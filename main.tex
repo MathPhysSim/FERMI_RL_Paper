@@ -1,0 +1,390 @@
+% ****** Start of file apssamp.tex ******
+%
+%   This file is part of the APS files in the REVTeX 4.2 distribution.
+%   Version 4.2a of REVTeX, December 2014
+%
+%   Copyright (c) 2014 The American Physical Society.
+%
+%   See the REVTeX 4 README file for restrictions and more information.
+%
+% TeX'ing this file requires that you have AMS-LaTeX 2.0 installed
+% as well as the rest of the prerequisites for REVTeX 4.2
+%
+% See the REVTeX 4 README file
+% It also requires running BibTeX. The commands are as follows:
+%
+%  1)  latex apssamp.tex
+%  2)  bibtex apssamp
+%  3)  latex apssamp.tex
+%  4)  latex apssamp.tex
+%
+\documentclass[
+ reprint,
+%superscriptaddress,
+%groupedaddress,
+%unsortedaddress,
+%runinaddress,
+%frontmatterverbose, 
+%preprint,
+%preprintnumbers,
+%nofootinbib,
+%nobibnotes,
+%bibnotes,
+ amsmath,amssymb,amsfonts,clevref,
+ aps,
+%pra,
+%prb,
+%rmp,
+prstab,
+%prstper,
+%floatfix,
+]{revtex4-2}
+\usepackage{wasysym}
+\usepackage{graphicx, subcaption}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+\usepackage[allcolors=blue]{hyperref}% add hypertext capabilities
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
+
+% \usepackage[active, tightpage]{preview}
+% \setlength\PreviewBorder{0pt}
+% \PreviewSnarfEnvironment[{[]}]{figure}
+
+%\usepackage[active,tightpage,floats]{preview}
+
+%\usepackage[showframe,%Uncomment any one of the following lines to test 
+%%scale=0.7, marginratio={1:1, 2:3}, ignoreall,% default settings
+%%text={7in,10in},centering,
+%%margin=1.5in,
+%%total={6.5in,8.75in}, top=1.2in, left=0.9in, includefoot,
+%%height=10in,a5paper,hmargin={3cm,0.8in},
+%]{geometry}
+
+%\usepackage{hyperref}% add hypertext capabilities
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
+% \usepackage{epic,eepic,pspicture,mathptmx,times,graphpap,siunitx, pgf, import}
+% For algorithms
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[ruled,vlined]{algorithm2e}
+
+\usepackage{siunitx, pgf, import}
+\usepackage[super]{nth}
+\newcommand{\shirinkimage}[2]{\resizebox{#1\textwidth}{!}{\input{#2}}}
+\usepackage{cleveref}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning} 
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    punkt/.style={
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           text width=3.5em,
+           minimum height=2em,
+           text centered},
+    % Define arrow style
+    pil/.style={
+           ->,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+%\usepackage[showframe,%Uncomment any one of the following lines to test 
+%%scale=0.7, marginratio={1:1, 2:3}, ignoreall,% default settings
+%%text={7in,10in},centering,
+%%margin=1.5in,
+%%total={6.5in,8.75in}, top=1.2in, left=0.9in, includefoot,
+%%height=10in,a5paper,hmargin={3cm,0.8in},
+%]{geometry}
+\usepackage{wasysym}
+%\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+
+\newcommand{\NB}[1]{\textcolor{red}{#1}}
+
+\begin{document}
+
+\preprint{APS/123-QED}
+
+
+
+\title{Model based reinforcement learning at FERMI FEL}
+
+
+
+\author{Simon Hirlaender}
+%\thanks{These two authors contributed equally}
+% \affiliation{University of Malta}
+\affiliation{Univertsity of Salzburg, Salzburg, Austria}
+\author{Niky Bruchon}%, Gianfranco Fenu, Felice Andrea Pellegrino, Erica Salvato}
+\affiliation{University of Trieste, Trieste, IT}
+% \author{Gianluca Valentino}
+% \affiliation{University of Malta, Msida, MT}
+% \author{Marco Lonza, Giulio Gaio}
+% \affiliation{Elettra Sincrotrone Trieste, Trieste, IT}
+% \author{Verena Kain}
+% %\thanks{These two authors contributed equally}
+% \email{verena.kain@cern.ch}
+
+\date{\today}% It is always \today, today,
+             %  but any date may be explicitly specified
+
+
+\begin{abstract}
+In this paper we discuss a model based reinforcement learning approach in comparison to a model free reinforcement learning approach applied at the FERMI FEL system. Both algorithms and approaches are new in this context and the main purpose of this paper is to show that reinforcement learning can be applied on an operational level in a feasible training time on real accelerator physics problems. In terms of sample-complexity the model-based approach is faster, while the finale performance of the model free method is superior - the so called asymptotic performance. The model-based algorithm is done in a Dyna-style using an uncertainty aware model and the model-free algorithm is based on tailored deep Q-learning using some tricks to increase the sample efficiency
+\end{abstract}
+%\keywords{Suggested keywords}%Use showkeys class option if keyword
+                              %display desired
+\maketitle
+
+%\tableofcontents
+\section{Introduction and Motivation}
+In particle accelerators one main goal is to provide stable and reproducible performance. In order to achieve this, a number of control problems have to be considered simultaneously. Especially if there is no way to model the physics, one might use optimisation techniques as e.g. derivative free optimisers (DFOs) or model-based optimisations as Gaussian processes. Another promising way is to apply reinforcement learning which has several advantages over optimisation methods:
+\begin{itemize}
+    \item Covers a larger class of problems.
+    \item Solves the problem not always completely from the beginning as an DFO.
+    \item Ability to use existing data.
+    \item The underlying structure of the problem might be deduced.
+\end{itemize}
+RL optimises a sequence of decisions. 
+In this paper, we present the study carried out to solve the maximisation-problem of the radiation intensity generated by a seeded Free-Electron Laser (FEL) on the Free Electron laser Radiation for Multidisciplinary Investigations (FERMI) at Elettra Sincrotrone Trieste. Three algorithms were applied successfully showing different advantages, which will e discussed in the following.
+
+% The methods proposed are the iterative Linear Quadratic Regulator (iLQR) - an extension to non-linear systems of the fundamental control theory Linear Quadratic Regulator (LQR) problem -  and the Normalized Advantage Function (NAF) - a continuous variant of the Q-learning algorithm from reinforcement learning field. An exhaustive presentation of both techniques is provided in the following sections.
+
+In a seeded free-electron laser one of the most critical parameters is the temporal and transverse overlap of the electron and laser beam in the magnetic section called modulator undulator. 
+\section{The physical set-up}
+At FERMI several beam-based feedback systems are deployed to control the beams trajectories shot to shot with the main purpose of guaranteeing a steady intensity of the light radiation. Nevertheless, in the last years various approaches have been studied to investigate their applicability in tuning operations. 
+%%% Last introduction paragraph
+The paper is organised as follows. 
+\begin{itemize}
+    \item Description of the problem set-up at FERMI
+    \item Overview of RL
+    \item Details of the implementations used in these studies and theoretical concerns
+    \item Results 
+    \item Summary and outlook
+\end{itemize}
+
+\section{Deep Reinforcement learning}
+Assume states $s$ the set of all states $S$ and actions $a$ all actions $a$ and rewards $r$ and the set of all rewards $R$ an initial state distribution $d_0$.
+Goal of reinforcement learning is to find a $\pi(s)\mapsto a$, which is the solution of:
+\begin{align}
+\max J(\pi)  =  \mathbb E_{\tau \thicksim p_{\pi}}\left[\sum_{t=0}^{H}\gamma^t r(s_t,a_t)\right],
+\end{align}
+where $p_\pi = d_0(s_0)\prod_{t_0}^H\pi(a_t,s_t)\mathcal T(s_{t+1}|s_t,a_t)$ is the distribution of all trajectories $\tau := (s_0, a_0, s_1, a_1,...s_H,a_H)$ drawn by $\pi$ with a horizon $H$.
+In the modern field of RL one distinguishes if the policy $\pi(s)\approx \pi_\phi(s)$ or the state-action value function $Q(s,a)$ is approximated using a high capacity function approximator, as e.g. a deep neural network. In the first case one speaks about policy gradient methods in the latter about approximate dynamic programming, which we now discuss.
+\subsection{Approximate dynamic programming}
+The state-value function $Q(s,a)$ is expressed as $Q_\phi(s,a)$, where $\phi$ denotes the parameters of the function approximator. By satisfying the Bellmann-optimality operator the optimal $Q^*(s,a)$ can be found:
+\begin{align}
+    \min_\theta \left(\vec Q_\theta - \mathcal{B}^*\vec Q_\theta\right)^2.\label{eq:minimize_bellmann_optimality}
+\end{align}
+This operator has a unique fixed point but is non-linear, due to the $\max$ - operator:
+\begin{align}
+ \mathcal{B}^*\vec Q_\theta(s_t,a_t) = r(s_t,a_t)+\gamma\max_a\left( Q_\theta(s_{t+1},a_t) - Q_\theta(s_t,a_t)\right).
+\end{align}
+The form of this equation can cause overestimation and other complications, when using a function approximator. Several methods exist which try to mitigate the problems \cite{}.
+One way to reduce the effect is to take a simple analytical form of the $Q$-function.
+\subsection{NAF}
+If a specific quadratic form of the $Q$ function is assumed:
+\begin{align}
+     Q_\theta(s,a) = -\frac{1}{2}(a-\mu_\theta(s))P_\theta(a-\mu_\theta(s))^T+V_\theta(s),
+\end{align}
+the maximum is given analytically as $\max_a Q(s,a) = V(s)$, hence from \cref{eq:minimize_bellmann_optimality}:
+\begin{align}
+     \min_\theta\left( (r(s_t,a_t)+\gamma V_{\theta\prime}(s_{t+1}) - (1+\gamma) Q_\theta(s_t,a_t)\right)^2
+\end{align}
+$\theta\prime$ denotes the weights of a previous iteration.
+\subsection{New NAF network architecture}
+
+\begin{algorithm}[ht]
+\caption{On-policy policy gradient with Monte Carlo estimator \label{alg:pg}}
+\begin{algorithmic}[1]
+\State initialise $\theta_0$
+\For{iteration $k \in [0, \dots, K]$}
+\State sample trajectories $\{\traj_i\}$ by running $\policy_{\theta_k}(\ba_t|\bs_t)$ \Comment{each $\traj_i$ consists of $\bs_{i,0},\ba_{i,0},\dots,\bs_{i,H},\ba_{i,H}$}
+\State compute $\return_{i,t} = \sum_{t'=t}^H \discount^{t'-t} \reward(\bs_{i,t},\ba_{i,t})$
+\State fit $b(\bs_t)$ to $\{\return{i,t}\}$ \Comment{use constant $b_t = \frac{1}{N}\sum_i \return{i,t}$, or fit $b(\bs_t)$ to $\{\return{i,t}\}$}
+\State compute $\hat{A}(\bs_{i,t},\ba_{i,t}) = \return_{i,t} - b(\bs_t)$
+\State estimate $\nabla_{\theta_k} J(\policy_{\theta_k}) \approx \sum_{i,t} \nabla_{\theta_k} \log \policy_{\theta_k}(\ba_{i,t} | \bs_{i,t}) \hat{A}(\bs_{i,t},\ba_{i,t})$
+\State update parameters: $\theta_{k+1} \leftarrow \theta_k + \alpha \nabla_{\theta_k} J(\policy_{\theta_k})$
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\section{Dyna-style reinforcement learning}
+
+
+\subsection{Operational deployment}
+\NB{Niky} % come abbiamo interagito con FERMI
+\subsection{\NB{short FERMI introduction}}
+The Free Electron laser Radiation for Multidisciplinary Investigation  better known as the FERMI, is the seeded free-electron laser facility next to the third-generation synchrotron facility ELETTRA at the Elettra Sinctrotrone Trieste laboratories.
+A free-electron laser is a fourth-generation light source where the lasing medium consists of very-high-speed electron moving freely through a magnetic structure. The FERMI peculiarity is given by the usage of an external seeding source that provides several advantages, as the increased stability in pulse and photon energy, reduced size of the device, improved longitudinal coherence, more control on the pulse structure, and improved temporal synchronization with external timing systems.
+
+The external optical laser signal provide is contribution to the FEL process in the modulator where it interacts with the relativistic electron beam modulating it in energy. The modulation in energy is the converted into a charge modulation in the dispersive section, and finally the density modulated beams radiation is amplified in the radiators section. The importance of ensuring the best possible overlapping between the seed laser and the electron beam in the modulator is therefore evident.
+
+For this reason the proposed study focuses on the control of the seed laser trajectory in the modulator, looking at FERMI performance as a reference.
+
+\subsection{\NB{our system: the modulator and the seed laser}}
+A more detailed description of the alignment process in the modulator is here provided.
+The most critical parameters in a seeded free-electron laser are the temporal and transverse overlap of the electron and laser beams in the modulator magnetic section. 
+The problem is simplified by keeping constant the trajectory of the electron beam and the mechanical delay line that controls the temporal alignment.
+The final problem faced consists in optimising the seed laser trajectory to match the electron beam and consequently increase the intensity of the FEL radiation.
+
+
+
+\section{Proof-of-principle application of RL Agent at FERMI trajectory correction}
+\NB{Niky}
+
+
+\subsection{Experiment results from FERMI RL tests}
+Niky and Simon
+
+\section{Discussion and outlook}
+
+\section{Conclusions}
+
+
+\appendix
+\section{NAF2 details}\label{appendix:pernaf}
+
+\begin{figure}[!h]
+  \centering
+  \input{Figures/SL_Alignment_Scheme}
+  \caption{The training .}
+  \label{fig:comparsion_per}
+\end{figure}
+
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics*[width=0.5\textwidth]{Figures/Learning_evolution}
+  \caption{The training .}
+  \label{fig:comparsion_per}
+\end{figure}
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics*[width=0.5\textwidth]{Figures/AE-DYNA_observables.pdf}
+  \caption{The training .}
+  \label{fig:comparsion_per}
+\end{figure}
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics*[width=0.5\textwidth]{Figures/AE-DYNA_verification.pdf}
+  \caption{The training .}
+  \label{fig:comparsion_per}
+\end{figure}
+
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics*[width=0.5\textwidth]{Figures/ME-TRPO_observables.pdf}
+  \caption{The training .}
+  \label{fig:comparsion_per}
+\end{figure}
+\begin{figure}[!h]
+  \centering
+  \includegraphics*[width=0.5\textwidth]{Figures/ME-TRPO_verification.pdf}
+  \caption{The training .}
+  \label{fig:comparsion_per}
+\end{figure}
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics*[width=0.5\textwidth]{Figures/FERMI_all_experiments_NAF_episodes.pdf}
+  \caption{The training .}
+  \label{fig:comparsion_per}
+\end{figure}
+\begin{figure}[!h]
+  \centering
+  \includegraphics*[width=0.5\textwidth]{Figures/FERMI_all_experiments_NAF_convergence.pdf}
+  \caption{The training .}
+  \label{fig:comparsion_per}
+\end{figure}
+
+% The \nocite command causes all entries in a bibliography to be printed out
+% whether or not they are actually referenced in the text. This is appropriate
+% for the sample file to show the different styles of references, but authors
+% most likely will not want to use it.
+% \nocite{*}
+% \bibliography{apssamp}% Produces the bibliography via BibTeX.
+
+
+
+% \bibliography{bibliography}
+\addcontentsline{toc}{chapter}{Bibliography}
+
+\begin{thebibliography}{9}
+
+\bibitem{lsa} D. Jacquet, R. Gorbonosov, G. Kruk, "LSA - The High Level Application Software of the LHC and its Performance during the first 3 years of Operation", ICALEPS, San Francisco, CA, USA, 6 - 11 Oct 2013, pp.thppc058.
+
+\bibitem{multiobjective-optimization} A. Edelen, N. Neveu, M. Frey, Y. Huber, C. Mayes, and A. Adelmann, "Machine learning for orders of magnitude speedup in multiobjective optimization of particle accelerator systems", Phys. Rev. Accel. Beams 23, 044601, 2020.
+
+\bibitem{collimator-alignment} G. Azzopardi, A. Muscat, G. Valentino, S. Redaelli, B. Salvachua, "Operational results of LHC collimator alignment using machine learning", Proc. IPAC'19, Melbourne, Australia, pp. 1208-1211, 2019.
+
+\bibitem{SPSAlignment} %InProceedings (Hirlaender2019)
+ S. Hirlaender, M. Fraser, B. Goddard , V. Kain, J. Prieto, L. Stoel, M. Szakaly, F. Velotti, "Automatisation of the SPS ElectroStatic Septa Alignment",  
+in 10th Int. Partile Accelerator Conf.(IPAC'19), 2019, p. 4001-4004.
+
+\bibitem{liu} E. Shaposhnikova et al., "LHC Injectors Upgrade (LIU) Project at CERN", 7$^{th}$ International Particle Accelerator Conference, Busan, Korea, 8 - 13 May 2016, pp.MOPOY059, \url{https://doi.org/10.18429/JACoW-IPAC2016-MOPOY059}.
+
+\bibitem{awake} E. Adli, A. Ahuja, O. Apsimon, R. Apsimon, A.-M. Bachmann, D. Barrientos, F. Batsch, J. Bauche, V. B. Olsen, M. Bernardini \textit{et al.}, “Acceleration of electrons in the plasma wakefield of a proton bunch,” Nature 561, 363–367 (2018), \url{https://doi.org/10.1038/s41586-018-0485-4)}.
+
+\bibitem{scheinker} A. Scheinker \textit{et al.}, "Online multi-objective particle accelerator optimization of the AWAKE electron beam line for simultaneous emittance and orbit control", AIP Advances 10, 055320 (2020), \url{https://doi.org/10.1063/5.0003423}.
+
+\bibitem{barto-sutton} R. Sutton, A. Barto, "Introduction to Reinforcement Learning",  MIT Press, Cambridge, MA, USA, 2018.
+
+\bibitem{LQR} H. Kwakernaak, R. Sivan, "Linear Optimal Control Systems", Wiley-Interscience, 1972.
+
+\bibitem{SBP} A. Nagabandi, G. Kahn, R. S. Fearing, S. Levine, "Neural Network Dynamics for Model-Based Deep Reinforcement Learning with Model-Free Fine-Tuning", arXiv:1708.02596, 2017. 
+
+\bibitem{DYNA} R. Sutton, "Dyna, an integrated architecture for learning, planning, and reacting", AAAI Spring Symposium, pp. 151-155, 1991, \url{https://doi.org/10.1145/122344.122377}.
+
+\bibitem{benchmarkmbrl} T. Wang et al., “Benchmarking Model-Based Reinforcement Learning”,  \url{https://arxiv.org/abs/1907.02057v1}, 2019-07-03.
+
+\bibitem{dqn} V. Mnih \textit{et al.}, "Human-level control through deep reinforcement learning", Nature 518, 529–533 (2015).
+
+\bibitem{ddpg} T. Lillicrap~\textit{et al.}, "Continuous control with deep reinforcement learning", Proc. ICLR 2016 \url{https://arxiv.org/abs/1509.02971}.
+
+\bibitem{naf} S. Gu, T. Lillicrap, I. Sutskever, S. Levine, "Continuous Deep Q-Learning with Model-based Acceleration", in Proc. 33rd International Conference on Machine Learning, New York, NY, USA, 2016.
+
+\bibitem{td3} S. Fujimoto, H. van Hoof, D. Meger, "Addressing Function Approximation Error in Actor-Critic Methods", arXiv:1802.09477, 2018.
+
+\bibitem{deeppilco} Y. Gal, R. McAllister, and C. E. Rasmussen, “Improving PILCO with Bayesian neural network dynamics models”, in Data-Efficient Machine Learning workshop, ICML, 2016, vol. 4, p. 34.
+
+\bibitem{per} T. Schaul, J. Quan, I. Antonoglou, D. Silver, "Prioritized Experience Replay", arXiv:1511.05952, 2015-11-18.
+
+\bibitem{pernafgit} S. Hirlaender, \textit{PER-NAF} available at \url{https://github.com/MathPhysSim/PER-NAF/} and
+\url{https://pypi.org/project/pernaf/}.
+\bibitem{pyjapc} "pyjapc" available at \url{https://pypi.org/project/pyjapc/}.
+
+\bibitem{openai_gym} \url{http://gym.openai.com}
+
+\bibitem{madx} MAD-X documentation and source code available at \url{https://mad.web.cern.ch/mad/}.
+
+\bibitem{linac4} G. Bellodi, "Linac4 Commissioning Status and Challenges to Nominal Operation", 61$^st$ ICFA Advanced Beam Dynamics Workshop on High-Intensity and High-Brightness Hadron Beams, Daejeon, Korea, 17 - 22 Jun 2018, pp.MOA1PL03, \url{https://doi.org/10.18429/JACoW-HB2018-MOA1PL03}.
+
+\bibitem{auto_matching} F. Velotti, B. Goddard et al., "Automatic AWAKE electron beamline setup using unsupervised machine learning", to be submitted to Phys. Rev. Accel. Beams.
+
+\bibitem{Kumar_1} A. Kumar, A. Gupta, S. Levine, “DisCor: Corrective Feedback in Reinforcement Learning via Distribution Correction,” arXiv:2003.07305, 2020-03-16.
+
+\bibitem{Kumar_2} A. Kumar, J. Fu, G. Tucker, S. Levine, “Stabilizing Off-Policy Q-Learning via Bootstrapping Error Reduction,” arXiv:1906.00949, 2019-06-03.
+
+% NEW REFERENCES
+\bibitem[bruchon2020basic]{Bruchon, Niky, et al. "Basic Reinforcement Learning Techniques to Control the Intensity of a Seeded Free-Electron Laser." Electronics 9.5 (2020): 781.}
+% https://www.mdpi.com/2079-9292/9/5/781/htm
+
+
+
+\end{thebibliography}
+
+%%%%% CLEAR DOUBLE PAGE!
+\newpage{\pagestyle{empty}\cleardoublepage}
+
+\end{document}
+%
+% ****** End of file apssamp.tex ******
