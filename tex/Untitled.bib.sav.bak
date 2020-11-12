@@ -1,0 +1,158 @@
+% Encoding: UTF-8
+
+@Article{Levine2020,
+  author      = {Sergey Levine and Aviral Kumar and George Tucker and Justin Fu},
+  title       = {Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems},
+  abstract    = {In this tutorial article, we aim to provide the reader with the conceptual tools needed to get started on research on offline reinforcement learning algorithms: reinforcement learning algorithms that utilize previously collected data, without additional online data collection. Offline reinforcement learning algorithms hold tremendous promise for making it possible to turn large datasets into powerful decision making engines. Effective offline reinforcement learning methods would be able to extract policies with the maximum possible utility out of the available data, thereby allowing automation of a wide range of decision-making domains, from healthcare and education to robotics. However, the limitations of current algorithms make this difficult. We will aim to provide the reader with an understanding of these challenges, particularly in the context of modern deep reinforcement learning methods, and describe some potential solutions that have been explored in recent work to mitigate these challenges, along with recent applications, and a discussion of perspectives on open problems in the field.},
+  date        = {2020-05-04},
+  eprint      = {2005.01643v3},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  file        = {:http\://arxiv.org/pdf/2005.01643v3:PDF},
+  keywords    = {cs.LG, cs.AI, stat.ML},
+}
+
+@WWW{,
+  url = {https://gym.openai.com},
+}
+
+@Article{Dabney2020,
+  author    = {Will Dabney and Zeb Kurth-Nelson and Naoshige Uchida and Clara Kwon Starkweather and Demis Hassabis and R{\'{e}}mi Munos and Matthew Botvinick},
+  title     = {A distributional code for value in dopamine-based reinforcement learning},
+  doi       = {10.1038/s41586-019-1924-6},
+  number    = {7792},
+  pages     = {671--675},
+  volume    = {577},
+  journal   = {Nature},
+  month     = {jan},
+  publisher = {Springer Science and Business Media {LLC}},
+  year      = {2020},
+}
+
+@Misc{fujimoto2018addressing,
+  author        = {Scott Fujimoto and Herke van Hoof and David Meger},
+  title         = {Addressing Function Approximation Error in Actor-Critic Methods},
+  eprint        = {1802.09477},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.AI},
+  year          = {2018},
+}
+
+@InProceedings{Gal2016,
+  author    = {Gal, Yarin and McAllister, Rowan and Rasmussen, Carl Edward},
+  booktitle = {Data-Efficient Machine Learning workshop, ICML},
+  title     = {Improving PILCO with Bayesian neural network dynamics models},
+  pages     = {34},
+  volume    = {4},
+  year      = {2016},
+}
+
+@SuppBook{Haarnoja2018,
+  author      = {Tuomas Haarnoja and Aurick Zhou and Pieter Abbeel and Sergey Levine},
+  date        = {2018-01-04},
+  title       = {Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor},
+  eprint      = {1801.01290v2},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  abstract    = {Model-free deep reinforcement learning (RL) algorithms have been demonstrated on a range of challenging decision making and control tasks. However, these methods typically suffer from two major challenges: very high sample complexity and brittle convergence properties, which necessitate meticulous hyperparameter tuning. Both of these challenges severely limit the applicability of such methods to complex, real-world domains. In this paper, we propose soft actor-critic, an off-policy actor-critic deep RL algorithm based on the maximum entropy reinforcement learning framework. In this framework, the actor aims to maximize expected reward while also maximizing entropy. That is, to succeed at the task while acting as randomly as possible. Prior deep RL methods based on this framework have been formulated as Q-learning methods. By combining off-policy updates with a stable stochastic actor-critic formulation, our method achieves state-of-the-art performance on a range of continuous control benchmark tasks, outperforming prior on-policy and off-policy methods. Furthermore, we demonstrate that, in contrast to other off-policy algorithms, our approach is very stable, achieving very similar performance across different random seeds.},
+  file        = {:http\://arxiv.org/pdf/1801.01290v2:PDF},
+  keywords    = {cs.LG, cs.AI, stat.ML},
+}
+
+@Misc{Charles2013,
+  author       = {Hirlaender, S.},
+  title        = {PER-NAF},
+  howpublished = {\url{https://github.com/MathPhysSim/PER-NAF}},
+  commit       = {4f57d6a0e4c030202a07a60bc1bb1ed1544bf679},
+  journal      = {GitHub repository},
+  publisher    = {GitHub},
+  year         = {2013},
+}
+
+@Article{Kumar2020,
+  author      = {Aviral Kumar and Abhishek Gupta and Sergey Levine},
+  date        = {2020-03-16},
+  title       = {DisCor: Corrective Feedback in Reinforcement Learning via Distribution Correction},
+  eprint      = {2003.07305v1},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  abstract    = {Deep reinforcement learning can learn effective policies for a wide range of tasks, but is notoriously difficult to use due to instability and sensitivity to hyperparameters. The reasons for this remain unclear. When using standard supervised methods (e.g., for bandits), on-policy data collection provides "hard negatives" that correct the model in precisely those states and actions that the policy is likely to visit. We call this phenomenon "corrective feedback." We show that bootstrapping-based Q-learning algorithms do not necessarily benefit from this corrective feedback, and training on the experience collected by the algorithm is not sufficient to correct errors in the Q-function. In fact, Q-learning and related methods can exhibit pathological interactions between the distribution of experience collected by the agent and the policy induced by training on that experience, leading to potential instability, sub-optimal convergence, and poor results when learning from noisy, sparse or delayed rewards. We demonstrate the existence of this problem, both theoretically and empirically. We then show that a specific correction to the data distribution can mitigate this issue. Based on these observations, we propose a new algorithm, DisCor, which computes an approximation to this optimal distribution and uses it to re-weight the transitions used for training, resulting in substantial improvements in a range of challenging RL settings, such as multi-task learning and learning from noisy reward signals. Blog post presenting a summary of this work is available at: https://bair.berkeley.edu/blog/2020/03/16/discor/.},
+  file        = {:http\://arxiv.org/pdf/2003.07305v1:PDF},
+  keywords    = {cs.LG, stat.ML},
+}
+
+@Article{Kumar2019,
+  author      = {Aviral Kumar and Justin Fu and George Tucker and Sergey Levine},
+  date        = {2019-06-03},
+  title       = {Stabilizing Off-Policy Q-Learning via Bootstrapping Error Reduction},
+  eprint      = {1906.00949v2},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  abstract    = {Off-policy reinforcement learning aims to leverage experience collected from prior policies for sample-efficient learning. However, in practice, commonly used off-policy approximate dynamic programming methods based on Q-learning and actor-critic methods are highly sensitive to the data distribution, and can make only limited progress without collecting additional on-policy data. As a step towards more robust off-policy algorithms, we study the setting where the off-policy experience is fixed and there is no further interaction with the environment. We identify bootstrapping error as a key source of instability in current methods. Bootstrapping error is due to bootstrapping from actions that lie outside of the training data distribution, and it accumulates via the Bellman backup operator. We theoretically analyze bootstrapping error, and demonstrate how carefully constraining action selection in the backup can mitigate it. Based on our analysis, we propose a practical algorithm, bootstrapping error accumulation reduction (BEAR). We demonstrate that BEAR is able to learn robustly from different off-policy distributions, including random and suboptimal demonstrations, on a range of continuous control tasks.},
+  file        = {:http\://arxiv.org/pdf/1906.00949v2:PDF},
+  keywords    = {cs.LG, stat.ML},
+}
+
+@Article{Schaul2015,
+  author      = {Tom Schaul and John Quan and Ioannis Antonoglou and David Silver},
+  date        = {2015-11-18},
+  title       = {Prioritized Experience Replay},
+  eprint      = {1511.05952v4},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  abstract    = {Experience replay lets online reinforcement learning agents remember and reuse experiences from the past. In prior work, experience transitions were uniformly sampled from a replay memory. However, this approach simply replays transitions at the same frequency that they were originally experienced, regardless of their significance. In this paper we develop a framework for prioritizing experience, so as to replay important transitions more frequently, and therefore learn more efficiently. We use prioritized experience replay in Deep Q-Networks (DQN), a reinforcement learning algorithm that achieved human-level performance across many Atari games. DQN with prioritized experience replay achieves a new state-of-the-art, outperforming DQN with uniform replay on 41 out of 49 games.},
+  file        = {:http\://arxiv.org/pdf/1511.05952v4:PDF},
+  keywords    = {cs.LG},
+}
+
+@Article{DBLP:journals/corr/SchulmanWDRK17,
+  author        = {John Schulman and Filip Wolski and Prafulla Dhariwal and Alec Radford and Oleg Klimov},
+  title         = {Proximal Policy Optimization Algorithms},
+  eprint        = {1707.06347},
+  url           = {http://arxiv.org/abs/1707.06347},
+  volume        = {abs/1707.06347},
+  archiveprefix = {arXiv},
+  bibsource     = {dblp computer science bibliography, https://dblp.org},
+  biburl        = {https://dblp.org/rec/journals/corr/SchulmanWDRK17.bib},
+  journal       = {CoRR},
+  timestamp     = {Mon, 13 Aug 2018 16:47:34 +0200},
+  year          = {2017},
+}
+
+@Article{Schulman2015,
+  author      = {John Schulman and Sergey Levine and Philipp Moritz and Michael I. Jordan and Pieter Abbeel},
+  date        = {2015-02-19},
+  title       = {Trust Region Policy Optimization},
+  eprint      = {1502.05477v5},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  abstract    = {We describe an iterative procedure for optimizing policies, with guaranteed monotonic improvement. By making several approximations to the theoretically-justified procedure, we develop a practical algorithm, called Trust Region Policy Optimization (TRPO). This algorithm is similar to natural policy gradient methods and is effective for optimizing large nonlinear policies such as neural networks. Our experiments demonstrate its robust performance on a wide variety of tasks: learning simulated robotic swimming, hopping, and walking gaits; and playing Atari games using images of the screen as input. Despite its approximations that deviate from the theory, TRPO tends to give monotonic improvement, with little tuning of hyperparameters.},
+  file        = {:http\://arxiv.org/pdf/1502.05477v5:PDF},
+  keywords    = {cs.LG},
+}
+
+@Article{Wang2019,
+  author      = {Tingwu Wang and Xuchan Bao and Ignasi Clavera and Jerrick Hoang and Yeming Wen and Eric Langlois and Shunshi Zhang and Guodong Zhang and Pieter Abbeel and Jimmy Ba},
+  date        = {2019-07-03},
+  title       = {Benchmarking Model-Based Reinforcement Learning},
+  eprint      = {1907.02057v1},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  abstract    = {Model-based reinforcement learning (MBRL) is widely seen as having the potential to be significantly more sample efficient than model-free RL. However, research in model-based RL has not been very standardized. It is fairly common for authors to experiment with self-designed environments, and there are several separate lines of research, which are sometimes closed-sourced or not reproducible. Accordingly, it is an open question how these various existing MBRL algorithms perform relative to each other. To facilitate research in MBRL, in this paper we gather a wide collection of MBRL algorithms and propose over 18 benchmarking environments specially designed for MBRL. We benchmark these algorithms with unified problem settings, including noisy environments. Beyond cataloguing performance, we explore and unify the underlying algorithmic differences across MBRL algorithms. We characterize three key research challenges for future MBRL research: the dynamics bottleneck, the planning horizon dilemma, and the early-termination dilemma. Finally, to maximally facilitate future research on MBRL, we open-source our benchmark in http://www.cs.toronto.edu/~tingwuwang/mbrl.html.},
+  file        = {:http\://arxiv.org/pdf/1907.02057v1:PDF},
+  keywords    = {cs.LG, cs.AI, cs.RO, stat.ML},
+}
+
+@Article{Wang2019a,
+  author      = {Tingwu Wang and Xuchan Bao and Ignasi Clavera and Jerrick Hoang and Yeming Wen and Eric Langlois and Shunshi Zhang and Guodong Zhang and Pieter Abbeel and Jimmy Ba},
+  date        = {2019-07-03},
+  title       = {Benchmarking Model-Based Reinforcement Learning},
+  eprint      = {1907.02057v1},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  abstract    = {Model-based reinforcement learning (MBRL) is widely seen as having the potential to be significantly more sample efficient than model-free RL. However, research in model-based RL has not been very standardized. It is fairly common for authors to experiment with self-designed environments, and there are several separate lines of research, which are sometimes closed-sourced or not reproducible. Accordingly, it is an open question how these various existing MBRL algorithms perform relative to each other. To facilitate research in MBRL, in this paper we gather a wide collection of MBRL algorithms and propose over 18 benchmarking environments specially designed for MBRL. We benchmark these algorithms with unified problem settings, including noisy environments. Beyond cataloguing performance, we explore and unify the underlying algorithmic differences across MBRL algorithms. We characterize three key research challenges for future MBRL research: the dynamics bottleneck, the planning horizon dilemma, and the early-termination dilemma. Finally, to maximally facilitate future research on MBRL, we open-source our benchmark in http://www.cs.toronto.edu/~tingwuwang/mbrl.html.},
+  file        = {:http\://arxiv.org/pdf/1907.02057v1:PDF},
+  keywords    = {cs.LG, cs.AI, cs.RO, stat.ML},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
