@@ -13,5 +13,5 @@ A variant of the ME-TRPO:
 ![ME-TRPO](Figures/ME-TRPO_observables.png)
 ![ME-TRPO](Figures/ME-TRPO_verification.png)
 
-The evolution:
+The evolution as presented at GSI [Towards Artificial Intelligence in Accelerator Operation](https://indico.gsi.de/event/11539/):
 ![ME-TRPO](Figures/Learning_evolution.png)
