@@ -221,7 +221,7 @@ $\theta\prime$ denotes the weights of a previous iteration.
 
 \section{Uncertainty aware Dyna-style reinforcement learning}
 The original Dyna algorithm \cite{DYNA} is modified here in several aspects. Generally, Dyna style algorithms denote algorithms, where a MFRL algorithm is trained on purely synthetic data from an approximate dynamics model or on a mixture of synthetic and real data. We use only synthetic data to reduce the interaction with the real environment to a minimum.
-An overview of the used method is shown in
+An overview of the used method is shown in \cref{fig:MBRL_overview}. At the beginning the data is collected or read in from a pre-collection. An uncertainty aware model is trained, using anchored ensembles on the data, which allows to take the allegorical (measurement errors) as well as the epistemic uncertainty (lack of data) into account. Subsequently a MFRL algorithm is deployed to learn the controller on the learned model by only using the synthetic data, by taking the uncertainty into account. After a defined number of training steps the controller is testes on each model individually. If there is no improvement in a specific ratio<1 of models, the controller is tested on the real environment.
 
 \begin{figure}[!h]
 	\centering
