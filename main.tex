@@ -187,7 +187,7 @@ This operator has a unique fixed point but is non-linear, due to the $\max$ - op
 \end{align}
 The form of this equation can cause overestimation and other complications, when using a function approximator. Several methods exist which try to mitigate the problems \cite{}.
 One way to reduce the effect is to take a simple analytical form of the $Q$-function.
-\subsection{NAF}
+\subsection{Value based}
 If a specific quadratic form of the $Q$ function is assumed:
 \begin{align}
      Q_\theta(s,a) = -\frac{1}{2}(a-\mu_\theta(s))P_\theta(a-\mu_\theta(s))^T+V_\theta(s).
