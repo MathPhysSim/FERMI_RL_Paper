@@ -204,7 +204,7 @@ If a specific quadratic form of the $Q$ function is assumed:
 One modification, which is used in these tests is a twin network (weights denoted by $\tilde\theta$), where only one is used to obtain the policy, while the other is used for the update rule to avoid over-estimation.
 The maximum is given analytically as $\max_a Q(s,a) = V(s)$, hence from \cref{eq:minimize_bellmann_optimality}:
 \begin{align}
-	\min_\theta\left( (\reward(\bs_t,\ba_t)+\gamma \min_{\hat\theta,\tilde \theta} V_{\theta\prime}(s_{t+1}) - (1+\gamma) Q_\theta(s_t,a_t)\right)^2
+	\min_\theta\left( (\reward(\bs_t,\ba_t)+\gamma \min_{1,2} V_{\theta_{i,targ}}(\bs_{t+1}) - (1+\gamma) Q_\theta(\bs_t,\ba_t)\right)^2
 \end{align}
 $\hat\theta$ are the weights of a previous iteration or the initialized weights. To stabilize the network training a small artificial noise is added to the actions in the update. This algorithm has an extremely good sample-efficiency for suitable problems as can be found in accelerators and is used as the baseline for the considered control problem.
 %\subsection{New NAF network architecture}
