@@ -184,7 +184,7 @@ The state-value function $Q(\bs,\ba)$ is expressed as $Q_\theta(\bs,\ba)$, where
 \end{align}
 This operator has a unique fixed point but is non-linear, due to the $\max$ - operator:
 \begin{align}
- \bellman^*\vec Q_\theta(\bs_t,\ba_t) := r(\bs_t,\ba_t)+\gamma\max_a\left( Q_\theta(\bs_{t+1},\Ba_t) - Q_\theta(\bs_t,\ba_t)\right).
+ \bellman^*\vec Q_\theta(\bs_t,\ba_t) := r(\bs_t,\ba_t)+\gamma\max_a\left( Q_\theta(\bs_{t+1},\ba_t) - Q_\theta(\bs_t,\ba_t)\right).
 \end{align}
 The form of this equation can cause overestimation and other complications, when using a function approximator. Several methods exist which try to mitigate the problems \cite{}.
 One way to reduce the effect is to take a simple analytical form of the $Q$-function.
