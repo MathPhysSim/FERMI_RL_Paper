@@ -1,24 +1,14 @@
 import os
 import pickle
 from datetime import datetime
-import itertools as it
+
 import gym
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-# from stable_baselines.common.noise import NormalActionNoise
-
-# from stable_baselines.sac.policies import MlpPolicy
-# from stable_baselines import SAC as Agent
-# from stable_baselines.td3.policies import MlpPolicy
-# from stable_baselines import TD3 as Agent
-from stable_baselines.common.policies import MlpPolicy
-from stable_baselines import PPO2 as Agent
-
 import tensorflow as tf
+from inverted_pendulum import PendulumEnv
 
-from local_fel_simulated_env import FelLocalEnv
-from simulated_tango import SimTangoConnection
+# from stable_baselines.common.noise import NormalActionNoise
 
 # from naf2 import NAF
 
@@ -28,37 +18,52 @@ np.random.seed(random_seed)
 config = tf.ConfigProto(
     device_count={'GPU': 0}
 )
-# config = None
+config = None
 
-tango = SimTangoConnection()
-real_env = FelLocalEnv(tango=tango)
+############################################################
+# Loading the environment
+############################################################
 
-# Hyper papameters
-steps_per_env = 25
-init_random_steps = 100
-total_steps = 250
+real_env = env = PendulumEnv()
+
+############################################################
+# Hyperparameters
+############################################################
+
+
+steps_per_env = 200
+init_random_steps = 200
+total_steps = 2500
 num_epochs = int((total_steps - init_random_steps) / steps_per_env) + 1
 
 print('Number of epochs: ', num_epochs)
 
-hidden_sizes = [100, 100]
 
 max_training_iterations = 50
 delay_before_convergence_check = 1
 
-algorithm = 'SAC'
+# Select the rl-algorithm
 
-# minibatch_size = 100
-simulated_steps = 3000
+algorithm = 'PPO'
+# algorithm = 'PPO'
 
-model_batch_size = 5
-num_ensemble_models = 5
+if algorithm == 'SAC':
+    from stable_baselines.sac.policies import MlpPolicy
+    from stable_baselines import SAC as Agent
+else:
+    from stable_baselines.common.policies import MlpPolicy
+    from stable_baselines import PPO2 as Agent
+
+simulated_steps = 2500
+
+model_batch_size = 100
+num_ensemble_models = 3
 
 early_stopping = True
-model_iter = 30
+model_iter = 2
 
 # model_training_iterations = 10
-network_size = 15
+network_size = 25
 # Set the priors for the anchor method:
 #  TODO: How to set these correctly?
 init_params = dict(init_stddev_1_w=np.sqrt(1),
@@ -74,7 +79,7 @@ lambda_anchor = data_noise / (np.array([init_params['init_stddev_1_w'],
 # e.g. lambda it, episode: (it + 1) % max(3, (ep+1)*2) == 0
 dynamic_wait_time = lambda it, ep: (it + 1) % 1 == 0  #
 
-# Learning rate as function of ep
+# Learning rate as function of ep:
 lr_start = 1e-3
 lr_end = 1e-3
 lr = lambda ep: max(lr_start + ep / 30 * (lr_end - lr_start), lr_end)
@@ -82,7 +87,7 @@ lr = lambda ep: max(lr_start + ep / 30 * (lr_end - lr_start), lr_end)
 # Create the logging directory:
 project_directory = 'Data_logging/Simulation/'
 
-hyp_str_all = '-nr_steps_' + str(steps_per_env) + '-cr_lr' + '-n_ep_' + str(num_epochs) + \
+hyp_str_all = '-nr_steps_' + str(steps_per_env) + '-n_ep_' + str(num_epochs) + \
               '-m_bs_' + str(model_batch_size) + \
               '-sim_steps_' + str(simulated_steps) + \
               '-m_iter_' + str(model_iter) + '-ensnr_' + str(num_ensemble_models) + '-init_' + str(
@@ -99,6 +104,8 @@ hyp_str_all = '-nr_steps_' + str(steps_per_env) + '-n_ep_' + str(num_epochs) + \
 if not os.path.isdir(project_directory):
     os.makedirs(project_directory)
     print("created folder : ", project_directory)
+
+max_steps = 200
 
 
 # Class for data storage during the tests
@@ -202,27 +209,30 @@ class MonitoringEnv(gym.Wrapper):
         self.verification = False
         if 'verification' in kwargs:
             self.verification = kwargs.get('verification')
+        try:
+            self.max_steps = env.max_steps
+        except:
+            self.max_steps = max_steps
+            print('Max steps set to:', self.max_steps)
+        self.current_step = -1
 
     def reset(self, **kwargs):
+        self.current_step = -1
         init_obs = self.env.reset(**kwargs)
-        # print('Reset Env: ', (init_obs),10*'-- ')
         self.current_buffer.new_trajectory(init_obs)
         init_obs = self.scale_state_env(init_obs)
-        # print('Reset Menv: ', (init_obs))
         return init_obs
 
     def step(self, action):
-        # print('a', action)
         action = self.descale_action_env(action)
-        # print('as', action)
         ob, reward, done, info = self.env.step(action)
-        # print('Env: ', reward)
-        # print('Env: ', ob, 'r:', reward, done)
         self.current_buffer.store_step(obs=ob, act=action, rew=reward, done=done)
         ob = self.scale_state_env(ob)
         reward = self.rew_scale(reward)
-        # print('Menv: ',  ob, 'r:', reward, done)
-        # print('Menv: ', reward)
+        self.current_step += 1
+        if self.current_step >= self.max_steps:
+            done = True
+
         return ob, reward, done, info
 
     def set_usage(self, usage):
@@ -344,7 +354,7 @@ class FullBuffer():
         self.idx += 1
 
     def generate_random_dataset(self, ratio=False):
-        '''ratio: how much for valid taken'''
+        """ratio: how much for valid taken"""
         rnd = np.arange(len(self.obs))
         np.random.shuffle(rnd)
         self.valid_idx = rnd[:]
@@ -386,7 +396,7 @@ class NN:
             self.inputs = x
             self.y_target = y
             if True:
-                self.inputs = tf.scalar_mul(0.8, self.inputs)
+                self.inputs = tf.scalar_mul(0.5, self.inputs)
                 self.layer_1_w = tf.layers.Dense(hidden_size,
                                                  activation=tf.nn.tanh,
                                                  kernel_initializer=tf.random_normal_initializer(mean=0.,
@@ -399,7 +409,7 @@ class NN:
                                                                                                dtype=tf.float64))
 
                 self.layer_1 = self.layer_1_w.apply(self.inputs)
-
+                self.layer_1 = tf.scalar_mul(0.5, self.layer_1)
                 self.layer_2_w = tf.layers.Dense(hidden_size,
                                                  activation=tf.nn.tanh,
                                                  kernel_initializer=tf.random_normal_initializer(mean=0.,
@@ -440,8 +450,6 @@ class NN:
 
             # set up loss and optimiser - we'll modify this later with anchoring regularisation
             self.opt_method = tf.train.AdamOptimizer(learning_rate)
-            # self.mse_ = 1 / tf.shape(self.inputs, out_type=tf.int64)[0] * \
-            #             tf.reduce_sum(tf.square(self.y_target - self.output))
             self.mse_ = tf.reduce_mean(((self.y_target - self.output)) ** 2)
             self.loss_ = 1 / tf.shape(self.inputs, out_type=tf.int64)[0] * \
                          tf.reduce_sum(tf.square(self.y_target - self.output))
@@ -449,7 +457,7 @@ class NN:
             self.optimizer_mse = self.opt_method.minimize(self.mse_)
 
     def get_weights(self, sess):
-        '''method to return current params'''
+        """method to return current params"""
 
         ops = [self.layer_1_w.kernel, self.layer_1_w.bias,
                self.layer_2_w.kernel, self.layer_2_w.bias,
@@ -458,17 +466,8 @@ class NN:
 
         return w1, b1, w2, b2, w
 
-    # def get_weights(self, sess):
-    #     '''method to return current params'''
-    #
-    #     ops = [self.layer_1_w.kernel, self.layer_1_w.bias,
-    #            self.output_w.kernel]
-    #     w1, b1, w = sess.run(ops)
-    #
-    #     return w1, b1, w
-
     def anchor(self, lambda_anchor, sess):
-        '''regularise around initialised parameters after session has started'''
+        """regularise around initialised parameters after session has started"""
 
         w1, b1, w2, b2, w = self.get_weights(sess=sess)
 
@@ -496,13 +495,12 @@ class NetworkEnv(gym.Wrapper):
 
     def __init__(self, env, model_func=None, done_func=None, number_models=1, **kwargs):
         gym.Wrapper.__init__(self, env)
-
+        self.number_models = number_models
+        self.current_model = np.random.randint(0, max(self.number_models, 1))
         self.model_func = model_func
         self.done_func = done_func
-        self.number_models = number_models
+
         self.len_episode = 0
-        # self.threshold = self.env.threshold
-        # print('the threshold is: ', self.threshold)
         self.max_steps = env.max_steps
         self.verification = False
         if 'verification' in kwargs:
@@ -510,99 +508,34 @@ class NetworkEnv(gym.Wrapper):
         self.visualize()
 
     def reset(self, **kwargs):
-
-        # self.threshold = -0.05 * 2 + 1  # rescaled [-1,1]
+        self.current_model = np.random.randint(0, max(self.number_models, 1))
         self.len_episode = 0
         self.done = False
-        # kwargs['simulation'] = True
-        # action = self.env.reset(**kwargs)
-        if self.model_func is not None:
-            obs = np.random.uniform(-1, 1, self.env.observation_space.shape)
-            # print('reset', obs)
-            # Todo: remove
-            # self.obs = self.env.reset()
-            # obs = self.env.reset()
-        else:
-            # obs = self.env.reset(**kwargs)
-            pass
-        # Does this work?
+        # Here is a main difference to other dyna style methods:
+        # obs = np.random.uniform(-1, 1, self.env.observation_space.shape)
+
+        obs = self.env.reset()
         self.obs = np.clip(obs, -1.0, 1.0)
-        # self.obs = obs.copy()
-        # if self.test_phase:
-        #     print('test reset', self.obs)
-        # print('Reset : ',self.obs)
-        self.current_model = np.random.randint(0, max(self.number_models, 1))
         return self.obs
 
     def step(self, action):
-        # self.visualize([np.squeeze(action)])
-        if self.model_func is not None:
-            # predict the next state on a random model
-            # obs, rew = self.model_func(self.obs, [np.squeeze(action)], np.random.randint(0, self.number_models))
-
-            if self.verification:
-                # obs_cov = np.diag(np.square(np.std(obss, axis=0, ddof=1)) + data_noise)
-                # print(obs_std)
-                # obs = np.squeeze(np.random.multivariate_normal(obs_m, (obs_cov), 1))
-                # obs, rew, done, info = self.env.step(
-                #     action)  #
-                obs, rew = self.model_func(self.obs, [np.squeeze(action)], self.number_models)
-            else:
-                # obs, rew, done, info = self.env.step(
-                #     action)
-                obs, rew = self.model_func(self.obs, [np.squeeze(action)], self.current_model)
-                # obss = []
-                # rews = []
-                # for i in range(num_ensemble_models):
-                #
-                #     obs, rew = self.model_func(self.obs, [np.squeeze(action)], i)
-                #     obss.append((obs))
-                #     rews.append(rew)
-                # # idx = np.argmin(rews)
-                # # obs = obss[idx]
-                # obs_m = np.mean(obss, axis=0)
-                # obs = obs_m
-            # print(obs)
-            # rew = rews[idx]
-            # rew = np.mean(np.clip(rews, -1, 1))
-            self.obs = np.clip(obs.copy(), -1, 1)
-            # if (self.obs == -1).any() or (self.obs == 1).any():
-            #     rew = -1
-            rew = np.clip(rew, -1, 1)
-            if not self.verification:
-                rew = (rew - 1) / 2
-
-            # obs_real, rew_real, _, _ = self.env.step(action)
-            # obs, rew, self.done, _ = self.env.step(action)
-            # print('Diff: ', np.linalg.norm(obs - obs_real), np.linalg.norm(rew - rew_real))
-            # print('MEnv: ', np.linalg.norm(obs ), np.linalg.norm(rew ))
-            # obs += np.random.randn(obs.shape[-1])
-            # # Todo: remove
-            # self.env.state = self.obs
-            # done = rew > self.threshold
-
-            self.len_episode += 1
-            # print('threshold at:', self.threshold)
-            # For niky hardcoded reward threshold in [-1,1] space from [0,1] -0.05 => 0.9------------------------------------------------------------
-            if rew > -0.05:  # self.threshold: TODO: to be changed
-                # ----------------------------------------------------------------------------------------------------------------------
-                self.done = True
-            #     if (self.obs == -1).any() or (self.obs == 1).any():
-            #         print('boundary hit...', self.obs, rew)
-            #     # print("Done", rew)
-            if self.len_episode >= self.max_steps:
-                self.done = True
-            #
-            return self.obs, rew, self.done, dict()
-            # return obs, rew, done, info
+        if self.verification:
+            obs, rew = self.model_func(self.obs, [np.squeeze(action)], self.number_models)
         else:
-            # self.obs, rew, done, _ = real_env.step(action)
-            # return self.obs, rew, done, ""
-            pass
-        # return env.step(action)
+            obs, rew = self.model_func(self.obs, [np.squeeze(action)], self.current_model)
+        self.obs = np.clip(obs.copy(), -1, 1)
+        # rew = np.clip(rew, -1, 1)
+        if not self.verification:
+            rew = (rew - 1) / 2
+        self.len_episode += 1
+        # if rew > -0.05:  # self.threshold: TODO: to be changed
+        #     self.done = True
+        if self.len_episode >= self.max_steps:
+            self.done = True
+            print('Max', self.len_episode)
+        return self.obs, rew, self.done, dict()
 
     def visualize(self, data=None, label=None):
-
         action = [np.zeros(self.env.action_space.shape)]
         state = np.zeros(self.env.observation_space.shape)
         maximum = 0
@@ -682,17 +615,14 @@ class NetworkEnv(gym.Wrapper):
         if 'info' in kwargs:
             self.info = kwargs.get('info')
         now = datetime.now()
-        # clock_time = "{}_{}_{}_{}_".format(now.day, now.hour, now.minute, now.second)
         clock_time = f'{now.month:0>2}_{now.day:0>2}_{now.hour:0>2}_{now.minute:0>2}_{now.second:0>2}_'
         data = dict(data=data,
                     model=model_nr,
                     rews=rews,
                     X=X,
                     Y=Y)
-        # print('saving...', data)
         out_put_writer = open(project_directory + clock_time + 'plot_model_' + str(model_nr), 'wb')
         pickle.dump(data, out_put_writer, -1)
-        # pickle.dump(self.actions, out_put_writer, -1)
         out_put_writer.close()
 
 
@@ -740,8 +670,8 @@ def restore_model(old_model_variables, m_variables):
     return tf.group(*restore_m_params)
 
 
-def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
-           critic_iter=10, steps_per_env=100, delta=0.05, algorithm='TRPO', conj_iters=10,
+def aedyna(env_name, cr_lr=5e-3, num_epochs=50,
+           critic_iter=10, steps_per_env=100, delta=0.05, algorithm='SAC', conj_iters=10,
            simulated_steps=1000, num_ensemble_models=2, model_iter=15, model_batch_size=512,
            init_random_steps=steps_per_env):
     '''
@@ -753,10 +683,7 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
     Parameters:
     -----------
     env_name: Name of the environment
-    hidden_sizes: list of the number of hidden units for each layer
     num_epochs: number of training epochs
-    number_envs: number of "parallel" synchronous environments
-        # NB: it isn't distributed across multiple CPUs
     steps_per_env: number of steps per environment
             # NB: the total number of steps per epoch will be: steps_per_env*number_envs
     algorithm: type of algorithm. Either 'TRPO' or 'NPO'
@@ -844,31 +771,26 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
 
     #################################################################################################
 
-    # Session start!!!!!!!!
-    # create a session
+    # Tensorflow session start!!!!!!!!
+    # Create a session
     sess = tf.Session(config=config)
-    # initialize the variables
+    # Initialize the variables
     sess.run(tf.global_variables_initializer())
 
     def model_op(o, a, md_idx):
-        mo = sess.run(nobs_pred_m[md_idx], feed_dict={obs_ph: [o], act_ph: [a[0]]})
+        mo = sess.run(nobs_pred_m[md_idx], feed_dict={obs_ph: [o], act_ph: [a]})
         return np.squeeze(mo[:, :-1]), float(np.squeeze(mo[:, -1]))
 
     def run_model_loss(model_idx, r_obs, r_act, r_nxt_obs, r_rew):
-        # print({'obs_ph': r_obs.shape, 'act_ph': r_act.shape, 'nobs_ph': r_nxt_obs.shape})
-        r_act = np.squeeze(r_act, axis=2)
-        # print(r_act.shape)
+        # r_act = np.squeeze(r_act, axis=2)
         r_rew = np.reshape(r_rew, (-1, 1))
-        # print(r_rew.shape)
         return_val = sess.run(m_loss_anchor[model_idx],
                               feed_dict={obs_ph: r_obs, act_ph: r_act, nobs_ph: r_nxt_obs, rew_ph: r_rew})
         return return_val
 
     def run_model_opt_loss(model_idx, r_obs, r_act, r_nxt_obs, r_rew, mb_lr):
-        r_act = np.squeeze(r_act, axis=2)
+        # r_act = np.squeeze(r_act, axis=2)
         r_rew = np.reshape(r_rew, (-1, 1))
-        # return sess.run([m_opts[model_idx], m_losses[model_idx]],
-        #                 feed_dict={obs_ph: r_obs, act_ph: r_act, nobs_ph: r_nxt_obs, rew_ph: r_rew, mb_lr_: mb_lr})
         return sess.run([m_opts_anchor[model_idx], m_loss_anchor[model_idx]],
                         feed_dict={obs_ph: r_obs, act_ph: r_act, nobs_ph: r_nxt_obs, rew_ph: r_rew, mb_lr_: mb_lr})
 
@@ -919,7 +841,7 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
                     acc_m_losses.append(ml)
                     last_m_losses.append(ml)
                     mb_valid_loss = run_model_loss(model_idx, v_obs, v_act, v_nxt_obs, v_rew)
-                    # mb_lr
+
                     if mb_valid_loss < max(mb_lr, 1e-4) or it > 1e5:
                         not_converged = False
                     it += 1
@@ -928,6 +850,7 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
             best_mb['iter'] = it
             # store the parameters to the array
             best_mb['params'] = sess.run(models_variables[model_idx])
+
         else:
             # Run until the number of model_iter has passed from the best val loss at it on...
             # ml = 1
@@ -975,30 +898,24 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
         print('now plotting...')
         rewards = env_wrapper.env.current_buffer.get_data()['rews']
 
-        # initial_states = env.initial_conditions
-
         iterations = []
         finals = []
         means = []
         stds = []
 
-        # init_states = pd.read_pickle('/Users/shirlaen/PycharmProjects/DeepLearning/spinningup/Environments/initData')
-
         for i in range(len(rewards)):
             if (len(rewards[i]) > 1):
-                # finals.append(rewards[i][len(rewards[i]) - 1])
                 finals.append(rewards[i][-1])
                 means.append(np.mean(rewards[i][1:]))
                 stds.append(np.std(rewards[i][1:]))
                 iterations.append(len(rewards[i]))
-        # print(iterations)
         x = range(len(iterations))
         iterations = np.array(iterations)
         finals = np.array(finals)
         means = np.array(means)
         stds = np.array(stds)
 
-        plot_suffix = label  # , Fermi time: {env.TOTAL_COUNTER / 600:.1f} h'
+        plot_suffix = label
 
         fig, axs = plt.subplots(2, 1, sharex=True)
 
@@ -1006,7 +923,7 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
         ax.plot(x, iterations)
         ax.set_ylabel('Iterations (1)')
         ax.set_title(plot_suffix)
-        # fig.suptitle(label, fontsize=12)
+
         if 'data_number' in kwargs:
             ax1 = plt.twinx(ax)
             color = 'lime'
@@ -1031,10 +948,8 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
                          alpha=0.5, edgecolor=color, facecolor='#FF9848')
         ax1.plot(x, means, color=color)
 
-        # ax.set_ylim(ax1.get_ylim())
         if 'save_name' in kwargs:
             plt.savefig(kwargs.get('save_name') + '.pdf')
-        # fig.tight_layout()
         plt.show()
 
     def plot_observables(data, label, **kwargs):
@@ -1055,7 +970,6 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
 
         ax.set_title(label)
 
-        # plt.tw
         ax2 = ax.twinx()
 
         color = 'lime'
@@ -1103,7 +1017,7 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
     sim_env = NetworkEnv(make_env(), model_op, None, num_ensemble_models)
 
     # ------------------------------------------------------------------------------------------------------
-    # -------------------------------------Try to set correct anchors---------------------------------------
+    # -------------------------------------Set correct anchors---------------------------------------
     # Get the initial parameters of each model
     # These are used in later epochs when we aim to re-train the models anew with the new dataset
     initial_variables_models = []
@@ -1119,7 +1033,6 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
         m_loss_anchor.append(loss)
 
     # ------------------------------------------------------------------------------------------------------
-    # -------------------------------------Try to set correct anchors---------------------------------------
 
     total_iterations = 0
 
@@ -1140,8 +1053,6 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
         batch_len = []
         print('============================', ep, '============================')
         # Execute in serial the environment, storing temporarily the trajectories.
-
-        # Todo: Test randomization stronger if reward lower...we need a good scheme
         env.reset()
 
         # iterate over a fixed number of steps
@@ -1157,9 +1068,6 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
                 act = np.random.uniform(-1, 1, size=env.action_space.shape[-1])
 
             else:
-
-                # act = sess.run(a_sampl, feed_dict={obs_ph: [env.n_obs], log_std: init_log_std})
-                # act = np.clip(act + np.random.randn(act.shape[0], act.shape[1]) * 0.1, -1, 1)
                 act, _ = agent.predict(env.n_obs)
 
             act = np.squeeze(act)
@@ -1214,15 +1122,16 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
                         step_count, i, mb_lr=mb_lr)
 
         ############################################################
-        ###################### POLICY LEARNING ######################
+        ###################### POLICY LEARNING #####################
         ############################################################
         data = model_buffer.get_maximum()
         print(data)
         label = f'Total {total_iterations}, ' + \
                 f'data points: {len(model_buffer)}, ' + \
                 f'ep: {ep}, max: {data}\n' + hyp_str_all
+        # TODO: Think about visualizations:
         sim_env.visualize(data=data, label=label)
-        # sim_env.visualize()
+
         best_sim_test = -1e16 * np.ones(num_ensemble_models)
         agent = Agent(MlpPolicy, sim_env, verbose=1)
         for it in range(max_training_iterations):
@@ -1231,39 +1140,27 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
 
             ################# Agent UPDATE ################
             agent.learn(total_timesteps=simulated_steps, log_interval=1000, reset_num_timesteps=False)
-            # Testing the policy on a real environment
-            # summary = tf.Summary()
-            # summary.value.add(tag='test/performance', simple_value=mn_test)
-            # file_writer.add_summary(summary, step_count)
-            # file_writer.flush()
 
-            # Test the policy on simulated environment.
-            # dynamic_wait_time_count = dynamic_wait_time(ep)
             if dynamic_wait_time(it, ep):
                 print('Iterations: ', total_iterations)
-
-                # for niky perform test! -----------------------------
-                # env_test.env.set_usage('test')
-                #
-                mn_test, mn_test_std, mn_length, mn_success = test_agent(env_test, agent.predict, num_games=50)
-                # # perform test! -----------------------------
                 label = f'Total {total_iterations}, ' + \
                         f'data points: {len(model_buffer)}, ' + \
                         f'ep: {ep}, it: {it}\n' + hyp_str_all
-                #
-                # # for niky plot results of test -----------------------------
-                # # plot_results(env_test, label=label)
-                #
+                # TODO: Running the test in debugging mode
+                env_test.env.set_usage('test')
+                mn_test, mn_test_std, mn_length, mn_success = test_agent(env_test, agent.predict, num_games=5)
+                print(' Test score: ', np.round(mn_test, 2), np.round(mn_test_std, 2),
+                      np.round(mn_length, 2), np.round(mn_success, 2))
+                # plot results of test
+                plot_results(env_test, label=label)
                 env_test.save_current_buffer(info=label)
 
-                # print(' Test score: ', np.round(mn_test, 2), np.round(mn_test_std, 2),
-                #       np.round(mn_length, 2), np.round(mn_success, 2))
-                #
-                # # save the data for plotting the tests
+                # Save the data for plotting the tests
                 tests_all.append(mn_test)
                 tests_std_all.append(mn_test_std)
                 length_all.append(mn_length)
-                # perform test end! -----------------------------
+                # TODO: Running the test in debugging mode
+
                 env_test.env.set_usage('default')
 
                 print('Simulated test:', end=' ** ')
@@ -1300,10 +1197,11 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
                 # if it % 10 == 0:
                 plot_observables(data=data, label=label)
 
+
                 # stop training if the policy hasn't improved
                 if (np.sum(best_sim_test >= sim_rewards) > int(num_ensemble_models * 0.7)):
                     if it > delay_before_convergence_check and ep < num_epochs - 1:
-                        print('break')
+                        print('break-no improvement')
                         break
                 else:
                     best_sim_test = sim_rewards
@@ -1328,7 +1226,7 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
 
 
 if __name__ == '__main__':
-    aedyna('', hidden_sizes=hidden_sizes, num_epochs=num_epochs,
-           steps_per_env=steps_per_env, algorithm='TRPO', model_batch_size=model_batch_size,
+    aedyna('', num_epochs=num_epochs,
+           steps_per_env=steps_per_env, algorithm='PPO', model_batch_size=model_batch_size,
            simulated_steps=simulated_steps,
            num_ensemble_models=num_ensemble_models, model_iter=model_iter, init_random_steps=init_random_steps)
