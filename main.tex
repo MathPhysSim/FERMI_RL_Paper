@@ -199,7 +199,7 @@ If a specific quadratic form of the $Q$ function is assumed:
 One modification, which is used in these tests is a twin network (weights denoted by $\tilde\theta$), where only one is used to obtain the policy, while the other is used for the update rule to avoid over-fitting.
 The maximum is given analytically as $\max_a Q(s,a) = V(s)$, hence from \cref{eq:minimize_bellmann_optimality}:
 \begin{align}
-	\min_\theta\left( (r(s_t,a_t)+\gamma \min_{\theta,\tilde \theta} V_{\theta\prime}(s_{t+1}) - (1+\gamma) Q_\theta(s_t,a_t)\right)^2
+	\min_\theta\left( (r(s_t,a_t)+\gamma \min_{\theta\prime,\tilde \theta} V_{\theta\prime}(s_{t+1}) - (1+\gamma) Q_\theta(s_t,a_t)\right)^2
 \end{align}
 $\theta\prime$ denotes the weights of a previous iteration.
 \subsection{New NAF network architecture}
