@@ -207,7 +207,7 @@ $\theta\prime$ denotes the weights of a previous iteration.
 
 \begin{algorithm}[ht]
 \caption{On-policy policy gradient with Monte Carlo estimator \label{alg:pg}}
-\begin{algorithmic}[1]
+\begin{algorithmic}
 \State initialise $\theta_0$
 \For{iteration $k \in [0, \dots, K]$}
 %\State sample trajectories $\{\traj_i\}$ by running $\policy_{\theta_k}(\ba_t|\bs_t)$ \Comment{each $\traj_i$ consists of $\bs_{i,0},\ba_{i,0},\dots,\bs_{i,H},\ba_{i,H}$}
