@@ -107,18 +107,6 @@
   year          = {2017},
 }
 
-@Article{Schulman2015,
-  author      = {John Schulman and Sergey Levine and Philipp Moritz and Michael I. Jordan and Pieter Abbeel},
-  date        = {2015-02-19},
-  title       = {Trust Region Policy Optimization},
-  eprint      = {1502.05477v5},
-  eprintclass = {cs.LG},
-  eprinttype  = {arXiv},
-  abstract    = {We describe an iterative procedure for optimizing policies, with guaranteed monotonic improvement. By making several approximations to the theoretically-justified procedure, we develop a practical algorithm, called Trust Region Policy Optimization (TRPO). This algorithm is similar to natural policy gradient methods and is effective for optimizing large nonlinear policies such as neural networks. Our experiments demonstrate its robust performance on a wide variety of tasks: learning simulated robotic swimming, hopping, and walking gaits; and playing Atari games using images of the screen as input. Despite its approximations that deviate from the theory, TRPO tends to give monotonic improvement, with little tuning of hyperparameters.},
-  file        = {:http\://arxiv.org/pdf/1502.05477v5:PDF},
-  keywords    = {cs.LG},
-}
-
 @Article{Wang2019,
   author      = {Tingwu Wang and Xuchan Bao and Ignasi Clavera and Jerrick Hoang and Yeming Wen and Eric Langlois and Shunshi Zhang and Guodong Zhang and Pieter Abbeel and Jimmy Ba},
   date        = {2019-07-03},
@@ -154,6 +142,51 @@
   eprinttype  = {arXiv},
   file        = {:http\://arxiv.org/pdf/2005.01643v3:PDF;:http\://arxiv.org/pdf/2005.01643v3:},
   keywords    = {cs.LG, cs.AI, stat.ML},
+}
+
+@Article{Kurutach2018,
+  author      = {Thanard Kurutach and Ignasi Clavera and Yan Duan and Aviv Tamar and Pieter Abbeel},
+  title       = {Model-Ensemble Trust-Region Policy Optimization},
+  abstract    = {Model-free reinforcement learning (RL) methods are succeeding in a growing number of tasks, aided by recent advances in deep learning. However, they tend to suffer from high sample complexity, which hinders their use in real-world domains. Alternatively, model-based reinforcement learning promises to reduce sample complexity, but tends to require careful tuning and to date have succeeded mainly in restrictive domains where simple models are sufficient for learning. In this paper, we analyze the behavior of vanilla model-based reinforcement learning methods when deep neural networks are used to learn both the model and the policy, and show that the learned policy tends to exploit regions where insufficient data is available for the model to be learned, causing instability in training. To overcome this issue, we propose to use an ensemble of models to maintain the model uncertainty and regularize the learning process. We further show that the use of likelihood ratio derivatives yields much more stable learning than backpropagation through time. Altogether, our approach Model-Ensemble Trust-Region Policy Optimization (ME-TRPO) significantly reduces the sample complexity compared to model-free deep RL methods on challenging continuous control benchmark tasks.},
+  date        = {2018-02-28},
+  eprint      = {1802.10592},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  file        = {:http\://arxiv.org/pdf/1802.10592v2:PDF},
+  keywords    = {cs.LG, cs.AI, cs.RO},
+}
+
+@Article{Haarnoja2018a,
+  author      = {Tuomas Haarnoja and Aurick Zhou and Kristian Hartikainen and George Tucker and Sehoon Ha and Jie Tan and Vikash Kumar and Henry Zhu and Abhishek Gupta and Pieter Abbeel and Sergey Levine},
+  title       = {Soft Actor-Critic Algorithms and Applications},
+  abstract    = {Model-free deep reinforcement learning (RL) algorithms have been successfully applied to a range of challenging sequential decision making and control tasks. However, these methods typically suffer from two major challenges: high sample complexity and brittleness to hyperparameters. Both of these challenges limit the applicability of such methods to real-world domains. In this paper, we describe Soft Actor-Critic (SAC), our recently introduced off-policy actor-critic algorithm based on the maximum entropy RL framework. In this framework, the actor aims to simultaneously maximize expected return and entropy. That is, to succeed at the task while acting as randomly as possible. We extend SAC to incorporate a number of modifications that accelerate training and improve stability with respect to the hyperparameters, including a constrained formulation that automatically tunes the temperature hyperparameter. We systematically evaluate SAC on a range of benchmark tasks, as well as real-world challenging tasks such as locomotion for a quadrupedal robot and robotic manipulation with a dexterous hand. With these improvements, SAC achieves state-of-the-art performance, outperforming prior on-policy and off-policy methods in sample-efficiency and asymptotic performance. Furthermore, we demonstrate that, in contrast to other off-policy algorithms, our approach is very stable, achieving similar performance across different random seeds. These results suggest that SAC is a promising candidate for learning in real-world robotics tasks.},
+  date        = {2018-12-13},
+  eprint      = {1812.05905},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  file        = {:http\://arxiv.org/pdf/1812.05905v2:PDF},
+  keywords    = {cs.LG, cs.AI, cs.RO, stat.ML},
+}
+
+@Misc{stable-baselines,
+  author       = {Hill, Ashley and Raffin, Antonin and Ernestus, Maximilian and Gleave, Adam and Kanervisto, Anssi and Traore, Rene and Dhariwal, Prafulla and Hesse, Christopher and Klimov, Oleg and Nichol, Alex and Plappert, Matthias and Radford, Alec and Schulman, John and Sidor, Szymon and Wu, Yuhuai},
+  howpublished = {\url{https://github.com/hill-a/stable-baselines}},
+  title        = {Stable Baselines},
+  year         = {2018},
+  journal      = {GitHub repository},
+  publisher    = {GitHub},
+}
+
+@Article{Schulman2015,
+  author      = {John Schulman and Sergey Levine and Philipp Moritz and Michael I. Jordan and Pieter Abbeel},
+  title       = {Trust Region Policy Optimization},
+  abstract    = {We describe an iterative procedure for optimizing policies, with guaranteed monotonic improvement. By making several approximations to the theoretically-justified procedure, we develop a practical algorithm, called Trust Region Policy Optimization (TRPO). This algorithm is similar to natural policy gradient methods and is effective for optimizing large nonlinear policies such as neural networks. Our experiments demonstrate its robust performance on a wide variety of tasks: learning simulated robotic swimming, hopping, and walking gaits; and playing Atari games using images of the screen as input. Despite its approximations that deviate from the theory, TRPO tends to give monotonic improvement, with little tuning of hyperparameters.},
+  date        = {2015-02-19},
+  eprint      = {1502.05477},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  file        = {:http\://arxiv.org/pdf/1502.05477v5:PDF},
+  keywords    = {cs.LG},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

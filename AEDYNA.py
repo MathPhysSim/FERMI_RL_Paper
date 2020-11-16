@@ -31,8 +31,8 @@ real_env = env = PendulumEnv()
 ############################################################
 
 
-steps_per_env = 501
-init_random_steps = 501
+steps_per_env = 201
+init_random_steps = 201
 total_steps = 10000
 num_epochs = int((total_steps - init_random_steps) / steps_per_env) + 1
 
@@ -43,7 +43,7 @@ delay_before_convergence_check = 1
 
 # Select the rl-algorithm
 
-algorithm = 'PPO'
+algorithm = 'SAC'
 # algorithm = 'PPO'
 
 if algorithm == 'SAC':
@@ -53,7 +53,7 @@ else:
     from stable_baselines.common.policies import MlpPolicy
     from stable_baselines import PPO2 as Agent
 
-simulated_steps = 50000
+simulated_steps = 20000
 
 model_batch_size = 100
 num_ensemble_models = 3
