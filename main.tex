@@ -170,12 +170,12 @@ The paper is organised as follows.
 \end{itemize}
 
 \section{Deep Reinforcement learning}
-Assume states $s$ the set of all states $\states$ and actions $a$ all actions $\actions$ and rewards $r$ and the set of all rewards $\mathcal{R}$ an initial state distribution $\initstate$.
+Assume states $s$ the set of all states $\bs$ and actions $\ba$ all actions $\actions$ and rewards $\reward$ and the set of all rewards $\mathcal{R}$ an initial state distribution $\initstate$.
 Goal of reinforcement learning is to find a $\policy\mapsto a$, which is the solution of:
 \begin{align}
 \max J (\policy)  =  \mathbb E_{\traj \sim p_{\policy}}\left[\sum_{t=0}^{\horizon}\discount^t r(\bs_t,\ba_t)\right],
 \end{align}
-where $p_\pi = d_0(s_0)\prod_{t_0}^H\pi(a_t,s_t)\mathcal T(s_{t+1}|s_t,a_t)$ is the distribution of all trajectories $\tau := (s_0, a_0, s_1, a_1,...s_H,a_H)$ drawn by $\pi$ with a horizon $H$.
+where $p_\policy = \initstate(\bs_0)\prod_{t_0}^\horizon\policy(\ba_t,\bs_t)\transitions(s_{t+1}|s_t,a_t)$ is the distribution of all trajectories $\tau := (s_0, a_0, s_1, a_1,...s_H,a_H)$ drawn by $\pi$ with a horizon $H$.
 In the modern field of RL one distinguishes if the policy $\pi(s)\approx \pi_\phi(s)$ or the state-action value function $Q(s,a)$ is approximated using a high capacity function approximator, as e.g. a deep neural network. In the first case one speaks about policy gradient methods in the latter about approximate dynamic programming, which we now discuss.
 \subsection{Approximate dynamic programming}
 The state-value function $Q(s,a)$ is expressed as $Q_\phi(s,a)$, where $\phi$ denotes the parameters of the function approximator. By satisfying the Bellmann-optimality operator the optimal $Q^*(s,a)$ can be found:
