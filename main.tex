@@ -193,9 +193,9 @@ If a specific quadratic form of the $Q$ function is assumed:
 \begin{align}
      Q_\theta(\bs,\ba) = -\frac{1}{2}(\ba-\mu_\theta(\bs))P_\theta(\ba-\mu_\theta(\bs))^T+V_\theta(s).
 \end{align}
- The optimal policy is given by:
+ The policy is given by:
 \begin{align}
-    \policy^*(\bs)=(\delta(\ba)-\arg\!\max_\ba Q_\theta(\bs,\ba)).
+    \policy_\theta(\bs)=(\delta(\ba)-\arg\!\max_\ba Q_\theta(\bs,\ba)).
 \end{align}
 One modification, which is used in these tests is a twin network (weights denoted by $\tilde\theta$), where only one is used to obtain the policy, while the other is used for the update rule to avoid over-estimation.
 The maximum is given analytically as $\max_a Q(s,a) = V(s)$, hence from \cref{eq:minimize_bellmann_optimality}:
