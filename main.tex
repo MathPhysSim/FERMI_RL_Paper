@@ -221,7 +221,14 @@ $\theta\prime$ denotes the weights of a previous iteration.
 
 \section{Uncertainty aware Dyna-style reinforcement learning}
 The original Dyna algorithm \cite{DYNA} is modified here in several aspects. Generally, Dyna style algorithms denote algorithms, where a MFRL algorithm is trained on purely synthetic data from an approximate dynamics model or on a mixture of synthetic and real data. We use only synthetic data to reduce the interaction with the real environment to a minimum.
+An overview of the used method is shown in
 
+\begin{figure}[!h]
+	\centering
+	\includegraphics*[width=0.5\textwidth]{Figures/MBRL_overview}
+	\caption{The training .}
+	\label{fig:MBRL_overview}
+\end{figure}
 
 \subsection{Operational deployment}
 \NB{Niky} % come abbiamo interagito con FERMI
