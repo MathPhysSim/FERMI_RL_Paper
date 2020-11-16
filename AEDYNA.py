@@ -31,13 +31,12 @@ real_env = env = PendulumEnv()
 ############################################################
 
 
-steps_per_env = 201
-init_random_steps = 201
+steps_per_env = 501
+init_random_steps = 501
 total_steps = 10000
 num_epochs = int((total_steps - init_random_steps) / steps_per_env) + 1
 
 print('Number of epochs: ', num_epochs)
-
 
 max_training_iterations = 50
 delay_before_convergence_check = 1
@@ -54,7 +53,7 @@ else:
     from stable_baselines.common.policies import MlpPolicy
     from stable_baselines import PPO2 as Agent
 
-simulated_steps = 10000
+simulated_steps = 50000
 
 model_batch_size = 100
 num_ensemble_models = 3
@@ -320,6 +319,7 @@ def test_agent(env_test, agent_op, num_games=10):
                 a_s, _ = agent_op([o])
             except:
                 a_s, _ = agent_op(o)
+            a_s = np.squeeze(a_s)
             o, r, d, _ = env_test.step(a_s)
             game_r += r
             game_length += 1
@@ -520,19 +520,21 @@ class NetworkEnv(gym.Wrapper):
 
     def step(self, action):
         if self.verification:
-            obs, rew = self.model_func(self.obs, [np.squeeze(action)], self.number_models)
+            obs, rew = self.model_func(self.obs, [np.squeeze(action)])
         else:
-            obs, rew = self.model_func(self.obs, [np.squeeze(action)], self.current_model)
+            # Can be activated to randomize each step
+            current_model = np.random.randint(0, max(self.number_models, 1)) # self.current_model
+            obs, rew = self.model_func(self.obs, [np.squeeze(action)], current_model)
+        # obs, rew, _, _ = self.env.step(action)
         self.obs = np.clip(obs.copy(), -1, 1)
         # rew = np.clip(rew, -1, 1)
         if not self.verification:
             rew = (rew - 1) / 2
         self.len_episode += 1
-        # if rew > -0.05:  # self.threshold: TODO: to be changed
-        #     self.done = True
+
         if self.len_episode >= self.max_steps:
             self.done = True
-            print('Max', self.len_episode)
+
         return self.obs, rew, self.done, dict()
 
     def visualize(self, data=None, label=None):
@@ -1167,7 +1169,8 @@ def aedyna(env_name, cr_lr=5e-3, num_epochs=50,
 
                 sim_rewards = []
                 for i in range(num_ensemble_models):
-                    sim_m_env = NetworkEnv(make_env(), model_op, None, number_models=i, verification=True)
+                    sim_m_env = NetworkEnv(make_env(), lambda o, a: model_op(o, a, i), None, number_models=i,
+                                           verification=True)
                     mn_sim_rew, _, _, _ = test_agent(sim_m_env, agent.predict, num_games=10)
                     sim_rewards.append(mn_sim_rew)
                     print(mn_sim_rew, end=' ** ')
@@ -1196,7 +1199,6 @@ def aedyna(env_name, cr_lr=5e-3, num_epochs=50,
                 # plotting the progress -------------------
                 # if it % 10 == 0:
                 plot_observables(data=data, label=label)
-
 
                 # stop training if the policy hasn't improved
                 if (np.sum(best_sim_test >= sim_rewards) > int(num_ensemble_models * 0.7)):

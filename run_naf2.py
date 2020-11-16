@@ -6,12 +6,7 @@ import numpy as np
 import tensorflow as tf
 
 
-
-
-# from laser_trajectory_control_env import LaserTrajectoryControlEnv
-# from tango_connection import TangoConnection
-from local_fel_simulated_env import FelLocalEnv as Ta
-from simulated_tango import SimTangoConnection
+from inverted_pendulum import PendulumEnv
 
 from naf2 import NAF
 
@@ -20,11 +15,7 @@ random_seed = 111
 np.random.seed(random_seed)
 random.seed(random_seed)
 
-# tango = SimTangoConnection()
-# env = FelLocalEnv(tango=tango)
-conf_file = '/home/niky/FERMI/2020_07_20/configuration/conf_fel.json'
-tango = TangoConnection(conf_file=conf_file)
-env = LaserTrajectoryControlEnv(tango=tango)
+env = PendulumEnv()
 
 def plot_results(env, file_name):
     # plotting
@@ -124,7 +115,9 @@ def plot_convergence(agent, file_name):
 
 if __name__ == '__main__':
 
-    directory = "checkpoints/test_new/"
+    directory = "checkpoints/pendulum/"
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
     is_continued = False  # False if is_train else True
 
