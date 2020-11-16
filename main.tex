@@ -141,7 +141,11 @@ In this paper we discuss a model based reinforcement learning approach in compar
 %\keywords{Suggested keywords}%Use showkeys class option if keyword
                               %display desired
 \maketitle
-
+\begin{itemize}
+	\item Noise benchmarks with pendulum
+	\item Benchmark NAF2 with pendulum
+	
+\end{itemize}
 %\tableofcontents
 \section{Introduction and Motivation}
 In particle accelerators one main goal is to provide stable and reproducible performance. In order to achieve this, a number of control problems have to be considered simultaneously. Especially if there is no way to model the physics, one might use optimisation techniques as e.g. derivative free optimisers (DFOs) or model-based optimisations as Gaussian processes. Another promising way is to apply reinforcement learning which has several advantages over optimisation methods:
@@ -184,7 +188,7 @@ The state-value function $Q(\bs,\ba)$ is expressed as $Q_\theta(\bs,\ba)$, where
 \end{align}
 This operator has a unique fixed point but is non-linear, due to the $\max$ - operator:
 \begin{align}
- \bellman^*\vec Q_\theta(\bs_t,\ba_t) := r(\bs_t,\ba_t)+\gamma\max_\ba\left( Q_\theta(\bs_{t+1},\ba_t) - Q_\theta(\bs_t,\ba_t)\right).
+ \bellman^*\vec Q_\theta(\bs_t,\ba_t) := r(\bs_t,\ba_t)+\gamma\max_\ba\left( Q_\theta(\bs_{t+1},\ba) - Q_\theta(\bs_t,\ba_t)\right).
 \end{align}
 The form of this equation can cause overestimation and other complications, when using a function approximator. Several methods exist which try to mitigate the problems \cite{}.
 One way to reduce the effect is to take a simple analytical form of the $Q$-function.
