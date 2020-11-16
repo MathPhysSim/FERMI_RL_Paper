@@ -230,7 +230,8 @@ An overview of the used method is shown in \cref{fig:MBRL_overview}. At the begi
 	\caption{A schematic overview of the AE-Dyna approach used in this paper.}
 	\label{fig:MBRL_overview}
 \end{figure}
-\subsection{What was tested?}
+\subsection{Critical design decisions}
+In the following the most important aspects of a successful application of a Dyna-AE algorithm are listed:
 \begin{itemize}
 	\item The ANN - including the prior - number of models - noise level.
 	\item The number of data points and the policy.
@@ -238,6 +239,8 @@ An overview of the used method is shown in \cref{fig:MBRL_overview}. At the begi
 	\item The episodic design - avoid long trajectories.
 	\item The MFRL agent as e.g. the TRPO and PPO or the SAC.
 \end{itemize}
+We try to discuss all items in some detail in the following.
+The anchoring ensemble methods usually yields good results already with a small number of different networks. The idea behind it, is to mimic the posterior probability of the dynamics model to capture first of all its own uncertainty due to the lack of data. Empirical results show that three to five models were sufficient to see clear advantages over a single network approach.
 \subsection{Operational deployment}
 \NB{Niky} % come abbiamo interagito con FERMI
 \subsection{\NB{short FERMI introduction}}
