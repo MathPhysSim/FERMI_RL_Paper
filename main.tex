@@ -210,7 +210,7 @@ $\theta\prime$ denotes the weights of a previous iteration.
 \begin{algorithmic}[1]
 \State initialise $\theta_0$
 \For{iteration $k \in [0, \dots, K]$}
-%\State sample trajectories $\{\traj_i\}$ by running $\policy_{\theta_k}(\ba_t|\bs_t)$ \Comment{each $\traj_i$ consists of $\bs_{i,0},\ba_{i,0},\dots,\bs_{i,H},\ba_{i,H}$}
+\State sample trajectories $\{\traj_i\}$ by running $\policy_{\theta_k}(\ba_t|\bs_t)$ \Comment{each $\traj_i$ consists of $\bs_{i,0},\ba_{i,0},\dots,\bs_{i,H},\ba_{i,H}$}
 %\State compute $\return_{i,t} = \sum_{t'=t}^H \discount^{t'-t} \reward(\bs_{i,t},\ba_{i,t})$
 %\State fit $b(\bs_t)$ to $\{\return{i,t}\}$ \Comment{use constant $b_t = \frac{1}{N}\sum_i \return{i,t}$, or fit $b(\bs_t)$ to $\{\return{i,t}\}$}
 %\State compute $\hat{A}(\bs_{i,t},\ba_{i,t}) = \return_{i,t} - b(\bs_t)$
