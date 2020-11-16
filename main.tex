@@ -202,7 +202,7 @@ The maximum is given analytically as $\max_a Q(s,a) = V(s)$, hence from \cref{eq
 \begin{align}
 	\min_\theta\left( (r(s_t,a_t)+\gamma \min_{\theta\prime,\tilde \theta} V_{\theta\prime}(s_{t+1}) - (1+\gamma) Q_\theta(s_t,a_t)\right)^2
 \end{align}
-$\theta\prime$ denotes the weights of a previous iteration. To stabilize the network training a small artificial noise is added to the actions in the update.
+$\theta\prime$ denotes the weights of a previous iteration. To stabilize the network training a small artificial noise is added to the actions in the update. This algorithm has an extremely good sample-efficiency for suitable problems as can be found in accelerators.
 %\subsection{New NAF network architecture}
 
 \begin{algorithm}[ht]
