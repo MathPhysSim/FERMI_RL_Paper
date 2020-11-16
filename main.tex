@@ -190,17 +190,18 @@ One way to reduce the effect is to take a simple analytical form of the $Q$-func
 \subsection{NAF}
 If a specific quadratic form of the $Q$ function is assumed:
 \begin{align}
-     Q_\theta(s,a) = -\frac{1}{2}(a-\mu_\theta(s))P_\theta(a-\mu_\theta(s))^T+V_\theta(s),
+     Q_\theta(s,a) = -\frac{1}{2}(a-\mu_\theta(s))P_\theta(a-\mu_\theta(s))^T+V_\theta(s).
 \end{align}
-the maximum is given analytically as $\max_a Q(s,a) = V(s)$, hence from \cref{eq:minimize_bellmann_optimality}:
-\begin{align}
-     \min_\theta\left( (r(s_t,a_t)+\gamma V_{\theta\prime}(s_{t+1}) - (1+\gamma) Q_\theta(s_t,a_t)\right)^2
-\end{align}
-$\theta\prime$ denotes the weights of a previous iteration. The optimal policy is given by:
+ The optimal policy is given by:
 \begin{align}
     \pi^*(s)=(\delta(a)-\arg\!\max_a Q_\theta(s,a)).
 \end{align}
-The modification, which is used in these tests is a twin network ($\tilde\theta$), where only one is used to obtain the policy, while the other is used for the update rule
+One modification, which is used in these tests is a twin network (weights denoted by $\tilde\theta$), where only one is used to obtain the policy, while the other is used for the update rule to avoid over-fitting:
+the maximum is given analytically as $\max_a Q(s,a) = V(s)$, hence from \cref{eq:minimize_bellmann_optimality}:
+\begin{align}
+	\min_\theta\left( (r(s_t,a_t)+\gamma \min_{\theta,\tilde \theta} V_{\theta\prime}(s_{t+1}) - (1+\gamma) Q_\theta(s_t,a_t)\right)^2
+\end{align}
+$\theta\prime$ denotes the weights of a previous iteration.
 \subsection{New NAF network architecture}
 
 % \begin{algorithm}[ht]
