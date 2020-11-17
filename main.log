@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  17 NOV 2020 11:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  17 NOV 2020 12:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -832,186 +832,7 @@ File: tikzlibrarypositioning.code.tex 2020/10/01 v3.1.6a (3.1.6a)
 \@input{tex/defs.aux}
 \openout2 = `tex/defs.aux'.
 
-(./tex/defs.tex
-
-! LaTeX Error: Command \cmt already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.9 lor{orange}{#1}}}
-                     
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Undefined control sequence.
-<argument> {\footnoteize 
-                         \textco lor{orange}{##1}}
-l.9 lor{orange}{#1}}}
-                     
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> {\footnoteize \textco 
-                                 lor{orange}{##1}}
-l.9 lor{orange}{#1}}}
-                     
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.9 lor{orange}{#1}}}
-                     
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! You can't use `macro parameter character #' in horizontal mode.
-<argument> {\footnoteize \textco lor{orange}{##
-                                               1}}
-l.9 lor{orange}{#1}}}
-                     
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-
-Overfull \hbox (55.61122pt too wide) in paragraph at lines 9--10
-[]\OT1/cmr/m/n/10 lororange1 
- []
-
-! Too many }'s.
-l.47 }
-                                \ewcommand{\pr}{^\prime}\newcommand{\tr}{^\m...
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-! Undefined control sequence.
-l.47 }                          \ewcommand
-                                          {\pr}{^\prime}\newcommand{\tr}{^\m...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.47 }                          \ewcommand{\pr
-                                              }{^\prime}\newcommand{\tr}{^\m...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.47 }                          \ewcommand{\pr}{^
-                                                 \prime}\newcommand{\tr}{^\m...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.47 }                          \ewcommand{\pr}{^
-                                                 \prime}\newcommand{\tr}{^\m...
-
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-LaTeX Font Info:    Trying to load font information for U+msa on input line 47.
-
-(c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 47.
-
-
-(c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 47
-.
-
-(c:/texlive/2020/texmf-dist/tex/latex/wasysym/uwasy.fd
-File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
-)
-
-LaTeX Font Warning: Font shape `U/wasy/b/n' in size <7> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 47.
-
-
-LaTeX Font Warning: Font shape `U/wasy/b/n' in size <5> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 47.
-
-! Extra }, or forgotten $.
-l.47 ...                  \ewcommand{\pr}{^\prime}
-                                                  \newcommand{\tr}{^\mathrm{T}}
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.52 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (12.80556pt too wide) in paragraph at lines 47--52
-[]$[]$ 
- []
-
-)
-! Undefined control sequence.
-\set@color ...\@pdfcolorstack push{\current@color 
-                                                  }\aftergroup \reset@color 
-l.108 \include{tex/defs}
-                        
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-\set@color ...\@pdfcolorstack push{\current@color 
-                                                  }\aftergroup \reset@color 
-l.108 \include{tex/defs}
-                        
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[1{c:/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(./tex/defs.tex)
 Class revtex4-2 Info: Unrecognized array package. Please update this document c
 lass! (Proceeding with fingers crossed.) on input line 110.
 Class revtex4-2 Info: cite was not loaded (OK!) on input line 110.
@@ -1141,12 +962,32 @@ Dictionary: translator-basic-dictionary, Language: English
 Class revtex4-2 Info: Taking \maketitle back from hyperref on input line 110.
 \openout3 = `mainNotes.bib'.
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.190 \end{align}
-                  [1]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 110
+.
+ (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 110
+.
+
+(c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 11
+0.
+
+(c:/texlive/2020/texmf-dist/tex/latex/wasysym/uwasy.fd
+File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
+)
+
+LaTeX Font Warning: Font shape `U/wasy/b/n' in size <7> not available
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 110.
+
+
+LaTeX Font Warning: Font shape `U/wasy/b/n' in size <5> not available
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 110.
+
+[1{c:/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 Underfull \hbox (badness 2310) in paragraph at lines 194--195
 []\OT1/cmr/m/n/10 The state-value func-tion $\OML/cmm/m/it/10 Q\OT1/cmr/m/n/10 
 (\OT1/cmr/bx/n/10 s\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 a\OT1/cmr/m/n/10 )$ is e
@@ -1171,7 +1012,7 @@ LaTeX Font Warning: Font shape `U/wasy/b/n' in size <9> not available
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <6> not available
 (Font)              Font shape `U/wasy/m/n' tried instead on input line 224.
 
-<Figures/MBRL_overview.pdf, id=119, 845.1575pt x 597.23125pt>
+<Figures/MBRL_overview.pdf, id=115, 845.1575pt x 597.23125pt>
 File: Figures/MBRL_overview.pdf Graphic file (type pdf)
 <use Figures/MBRL_overview.pdf>
 Package pdftex.def Info: Figures/MBRL_overview.pdf  used on input line 242.
@@ -1198,7 +1039,7 @@ LaTeX Font Warning: Font shape `U/wasy/b/n' in size <8> not available
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Figures/Learning_evolution.png, id=181, 1812.7725pt x 1024.82875pt>
+<Figures/Learning_evolution.png, id=177, 1812.7725pt x 1024.82875pt>
 File: Figures/Learning_evolution.png Graphic file (type png)
 <use Figures/Learning_evolution.png>
 Package pdftex.def Info: Figures/Learning_evolution.png  used on input line 310
@@ -1212,7 +1053,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 310--311
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Figures/AE-DYNA_observables.pdf, id=184, 462.52798pt x 346.89601pt>
+<Figures/AE-DYNA_observables.pdf, id=180, 462.52798pt x 346.89601pt>
 File: Figures/AE-DYNA_observables.pdf Graphic file (type pdf)
 <use Figures/AE-DYNA_observables.pdf>
 Package pdftex.def Info: Figures/AE-DYNA_observables.pdf  used on input line 31
@@ -1226,7 +1067,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 317--318
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Figures/AE-DYNA_verification.pdf, id=186, 462.52798pt x 346.89601pt>
+<Figures/AE-DYNA_verification.pdf, id=182, 462.52798pt x 346.89601pt>
 File: Figures/AE-DYNA_verification.pdf Graphic file (type pdf)
 <use Figures/AE-DYNA_verification.pdf>
 Package pdftex.def Info: Figures/AE-DYNA_verification.pdf  used on input line 3
@@ -1240,7 +1081,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 324--325
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Figures/ME-TRPO_observables.pdf, id=188, 462.52798pt x 346.89601pt>
+<Figures/ME-TRPO_observables.pdf, id=184, 462.52798pt x 346.89601pt>
 File: Figures/ME-TRPO_observables.pdf Graphic file (type pdf)
 <use Figures/ME-TRPO_observables.pdf>
 Package pdftex.def Info: Figures/ME-TRPO_observables.pdf  used on input line 33
@@ -1251,7 +1092,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 332--333
  [][] 
  []
 
-<Figures/ME-TRPO_verification.pdf, id=190, 462.52798pt x 346.89601pt>
+<Figures/ME-TRPO_verification.pdf, id=186, 462.52798pt x 346.89601pt>
 File: Figures/ME-TRPO_verification.pdf Graphic file (type pdf)
 <use Figures/ME-TRPO_verification.pdf>
 Package pdftex.def Info: Figures/ME-TRPO_verification.pdf  used on input line 3
@@ -1268,7 +1109,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Figures/FERMI_all_experiments_NAF_episodes.pdf, id=192, 462.52798pt x 346.8960
+<Figures/FERMI_all_experiments_NAF_episodes.pdf, id=188, 462.52798pt x 346.8960
 1pt>
 File: Figures/FERMI_all_experiments_NAF_episodes.pdf Graphic file (type pdf)
 <use Figures/FERMI_all_experiments_NAF_episodes.pdf>
@@ -1280,7 +1121,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 345--346
  [][] 
  []
 
-<Figures/FERMI_all_experiments_NAF_convergence.pdf, id=194, 462.52798pt x 346.8
+<Figures/FERMI_all_experiments_NAF_convergence.pdf, id=190, 462.52798pt x 346.8
 9601pt>
 File: Figures/FERMI_all_experiments_NAF_convergence.pdf Graphic file (type pdf)
 
@@ -1352,49 +1193,45 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
- )
-(\end occurred inside a group at level 1)
-
-### simple group (level 1) entered at line 47 ({)
-### bottom level 
+ ) 
 Here is how much of TeX's memory you used:
- 26539 strings out of 479917
- 518938 string characters out of 5886664
- 830330 words of memory out of 5000000
- 42559 multiletter control sequences out of 15000+600000
+ 26538 strings out of 479917
+ 518923 string characters out of 5886664
+ 809506 words of memory out of 5000000
+ 42558 multiletter control sequences out of 15000+600000
  552943 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,12n,77p,1348b,3420s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t
-s1.enc}<c:/texlive/2020/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.p
-fb><c:/texlive/2020/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb>
-<c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texli
-ve/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2020/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><c:/texlive/2020/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmbx9.pfb><c:/texlive/2020/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmmi10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi5.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.p
-fb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/tex
-live/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2020/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2020/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2020/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr6.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c
-:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2
-020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2020/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2020/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy9.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmti10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-ti9.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c
-:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/te
-xlive/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on main.pdf (7 pages, 2675708 bytes).
+ 71i,12n,77p,1348b,926s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/tex
+live/2020/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb><c:/texlive
+/2020/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb><c:/texlive/20
+20/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2020/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2020/texmf-dist/font
+s/type1/public/amsfonts/cm/cmbx7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmbx9.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmex10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><
+c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive
+/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2020/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2020/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2020/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr5.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+6.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/t
+exlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2020
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2020/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2020/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy9.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.
+pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb><c:/te
+xlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2020
+/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2020/tex
+mf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on main.pdf (6 pages, 2675288 bytes).
 PDF statistics:
- 614 PDF objects out of 1000 (max. 8388607)
- 358 compressed objects within 4 object streams
+ 609 PDF objects out of 1000 (max. 8388607)
+ 354 compressed objects within 4 object streams
  75 named destinations out of 1000 (max. 500000)
  285 words of extra memory for PDF output out of 10000 (max. 10000000)
 
