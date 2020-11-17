@@ -183,12 +183,12 @@ The paper is organised as follows.
 \end{itemize}
 
 \section{Deep Reinforcement learning}
-Assume states $s$ the set of all states $\bs$ and actions $\ba$ all actions $\actions$ and rewards $\reward$ and the set of all rewards $\mathcal{R}$ an initial state distribution $\initstate$.
-Goal of reinforcement learning is to find a $\policy\mapsto a$, which is the solution of:
+Assume states $\s$ the set of all states $\states$ and actions $\ba$ all actions $\actions$ and rewards $\reward$ and the set of all rewards $\mathcal{R}$ an initial state distribution $\initstate$.
+Goal of reinforcement learning is to find a $\policy$ $\states\mapsto \actions$, which is the solution of:
 \begin{align}
 \max J (\policy)  =  \mathbb E_{\traj \sim p_{\policy}}\left[\sum_{t=0}^{\horizon}\discount^t r(\bs_t,\ba_t)\right],
 \end{align}
-where $p_\policy = \initstate(\bs_0)\prod_{t_0}^\horizon\policy(\ba_t,\bs_t)\transitions(\bs_{t+1}|\bs_t,\ba_t)$ is the distribution of all trajectories $\traj := (\bs_0, \ba_0, \bs_1, a_1,\dots s_\horizon,a_\horizon)$ drawn by $\policy$ with a horizon $\horizon$.
+where $p_\policy = \initstate(\bs_0)\prod_{t_0}^\horizon\policy(\ba_t,\bs_t)\transitions(\bs_{t+1}|\bs_t,\ba_t)$ is the distribution of all trajectories $\traj := (\bs_0, \ba_0, \bs_1, \ba_1,\dots \bs_\horizon,\ba_\horizon)$ drawn by $\policy$ with a horizon $\horizon$.
 In the modern field of RL one distinguishes if the policy $\policy(\ba)\approx \policy_\phi(\bs)$ or the state-action value function $Q(\bs,\ba)$ is approximated using a high capacity function approximator, as e.g. a deep neural network. In the first case one speaks about policy gradient methods in the latter about approximate dynamic programming, which we now discuss.
 \subsection{Approximate dynamic programming}
 The state-value function $Q(\bs,\ba)$ is expressed as $Q_\theta(\bs,\ba)$, where $\theta$ denotes the parameters of the function approximator. By satisfying the Bellmann-optimality operator the optimal $Q^*(\bs,\ba)$ can be found:
