@@ -8,19 +8,17 @@ import numpy as np
 import pandas as pd
 # from stable_baselines.common.noise import NormalActionNoise
 
-from stable_baselines.sac.policies import MlpPolicy
+# from stable_baselines.sac.policies import MlpPolicy
+# from stable_baselines import SAC as Agent
 # from stable_baselines.td3.policies import MlpPolicy
-# from stable_baselines.common.policies import MlpPolicy
-from stable_baselines import SAC as Agent
 # from stable_baselines import TD3 as Agent
-# from stable_baselines import PPO2 as Agent
+from stable_baselines.common.policies import MlpPolicy
+from stable_baselines import PPO2 as Agent
 
 import tensorflow as tf
 
-# from local_fel_simulated_env import FelLocalEnv
-# from simulated_tango import SimTangoConnection
-from laser_trajectory_control_env import LaserTrajectoryControlEnv
-from tango_connection import TangoConnection
+from local_fel_simulated_env import FelLocalEnv
+from simulated_tango import SimTangoConnection
 
 # from naf2 import NAF
 
@@ -32,16 +30,13 @@ config = tf.ConfigProto(
 )
 # config = None
 
-# tango = SimTangoConnection()
-# real_env = FelLocalEnv(tango=tango)
-conf_file = '/home/niky/FERMI/2020_11_05/configuration/conf_fel2.json'
-tango = TangoConnection(conf_file=conf_file)
-real_env = LaserTrajectoryControlEnv(tango=tango)
+tango = SimTangoConnection()
+real_env = FelLocalEnv(tango=tango)
 
 # Hyper papameters
 steps_per_env = 25
-init_random_steps = 200
-total_steps = 500  # 350  # 300  # 250
+init_random_steps = 100
+total_steps = 250
 num_epochs = int((total_steps - init_random_steps) / steps_per_env) + 1
 
 print('Number of epochs: ', num_epochs)
@@ -54,21 +49,21 @@ delay_before_convergence_check = 1
 algorithm = 'SAC'
 
 # minibatch_size = 100
-simulated_steps = 3000  # 2500
+simulated_steps = 3000
 
-model_batch_size = 100
-num_ensemble_models = 3
+model_batch_size = 5
+num_ensemble_models = 5
 
 early_stopping = True
-model_iter = 35  # 30
+model_iter = 30
 
-model_training_iterations = 10
+# model_training_iterations = 10
 network_size = 15
 # Set the priors for the anchor method:
 #  TODO: How to set these correctly?
 init_params = dict(init_stddev_1_w=np.sqrt(1),
                    init_stddev_1_b=np.sqrt(1),
-                   init_stddev_2_w=1.0 / np.sqrt(network_size))
+                   init_stddev_2_w=1 / np.sqrt(network_size))
 
 data_noise = 0.00000  # estimated noise variance
 lambda_anchor = data_noise / (np.array([init_params['init_stddev_1_w'],
@@ -80,12 +75,12 @@ lambda_anchor = data_noise / (np.array([init_params['init_stddev_1_w'],
 dynamic_wait_time = lambda it, ep: (it + 1) % 1 == 0  #
 
 # Learning rate as function of ep
-lr_start = 1e-3  # 1e-3
-lr_end = 1e-3  # 1e-3
+lr_start = 1e-3
+lr_end = 1e-3
 lr = lambda ep: max(lr_start + ep / 30 * (lr_end - lr_start), lr_end)
 
 # Create the logging directory:
-project_directory = 'Data_logging/Test_plots_5/'
+project_directory = 'Data_logging/Simulation/'
 
 hyp_str_all = '-nr_steps_' + str(steps_per_env) + '-cr_lr' + '-n_ep_' + str(num_epochs) + \
               '-m_bs_' + str(model_batch_size) + \
@@ -315,7 +310,7 @@ def test_agent(env_test, agent_op, num_games=10):
                 a_s, _ = agent_op([o])
             except:
                 a_s, _ = agent_op(o)
-            o, r, d, _ = env_test.step(a_s[0])  # Niky
+            o, r, d, _ = env_test.step(a_s)
             game_r += r
             game_length += 1
             # print(o, a_s, r)
@@ -658,11 +653,10 @@ class NetworkEnv(gym.Wrapper):
             #             # plt.plot(np.array(states, dtype=object)[:, 1],)
             #         # images.append(axs[i, j].contour(X, Y, (rewards - 1) / 2, 25, alpha=1))
             #         # axs[i, j].label_outer()
-            # plt.title(maximum)
-            plt.title(label)
+            plt.title(maximum)
+            # plt.title(label)
             # plt.colorbar()
-            # fig.show()
-            plt.show()
+            fig.show()
         else:
             pass
             # action = [np.random.uniform(-1, 1, 4)]
@@ -752,8 +746,10 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
            init_random_steps=steps_per_env):
     '''
     Anchor ensemble dyna reinforcement learning
+
     The states and actions are provided by the gym environment with the correct boxes.
     The reward has to be between [-1,0].
+
     Parameters:
     -----------
     env_name: Name of the environment
@@ -934,7 +930,7 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
             best_mb['params'] = sess.run(models_variables[model_idx])
         else:
             # Run until the number of model_iter has passed from the best val loss at it on...
-            ml = 1
+            # ml = 1
             # while not (best_mb['iter'] < it - model_iter and ml < 5e-3):
             while best_mb['iter'] > it - model_iter:
                 # update the model on each mini-batch
@@ -1156,8 +1152,8 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
 
             if ep == 0:
                 # Sample random action during the first epoch
-                if (step_count+1) % 5 == 0: 
-                    env.reset() 
+                if step_count % 5 == 0:
+                    env.reset()
                 act = np.random.uniform(-1, 1, size=env.action_space.shape[-1])
 
             else:
@@ -1183,7 +1179,7 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
                 env.reset()
 
         # save the data for plotting the collected data for the model
-        # env.save_current_buffer()
+        env.save_current_buffer()
 
         print('Ep:%d Rew:%.2f -- Step:%d' % (ep, np.mean(batch_rew), step_count))
 
@@ -1202,18 +1198,14 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
 
         mb_lr = lr(ep)
         print('mb_lr: ', mb_lr)
-
-        # Initialize randomly a training and validation set
         if early_stopping:
-            model_buffer.generate_random_dataset(ratio=0.1)  # 0.2)
+            model_buffer.generate_random_dataset(ratio=0.1)
         else:
             model_buffer.generate_random_dataset()
+
         for i in range(num_ensemble_models):
             # Initialize randomly a training and validation set
-            # if early_stopping:
-            #     model_buffer.generate_random_dataset(ratio=0.1)  # 0.2)
-            # else:
-            #     model_buffer.generate_random_dataset()
+
             # get both datasets
             train_obs, train_act, train_rew, train_nxt_obs, _ = model_buffer.get_training_batch()
             valid_obs, valid_act, valid_rew, valid_nxt_obs, _ = model_buffer.get_valid_batch()
@@ -1253,7 +1245,7 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
                 # for niky perform test! -----------------------------
                 # env_test.env.set_usage('test')
                 #
-                # mn_test, mn_test_std, mn_length, mn_success = test_agent(env_test, agent.predict, num_games=50)
+                mn_test, mn_test_std, mn_length, mn_success = test_agent(env_test, agent.predict, num_games=50)
                 # # perform test! -----------------------------
                 label = f'Total {total_iterations}, ' + \
                         f'data points: {len(model_buffer)}, ' + \
@@ -1262,15 +1254,15 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
                 # # for niky plot results of test -----------------------------
                 # # plot_results(env_test, label=label)
                 #
-                # # env_test.save_current_buffer(info=label)
-                #
+                env_test.save_current_buffer(info=label)
+
                 # print(' Test score: ', np.round(mn_test, 2), np.round(mn_test_std, 2),
                 #       np.round(mn_length, 2), np.round(mn_success, 2))
                 #
                 # # save the data for plotting the tests
-                # tests_all.append(mn_test)
-                # tests_std_all.append(mn_test_std)
-                # length_all.append(mn_length)
+                tests_all.append(mn_test)
+                tests_std_all.append(mn_test_std)
+                length_all.append(mn_length)
                 # perform test end! -----------------------------
                 env_test.env.set_usage('default')
 
@@ -1306,7 +1298,7 @@ def aedyna(env_name, hidden_sizes=[32, 32], cr_lr=5e-3, num_epochs=50,
 
                 # plotting the progress -------------------
                 # if it % 10 == 0:
-                # plot_observables(data=data, label=label)
+                plot_observables(data=data, label=label)
 
                 # stop training if the policy hasn't improved
                 if (np.sum(best_sim_test >= sim_rewards) > int(num_ensemble_models * 0.7)):
@@ -1340,14 +1332,3 @@ if __name__ == '__main__':
            steps_per_env=steps_per_env, algorithm='TRPO', model_batch_size=model_batch_size,
            simulated_steps=simulated_steps,
            num_ensemble_models=num_ensemble_models, model_iter=model_iter, init_random_steps=init_random_steps)
-
-
-
-
-
-
-
-
-
-
-
