@@ -191,7 +191,7 @@ Goal of reinforcement learning is to find a $\policy: \bs\mapsto \ba$, which is 
 where $p_\policy = \initstate(\bs_0)\prod_{t_0}^\horizon\policy(\ba_t,\bs_t)\transitions(\bs_{t+1}|\bs_t,\ba_t)$ is the distribution of all trajectories $\traj := (\bs_0, \ba_0, \bs_1, \ba_1,\dots \bs_\horizon,\ba_\horizon)$ drawn by $\policy$ with a horizon $\horizon$.
 In the modern field of RL one distinguishes if the policy $\policy(\ba)\approx \policy_\phi(\bs)$ or the state-action value function $Q(\bs,\ba)$ is approximated using a high capacity function approximator, as e.g. a deep neural network. In the first case one speaks about policy gradient methods in the latter about approximate dynamic programming, which we now discuss.
 \subsection{Approximate dynamic programming}
-The state-value function $Q(\bs,\ba)$ is expressed as $Q_\theta(\bs,\ba)$, where $\theta$ denotes the parameters of the function approximator. By satisfying the Bellmann-optimality equation the optimal $Q^*(\bs,\ba)$ can be found:
+The state-value function $Q(\bs,\ba)$ is expressed as $Q_\theta(\bs,\ba)$, where $\theta$ denotes the parameters of the function approximator. By satisfying the Bellmann-optimality equation $Q_\theta$ can be trained towards the optimal $Q^*(\bs,\ba)$ can be found:
 \begin{align}
     \min_\theta \left(\vec Q_\theta - \bellman^*\vec Q_\theta\right)^2.\label{eq:minimize_bellmann_optimality}
 \end{align}
