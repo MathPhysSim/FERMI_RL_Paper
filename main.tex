@@ -184,7 +184,7 @@ The paper is organised as follows.
 
 \section{Deep Reinforcement learning}
 Assume states $\bs$ the set of all states $\states$ and actions $\ba$ all actions $\actions$ and rewards $\reward$ and the set of all rewards $\mathcal{R}$ an initial state distribution $\initstate$.
-Goal of reinforcement learning is to find a $\policy$ $\states\mapsto \actions$, which is the solution of:
+Goal of reinforcement learning is to find a $\policy: \bs\mapsto \ba$, which is the solution of:
 \begin{align}
 \max J (\policy)  =  \mathbb E_{\traj \sim p_{\policy}}\left[\sum_{t=0}^{\horizon}\discount^t r(\bs_t,\ba_t)\right],
 \end{align}
