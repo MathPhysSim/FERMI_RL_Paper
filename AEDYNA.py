@@ -53,13 +53,13 @@ else:
     from stable_baselines.common.policies import MlpPolicy
     from stable_baselines import PPO2 as Agent
 
-simulated_steps = 20000
+simulated_steps = 30000
 
 model_batch_size = 100
 num_ensemble_models = 3
 
 early_stopping = True
-model_iter = 2
+model_iter = 10
 
 # model_training_iterations = 10
 network_size = 25
@@ -491,6 +491,7 @@ class NN:
 class NetworkEnv(gym.Wrapper):
     '''
     Wrapper to handle the network interaction
+    Here you can change the treatment of the uncertainty
     '''
 
     def __init__(self, env, model_func=None, done_func=None, number_models=1, **kwargs):
@@ -523,7 +524,8 @@ class NetworkEnv(gym.Wrapper):
             obs, rew = self.model_func(self.obs, [np.squeeze(action)])
         else:
             # Can be activated to randomize each step
-            current_model = np.random.randint(0, max(self.number_models, 1)) # self.current_model
+            # current_model = np.random.randint(0, max(self.number_models, 1)) # self.current_model
+            current_model = self.current_model
             obs, rew = self.model_func(self.obs, [np.squeeze(action)], current_model)
         # obs, rew, _, _ = self.env.step(action)
         self.obs = np.clip(obs.copy(), -1, 1)
@@ -537,7 +539,7 @@ class NetworkEnv(gym.Wrapper):
 
         return self.obs, rew, self.done, dict()
 
-    def visualize(self, data=None, label=None):
+    def visualize(self, data=None, label=None, **kwargs):
         action = [np.zeros(self.env.action_space.shape)]
         state = np.zeros(self.env.observation_space.shape)
         maximum = 0
@@ -550,6 +552,8 @@ class NetworkEnv(gym.Wrapper):
         y = np.arange(-1, 1, delta)
         X, Y = np.meshgrid(x, y)
 
+        if 'data_points' in kwargs:
+            data_points = kwargs.get('data_points')
         if self.number_models == num_ensemble_models:
             Nr = 1
             Nc = 1
@@ -588,6 +592,7 @@ class NetworkEnv(gym.Wrapper):
             #             # plt.plot(np.array(states, dtype=object)[:, 1],)
             #         # images.append(axs[i, j].contour(X, Y, (rewards - 1) / 2, 25, alpha=1))
             #         # axs[i, j].label_outer()
+
             plt.title(maximum)
             # plt.title(label)
             # plt.colorbar()
@@ -1068,11 +1073,11 @@ def aedyna(env_name, cr_lr=5e-3, num_epochs=50,
                 if step_count % 5 == 0:
                     env.reset()
                 act = np.random.uniform(-1, 1, size=env.action_space.shape[-1])
-
+                act = np.squeeze(act)
             else:
+                noise = 0.01 * np.random.randn(env.action_space.shape[-1])
                 act, _ = agent.predict(env.n_obs)
-
-            act = np.squeeze(act)
+                act = np.clip(np.squeeze(act) + noise, -1, 1)
             # take a step in the environment
             obs2, rew, done, _ = env.step(np.array(act))
 
