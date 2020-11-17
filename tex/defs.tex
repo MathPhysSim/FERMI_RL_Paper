@@ -1,0 +1,203 @@
+%% editing comment
+\newcommand{\cmt}[1]{{\footnotesize\textcolor{red}{#1}}}
+\newcommand{\cmto}[1]{{\footnotesize\textcolor{orange}{#1}}}
+\newcommand{\note}[1]{\cmt{Note: #1}}
+\newcommand{\todo}[1]{\cmt{TO-DO: #1}}
+\newcommand{\question}[1]{\cmto{Question: #1}}
+\newcommand{\sergey}[1]{{\footnotesize\textcolor{blue}{Sergey: #1}}}
+\newcommand{\ak}[1]{{\footnotesize\textcolor{red}{AK: #1}}}
+\newcommand{\edits}[1]{\textcolor{red}{#1}}
+
+%% abbreviations
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\z}{\mathbf{z}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\data}{\mathcal{D}}
+
+\newcommand{\etal}{{et~al.}\ }
+\newcommand{\eg}{e.g.\ }
+\newcommand{\ie}{i.e.\ }
+\newcommand{\nth}{\text{th}}
+\newcommand{\pr}{^\prime}
+\newcommand{\tr}{^\mathrm{T}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\pinv}{^{\dagger}}
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\gauss}{\mathcal{N}}
+\newcommand{\norm}[1]{\left|#1\right|}
+\newcommand{\trace}{\text{tr}}
+
+%% specifics for the paper
+\newcommand{\reward}{r}
+\newcommand{\policy}{\pi}
+\newcommand{\mdp}{\mathcal{M}}
+\newcommand{\states}{\mathcal{S}}
+\newcommand{\actions}{\mathcal{A}}
+\newcommand{\observations}{\mathcal{O}}
+\newcommand{\transitions}{T}
+\newcommand{\initstate}{d_0}
+\newcommand{\freq}{d}
+\newcommand{\obsfunc}{E}
+\newcommand{\initial}{\mathcal{I}}
+\newcommand{\horizon}{H}
+\newcommand{\rewardevent}{R}
+\newcommand{\probr}{p_\rewardevent}
+\newcommand{\metareward}{\bar{\reward}}
+\newcommand{\discount}{\gamma}
+\newcommand{\behavior}{{\pi_\beta}}
+\newcommand{\bellman}{\mathcal{B}}
+\newcommand{\qparams}{\phi}
+\newcommand{\qparamset}{\Phi}
+\newcommand{\qset}{\mathcal{Q}}
+\newcommand{\batch}{B}
+\newcommand{\qfeat}{\mathbf{f}}
+\newcommand{\Qfeat}{\mathbf{F}}
+
+\newcommand{\traj}{\tau}
+
+\newcommand{\pihi}{\pi^{\text{hi}}}
+\newcommand{\pilo}{\pi^{\text{lo}}}
+\newcommand{\ah}{\mathbf{w}}
+
+\newcommand{\proj}{\Pi}
+
+\newcommand{\loss}{\mathcal{L}}
+\newcommand{\eye}{\mathbf{I}}
+
+\newcommand{\model}{\hat{p}}
+
+\newcommand{\pimix}{\pi_{\text{mix}}}
+
+\newcommand{\pib}{\bar{\pi}}
+\newcommand{\epspi}{\epsilon_{\pi}}
+\newcommand{\epsmodel}{\epsilon_{m}}
+
+\newcommand{\return}{\mathcal{R}}
+
+\newcommand{\conpen}{\mathcal{C}}
+
+%% math
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\en}{\mathcal{E}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bo}{\mathbf{o}}
+\newcommand{\bs}{\mathbf{s}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\ot}{\bo_t}
+\newcommand{\st}{\bs_t}
+\newcommand{\at}{\ba_t}
+\newcommand{\op}{\mathcal{O}}
+\newcommand{\opt}{\op_t}
+\newcommand{\kl}{D_\text{KL}}
+\newcommand{\tv}{D_\text{TV}}
+\newcommand{\ent}{\mathcal{H}}
+
+\newcommand{\bzhi}{\bz^\text{hi}}
+
+\newcommand{\E}{\mathbb{E}}%% editing comment
+\newcommand{\cmt}[1]{{\footnotesize\textcolor{red}{#1}}}
+\newcommand{\cmto}[1]{{\footnotesize\textcolor{orange}{#1}}}
+\newcommand{\note}[1]{\cmt{Note: #1}}
+\newcommand{\todo}[1]{\cmt{TO-DO: #1}}
+\newcommand{\question}[1]{\cmto{Question: #1}}
+\newcommand{\sergey}[1]{{\footnotesize\textcolor{blue}{Sergey: #1}}}
+\newcommand{\ak}[1]{{\footnotesize\textcolor{red}{AK: #1}}}
+\newcommand{\edits}[1]{\textcolor{red}{#1}}
+
+%% abbreviations
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\z}{\mathbf{z}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\data}{\mathcal{D}}
+
+\newcommand{\etal}{{et~al.}\ }
+\newcommand{\eg}{e.g.\ }
+\newcommand{\ie}{i.e.\ }
+\newcommand{\nth}{\text{th}}
+\newcommand{\pr}{^\prime}
+\newcommand{\tr}{^\mathrm{T}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\pinv}{^{\dagger}}
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\gauss}{\mathcal{N}}
+\newcommand{\norm}[1]{\left|#1\right|}
+\newcommand{\trace}{\text{tr}}
+
+%% specifics for the paper
+\newcommand{\reward}{r}
+\newcommand{\policy}{\pi}
+\newcommand{\mdp}{\mathcal{M}}
+\newcommand{\states}{\mathcal{S}}
+\newcommand{\actions}{\mathcal{A}}
+\newcommand{\observations}{\mathcal{O}}
+\newcommand{\transitions}{T}
+\newcommand{\initstate}{d_0}
+\newcommand{\freq}{d}
+\newcommand{\obsfunc}{E}
+\newcommand{\initial}{\mathcal{I}}
+\newcommand{\horizon}{H}
+\newcommand{\rewardevent}{R}
+\newcommand{\probr}{p_\rewardevent}
+\newcommand{\metareward}{\bar{\reward}}
+\newcommand{\discount}{\gamma}
+\newcommand{\behavior}{{\pi_\beta}}
+\newcommand{\bellman}{\mathcal{B}}
+\newcommand{\qparams}{\phi}
+\newcommand{\qparamset}{\Phi}
+\newcommand{\qset}{\mathcal{Q}}
+\newcommand{\batch}{B}
+\newcommand{\qfeat}{\mathbf{f}}
+\newcommand{\Qfeat}{\mathbf{F}}
+
+\newcommand{\traj}{\tau}
+
+\newcommand{\pihi}{\pi^{\text{hi}}}
+\newcommand{\pilo}{\pi^{\text{lo}}}
+\newcommand{\ah}{\mathbf{w}}
+
+\newcommand{\proj}{\Pi}
+
+\newcommand{\loss}{\mathcal{L}}
+\newcommand{\eye}{\mathbf{I}}
+
+\newcommand{\model}{\hat{p}}
+
+\newcommand{\pimix}{\pi_{\text{mix}}}
+
+\newcommand{\pib}{\bar{\pi}}
+\newcommand{\epspi}{\epsilon_{\pi}}
+\newcommand{\epsmodel}{\epsilon_{m}}
+
+\newcommand{\return}{\mathcal{R}}
+
+\newcommand{\conpen}{\mathcal{C}}
+
+%% math
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\en}{\mathcal{E}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bo}{\mathbf{o}}
+\newcommand{\bs}{\mathbf{s}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\ot}{\bo_t}
+\newcommand{\st}{\bs_t}
+\newcommand{\at}{\ba_t}
+\newcommand{\op}{\mathcal{O}}
+\newcommand{\opt}{\op_t}
+\newcommand{\kl}{D_\text{KL}}
+\newcommand{\tv}{D_\text{TV}}
+\newcommand{\ent}{\mathcal{H}}
+
+\newcommand{\bzhi}{\bz^\text{hi}}
+
+\newcommand{\E}{\mathbb{E}}
