@@ -1,6 +1,8 @@
 import os
 import pickle
 import random
+
+import gym
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
@@ -15,7 +17,65 @@ random_seed = 111
 np.random.seed(random_seed)
 random.seed(random_seed)
 
-env = PendulumEnv()
+
+class MonitoringEnv(gym.Wrapper):
+    '''
+    Gym Wrapper to store information for scaling to correct scpace and for post analysis.
+    '''
+
+    def __init__(self, env, **kwargs):
+        gym.Wrapper.__init__(self, env)
+        self.rewards = []
+        self.init_rewards = []
+        self.current_episode = -1
+        self.current_step = -1
+
+        self.obs_dim = self.env.observation_space.shape
+        self.obs_high = self.env.observation_space.high
+        self.obs_low = self.env.observation_space.high
+        self.act_dim = self.env.action_space.shape
+        self.act_high = self.env.action_space.high
+        self.act_low = self.env.action_space.low
+
+        # state space definition
+        self.observation_space = gym.spaces.Box(low=-1.0,
+                                                high=1.0,
+                                                shape=self.obs_dim,
+                                                dtype=np.float64)
+
+        # action space definition
+        self.action_space = gym.spaces.Box(low=-1.0,
+                                           high=1.0,
+                                           shape=self.act_dim,
+                                           dtype=np.float64)
+
+    def scale_state_env(self, ob):
+        scale = (self.env.observation_space.high - self.env.observation_space.low)
+        return (2 * ob - (self.env.observation_space.high + self.env.observation_space.low)) / scale
+
+    def scale_rew(self, rew):
+        return rew/100
+
+    def reset(self,**kwargs):
+        self.current_step = 0
+        self.current_episode += 1
+        self.rewards.append([])
+        return self.scale_state_env(self.env.reset(**kwargs))
+
+    def step(self, action):
+        self.current_step += 1
+        ob, reward, done, info = self.env.step(action)
+        self.rewards[self.current_episode].append(reward)
+        if self.current_step>=200:
+            done = True
+        ob = self.scale_state_env(ob)
+        reward = self.scale_rew(reward)
+
+        return ob, reward, done, info
+
+env = MonitoringEnv(env=PendulumEnv())
+
+
 
 def plot_results(env, file_name):
     # plotting
@@ -33,10 +93,15 @@ def plot_results(env, file_name):
     for i in range(len(rewards)):
         if (len(rewards[i]) > 0):
             final_rews.append(rewards[i][len(rewards[i]) - 1])
-            starts.append(initial_rewards[i])
+
             iterations.append(len(rewards[i]))
             sum_rews.append(np.sum(rewards[i]))
             mean_rews.append(np.mean(rewards[i]))
+
+            try:
+                starts.append(initial_rewards[i])
+            except:
+                pass
     plot_suffix = ""  # f', number of iterations: {env.TOTAL_COUNTER}, Linac4 time: {env.TOTAL_COUNTER / 600:.1f} h'
 
     fig, axs = plt.subplots(2, 1)
@@ -124,7 +189,7 @@ if __name__ == '__main__':
     nafnet_kwargs = dict(hidden_sizes=[100, 100], activation=tf.nn.tanh
                          , weight_init=tf.random_uniform_initializer(-0.05, 0.05, seed=random_seed))
 
-    noise_info = dict(noise_function=lambda nr: max(0., 1-(nr/200)))
+    noise_info = dict(noise_function=lambda nr: max(0., 1-(nr/25)))
 
     # the target network is updated at the end of each episode
     # the number of episodes is executed each step in the environment
@@ -134,13 +199,13 @@ if __name__ == '__main__':
     # init the agent
     agent = NAF(env=env, directory=directory, noise_info=noise_info,
                 is_continued=is_continued, q_smoothing=0.05, clipped_double_q=True,
-                training_info=training_info, save_frequency=25,
+                training_info=training_info, save_frequency=500,
                 **nafnet_kwargs)
 
     # run the agent training
-    agent.training(warm_up_steps=0, initial_episode_length=5, max_episodes=100, max_steps=500)
+    agent.training(warm_up_steps=0, initial_episode_length=5, max_episodes=3, max_steps=500)
     # run the agent verification
-    agent.verification(max_episodes=50, max_steps=25)
+    agent.verification(max_episodes=3, max_steps=500)
 
     # plot the results
     files = []
