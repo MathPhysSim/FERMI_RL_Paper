@@ -1,10 +1,12 @@
+'''This script generates the plots for the AE-DYNA tests at FERMI FEL'''
+
 import os
 import pickle
 import matplotlib.pyplot as plt
 import numpy as np
 
 label = "ME-TRPO"
-label = "AE-DYNA"
+# label = "AE-DYNA"
 if label == "ME-TRPO":
     # ME-TRPO results
     project_directory = 'Data_Experiments/2020_10_06_ME_TRPO_stable@FERMI/run2/'

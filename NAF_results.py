@@ -1,3 +1,6 @@
+'''This script generates the plots for the NAF2 tests at FERMI FEL'''
+
+
 import os
 import pickle
 import numpy as np
