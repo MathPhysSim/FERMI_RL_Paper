@@ -33,7 +33,7 @@ real_env = env = PendulumEnv()
 
 steps_per_env = 201
 init_random_steps = 201
-total_steps = 10000
+total_steps = 1004
 num_epochs = int((total_steps - init_random_steps) / steps_per_env) + 1
 
 print('Number of epochs: ', num_epochs)
@@ -53,10 +53,10 @@ else:
     from stable_baselines.common.policies import MlpPolicy
     from stable_baselines import PPO2 as Agent
 
-simulated_steps = 30000
+simulated_steps = 25000
 
 model_batch_size = 100
-num_ensemble_models = 3
+num_ensemble_models = 5
 
 early_stopping = True
 model_iter = 10
@@ -524,8 +524,8 @@ class NetworkEnv(gym.Wrapper):
             obs, rew = self.model_func(self.obs, [np.squeeze(action)])
         else:
             # Can be activated to randomize each step
-            # current_model = np.random.randint(0, max(self.number_models, 1)) # self.current_model
-            current_model = self.current_model
+            current_model = np.random.randint(0, max(self.number_models, 1)) # self.current_model
+            # current_model = self.current_model
             obs, rew = self.model_func(self.obs, [np.squeeze(action)], current_model)
         # obs, rew, _, _ = self.env.step(action)
         self.obs = np.clip(obs.copy(), -1, 1)
@@ -1206,9 +1206,9 @@ def aedyna(env_name, cr_lr=5e-3, num_epochs=50,
                 plot_observables(data=data, label=label)
 
                 # stop training if the policy hasn't improved
-                if (np.sum(best_sim_test >= sim_rewards) > int(num_ensemble_models * 0.7)):
+                if (np.sum(best_sim_test >= sim_rewards) >= int(num_ensemble_models * 0.7)):
                     if it > delay_before_convergence_check and ep < num_epochs - 1:
-                        print('break-no improvement')
+                        print('break-no improvement in', int(num_ensemble_models * 0.7), ' models')
                         break
                 else:
                     best_sim_test = sim_rewards

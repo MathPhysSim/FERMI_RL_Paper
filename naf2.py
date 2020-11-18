@@ -414,7 +414,7 @@ class QModel:
             del kwargs['discount']
         else:
             self.polyak = 0.999
-        batch = self.replay_buffer.sample_batch(batch_size=1000000)
+        batch = self.replay_buffer.sample_batch(batch_size=20000)
         # batch, prios = self.replay_buffer.sample_batch(batch_size=batch_size)
         # nr = self.replay_buffer.size
         #
@@ -648,10 +648,10 @@ class NAF(object):
         self.losses = []
         self.pretune = pretune
         # self.prio_info = prio_info
-        self.prio_info = dict()
-        self.per_flag = bool(self.prio_info)
-        # self.per_flag = False
-        print('PER is:', self.per_flag)
+        # self.prio_info = dict()
+        # self.per_flag = bool(self.prio_info)
+        # # self.per_flag = False
+        # print('PER is:', self.per_flag)
 
         self.env = env
 
@@ -766,7 +766,6 @@ class NAF(object):
     def predict(self, model, state, is_train):
 
         if is_train and model.replay_buffer.size < self.warm_up_steps:
-            print(10 * 'inits ')
             action = model.de_normalize(np.random.uniform(-1, 1, self.action_size), model.act_box)
             # print(action)
             return np.array(action)
@@ -865,7 +864,8 @@ class NAF(object):
                 o = o2
                 d = False if t == self.max_steps - 1 else d
 
-                if t % self.initial_episode_length == 0 and self.q_main_model_1.replay_buffer.size <= self.warm_up_steps:
+                if t % self.initial_episode_length == 0 and \
+                        self.q_main_model_1.replay_buffer.size <= self.warm_up_steps:
                     o = self.env.reset()
                     self.init_trajectory_data(state=o)
                     print('Initial reset at ', t)
@@ -889,6 +889,7 @@ class NAF(object):
         #     else:
         #         batch, priority_info = model.replay_buffer.sample_normal(batch_size=self.batch_size)
         # else:
+        # Generate batch for monitoring the performance
         batch = model.replay_buffer.sample_batch(200)
 
         # o = batch['obs1']

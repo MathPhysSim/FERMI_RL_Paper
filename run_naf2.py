@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
 
-
 from inverted_pendulum import PendulumEnv
 
 from naf2 import NAF
@@ -54,9 +53,9 @@ class MonitoringEnv(gym.Wrapper):
         return (2 * ob - (self.env.observation_space.high + self.env.observation_space.low)) / scale
 
     def scale_rew(self, rew):
-        return rew/100
+        return rew / 100
 
-    def reset(self,**kwargs):
+    def reset(self, **kwargs):
         self.current_step = 0
         self.current_episode += 1
         self.rewards.append([])
@@ -66,15 +65,15 @@ class MonitoringEnv(gym.Wrapper):
         self.current_step += 1
         ob, reward, done, info = self.env.step(action)
         self.rewards[self.current_episode].append(reward)
-        if self.current_step>=200:
+        if self.current_step >= 200:
             done = True
         ob = self.scale_state_env(ob)
         reward = self.scale_rew(reward)
 
         return ob, reward, done, info
 
-env = MonitoringEnv(env=PendulumEnv())
 
+env = MonitoringEnv(env=PendulumEnv())
 
 
 def plot_results(env, file_name):
@@ -152,6 +151,7 @@ def plot_results(env, file_name):
     plt.savefig(file_name + '_rewards.pdf')
     plt.show()
 
+
 def plot_convergence(agent, file_name):
     losses, vs = agent.losses, agent.vs
     # losses2, vs2 = agent.losses2, agent.vs2
@@ -178,6 +178,7 @@ def plot_convergence(agent, file_name):
     plt.savefig(file_name + '_convergence' + '.pdf')
     plt.show()
 
+
 if __name__ == '__main__':
 
     directory = "checkpoints/pendulum/"
@@ -189,11 +190,11 @@ if __name__ == '__main__':
     nafnet_kwargs = dict(hidden_sizes=[100, 100], activation=tf.nn.tanh
                          , weight_init=tf.random_uniform_initializer(-0.05, 0.05, seed=random_seed))
 
-    noise_info = dict(noise_function=lambda nr: max(0., 1-(nr/25)))
+    noise_info = dict(noise_function=lambda nr: max(0., 1 - (nr / 25)))
 
     # the target network is updated at the end of each episode
     # the number of episodes is executed each step in the environment
-    training_info = dict(polyak=0.999, epochs=2, steps_per_epoch=5, batch_size=100,
+    training_info = dict(polyak=0.999, epochs=2, steps_per_epoch=5, batch_size=25,
                          learning_rate=1e-3, discount=0.9999)
 
     # init the agent
@@ -203,7 +204,7 @@ if __name__ == '__main__':
                 **nafnet_kwargs)
 
     # run the agent training
-    agent.training(warm_up_steps=0, initial_episode_length=5, max_episodes=3, max_steps=500)
+    agent.training(warm_up_steps=200, initial_episode_length=200, max_episodes=10, max_steps=500)
     # run the agent verification
     agent.verification(max_episodes=3, max_steps=500)
 
@@ -223,11 +224,11 @@ if __name__ == '__main__':
 
     out_put_writer = open(file_name + '.pkl', 'wb')
     out_rewards = env.rewards
-    out_inits = env.initial_conditions
+    # out_inits = env.initial_conditions
     out_losses, out_vs = agent.losses, agent.vs
 
     pickle.dump(out_rewards, out_put_writer, -1)
-    pickle.dump(out_inits, out_put_writer, -1)
+    # pickle.dump(out_inits, out_put_writer, -1)
 
     pickle.dump(out_losses, out_put_writer, -1)
     pickle.dump(out_vs, out_put_writer, -1)
