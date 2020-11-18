@@ -166,9 +166,9 @@ class QModel:
         h = self.normalize(inputs_state, box=self.obs_box)
         for hidden_dim in hidden_sizes:
             h = self.fc(h, hidden_dim)
-        V = self.fc(h, 1, name='V')
+        V = self.fc(h, 1, activation=None, name='V')
 
-        l = self.fc(h, (self.act_dim * (self.act_dim + 1) / 2))
+        l = self.fc(h, (self.act_dim * (self.act_dim + 1) / 2), activation=None, name='l')
         mu = self.fc(h, self.act_dim, name='mu')
 
         # action = inputs[:, obs_dim:]
@@ -241,21 +241,23 @@ class QModel:
     def normalize(self, input, box):
         low = tf.convert_to_tensor(box.low, dtype=tf.float64)
         high = tf.convert_to_tensor(box.high, dtype=tf.float64)
-        return tf.math.scalar_mul(tf.convert_to_tensor(2, dtype=tf.float64),
-                                  tf.math.add(tf.convert_to_tensor(-0.5, dtype=tf.float64),
-                                              tf.multiply(tf.math.add(input, -low), 1 / (high - low))))
+        # return tf.math.scalar_mul(tf.convert_to_tensor(2, dtype=tf.float64),
+        #                           tf.math.add(tf.convert_to_tensor(-0.5, dtype=tf.float64),
+        #                                       tf.multiply(tf.math.add(input, -low), 1 / (high - low))))
+        return input
 
     def de_normalize(self, input, box):
         low = tf.convert_to_tensor(box.low, dtype=tf.float64)
         high = tf.convert_to_tensor(box.high, dtype=tf.float64)
         input = tf.convert_to_tensor(input, dtype=tf.float64)
-        return tf.math.add(
-            tf.multiply(tf.math.add(tf.math.scalar_mul(tf.convert_to_tensor(0.5, dtype=tf.float64), input),
-                                    tf.convert_to_tensor(0.5, dtype=tf.float64)),
-                        (high - low)), low)
+        # return tf.math.add(
+        #     tf.multiply(tf.math.add(tf.math.scalar_mul(tf.convert_to_tensor(0.5, dtype=tf.float64), input),
+        #                             tf.convert_to_tensor(0.5, dtype=tf.float64)),
+        #                 (high - low)), low)
+        return input
 
-    def fc(self, x, hidden_size, name=None):
-        layer = keras.layers.Dense(hidden_size, activation=tf.nn.tanh,
+    def fc(self, x, hidden_size, activation=tf.nn.tanh, name=None):
+        layer = keras.layers.Dense(hidden_size, activation=activation,
                                    kernel_initializer=tf.compat.v1.random_uniform_initializer(-0.01, 0.01),
                                    kernel_regularizer=None,
                                    bias_initializer=tf.compat.v1.constant_initializer(0.0), name=name)
@@ -365,7 +367,7 @@ class QModel:
             #         # print("Restoring model weights from the end of the best epoch.")
             #         self.model.set_weights(self.best_weights)
             self.q_target.set_polyak_weights(self.model.get_weights(),
-                                             polyak=0.9995)
+                                             polyak=0.999)
             # print('updating...', self.model.__name__)
 
         # def on_train_end(self, logs=None):
@@ -403,7 +405,7 @@ class QModel:
             self.batch_size = 100
         if 'epochs' not in kwargs:
             # self.epochs = kwargs.get('epochs')
-            kwargs['epochs'] = 2
+            kwargs['epochs'] = 5
         if 'steps_per_epoch' not in kwargs:
             # self.steps_per_epoch = kwargs.get('steps_per_epoch')
             kwargs['steps_per_epoch'] = 10
@@ -414,7 +416,7 @@ class QModel:
             del kwargs['discount']
         else:
             self.polyak = 0.999
-        batch = self.replay_buffer.sample_batch(batch_size=20000)
+        batch = self.replay_buffer.sample_batch(batch_size=200)
         # batch, prios = self.replay_buffer.sample_batch(batch_size=batch_size)
         # nr = self.replay_buffer.size
         #
@@ -435,7 +437,8 @@ class QModel:
         # batch['y_target'] = self.get_estimate(o2, d, r)
         # batch['x_batch_train'] = x_batch_train
         # print(batch)
-        dataset = tf.data.Dataset.from_tensor_slices(batch).repeat(200).shuffle(buffer_size=10000)
+        # Here we decide how often to iterate over the data
+        dataset = tf.data.Dataset.from_tensor_slices(batch).repeat(1).shuffle(buffer_size=10000)
         train_dataset = dataset.batch(self.batch_size)
         # print([element['obs1'] for element in train_dataset.take(2)])
 
@@ -648,8 +651,8 @@ class NAF(object):
         self.losses = []
         self.pretune = pretune
         # self.prio_info = prio_info
-        # self.prio_info = dict()
-        # self.per_flag = bool(self.prio_info)
+        self.prio_info = dict()
+        self.per_flag = bool(self.prio_info)
         # # self.per_flag = False
         # print('PER is:', self.per_flag)
 
@@ -669,20 +672,20 @@ class NAF(object):
 
         self.idx_episode = None
         self.vs = []
-        if 'decay_function' in self.prio_info:
-            self.decay_function = self.prio_info.get('decay_function')
-        else:
-            if 'beta' in self.prio_info:
-                self.decay_function = lambda nr: self.prio_info.get('beta')
-            else:
-                self.decay_function = lambda nr: 1.
-
-        if 'beta_decay' in self.prio_info:
-            self.beta_decay_function = self.prio_info.get('beta_decay')
-        # elif self.per_flag:
-        #     self.beta_decay_function = lambda nr: max(1e-12, prio_info.get('beta_start') - nr / 100)
-        else:
-            self.beta_decay_function = lambda nr: 1
+        # if 'decay_function' in self.prio_info:
+        #     self.decay_function = self.prio_info.get('decay_function')
+        # else:
+        #     if 'beta' in self.prio_info:
+        #         self.decay_function = lambda nr: self.prio_info.get('beta')
+        #     else:
+        #         self.decay_function = lambda nr: 1.
+        #
+        # if 'beta_decay' in self.prio_info:
+        #     self.beta_decay_function = self.prio_info.get('beta_decay')
+        # # elif self.per_flag:
+        # #     self.beta_decay_function = lambda nr: max(1e-12, prio_info.get('beta_start') - nr / 100)
+        # else:
+        #     self.beta_decay_function = lambda nr: 1
 
         self.training_info = training_info
 
@@ -708,11 +711,11 @@ class NAF(object):
             shutil.rmtree(self.directory)
             os.makedirs(self.directory)
             os.makedirs(self.directory + "data/")
-                # for f in os.listdir(self.directory):
-                #     print(f)
-                #     print('Deleting: ', self.directory + f)
-                #     os.remove(self.directory + f)
-                # time.sleep(.5)
+            # for f in os.listdir(self.directory):
+            #     print(f)
+            #     print('Deleting: ', self.directory + f)
+            #     os.remove(self.directory + f)
+            # time.sleep(.5)
         else:
             if not os.path.exists(self.directory):
                 print('Creating directory: ', self.directory)
@@ -758,8 +761,6 @@ class NAF(object):
             self.q_main_model_2.set_models(self.q_target_model_2, self.q_target_model_1)
         else:
             self.q_main_model_1.set_models(self.q_target_model_1)
-
-
 
         self.counter = 0
 
@@ -864,22 +865,23 @@ class NAF(object):
                 o = o2
                 d = False if t == self.max_steps - 1 else d
 
-                if t % self.initial_episode_length == 0 and \
+                if t > 0 and t % self.initial_episode_length == 0 and \
                         self.q_main_model_1.replay_buffer.size <= self.warm_up_steps:
                     o = self.env.reset()
                     self.init_trajectory_data(state=o)
                     print('Initial reset at ', t)
 
-                # 2. train
-                if is_train and self.q_main_model_1.replay_buffer.size > self.warm_up_steps:
-                    # try:
-                    self.update_q(self.q_main_model_1)
-                    if self.clipped_double_q:
-                        self.update_q(self.q_main_model_2)
+                # 2. train maybe not every step
+                if t % 1 == 0:
+                    if is_train and self.q_main_model_1.replay_buffer.size > self.warm_up_steps:
+                        # try:
+                        self.update_q(self.q_main_model_1)
+                        if self.clipped_double_q:
+                            self.update_q(self.q_main_model_2)
                 if d:
                     break
 
-    def train_model(self, model):
+    def train_model(self, model,**kwargs):
         # beta_decay = self.beta_decay_function(self.idx_episode)
         # decay = self.decay_function(self.idx_episode)
 
@@ -932,14 +934,14 @@ class NAF(object):
     #         else:
     #             self.current_model = self.q_main_model_2
 
-    def update_q(self, model):
+    def update_q(self, model, **kwargs):
         vs = []
         losses = []
         self.counter += 1
 
         # for i in range(self.update_repeat):
         # print('i', i, model)
-        v, loss = self.train_model(model=model)
+        v, loss = self.train_model(model=model, **kwargs)
         if model == self.q_main_model_1:
             vs.append(v)
             losses.append(loss)
@@ -947,9 +949,9 @@ class NAF(object):
             if (self.counter) % self.save_frequency == 0:
                 # self.q_target_model_1.save_model(directory=self.directory)
                 number = str(self.counter).zfill(4)
-                self.q_main_model_1.replay_buffer.save_to_pkl(name=f'buffer_data_'+number+'.pkl',
+                self.q_main_model_1.replay_buffer.save_to_pkl(name=f'buffer_data_' + number + '.pkl',
                                                               directory=self.directory + "data/")
-                self.store_trajectories_to_pkl(name=f'trajectory_data_'+number+'.pkl',
+                self.store_trajectories_to_pkl(name=f'trajectory_data_' + number + '.pkl',
                                                directory=self.directory + "data/")
                 print('Saving buffer...')
             # if model == self.q_main_model_1:
