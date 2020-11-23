@@ -1,8 +1,8 @@
 import os
 import pickle
 import shutil
-import time
-
+import matplotlib.pyplot as plt
+import gym
 import tensorflow as tf
 from tensorflow import keras
 
@@ -69,7 +69,53 @@ def basic_loss_function(y_true, y_pred):
     return tf.math.reduce_mean(y_true - y_pred)
 
 
+class NormalizeEnv(gym.Wrapper):
+    '''
+    Gym Wrapper to normalize the environment
+    '''
+
+    def __init__(self, env, **kwargs):
+        gym.Wrapper.__init__(self, env)
+
+        self.obs_dim = self.env.observation_space.shape
+        self.obs_high = self.env.observation_space.high
+        self.obs_low = self.env.observation_space.high
+        self.act_dim = self.env.action_space.shape
+        self.act_high = self.env.action_space.high
+        self.act_low = self.env.action_space.low
+
+        # state space definition
+        self.observation_space = gym.spaces.Box(low=-1.0,
+                                                high=1.0,
+                                                shape=self.obs_dim,
+                                                dtype=np.float64)
+
+        # action space definition
+        self.action_space = gym.spaces.Box(low=-1.0,
+                                           high=1.0,
+                                           shape=self.act_dim,
+                                           dtype=np.float64)
+
+    def reset(self, **kwargs):
+        return self.scale_state_env(self.env.reset(**kwargs))
+
+    def step(self, action):
+        # TODO: check the dimensions
+        ob, reward, done, info = self.env.step(self.descale_action_env(action)[0])
+        return self.scale_state_env(ob), reward, done, info
+
+    def descale_action_env(self, act):
+        scale = (self.env.action_space.high - self.env.action_space.low)
+        return_value = (scale * act + self.env.action_space.high + self.env.action_space.low) / 2
+        return return_value
+
+    def scale_state_env(self, ob):
+        scale = (self.env.observation_space.high - self.env.observation_space.low)
+        return (2 * ob - (self.env.observation_space.high + self.env.observation_space.low)) / scale
+
+
 class QModel:
+    """Artificial neural net holding the state-action value function in a simple analytical form"""
 
     def __init__(self, obs_dim=2, act_dim=2, **kwargs):
         if 'directory' in kwargs:
@@ -95,11 +141,22 @@ class QModel:
             self.__name__ = kwargs.get('name')
             print(self.__name__)
 
+        if 'learning_rate' in kwargs:
+            self.learning_rate = kwargs.get('learning_rate')
+            del kwargs['learning_rate']
+        else:
+            self.learning_rate = 1e-3
+
+        if 'directory' in kwargs:
+            self.directory = kwargs.get('directory')
+        else:
+            self.directory = None
+
         if 'clipped_double_q' in kwargs:
             self.clipped_double_q = kwargs.get('clipped_double_q')
         else:
             self.clipped_double_q = False
-            # print(self.__name__ )
+
         if 'kernel_initializer' in kwargs:
             self.kernel_initializer = kwargs.get('kernel_initializer')
         else:
@@ -110,19 +167,25 @@ class QModel:
         self.act_dim = act_dim
         self.obs_dim = obs_dim
 
-        # create a shared network for the variables
+        # Define the network inputs (state-action)
         inputs_state = keras.Input(shape=(self.obs_dim,), name="state_input")
         inputs_action = keras.Input(shape=(self.act_dim,), name="action_input")
 
-        # h = inputs[:, 0:obs_dim]
+        # create a shared network for the variables
         h = inputs_state
         for hidden_dim in self.hidden_sizes:
             h = self.fc(h, hidden_dim, kernel_initializer=self.kernel_initializer)
-        V = self.fc(h, 1, activation=None, kernel_initializer=self.kernel_initializer, name='V')
 
+        # Output - state-value function, where the reward is assumed to be negative
+        V = tf.scalar_mul(-1, self.fc(h, 1, activation=tf.nn.leaky_relu,
+                                      kernel_initializer=self.kernel_initializer, name='V'))
+        # Output - for the matrix L
         l = self.fc(h, (self.act_dim * (self.act_dim + 1) / 2),
                     kernel_initializer=self.kernel_initializer, name='l')
+        # Output - policy pi
         mu = self.fc(h, self.act_dim, kernel_initializer=self.kernel_initializer, name='mu')
+        self.value_model = keras.Model([inputs_state], V, name='value_model')
+        self.action_model = keras.Model([inputs_state], mu, name='action_model')
 
         pivot = 0
         rows = []
@@ -136,40 +199,18 @@ class QModel:
         L = tf.transpose(a=tf.stack(rows, axis=1), perm=(0, 2, 1))
         P = tf.matmul(L, tf.transpose(a=L, perm=(0, 2, 1)))
         tmp = tf.expand_dims(inputs_action - mu, -1)
+        # The advantage function
         A = -tf.multiply(tf.matmul(tf.transpose(a=tmp, perm=[0, 2, 1]),
                                    tf.matmul(P, tmp)), tf.constant(0.5, dtype=tf.float64))
         A = tf.reshape(A, [-1, 1])
+
+        # The state-action-value function
         Q = tf.add(A, V)
 
-        if 'learning_rate' in kwargs:
-            self.learning_rate = kwargs.get('learning_rate')
-            del kwargs['learning_rate']
-        else:
-            self.learning_rate = 1e-3
-        if 'directory' in kwargs:
-            self.directory = kwargs.get('directory')
-        else:
-            self.directory = None
-
-        if 'discount' in kwargs:
-            self.discount = tf.constant(kwargs.get('discount'), dtype=tf.float64)
-            del kwargs['discount']
-        else:
-            self.discount = tf.constant(0.999, dtype=tf.float64)
-
+        # We use a customized way to train the model:
         self.optimizer = keras.optimizers.Adam(learning_rate=self.learning_rate)
-
         self.q_model = self.CustomModel(inputs=[inputs_state, inputs_action], outputs=Q, mother_class=self)
-
         self.q_model.compile(optimizer=self.optimizer, loss="mse", metrics=["mae"])
-
-        # Action output
-        self.model_get_action = keras.Model(inputs=[inputs_state, inputs_action],
-                                            outputs=self.q_model.get_layer(name='mu').output)
-
-        # Value output
-        self.model_value_estimate = keras.Model(inputs=[inputs_state, inputs_action],
-                                                outputs=self.q_model.get_layer(name='V').output)
 
         self.storage_management()
 
@@ -193,13 +234,10 @@ class QModel:
         return layer(x)
 
     def get_action(self, state):
-        state = np.array([state], dtype='float64')
-        actions = tf.zeros(shape=(tf.shape(state)[0], self.act_dim), dtype=tf.float64)
-        return self.model_get_action.predict([state, actions])
+        return self.action_model.predict(np.array(state))
 
     def get_value_estimate(self, state):
-        actions = tf.zeros(shape=(tf.shape(state)[0], self.act_dim), dtype=tf.float64)
-        return self.model_value_estimate.predict([state, actions])
+        return self.value_model.predict(np.array(state))
 
     def set_polyak_weights(self, weights, polyak=0.999, **kwargs):
         weights_old = self.get_weights()
@@ -214,6 +252,65 @@ class QModel:
             self.q_model.save(filepath=directory, overwrite=True)
         except:
             print('Saving failed')
+
+    def set_target_models(self, q_target_1, q_target_2=None):
+        self.q_target_first = q_target_1
+        if q_target_2 is not None:
+            self.q_target_second = q_target_2
+
+    class CustomModel(keras.Model):
+
+        def __init__(self, *args, **kwargs):
+            self.mother_class = kwargs.pop('mother_class')
+            self.__name__ = self.mother_class.__name__
+
+            super().__init__(*args, **kwargs)
+
+        def train_step(self, batch):
+            self.discount = self.mother_class.discount
+            self.polyak = self.mother_class.polyak
+
+            v_1 = self.mother_class.q_target_first.value_model(batch['obs2'])  # , training=False)
+            if self.mother_class.clipped_double_q:
+                v_2 = self.mother_class.q_target_second.value_model(batch['obs2'])  # , training=False)
+                v = tf.squeeze(tf.where(tf.math.less(v_1, v_2), v_1, v_2))
+            else:
+                v = tf.squeeze(v_1)
+
+            y_target = tf.add(tf.multiply(tf.math.scalar_mul(self.discount, v),
+                                          tf.add(tf.constant(1, dtype=tf.float64),
+                                                 tf.math.scalar_mul(-1, batch['done']))), batch['rews'])
+
+            # Double Q implementation
+            # a_1 = self.mother_class.q_target_first.action_model(batch['obs2'])
+            # q_2 = self.mother_class.q_target_second.q_model([batch['obs2'], a_1])
+            #
+            # y_target = tf.add(tf.multiply(tf.math.scalar_mul(self.discount, q_2),
+            #                               tf.add(tf.constant(1, dtype=tf.float64),
+            #                                      tf.math.scalar_mul(-1, batch['done']))), batch['rews'])
+
+            with tf.GradientTape() as tape:
+                # Run the forward pass of the layer.
+                # The operations that the layer applies
+                # to its inputs are going to be recorded
+                # on the GradientTape.
+                y_pred = self([batch['obs1'], batch['acts']], training=True)
+                # Compute the loss value for this minibatch.
+                loss = self.compiled_loss(y_target, y_pred)
+            # Use the gradient tape to automatically retrieve
+            # the gradients of the trainable variables with respect to the loss.
+            # Compute gradients
+            trainable_vars = self.trainable_weights
+            gradients = tape.gradient(loss, trainable_vars)
+            # Run one step of gradient descent by updating
+            # the value of the variables to minimize the loss.
+            # Update weights
+            self.optimizer.apply_gradients(zip(gradients, trainable_vars))
+            # Update the metrics.
+            # Metrics are configured in `compile()`.
+            self.compiled_metrics.update_state(y_target, y_pred)
+            # Apply weights to target network
+            return {m.name: m.result() for m in self.metrics}
 
     class CustomCallback(keras.callbacks.Callback):
 
@@ -247,9 +344,14 @@ class QModel:
             #         self.model.stop_training = True
             #         # print("Restoring model weights from the end of the best epoch.")
             #         self.model.set_weights(self.best_weights)
-            self.q_target.set_polyak_weights(self.model.get_weights(),
-                                             polyak=0.999, name=self.model.__name__)
+            # Apply weights to target network
+            # self.q_target.set_polyak_weights(self.model.get_weights(),
+            #                                  self.model.polyak, name=self.model.__name__)
 
+        def on_train_batch_end(self, batch, logs=None):
+            # Apply weights to target network
+            self.q_target.set_polyak_weights(self.model.get_weights(),
+                                             self.model.polyak, name=self.model.__name__)
         # def on_train_end(self, logs=None):
         #     if self.stopped_epoch > 0:
         #         print("Epoch %05d: early stopping" % (self.stopped_epoch + 1))
@@ -266,41 +368,46 @@ class QModel:
         #     print("...Training: end of batch {}; got log keys: {}".format(batch, keys))
         #     # print(self.model.y_target)
 
-    def train_model(self, **kwargs):
+    def set_training_parameters(self, **kwargs):
+        # Filter kwargs for keras
         if 'polyak' in kwargs:
-            self.polyak = kwargs.get('polyak')
-            del kwargs['polyak']
+            self.polyak = kwargs.pop('polyak')
         else:
             self.polyak = 0.999
-        if 'batch_size' in kwargs:
-            batch_size = kwargs.get('batch_size')
-            del kwargs['batch_size']
-        else:
-            batch_size = 100
-        if 'epochs' not in kwargs:
-            kwargs['epochs'] = 1
-        if 'steps_per_batch' in kwargs:
-            steps_per_batch = kwargs.get('steps_per_batch')
-            del kwargs['steps_per_batch']
-        else:
-            steps_per_batch = 1
         if 'discount' in kwargs:
-            del kwargs['discount']
+            self.discount = kwargs.pop('discount')
+        else:
+            self.discount = 0.999
+        if 'steps_per_batch' in kwargs:
+            self.steps_per_batch = kwargs.pop('steps_per_batch')
+        else:
+            self.steps_per_batch = 1
+        if 'batch_size' in kwargs:
+            self.batch_size = kwargs.pop('batch_size')
+        else:
+            self.batch_size = 1
 
-
-        batch = self.replay_buffer.sample_batch(batch_size=batch_size)
-
-        # Here we decide how often to iterate over the data
-        dataset = tf.data.Dataset.from_tensor_slices(batch)  # .repeat(1).shuffle(buffer_size=10000)
-        train_dataset = dataset.batch(steps_per_batch)
         self.callback = self.CustomCallback(patience=0)
         self.callback.q_target = self.q_target_first
+
+        self.training_params = kwargs
+
+    def train_model(self, **kwargs):
+
+        # for key in kwargs:
+        #     self.training_params[key] = kwargs.get(key)
+
+        batch = self.replay_buffer.sample_batch(batch_size=self.batch_size)
+        # Here we decide how often to iterate over the data
+        dataset = tf.data.Dataset.from_tensor_slices(batch)  # .repeat(1).shuffle(buffer_size=10000)
+        train_dataset = dataset.batch(self.steps_per_batch)
 
         hist = self.q_model.fit(train_dataset,
                                 verbose=0,
                                 callbacks=[self.callback],
                                 shuffle=True,
-                                **kwargs)
+                                **self.training_params)
+
         if int(self.ckpt.step) % self.save_frequency == 0:
             save_path = self.manager.save()
             print("Saved checkpoint for step {}: {}".format(int(self.ckpt.step), save_path))
@@ -311,100 +418,40 @@ class QModel:
 
         return return_value
 
-    def set_models(self, q_target_1, q_target_2=None):
-        self.q_target_first = q_target_1
-        if q_target_2 is not None:
-            self.q_target_second = q_target_2
+    def create_buffers(self, buffer=None):
+        if buffer is None:
+            self.replay_buffer = ReplayBuffer(obs_dim=self.obs_dim, act_dim=self.act_dim, size=int(1e6))
+            try:
+                files = []
+                directory = self.directory + 'data/'
+                for f in os.listdir(directory):
+                    if 'buffer_data' in f and 'pkl' in f:
+                        files.append(f)
+                files.sort()
+                self.replay_buffer.read_from_pkl(name=files[-1], directory=directory)
+                print('Buffer data loaded for ' + self.__name__, files[-1])
+            except:
+                print('Buffer data empty for ' + self.__name__, files)
+        else:
+            self.replay_buffer = buffer
 
-    class CustomModel(keras.Model):
-
-        def __init__(self, *args, **kwargs):
-            self.mother_class = kwargs.get('mother_class')
-            self.__name__ = self.mother_class.__name__
-            self.discount = self.mother_class.discount
-            del kwargs['mother_class']
-            super().__init__(*args, **kwargs)
-
-        def train_step(self, batch):
-            o = batch['obs1']
-            o2 = batch['obs2']
-            a = batch['acts']
-            r = batch['rews']
-            d = batch['done']
-            v_1 = self.mother_class.q_target_first.model_value_estimate([o2, a])  # , training=False)
-            if self.mother_class.clipped_double_q:
-                v_2 = self.mother_class.q_target_second.model_value_estimate([o2, a])  # , training=False)
-                v = tf.squeeze(tf.where(tf.math.less(v_1, v_2), v_1, v_2))
-            else:
-                v = tf.squeeze(v_1)
-            y_target = tf.add(tf.multiply(tf.math.scalar_mul(self.discount, v),
-                                          tf.add(tf.constant(1, dtype=tf.float64),
-                                                 tf.math.scalar_mul(-1, d))), r)
-
-            with tf.GradientTape() as tape:
-                # Run the forward pass of the layer.
-                # The operations that the layer applies
-                # to its inputs are going to be recorded
-                # on the GradientTape.
-                y_pred = self([o, a], training=True)  # Logits for this minibatch
-                # Compute the loss value for this minibatch.
-                loss = self.compiled_loss(
-                    y_target,
-                    y_pred,
-                )
-            # Use the gradient tape to automatically retrieve
-            # the gradients of the trainable variables with respect to the loss.
-            # Compute gradients
-            trainable_vars = self.trainable_weights
-            gradients = tape.gradient(loss, trainable_vars)
-            # Run one step of gradient descent by updating
-            # the value of the variables to minimize the loss.
-            # Update weights
-            self.optimizer.apply_gradients(zip(gradients, trainable_vars))
-            # Update the metrics.
-            # Metrics are configured in `compile()`.
-            self.compiled_metrics.update_state(y_target, y_pred)
-            return {m.name: m.result() for m in self.metrics}
-
-    def create_buffers(self):
-        self.replay_buffer = ReplayBuffer(obs_dim=self.obs_dim, act_dim=self.act_dim, size=int(1e6))
-        try:
-            files = []
-            directory = self.directory + 'data/'
-            for f in os.listdir(directory):
-                if 'buffer_data' in f and 'pkl' in f:
-                    files.append(f)
-            files.sort()
-            self.replay_buffer.read_from_pkl(name=files[-1], directory=directory)
-            print('Buffer data loaded for ' + self.__name__, files[-1])
-        except:
-            print('Buffer data empty for ' + self.__name__, files)
 
 class NAF(object):
-    def __init__(self, env, training_info=dict(), pretune=None,
+    def __init__(self, env, training_info=dict(), pre_tune=None,
                  noise_info=dict(), save_frequency=500, directory=None, is_continued=False,
-                 clipped_double_q=2, q_smoothing=0.01, **nafnet_kwargs):
-        '''
+                 clipped_double_q=False, q_smoothing=0.01, **nafnet_kwargs):
+        """
         :param env: open gym environment to be solved
-        :param directory: directory were weigths are saved
-        :param stat: statistic class to handle tensorflow and statitics
-        :param discount: discount factor
-        :param batch_size: batch size for the training
-        :param learning_rate: learning rate
-        :param max_steps: maximal steps per episode
-        :param update_repeat: iteration per step of training
-        :param max_episodes: maximum number of episodes
-        :param polyak: polyac averaging
-        :param pretune: list of tuples of state action reward next state done
-        :param nafnet_kwargs: keywords to handle the network and training
-        :param noise_info: dict with noise_function
+        :dict training_info: dictionary containing info for the training of the network
+        :tuple pre_tune: list of tuples (state action reward next state done)
+        :param noise_info: dict with noise function for decay of gaussian noise
+        :param save_frequency: frequency to save the weights of the network
+        :param directory: directory were weights are saved
+        :param is_continued: continue a training, otherwise given directory deleted if existing
         :param clipped_double_q: use the clipped double q trick with switching all clipped_double_q steps
         :param q_smoothing: add small noise on actions to smooth the training
-        '''
-        self.rewards = []
-        self.states = []
-        self.actions = []
-        self.dones = []
+        :param nafnet_kwargs: keywords to handle the network and training
+        """
 
         self.clipped_double_q = clipped_double_q
         self.q_smoothing = q_smoothing
@@ -416,17 +463,17 @@ class NAF(object):
         self.save_frequency = save_frequency
 
         self.losses = []
-        self.pretune = pretune
+        self.pre_tune = pre_tune
 
-        self.env = env
+        self.env = NormalizeEnv(env)
 
         if 'noise_function' in noise_info:
             self.noise_function = noise_info.get('noise_function')
         else:
-            self.noise_function = lambda nr: 1 / (nr + 1)
+            self.noise_function = lambda action, nr: action + np.random.randn(self.action_size) * 1 / (nr + 1)
 
-        self.action_size = env.action_space.shape[0]
-        self.observation_size = env.observation_space.shape[0]
+        self.action_size = self.env.action_space.shape[0]
+        self.observation_size = self.env.observation_space.shape[0]
 
         self.max_steps = 1000
 
@@ -460,6 +507,7 @@ class NAF(object):
                                      save_frequency=self.save_frequency,
                                      clipped_double_q=self.clipped_double_q,
                                      **nafnet_kwargs)
+        # Create replay buffer
         self.q_main_model_1.create_buffers()
 
         # Set same initial values in all networks
@@ -468,6 +516,7 @@ class NAF(object):
                                        directory=self.directory,
                                        **nafnet_kwargs)
         self.q_target_model_1.q_model.set_weights(weights=self.q_main_model_1.q_model.get_weights())
+
         if self.clipped_double_q:
             self.q_main_model_2 = QModel(obs_dim=self.observation_size, act_dim=self.action_size,
                                          learning_rate=learning_rate,
@@ -476,17 +525,20 @@ class NAF(object):
                                          save_frequency=self.save_frequency,
                                          clipped_double_q=self.clipped_double_q,
                                          **nafnet_kwargs)
-            self.q_main_model_2.create_buffers()
+            # Copy buffer from first model
+            self.q_main_model_2.create_buffers(buffer=self.q_main_model_1.replay_buffer)
+
             self.q_target_model_2 = QModel(obs_dim=self.observation_size, act_dim=self.action_size,
                                            name='q_target_model_2',
                                            directory=self.directory,
                                            **nafnet_kwargs)
             self.q_target_model_2.q_model.set_weights(weights=self.q_main_model_2.q_model.get_weights())
 
-            self.q_main_model_1.set_models(self.q_target_model_1, self.q_target_model_2)
-            self.q_main_model_2.set_models(self.q_target_model_2, self.q_target_model_1)
+            # Set the target models
+            self.q_main_model_1.set_target_models(self.q_target_model_1, self.q_target_model_2)
+            self.q_main_model_2.set_target_models(self.q_target_model_2, self.q_target_model_1)
         else:
-            self.q_main_model_1.set_models(self.q_target_model_1)
+            self.q_main_model_1.set_target_models(self.q_target_model_1)
 
         self.counter = 0
 
@@ -498,17 +550,16 @@ class NAF(object):
 
         # Add small noise on the controller
         elif is_train:
-            action = model.get_action(state=state)
-            noise = self.noise_function(self.idx_episode) * np.random.randn(self.action_size)
+            action = self.noise_function(np.squeeze(model.get_action([state])),self.idx_episode)
             if self.q_smoothing is None:
-                return_value = np.clip(action + noise, -1, 1)
+                return_value = np.clip(action, -1, 1)
             else:
                 sigma = 0.01
-                return_value = np.clip(action + noise + np.clip(sigma * np.random.randn(
-                    self.action_size), -self.q_smoothing, self.q_smoothing), -1, 1)
-            return np.array(return_value)
+                return_value = np.clip(action + np.clip(sigma * np.random.randn(self.action_size),
+                                                        -self.q_smoothing, self.q_smoothing), -1, 1)
+            return return_value
         else:
-            action = model.get_action(state=state)
+            action = model.get_action([state])
             return action
 
     def verification(self, **kwargs):
@@ -540,75 +591,58 @@ class NAF(object):
             self.max_episodes = kwargs.get('max_episodes')
         if 'max_steps' in kwargs:
             self.max_steps = kwargs.get('max_steps')
+        self.q_main_model_1.set_training_parameters(**self.training_info)
+        if self.clipped_double_q:
+            self.q_main_model_2.set_training_parameters(**self.training_info)
 
         self.run(is_train=True)
-
-    def add_trajectory_data(self, state, action, reward, done):
-        index = self.idx_episode
-        self.rewards[index].append(reward)
-        self.actions[index].append(action)
-        self.states[index].append(state)
-        self.dones[index].append(done)
-
-    def store_trajectories_to_pkl(self, name, directory):
-        out_put_writer = open(directory + name, 'wb')
-        pickle.dump(self.states, out_put_writer, -1)
-        pickle.dump(self.actions, out_put_writer, -1)
-        pickle.dump(self.rewards, out_put_writer, -1)
-        pickle.dump(self.dones, out_put_writer, -1)
-        out_put_writer.close()
-
-    def init_trajectory_data(self, state):
-        self.rewards.append([])
-        self.actions.append([])
-        self.states.append([])
-        self.dones.append([])
-        self.add_trajectory_data(state=state, action=None, done=None, reward=None)
 
     def run(self, is_train=True):
         for index in tqdm(range(0, self.max_episodes)):
             self.idx_episode = index
+            # self.visualize(f'index: {index}')
 
             o = self.env.reset()
-            # For the trajectory storage
-            self.init_trajectory_data(state=o)
-
             for t in range(0, self.max_steps):
                 # 1. predict
-                a = np.squeeze(self.predict(self.q_main_model_1, o, is_train))
+
+                a_1 = np.squeeze(self.predict(self.q_main_model_1, o, is_train))
+                # Double Q implementation
+                # a_2 = np.squeeze(self.predict(self.q_main_model_2, o, is_train))
+                # a = (a_1 + a_2) / 2
+
+                a = a_1
                 o2, r, d, _ = self.env.step(a)
-                self.add_trajectory_data(state=o2, action=a, done=d, reward=r)
                 if is_train:
                     self.q_main_model_1.replay_buffer.store(o, a, r, o2, d)
-                    if self.clipped_double_q:
-                        self.q_main_model_2.replay_buffer.store(o, a, r, o2, d)
                 o = o2
                 d = False if t == self.max_steps - 1 else d
 
                 if t > 0 and t % self.initial_episode_length == 0 and \
                         self.q_main_model_1.replay_buffer.size <= self.warm_up_steps:
                     o = self.env.reset()
-                    self.init_trajectory_data(state=o)
                     print('Initial reset at ', t)
 
                 # 2. train maybe not every step
                 if t % 1 == 0:
                     if is_train and self.q_main_model_1.replay_buffer.size > self.warm_up_steps:
-                        # try:
                         self.update_q(self.q_main_model_1)
                         if self.clipped_double_q:
                             self.update_q(self.q_main_model_2)
+                    # Double Q implementation
+                    # if is_train and self.q_main_model_1.replay_buffer.size > self.warm_up_steps:
+                    #     # try:
+                    #     if np.random.uniform(-1, 1, 1) < 0:
+                    #         self.update_q(self.q_main_model_1)
+                    #     else:
+                    #         self.update_q(self.q_main_model_2)
                 if d:
                     break
 
     def train_model(self, model, **kwargs):
         # Generate batch for monitoring the performance
-        batch = model.replay_buffer.sample_batch(200)
-
-        o2 = batch['obs2']
-        a = batch['acts']
-        v = self.q_target_model_1.model_value_estimate([o2, a])
-        loss = model.train_model(**self.training_info)[-1]
+        v = self.q_target_model_1.value_model(model.replay_buffer.sample_batch(20)['obs2'])
+        loss = model.train_model(**kwargs)[-1]
         return v, loss
 
     def update_q(self, model, **kwargs):
@@ -624,11 +658,86 @@ class NAF(object):
                 number = str(self.counter).zfill(4)
                 self.q_main_model_1.replay_buffer.save_to_pkl(name=f'buffer_data_' + number + '.pkl',
                                                               directory=self.directory + "data/")
-                self.store_trajectories_to_pkl(name=f'trajectory_data_' + number + '.pkl',
-                                               directory=self.directory + "data/")
                 print('Saving buffer...')
             self.vs.append(np.mean(vs))
             self.losses.append(np.mean(losses))
+
+    def visualize(self, label=None, **kwargs):
+        # action = [np.zeros(self.env.action_space.shape)]
+        state = np.zeros(self.env.observation_space.shape)
+
+        delta = 0.05
+        theta = np.arange(-1, 1, delta)
+        theta_dot = np.arange(-1, 1, delta)
+        X, Y = np.meshgrid(theta, theta_dot)
+
+        Nr = 1
+        Nc = 2
+        fig, axs = plt.subplots(Nr, Nc)
+        fig.subplots_adjust(hspace=0.3)
+
+        rewards = np.zeros(X.shape)
+        actions = np.zeros(X.shape)
+        for i1 in range(len(theta)):
+            for j1 in range(len(theta_dot)):
+                state[0] = np.sin(theta[i1])
+                state[1] = np.cos(theta[i1])
+                state[2] = theta_dot[j1]
+
+            rewards[i1, j1] = self.q_target_model_1.get_value_estimate([state])
+            actions[i1, j1] = self.q_target_model_1.get_action([state])
+
+        axs[0].contour(X, Y, rewards, alpha=1)
+        axs[0].set_title('Value estimate')
+
+        axs[1].contour(X, Y, actions, alpha=1)
+        axs[0].set_title('Policy estimate')
+
+        # list_combinations = list(it.combinations([0, 1, 2, 3], 2))
+        #
+        # for i in range(Nr):
+        #     for j in range(Nc):
+        #
+        #         for nr in range(self.number_models):
+        #             rewards = np.zeros(X.shape)
+        #
+        #             # print(self.number_models)
+        #             for i1 in range(len(x)):
+        #                 for j1 in range(len(y)):
+        #                     current_pair = list_combinations[i * Nc + j]
+        #                     state[current_pair[0]] = x[i1]
+        #                     state[current_pair[1]] = y[j1]
+        #                     rewards[i1, j1] = (self.model_func(state, [np.squeeze(action)],
+        #                                                        nr))[1] / num_ensemble_models
+        #             axs[i, j].contour(X, Y, (rewards - 1) / 2, alpha=1)
+        #             # plt.plot(np.array(states, dtype=object)[:, 1],)
+        #         # images.append(axs[i, j].contour(X, Y, (rewards - 1) / 2, 25, alpha=1))
+        #         # axs[i, j].label_outer()
+
+        # plt.title(maximum)
+        # plt.title(label)
+        # plt.colorbar()
+        fig.show()
+        # else:
+        #     pass
+        # action = [np.random.uniform(-1, 1, 4)]
+        # state_vec = np.linspace(-1, 1, 100)
+        # states = []
+        # # print(self.number_models)
+        #
+        # for i in state_vec:
+        #     states.append(self.model_func(np.array([i, 0, 0, 0]), action,
+        #                                   self.number_models))
+        #
+        # plt.plot(np.array(states, dtype=object)[:, 1])
+
+        # states = np.zeros(X.shape)
+        # # print(self.number_models)
+        # for i in range(len(x)):
+        #     for j in range(len(y)):
+        #         states[i, j] = (self.model_func(np.array([x[i], y[j], 0, 0]), action,
+        #                                         self.number_models)[1])
+        # plt.contourf(states)
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  18 NOV 2020 09:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  23 NOV 2020 15:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1036,70 +1036,61 @@ LaTeX Font Warning: Font shape `U/wasy/b/n' in size <8> not available
 (Font)              Font shape `U/wasy/m/n' tried instead on input line 29.
 
 )
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<Figures/Learning_evolution.png, id=179, 1812.7725pt x 1024.82875pt>
+<Figures/Learning_evolution.png, id=180, 1812.7725pt x 1024.82875pt>
 File: Figures/Learning_evolution.png Graphic file (type png)
 <use Figures/Learning_evolution.png>
-Package pdftex.def Info: Figures/Learning_evolution.png  used on input line 310
+Package pdftex.def Info: Figures/Learning_evolution.png  used on input line 311
 .
 (pdftex.def)             Requested size: 255.0pt x 144.14746pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 310--311
+Overfull \hbox (9.0pt too wide) in paragraph at lines 311--312
  [][] 
  []
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<Figures/AE-DYNA_observables.pdf, id=182, 462.52798pt x 346.89601pt>
+<Figures/AE-DYNA_observables.pdf, id=183, 462.52798pt x 346.89601pt>
 File: Figures/AE-DYNA_observables.pdf Graphic file (type pdf)
 <use Figures/AE-DYNA_observables.pdf>
 Package pdftex.def Info: Figures/AE-DYNA_observables.pdf  used on input line 31
-7.
+8.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 317--318
+Overfull \hbox (9.0pt too wide) in paragraph at lines 318--319
  [][] 
  []
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<Figures/AE-DYNA_verification.pdf, id=184, 462.52798pt x 346.89601pt>
+<Figures/AE-DYNA_verification.pdf, id=185, 462.52798pt x 346.89601pt>
 File: Figures/AE-DYNA_verification.pdf Graphic file (type pdf)
 <use Figures/AE-DYNA_verification.pdf>
 Package pdftex.def Info: Figures/AE-DYNA_verification.pdf  used on input line 3
-24.
+25.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 324--325
+Overfull \hbox (9.0pt too wide) in paragraph at lines 325--326
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Figures/ME-TRPO_observables.pdf, id=186, 462.52798pt x 346.89601pt>
+<Figures/ME-TRPO_observables.pdf, id=187, 462.52798pt x 346.89601pt>
 File: Figures/ME-TRPO_observables.pdf Graphic file (type pdf)
 <use Figures/ME-TRPO_observables.pdf>
 Package pdftex.def Info: Figures/ME-TRPO_observables.pdf  used on input line 33
-2.
+3.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 332--333
+Overfull \hbox (9.0pt too wide) in paragraph at lines 333--334
  [][] 
  []
 
-<Figures/ME-TRPO_verification.pdf, id=188, 462.52798pt x 346.89601pt>
+<Figures/ME-TRPO_verification.pdf, id=189, 462.52798pt x 346.89601pt>
 File: Figures/ME-TRPO_verification.pdf Graphic file (type pdf)
 <use Figures/ME-TRPO_verification.pdf>
 Package pdftex.def Info: Figures/ME-TRPO_verification.pdf  used on input line 3
-38.
+39.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 338--339
+Overfull \hbox (9.0pt too wide) in paragraph at lines 339--340
  [][] 
  []
 
@@ -1109,28 +1100,28 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Figures/FERMI_all_experiments_NAF_episodes.pdf, id=190, 462.52798pt x 346.8960
+<Figures/FERMI_all_experiments_NAF_episodes.pdf, id=191, 462.52798pt x 346.8960
 1pt>
 File: Figures/FERMI_all_experiments_NAF_episodes.pdf Graphic file (type pdf)
 <use Figures/FERMI_all_experiments_NAF_episodes.pdf>
 Package pdftex.def Info: Figures/FERMI_all_experiments_NAF_episodes.pdf  used o
-n input line 345.
+n input line 346.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 345--346
+Overfull \hbox (9.0pt too wide) in paragraph at lines 346--347
  [][] 
  []
 
-<Figures/FERMI_all_experiments_NAF_convergence.pdf, id=192, 462.52798pt x 346.8
+<Figures/FERMI_all_experiments_NAF_convergence.pdf, id=193, 462.52798pt x 346.8
 9601pt>
 File: Figures/FERMI_all_experiments_NAF_convergence.pdf Graphic file (type pdf)
 
 <use Figures/FERMI_all_experiments_NAF_convergence.pdf>
 Package pdftex.def Info: Figures/FERMI_all_experiments_NAF_convergence.pdf  use
-d on input line 351.
+d on input line 352.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 351--352
+Overfull \hbox (9.0pt too wide) in paragraph at lines 352--353
  [][] 
  []
 
@@ -1140,45 +1131,33 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-(./main.bbl
+(./main.bbl [4 <./Figures/Learning_evolution.png> <./Figures/AE-DYNA_observable
+s.pdf>]
 Underfull \hbox (badness 1194) in paragraph at lines 86--90
  []\OT1/cmr/m/n/9 T. Ku-ru-tach, I. Clav-era, Y. Duan, A. Tamar, and
  []
 
-) [4]
+) [5 <./Figures/AE-DYNA_verification.pdf> <./Figures/ME-TRPO_observables.pdf>]
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
  on input line 434.
 
-
-Class revtex4-2 Warning: Deferred float stuck during \clearpage processing.
-
-[5 <./Figures/Learning_evolution.png> <./Figures/AE-DYNA_observables.pdf> <./Fi
-gures/AE-DYNA_verification.pdf> <./Figures/ME-TRPO_observables.pdf> <./Figures/
-ME-TRPO_verification.pdf> <./Figures/FERMI_all_experiments_NAF_episodes.pdf>]
-
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 434.
-
-
-Class revtex4-2 Warning: Deferred float stuck during \clearpage processing.
-
-[6 <./Figures/FERMI_all_experiments_NAF_convergence.pdf>] (./main.aux)
+[6 <./Figures/ME-TRPO_verification.pdf> <./Figures/FERMI_all_experiments_NAF_ep
+isodes.pdf> <./Figures/FERMI_all_experiments_NAF_convergence.pdf>] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 806A90FABB1DCAB309294882A6F2D208;1647.
-
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 26467 strings out of 479917
- 517225 string characters out of 5886664
+ 26475 strings out of 479917
+ 517334 string characters out of 5886664
  809506 words of memory out of 5000000
- 42507 multiletter control sequences out of 15000+600000
- 552943 words of font info for 97 fonts, out of 8000000 for 9000
+ 42513 multiletter control sequences out of 15000+600000
+ 553319 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,12n,77p,1348b,800s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,12n,77p,1348b,888s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/tex
 live/2020/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb><c:/texlive
 /2020/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb><c:/texlive/20
@@ -1203,11 +1182,12 @@ pe1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public
 cm/cmsy9.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.
 pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb><c:/te
 xlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texliv
-e/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on main.pdf (6 pages, 2654937 bytes).
+e/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2020/tex
+mf-dist/fonts/type1/public/cm-super/sfti0900.pfb>
+Output written on main.pdf (6 pages, 2662868 bytes).
 PDF statistics:
- 569 PDF objects out of 1000 (max. 8388607)
- 309 compressed objects within 4 object streams
- 53 named destinations out of 1000 (max. 500000)
+ 578 PDF objects out of 1000 (max. 8388607)
+ 317 compressed objects within 4 object streams
+ 54 named destinations out of 1000 (max. 500000)
  277 words of extra memory for PDF output out of 10000 (max. 10000000)
 

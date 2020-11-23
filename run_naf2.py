@@ -1,6 +1,7 @@
 import os
 import pickle
 import random
+import sys
 
 import gym
 import matplotlib.pyplot as plt
@@ -92,7 +93,6 @@ def plot_results(env, file_name):
     plt.savefig(file_name + '_rewards.pdf')
     plt.show()
 
-
 def plot_convergence(agent, file_name):
     losses, vs = agent.losses, agent.vs
     # losses2, vs2 = agent.losses2, agent.vs2
@@ -126,6 +126,10 @@ class MonitoringEnv(gym.Wrapper):
     '''
 
     def __init__(self, env, **kwargs):
+        self.plot_label = False
+        if 'plot_progress' in kwargs:
+            self.plot_label = kwargs.get('plot_progress')
+
         gym.Wrapper.__init__(self, env)
         self.rewards = []
         self.init_rewards = []
@@ -172,7 +176,9 @@ class MonitoringEnv(gym.Wrapper):
         self.rewards[self.current_episode].append(reward)
         if self.current_step >= 200:
             done = True
-            self.plot_results(self.current_episode)
+
+            if self.plot_label:
+                self.plot_results(self.current_episode)
         ob = self.scale_state_env(ob)
         reward = self.scale_rew(reward)
 
@@ -203,8 +209,6 @@ class MonitoringEnv(gym.Wrapper):
                 sum_rews.append(np.sum(rewards[i]))
                 mean_rews.append(np.mean(rewards[i]))
 
-        plot_suffix = ""  # f', number of iterations: {env.TOTAL_COUNTER}, Linac4 time: {env.TOTAL_COUNTER / 600:.1f} h'
-
         fig, ax = plt.subplots(1, 1)
         ax.set_title(label=label)
         color = 'blue'
@@ -212,34 +216,59 @@ class MonitoringEnv(gym.Wrapper):
         ax.set_ylabel('cum. reward', color=color)
         ax.set_xlabel('# episode')
         ax.tick_params(axis='y', labelcolor=color)
-        ax1 = plt.twinx(ax)
-        color = 'lime'
-        ax1.plot(mean_rews, c=color)
-        ax1.set_ylabel('mean reward', color=color)  # we already handled the x-label with ax1
-        ax1.tick_params(axis='y', labelcolor=color)
-        # plt.savefig(file_name + '_rewards.pdf')
         plt.show()
 
 
-env = MonitoringEnv(env=PendulumEnv())
-env = gym.wrappers.Monitor(env, "recording")
+
 
 if __name__ == '__main__':
 
-    directory = "checkpoints/pendulum2/"
+    try:
+        random_seed = int(sys.argv[2])
+    except:
+        random_seed = 25
+    try:
+        file_name = sys.argv[1] + '_' + str(random_seed)
+    except:
+        file_name = 'Data/NEW_tests' + str(random_seed) + '_'
+    # set random seed
+    tf.random.set_seed(random_seed)
+    np.random.seed(random_seed)
+
+    try:
+        root_dir = sys.argv[3]
+    except:
+        root_dir = "checkpoints/pendulum_video2/"
+
+    directory = root_dir + file_name + '/'
+
     if not os.path.exists(directory):
         os.makedirs(directory)
 
+    try:
+        index = int(sys.argv[4])
+        parameter_list = [
+            dict()
+        ]
+        parameters = parameter_list[index]
+        print('Just a test...')
+    except:
+        parameters = dict()
+
     is_continued = False  # False if is_train else True
 
+    # We normalize in a MonitoringEnv state action and reward to [-1,1] for the agent and plot results
+    env = MonitoringEnv(env=PendulumEnv(), plot_progress=True)
+    # env = gym.wrappers.Monitor(env, "recording2", force=True)
+
     nafnet_kwargs = dict(hidden_sizes=[100, 100], activation=tf.nn.tanh
-                         , weight_init=tf.random_uniform_initializer(-0.05, 0.05, seed=random_seed))
+                         , kernel_initializer=tf.random_normal_initializer(0, 0.05, seed=random_seed))
 
     noise_info = dict(noise_function=lambda nr: max(0., (1 - (nr / 50))))
 
     # the target network is updated at the end of each episode
     # the number of episodes is executed each step in the environment
-    training_info = dict(polyak=0.999, epochs=1, steps_per_epoch=None, batch_size=50,
+    training_info = dict(polyak=0.999, batch_size=100, steps_per_batch=10, epochs=1,
                          learning_rate=1e-3, discount=0.9999)
 
     # init the agent
@@ -249,9 +278,9 @@ if __name__ == '__main__':
                 **nafnet_kwargs)
 
     # run the agent training
-    agent.training(warm_up_steps=500, initial_episode_length=20, max_episodes=100, max_steps=500)
+    agent.training(warm_up_steps=200, initial_episode_length=200, max_episodes=100, max_steps=500)
     # run the agent verification
-    agent.verification(max_episodes=3, max_steps=500)
+    # agent.verification(max_episodes=10, max_steps=500)
 
     # plot the results
     files = []

@@ -291,8 +291,9 @@ Niky and Simon
 
 \appendix
 \section{A non-linear standard control problem}
-To provide some transparency of these studies we provide results on a famous classical standard control problem, the inverted pendulum. It is a non-linear low dimensional unsolved continuous control problem, which means there is no threshold for the reward to terminate an episode. The episode length is set to 200 steps.
+To provide some transparency of these studies for other labs we provide results on a famous classical standard control problem \cite{Furutaa}, the \emph{inverted pendulum}. It is a non-linear low dimensional unsolved continuous control problem. Unsolved means there is no threshold for the reward to terminate an episode. The episode length is set to 200 steps. In the following several tests were carried out on the \emph{inverted pendulum} to demonstrate the improvements of the selected algorithms, mainly in terms of noise handling. This is of importance when dealing with measurements on real systems.
 \subsection{The impact of noise}
+We add artificial Gaussian noise $\gauss(0,0.05)$ on the state with and compare the different \emph{NAF} variants: \emph{smoothing-double}, \emph{smoothing single}, \emph{standart}.
 \section{NAF2 details}\label{appendix:naf2}
 \section{AE training details}
 \section{Theoretical aspects on the AE-DYNA on FERMI FEL}
