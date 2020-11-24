@@ -4,7 +4,7 @@
 \BOOKMARK [1][-]{section*.4}{The physical set-up}{section*.2}% 4
 \BOOKMARK [1][-]{section*.5}{Deep Reinforcement learning}{section*.2}% 5
 \BOOKMARK [2][-]{section*.6}{Approximate dynamic programming}{section*.5}% 6
-\BOOKMARK [2][-]{section*.7}{NAF}{section*.5}% 7
+\BOOKMARK [2][-]{section*.7}{Normalized advantage function}{section*.5}% 7
 \BOOKMARK [1][-]{section*.9}{Uncertainty aware Dyna-style reinforcement learning}{section*.2}% 8
 \BOOKMARK [2][-]{section*.11}{Critical design decisions}{section*.9}% 9
 \BOOKMARK [2][-]{section*.12}{Operational deployment}{section*.9}% 10
@@ -19,6 +19,5 @@
 \BOOKMARK [1][-]{section*.28}{A non-linear standard control problem}{section*.2}% 19
 \BOOKMARK [2][-]{section*.29}{NAF2 details}{section*.28}% 20
 \BOOKMARK [2][-]{section*.31}{The impact of noise}{section*.28}% 21
-\BOOKMARK [1][-]{section*.33}{AE training details}{section*.2}% 22
-\BOOKMARK [1][-]{section*.34}{Theoretical aspects on the AE-DYNA on FERMI FEL}{section*.2}% 23
-\BOOKMARK [1][-]{section*.36}{References}{section*.2}% 24
+\BOOKMARK [1][-]{section*.33}{Theoretical aspects on the AE-DYNA on FERMI FEL}{section*.2}% 22
+\BOOKMARK [1][-]{section*.35}{References}{section*.2}% 23

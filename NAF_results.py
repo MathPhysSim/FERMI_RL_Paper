@@ -93,14 +93,14 @@ def plot_results(rewards, rewards_single, **kwargs):
     color = 'blue'
     ax.plot(iterations, c=color)
     ax.plot(iterations_s, c=color, ls=':')
-    ax.set_ylabel('steps', color=color)
+    ax.set_ylabel('no. iterations', color=color)
     ax.tick_params(axis='y', labelcolor=color)
     ax1 = plt.twinx(ax)
     color = 'k'
     ax1.plot(np.cumsum(iterations), c=color)
     ax1.plot(np.cumsum(iterations_s), c=color, ls=':')
-    ax1.set_ylabel('cumulative steps', color=color)
-    ax.set_title('Iterations' + plot_suffix)
+    ax1.set_ylabel('no. cumulative steps', color=color)
+    ax.set_title('no. iterations' + plot_suffix)
     # fig.suptitle(label, fontsize=12)
 
     ax = axs[1]
@@ -109,18 +109,18 @@ def plot_results(rewards, rewards_single, **kwargs):
     # ax.plot(starts, c=color)
     ax.plot(mean_rews, c=color)
     ax.plot(mean_rews_s, c=color, ls=':')
-    ax.set_ylabel('cum. return', color=color)
+    ax.set_ylabel('cum. return (arb. units)', color=color)
     # ax.axhline(-0.05, ls=':', color='r')
     ax.tick_params(axis='y', labelcolor=color)
-    ax.set_title('Reward per episode')  # + plot_suffix)
-    ax.set_xlabel('episodes')
+    ax.set_title('reward per episode (arb. units)')  # + plot_suffix)
+    ax.set_xlabel('no. episodes')
 
     ax1 = plt.twinx(ax)
     color = 'lime'
     ax1.plot(final_rews[:-1], color=color)
     ax1.plot(final_rews_s[:-1], color=color, ls=':')
 
-    ax1.set_ylabel('final return', color=color)
+    ax1.set_ylabel('final return (arb. units)', color=color)
     ax1.axhline(-0.05, ls=':', color=color)
     ax1.tick_params(axis='y', labelcolor=color)
 
@@ -175,20 +175,20 @@ rewards_s = [rews0, rews1]
 def plot_convergence(losses, v_s, losses_s, v_s_s, label, **kwargs):
     fig, ax = plt.subplots()
     ax.set_title(label)
-    ax.set_xlabel('steps')
+    ax.set_xlabel('no. steps')
 
     color = 'tab:blue'
     ax.semilogy(losses, color=color)
     ax.semilogy(losses_s, color=color, ls=':')
     ax.tick_params(axis='y', labelcolor=color)
-    ax.set_ylabel('Bellman error', color=color)
+    ax.set_ylabel('Bellman error (arb. units)', color=color)
     # ax.set_ylim(0, 1)
 
     ax1 = plt.twinx(ax)
     # ax1.set_ylim(-2, 1)
     color = 'lime'
 
-    ax1.set_ylabel('V', color=color)  # we already handled the x-label with ax1
+    ax1.set_ylabel('V (arb. units)', color=color)  # we already handled the x-label with ax1
     ax1.tick_params(axis='y', labelcolor=color)
     ax1.plot(v_s, color=color)
     ax1.plot(v_s_s, color=color, ls=':')

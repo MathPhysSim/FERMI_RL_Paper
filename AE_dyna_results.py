@@ -6,21 +6,26 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 label = "ME-TRPO"
-# label = "AE-DYNA"
+label = "AE-DYNA"
+
+label = 'simulation'
+
 if label == "ME-TRPO":
     # ME-TRPO results
     project_directory = 'Data_Experiments/2020_10_06_ME_TRPO_stable@FERMI/run2/'
-else:
+elif label=="AE-DYNA":
     # AE-Dyna results
-    project_directory = 'Data_Experiments/2020_11_05_AE_Dyna@FERMI/-nr_steps_25-cr_lr-n_ep_13-m_bs_100-sim_steps_3000-m_iter_35-ensnr_3-init_200/'
+    project_directory = 'Data_Experiments/2020_11_05_AE_Dyna@FERMI/-nr_steps_25-cr_lr-n_ep_13-m_bs_100-sim_steps_3000' \
+                        '-m_iter_35-ensnr_3-init_200/ '
+else:
+    project_directory = 'Data_logging/Simulation/-nr_steps_201-n_ep_12-m_bs_100-sim_steps_2500-m_iter_2-ensnr_3-init_201/'
+
 
 def read_rewards(rewards):
     iterations_all = []
     final_rews_all = []
     mean_rews_all = []
     stds = []
-
-
 
     iterations = []
     final_rews = []
@@ -72,7 +77,7 @@ def plot_results(data, label='Verification', **kwargs):
         ax = axs[0]
         x = range(len(iterations))
         ax.plot(x, iterations)
-        ax.set_ylabel('Iterations (1)')
+        ax.set_ylabel('no. iterations')
         ax.set_title(plot_suffix)
         # fig.suptitle(label, fontsize=12)
         if 'data_number' in kwargs:
@@ -89,7 +94,7 @@ def plot_results(data, label='Verification', **kwargs):
         ax.plot(x, finals, color=color)
 
         ax.set_title('Final reward per episode')  # + plot_suffix)
-        ax.set_xlabel('Episodes (1)')
+        ax.set_xlabel('no. episodes')
 
         ax1 = plt.twinx(ax)
         color = 'lime'
@@ -120,14 +125,14 @@ def plot_observables(data, label='Experiment', **kwargs):
     ax.step(x, batch_rews_all[0])
     ax.fill_between(x, batch_rews_all[0] - batch_rews_all[1], batch_rews_all[0] + batch_rews_all[1],
                     alpha=0.5)
-    ax.set_ylabel('rews per batch')
+    ax.set_ylabel('rews per batch (arb. units)')
 
     ax.set_title(label)
 
     ax2 = ax.twinx()
 
     color = 'lime'
-    ax2.set_ylabel('data points', color=color)  # we already handled the x-label with ax1
+    ax2.set_ylabel('no. data points', color=color)  # we already handled the x-label with ax1
     ax2.tick_params(axis='y', labelcolor=color)
     ax2.step(x, step_counts_all, color=color)
 
@@ -142,13 +147,14 @@ def plot_observables(data, label='Experiment', **kwargs):
         ax.axhline(y=np.max(tests_all[0]), c='orange')
     except:
         pass
-    ax.set_ylabel('rewards tests')
+    ax.set_ylabel('rewards tests (arb. units)')
     # plt.tw
     ax.grid(True)
+    ax.set_xlabel('no. iterations')
     if length_all:
         ax2 = ax.twinx()
         color = 'lime'
-        ax2.set_ylabel(r'- log(std($p_\pi$))', color=color)   # we already handled the x-label with ax1
+        ax2.set_ylabel(r'log(std($p_\pi$)) (arb. units)', color=color)   # we already handled the x-label with ax1
         ax2.tick_params(axis='y', labelcolor=color)
         ax2.plot(length_all, color=color)
     fig.align_labels()
@@ -159,21 +165,21 @@ def plot_observables(data, label='Experiment', **kwargs):
     plt.show()
 
 # plot verification
+if label in ["ME-TRPO", "AE-DYNA"]:
+    filenames = []
+    for file in os.listdir(project_directory):
+        if 'final' in file:
+            filenames.append(file)
 
-filenames = []
-for file in os.listdir(project_directory):
-    if 'final' in file:
-        filenames.append(file)
+    filenames.sort()
 
-filenames.sort()
+    filename = filenames[-1]
+    print(filename)
 
-filename = filenames[-1]
-print(filename)
-
-filehandler = open(project_directory + filename, 'rb')
-object = pickle.load(filehandler)
-save_name = 'Figures/' + label+'_verification'
-plot_results(object,label=label, save_name=save_name)
+    filehandler = open(project_directory + filename, 'rb')
+    object = pickle.load(filehandler)
+    save_name = 'Figures/' + label+'_verification'
+    plot_results(object,label=label, save_name=save_name)
 
 # plot observables
 

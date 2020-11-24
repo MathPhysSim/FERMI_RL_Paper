@@ -136,7 +136,9 @@ prstab,
 
 
 \begin{abstract}
-In this paper we discuss a model based reinforcement learning approach in comparison to a model free reinforcement learning approach applied at the FERMI FEL system. Both algorithms and approaches are new in this context and the main purpose of this paper is to show how reinforcement learning can be applied on an operational level in a feasible training time on real accelerator physics problems. In terms of sample-complexity the model-based approach is faster, while the final performance of the model free method is superior - the so called asymptotic performance. The model-based algorithm is done in a Dyna-style using an uncertainty aware model and the model-free algorithm is based on tailored deep Q-learning using some tricks to increase the sample efficiency
+In this paper we discuss a model based reinforcement learning approach in comparison to a model free reinforcement learning approach applied at the FERMI FEL system. Both algorithms and approaches are new in this context and the main purpose of this paper is to show how reinforcement learning can be applied on an operational level in a feasible training time on real accelerator physics problems. In terms of sample-complexity the model-based approach is faster, while the final performance of the model free method is superior - the so called asymptotic performance. The model-based algorithm is done in a Dyna-style using an uncertainty aware model and the model-free algorithm is based on tailored deep Q-learning using some tricks to increase the sample efficiency.
+The implementation is available at \cite{Hirlaender2020}.
+
 \end{abstract}
 %\keywords{Suggested keywords}%Use showkeys class option if keyword
                               %display desired
@@ -204,7 +206,7 @@ The Bellman operator $\bellman^*$ has a unique fixed point but is non-linear, du
 \end{align}
 The form of this equation can cause overestimation and other complications, when using a function approximator. Several methods exist which try to mitigate the problems \cite{}.
 One way to reduce the effect is to take a simple analytical form of the $Q$-function.
-\subsection{NAF}
+\subsection{Normalized advantage function}
 If a specific quadratic form of the $Q$ function is assumed:
 \begin{align}
      Q_\theta(\bs,\ba) = -\frac{1}{2}(\ba-\mu_\theta(\bs))P_\theta(\ba-\mu_\theta(\bs))^T+V_\theta(\bs).\label{eq:state-action-value-approxiation}
@@ -243,7 +245,7 @@ An overview of the used method is shown in \cref{fig:MBRL_overview}. At the begi
 	\caption{A schematic overview of the AE-Dyna approach used in this paper.}
 	\label{fig:MBRL_overview}
 \end{figure}
-\subsection{Critical design decisions}
+\subsection{Critical design decisions}\label{ss:critical_design}
 In the following the most important aspects of a successful application of a Dyna-AE algorithm are listed:
 \begin{itemize}
 	\item The ANN - including the prior - number of models - noise level - early stopping
@@ -290,8 +292,10 @@ In total four tests were carried out, two using a single network and two using t
 In the verification phase both algorithms show a similar performance, while the double network needs less training steps, and reveals a more stable overall performance.\\
 Additionally the convergence metrics of the two algorithms is plotted in \cref{fig:NAF_convergence} against the number of training steps. The blue curves shows the Bellmann error, which is comparable. The state-value function, which is a direct output of the neural net (\cref{eq:state-action-value-approxiation}), converges to a reasonable value for the double network within the shown 700 steps, whereas the single network tends to overestimate the value. In this case convergence is reached ~1400 steps.\\
 \subsection{MBRL tests}
-The second test campaign was employing the \emph{AE-DYNA} algorithm, as representative for pure a MBRL algorithms. Two variants were implemented: the \emph{ME-TRPO} variant and the \emph{AE-DYNA SAC} variant. The first uses the trust region policy optimization -\emph{TRPO}- \cite{Schulman2015} to train the controller. The TRPO monotonically converges to better policy and this property is exploited in the training. The convergence property can be seen in \cref{fig:ME-TRPO_observables}. In the upper figure the total reward per batch is shown, as well as the number of data points used in the training of the dynamics model. In the lower plot the average cumulative reward as achieved by the TRPO on the individual models in the ensemble on a number of 10 episodes is drawn. The shade area shows the corresponding standard deviation to indicate the uncertainty of the dynamics model.   \\
-Secondly, the \emph{AE-DYNA SAC} was tested, which uses the soft actor critic -SAC- algorithm \cite{Haarnoja2018a}. The SAC not only tries to maximise $J$ \cref{eq:cumulative_reward}, but also simultaneously but weights on the maximisation of the entropy in the action space. In this way exploration is encouraged to avoid getting stuck in a local optimum. In this test the controller is reset each time, when new data for the dynamics model training is acquired.
+The second test campaign was employing the \emph{AE-DYNA} algorithm, as representative for pure a MBRL algorithms. Two variants were implemented: the \emph{ME-TRPO} variant and the \emph{AE-DYNA SAC} variant. In both cases an ensemble of three network was used and the epistemic and aleatoric uncertainty is measured via the anchor-ensemble technique as discussed in \cref{ss:critical_design}. On top early stopping was used.
+\\ The first uses the trust region policy optimization -\emph{TRPO}- \cite{Schulman2015} to train the controller. The TRPO monotonically converges to better policy and this property is exploited in the training. The convergence property can be seen in \cref{fig:ME-TRPO_observables}. In the upper figure the total reward per batch is shown, as well as the number of data points used in the training of the dynamics model. In the lower plot the average cumulative reward as achieved by the TRPO on the individual models in the ensemble on a number of 10 episodes is drawn. The shade area shows the corresponding standard deviation to indicate the uncertainty of the dynamics model. To measure the convergence of the TRPO the logarithm of the standard deviation of the distribution drawn trajectories $p_\traj$ is also visualized. Here the training was stopped after 450 steps acquiring 25 steps each dynamics training. In the verification, as can be seen in \cref{fig:ME-TRPO_verification}, all of the 50 episodes where successfully finished after a few steps. \\
+Secondly, the \emph{AE-DYNA SAC} was tested, which uses the soft actor critic -SAC- algorithm \cite{Haarnoja2018a}. The SAC not only tries to maximise $J$ \cref{eq:cumulative_reward}, but also simultaneously but weights on the maximisation of the entropy in the action space. In this way exploration is encouraged to avoid getting stuck in a local optimum. In this test the controller is reset each time, when new data for the dynamics model training is acquired. Consequently, the performance drops each time, the dynamics model was retrained, as shown in \cref{fig:AE-DYNA_observables}. Chances to get trapped in a local optimum are smaller by using this strategy of training.
+In difference to the first MBRL test, the batches of when acquiring new data are 50 with an initial random walk of 100 steps. The number of initial steps was chosen carefully large enough, because the convergence is slowed down and there is the risk that the training becomes unfeasibly. The training was stopped after the acquisition of 500 data points and a verification was done as in the first test. Again the success is 100\%, but the number of iterations per step is smaller. It might be a result of the bigger number of data points, but in general, this method showed a better asymptotic performance than the $ME-TRPO$ variant.
 \begin{figure}[!h]
 	\centering
 	\includegraphics*[width=0.5\textwidth]{Figures/FERMI_all_experiments_NAF_episodes.pdf}
@@ -319,14 +323,14 @@ Secondly, the \emph{AE-DYNA SAC} was tested, which uses the soft actor critic -S
 	\centering
 	\includegraphics*[width=0.5\textwidth]{Figures/AE-DYNA_observables.pdf}
 	\caption{The training .}
-	\label{fig:comparsion_per}
+	\label{fig:AE-DYNA_observables}
 \end{figure}
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics*[width=0.5\textwidth]{Figures/AE-DYNA_verification.pdf}
 	\caption{The training .}
-	\label{fig:comparsion_per}
+	\label{fig:AE-DYNA_verification}
 \end{figure}
 
 
@@ -391,9 +395,9 @@ A test adding artificial Gaussian noise $\epsilon \sim \mathcal{N}(0, \sigma)$ w
 	\label{fig:comparsion_noise}
 \end{figure}
 
-
-\section{AE training details}
 \section{Theoretical aspects on the AE-DYNA on FERMI FEL}
+In this section we want to discuss some theoretical aspects concerning the AE-DYNA approach. A simulation was used to obtain the presented analysis. \\
+One issue of MBRL methods is the asymptotic performance. Altough good results were obtained using the AE-DYNA, there is a difference between the MFRL and MBRL. We call it the \emph{reality gap}. There are ideas to attack the problem e.g. by learning a meta-policy \cite{Clavera2018} followed by a fine tuning on the residual physics, which minimizes the \emph{reality gap} ot training on a simulator and closing than with a small amount of training iterations on the real system the gap \cite{Zeng2019}.
 \begin{figure}[!h]
 	\centering
 	\includegraphics*[width=0.5\textwidth]{Figures/Learning_evolution}
