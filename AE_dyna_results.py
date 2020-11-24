@@ -5,7 +5,7 @@ import pickle
 import matplotlib.pyplot as plt
 import numpy as np
 
-label = ["ME-TRPO", "AE-DYNA",'simulation'][1]
+label = ["ME-TRPO", "AE-DYNA",'simulation'][2]
 
 if label == "ME-TRPO":
     # ME-TRPO results
@@ -15,7 +15,7 @@ elif label=="AE-DYNA":
     project_directory = 'Data_Experiments/2020_11_05_AE_Dyna@FERMI/-nr_steps_25-cr_lr-n_ep_13-m_bs_100-sim_steps_3000-m_iter_35-ensnr_3-init_200/'
 else:
     project_directory = 'Data_logging/Simulation/'+\
-                        '-nr_steps_25-n_ep_97-m_bs_5-sim_steps_3000-m_iter_30-ensnr_5-init_100'+\
+                        '-nr_steps_201-n_ep_49-m_bs_100-sim_steps_20000-m_iter_10-ensnr_3-init_201'+\
                         '/'
 
 
@@ -152,7 +152,10 @@ def plot_observables(data, label='Experiment', **kwargs):
     if length_all:
         ax2 = ax.twinx()
         color = 'lime'
-        ax2.set_ylabel(r'log(std($p_\pi$)) (arb. units)', color=color)   # we already handled the x-label with ax1
+        if label=='ME-TRPO':
+            ax2.set_ylabel(r'log(std($p_\pi$)) (arb. units)', color=color)   # we already handled the x-label with ax1
+        else:
+            ax2.set_ylabel(r'success (1)', color=color)   # we already handled the x-label with ax1
         ax2.tick_params(axis='y', labelcolor=color)
         ax2.plot(length_all, color=color)
     fig.align_labels()

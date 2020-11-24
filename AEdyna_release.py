@@ -61,10 +61,10 @@ else:
     from stable_baselines.common.policies import MlpPolicy
     from stable_baselines import PPO2 as Agent
 
-simulated_steps = 3000
+simulated_steps = 2500
 
-model_batch_size = 5
-num_ensemble_models = 5
+model_batch_size = 100
+num_ensemble_models = 3
 
 early_stopping = True
 model_iter = 30
