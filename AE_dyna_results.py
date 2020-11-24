@@ -5,20 +5,18 @@ import pickle
 import matplotlib.pyplot as plt
 import numpy as np
 
-label = "ME-TRPO"
-label = "AE-DYNA"
-
-label = 'simulation'
+label = ["ME-TRPO", "AE-DYNA",'simulation'][1]
 
 if label == "ME-TRPO":
     # ME-TRPO results
     project_directory = 'Data_Experiments/2020_10_06_ME_TRPO_stable@FERMI/run2/'
 elif label=="AE-DYNA":
     # AE-Dyna results
-    project_directory = 'Data_Experiments/2020_11_05_AE_Dyna@FERMI/-nr_steps_25-cr_lr-n_ep_13-m_bs_100-sim_steps_3000' \
-                        '-m_iter_35-ensnr_3-init_200/ '
+    project_directory = 'Data_Experiments/2020_11_05_AE_Dyna@FERMI/-nr_steps_25-cr_lr-n_ep_13-m_bs_100-sim_steps_3000-m_iter_35-ensnr_3-init_200/'
 else:
-    project_directory = 'Data_logging/Simulation/-nr_steps_201-n_ep_12-m_bs_100-sim_steps_2500-m_iter_2-ensnr_3-init_201/'
+    project_directory = 'Data_logging/Simulation/'+\
+                        '-nr_steps_25-n_ep_97-m_bs_5-sim_steps_3000-m_iter_30-ensnr_5-init_100'+\
+                        '/'
 
 
 def read_rewards(rewards):
@@ -93,12 +91,12 @@ def plot_results(data, label='Verification', **kwargs):
         ax.tick_params(axis='y', labelcolor=color)
         ax.plot(x, finals, color=color)
 
-        ax.set_title('Final reward per episode')  # + plot_suffix)
+        # ax.set_title('final reward per episode (arb. units)')  # + plot_suffix)
         ax.set_xlabel('no. episodes')
 
         ax1 = plt.twinx(ax)
         color = 'lime'
-        ax1.set_ylabel('Mean reward', color=color)  # we already handled the x-label with ax1
+        ax1.set_ylabel('cum. reward (arb. units)', color=color)  # we already handled the x-label with ax1
         ax1.tick_params(axis='y', labelcolor=color)
         ax1.fill_between(x, means - stds, means + stds,
                          alpha=0.5, edgecolor=color, facecolor='#FF9848')
