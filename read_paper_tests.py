@@ -26,7 +26,6 @@ def read_experiment(root_dir):
 
     return data_all
 
-
 try:
     root_dir = sys.argv[1]
 except:
@@ -36,19 +35,19 @@ except:
     # double = read_experiment(root_dir=root_dir)
 
     # data_all = pd.concat([single, double], sort=False)
-    root_dir = "Experiments-150-200-50/"
+    root_dir = "Experiments-150-200-50-noisy/"
     data_all = read_experiment(root_dir=root_dir)
 
-figure_name = 'Smoothing_comparison.pdf'
+figure_name = '../Figures/Comparison_noise.pdf'
 current_test_name = ''
 
 fig, axs = plt.subplots(1, 1)
 
 # data_all = data_all.loc[:, :length]
 print(data_all)
-
+sns.set_palette(sns.color_palette("bright", 8))
 sns.lineplot(ax=axs, data=data_all.T)
-plt.ylabel(' cum reward (arb. units.)')
+plt.ylabel('cum. reward (arb. units.)')
 plt.xlabel('no. episode')
 plt.savefig(root_dir + figure_name)
 plt.show()

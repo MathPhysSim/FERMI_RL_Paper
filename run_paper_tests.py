@@ -3,10 +3,10 @@ import shutil
 
 name = 'random_seeds'
 # root_dir = "DOUBLE/"
-root_dir = "Experiments-150-200-50/"
+root_dir = "Experiments-150-200-50-noisy/"
 
-if os.path.exists(root_dir):
-    shutil.rmtree(root_dir)
+# if os.path.exists(root_dir):
+#     shutil.rmtree(root_dir)
 
 # Parameters for the test
 # parameter_list = [
@@ -18,16 +18,16 @@ if os.path.exists(root_dir):
 #     'False-high-noisy'
 # ]
 parameter_list = [
-    'Clipping',
-    'No-clipping-clipping-no-smoothing',
-    'No-clipping-clipping-smoothing',
+    'Clipping-noisy',
+    'NocNoS-noisy',
+    'NoCS-noisy',
 ]
 
 for index in range(len(parameter_list)):
-    name = 'test-'
+    name = 'Setting'
     name += '_' + str(parameter_list[index])
     print(name)
-    for seed in [10]:
+    for seed in [10, 20, 30, 40, 50]:
         command = "python run_naf2_single.py " + name + ' ' + str(seed) + ' ' + root_dir + ' ' + str(index)
         os.system(command)
 

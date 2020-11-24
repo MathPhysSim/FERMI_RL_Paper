@@ -113,7 +113,7 @@ prstab,
 
 
 
-\title{Model based reinforcement learning at FERMI FEL}
+\title{Model based and model free reinforcement learning at FERMI FEL}
 
 
 
@@ -185,7 +185,7 @@ The paper is organised as follows.
 Assume states $\bs$ the set of all states $\states$ and actions $\ba$ all actions $\actions$ and rewards $\reward$ and the set of all rewards $\mathcal{R}$ an initial state distribution $\initstate$.
 Goal of reinforcement learning is to find a $\policy: \bs\mapsto \ba$, which is the solution of:
 \begin{align}
-\max J (\policy)  =  \mathbb E_{\traj \sim p_{\policy}}\left[\sum_{t=0}^{\horizon}\discount^t r(\bs_t,\ba_t)\right],
+\max J (\policy)  =  \mathbb E_{\traj \sim p_{\policy}}\left[\sum_{t=0}^{\horizon}\discount^t r(\bs_t,\ba_t)\right],\label{eq:cumulative_reward}
 \end{align}
 where $p_\policy = \initstate(\bs_0)\prod_{t_0}^\horizon\policy(\ba_t,\bs_t)\transitions(\bs_{t+1}|\bs_t,\ba_t)$ is the distribution of all trajectories $\traj := (\bs_0, \ba_0, \bs_1, \ba_1,\dots \bs_\horizon,\ba_\horizon)$ drawn by $\policy$ with a horizon $\horizon$.
 In the modern field of RL one distinguishes if the policy $\policy(\ba)\approx \policy_\phi(\bs)$ or the state-action value function $Q(\bs,\ba)$ is approximated using a high capacity function approximator, as e.g. a deep neural network. In the first case one speaks about policy gradient methods in the latter about approximate dynamic programming, which we now discuss.
@@ -207,15 +207,15 @@ One way to reduce the effect is to take a simple analytical form of the $Q$-func
 \subsection{NAF}
 If a specific quadratic form of the $Q$ function is assumed:
 \begin{align}
-     Q_\theta(\bs,\ba) = -\frac{1}{2}(\ba-\mu_\theta(\bs))P_\theta(\ba-\mu_\theta(\bs))^T+V_\theta(s).
+     Q_\theta(\bs,\ba) = -\frac{1}{2}(\ba-\mu_\theta(\bs))P_\theta(\ba-\mu_\theta(\bs))^T+V_\theta(\bs).\label{eq:state-action-value-approxiation}
 \end{align}
 
-One modification, which is used in these tests is a twin network (weights denoted by $\tilde\theta$), where only one is used to obtain the policy, while the other is used for the update rule to avoid over-estimation. It is motivated by double Q-learning \cite{NIPS2010_091d584f}.
+One modification, which is used in these tests is a twin network (weights for network $i$ denoted by $\theta^i$), where only one is used to obtain the policy, while the other is used for the update rule to avoid over-estimation. It is motivated by double Q-learning \cite{NIPS2010_091d584f}.
 The maximum is given analytically as $\max_\ba Q(\bs,\ba) = V(\bs)$, hence from \cref{eq:minimize_bellmann_optimality}:
 \begin{align}
 	\min_\theta\left( (\reward(\bs_t,\ba_t)+\gamma \min_{1,2} V_{\theta^i_\text{targ}}(\bs_{t+1}) - (1+\gamma) Q_\theta(\bs_t,\ba_t)\right)^2
 \end{align}
-$\theta_\text{targ}$ are the weights of a target network, which is softly updated. To stabilize the network training a small artificial noise is added to the actions in the update. This algorithm has an extremely good sample-efficiency for suitable problems as can be found in accelerators and is used as the baseline for the considered control problem.
+$\theta_\text{targ}$ are the weights of a target network, which is softly updated. To stabilize the network training a small artificial noise is added to the actions in the update. This algorithm has an extremely good sample-efficiency for suitable problems as can be found often in accelerators and is used as the baseline for the considered control problem, as it shows very good results.
 %\subsection{New NAF network architecture}
 
 \begin{algorithm}[ht]
@@ -282,7 +282,67 @@ The final problem faced consists in optimising the seed laser trajectory to matc
 
 
 \subsection{Experiment results from FERMI RL tests}
-Niky and Simon
+As discussed in the previous sections, several tests were performed on the FERMI XFEL.
+The main purpose was to test the newly implemented algorithms on a real system to evaluate their operational feasibility. The \emph{NAF2} algorithm, as a representative for highly sample efficient MFRL algorithms, was tested first.
+\subsection{MFRL tests}
+In total four tests were carried out, two using a single network and two using the double network architecture. In both cases \emph{smoothing} was applied, as described in \cref{appendix:naf2}.\\
+\Cref{fig:NAF_training} displays the results, averaged over the two test. A training of 100 episodes (shades area) is followed by a verification of 50 steps. in the upper figure the number of iterations per episode is plotted including the cumulative number of steps.
+In the verification phase both algorithms show a similar performance, while the double network needs less training steps, and reveals a more stable overall performance.\\
+Additionally the convergence metrics of the two algorithms is plotted in \cref{fig:NAF_convergence} against the number of training steps. The blue curves shows the Bellmann error, which is comparable. The state-value function, which is a direct output of the neural net (\cref{eq:state-action-value-approxiation}), converges to a reasonable value for the double network within the shown 700 steps, whereas the single network tends to overestimate the value. In this case convergence is reached ~1400 steps.\\
+\subsection{MBRL tests}
+The second test campaign was employing the \emph{AE-DYNA} algorithm, as representative for pure a MBRL algorithms. Two variants were implemented: the \emph{ME-TRPO} variant and the \emph{AE-DYNA SAC} variant. The first uses the trust region policy optimization -\emph{TRPO}- \cite{Schulman2015} to train the controller. The TRPO monotonically converges to better policy and this property is exploited in the training. The convergence property can be seen in \cref{fig:ME-TRPO_observables}. In the upper figure the total reward per batch is shown, as well as the number of data points used in the training of the dynamics model. In the lower plot the average cumulative reward as achieved by the TRPO on the individual models in the ensemble on a number of 10 episodes is drawn. The shade area shows the corresponding standard deviation to indicate the uncertainty of the dynamics model.   \\
+Secondly, the \emph{AE-DYNA SAC} was tested, which uses the soft actor critic -SAC- algorithm \cite{Haarnoja2018a}. The SAC not only tries to maximise $J$ \cref{eq:cumulative_reward}, but also simultaneously but weights on the maximisation of the entropy in the action space. In this way exploration is encouraged to avoid getting stuck in a local optimum. In this test the controller is reset each time, when new data for the dynamics model training is acquired.
+\begin{figure}[!h]
+	\centering
+	\includegraphics*[width=0.5\textwidth]{Figures/FERMI_all_experiments_NAF_episodes.pdf}
+	\caption{The training on the \emph{NAF2} in the FERMI FEL.}
+	\label{fig:NAF_training}
+\end{figure}
+\begin{figure}[!h]
+	\centering
+	\includegraphics*[width=0.5\textwidth]{Figures/FERMI_all_experiments_NAF_convergence.pdf}
+	\caption{The training .}
+	\label{fig:NAF_convergence}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\input{Figures/SL_Alignment_Scheme}
+	\caption{The training .}
+	\label{fig:comparsion_per}
+\end{figure}
+
+
+
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics*[width=0.5\textwidth]{Figures/AE-DYNA_observables.pdf}
+	\caption{The training .}
+	\label{fig:comparsion_per}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics*[width=0.5\textwidth]{Figures/AE-DYNA_verification.pdf}
+	\caption{The training .}
+	\label{fig:comparsion_per}
+\end{figure}
+
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics*[width=0.5\textwidth]{Figures/ME-TRPO_observables.pdf}
+	\caption{The training .}
+	\label{fig:ME-TRPO_observables}
+\end{figure}
+\begin{figure}[!h]
+	\centering
+	\includegraphics*[width=0.5\textwidth]{Figures/ME-TRPO_verification.pdf}
+	\caption{The training .}
+	\label{fig:ME-TRPO_verification}
+\end{figure}
+
 
 \section{Discussion and outlook}
 
@@ -292,66 +352,53 @@ Niky and Simon
 \appendix
 \section{A non-linear standard control problem}
 To provide some transparency of these studies for other labs we provide results on a famous classical standard control problem \cite{Furutaa}, the \emph{inverted pendulum}. It is a non-linear low dimensional unsolved continuous control problem. Unsolved means there is no threshold for the reward to terminate an episode. The episode length is set to 200 steps. In the following several tests were carried out on the \emph{inverted pendulum} to demonstrate the improvements of the selected algorithms, mainly in terms of noise handling. This is of importance when dealing with measurements on real systems.
+
+\subsection{NAF2 details}\label{appendix:naf2}
+%We add artificial Gaussian noise $\gauss(0,0.05)$ on the state.
+ We compare the different \emph{NAF} variants: \emph{smoothing-double}, \emph{smoothing single}, \emph{standart}. The smoothing adds a small clipped noise on the actions to stabilize the network training as:
+ \begin{equation}
+ 	a'(s') = \text{clip}\left(\mu_{\theta_{\text{targ}}}(s') + \text{clip}(\epsilon,-c,c), a_{Low}, a_{High}\right),
+ \end{equation}
+ 	where $\epsilon \sim \mathcal{N}(0, \sigma)$. This method was used already in \cite{fujimoto2018addressing} to improve the deterministic policy gradient \cite{Silver2014}.
+ The double network was used in \cite{fujimoto2018addressing,Haarnoja2018a} and is done in the following way:
+ \begin{align}
+y(r,s',d) = r + \gamma (1 - d) \min_{i=1,2} Q_{\phi_{i, \text{targ}}}(s', a'(s'))
+ \end{align}
+and then both are learned by regressing to this target:
+\begin{align}
+	L(\phi_1, {\mathcal D}) = \mathbb E_{(s,a,r,s',d) \sim {\mathcal D}}{
+		\Bigg( Q_{\phi_1}(s,a) - y(r,s',d) \Bigg)^2
+	}
+\end{align}
+and the policy is obtained via:
+\begin{align}
+\max_{\theta} \underset{s \sim {\mathcal D}}{{\mathrm E}}\left[ Q_{\phi_1}(s, \mu_{\theta}(s)) \right].
+\end{align}
+The results are shown in \cref{fig:comparsion_smoothing}. One sees the cumulative reward per episode for a training of a total of 50 episodes. The curve labelled \emph{clipping} corresponds to the double network including the smoothing method and shows the best stability during the training yielding quickly a high reward. Also the single network shows good and comparable performance, except for the stability. The worst performance is achieved without smoothing and a single network, nevertheless the result is competing with state of the art model free methods as \cite{BarthMaron2018} as the benchmark in the \emph{leaderboard} of openai gym \cite{Brockman2016}.
+\begin{figure}[!h]
+	\centering
+	\includegraphics*[width=0.5\textwidth]{Figures/Comparison_smoothing}
+	\caption{Cumulative reward of different NAF implementations as discussed in the text.}
+	\label{fig:comparsion_smoothing}
+\end{figure}
 \subsection{The impact of noise}
-We add artificial Gaussian noise $\gauss(0,0.05)$ on the state with and compare the different \emph{NAF} variants: \emph{smoothing-double}, \emph{smoothing single}, \emph{standart}.
-\section{NAF2 details}\label{appendix:naf2}
+A test adding artificial Gaussian noise $\epsilon \sim \mathcal{N}(0, \sigma)$ with $\sigma=0.05$ in the normalized observation space on the states is presented in \cref{fig:comparsion_noise}. There the difference of the three methods becomes even more evident.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics*[width=0.5\textwidth]{Figures/Comparison_noise}
+	\caption{Cumulative reward of different NAF implementations with artificial noise as discussed in the text.}
+	\label{fig:comparsion_noise}
+\end{figure}
+
+
 \section{AE training details}
 \section{Theoretical aspects on the AE-DYNA on FERMI FEL}
-
 \begin{figure}[!h]
-  \centering
-  \input{Figures/SL_Alignment_Scheme}
-  \caption{The training .}
-  \label{fig:comparsion_per}
-\end{figure}
-
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics*[width=0.5\textwidth]{Figures/Learning_evolution}
-  \caption{The training .}
-  \label{fig:comparsion_per}
-\end{figure}
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics*[width=0.5\textwidth]{Figures/AE-DYNA_observables.pdf}
-  \caption{The training .}
-  \label{fig:comparsion_per}
-\end{figure}
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics*[width=0.5\textwidth]{Figures/AE-DYNA_verification.pdf}
-  \caption{The training .}
-  \label{fig:comparsion_per}
-\end{figure}
-
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics*[width=0.5\textwidth]{Figures/ME-TRPO_observables.pdf}
-  \caption{The training .}
-  \label{fig:comparsion_per}
-\end{figure}
-\begin{figure}[!h]
-  \centering
-  \includegraphics*[width=0.5\textwidth]{Figures/ME-TRPO_verification.pdf}
-  \caption{The training .}
-  \label{fig:comparsion_per}
-\end{figure}
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics*[width=0.5\textwidth]{Figures/FERMI_all_experiments_NAF_episodes.pdf}
-  \caption{The training .}
-  \label{fig:comparsion_per}
-\end{figure}
-\begin{figure}[!h]
-  \centering
-  \includegraphics*[width=0.5\textwidth]{Figures/FERMI_all_experiments_NAF_convergence.pdf}
-  \caption{The training .}
-  \label{fig:comparsion_per}
+	\centering
+	\includegraphics*[width=0.5\textwidth]{Figures/Learning_evolution}
+	\caption{The training .}
+	\label{fig:Learning_evolution}
 \end{figure}
 
 % The \nocite command causes all entries in a bibliography to be printed out

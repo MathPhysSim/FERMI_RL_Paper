@@ -3,13 +3,15 @@ import pickle
 import shutil
 import matplotlib.pyplot as plt
 import gym
+
 import tensorflow as tf
 from tensorflow import keras
+# Turn off warnings form tensorflow
+tf.get_logger().setLevel('ERROR')
 
 tf.keras.backend.set_floatx('float64')
 import numpy as np
 from tqdm import tqdm
-
 
 class ReplayBuffer:
     """
@@ -63,7 +65,6 @@ class ReplayBuffer:
         for i in range(len(obs1s)):
             self.store(obs1s[i], acts[i], rews[i], obs2s[i], dones[i])
         # print(self.size)
-
 
 def basic_loss_function(y_true, y_pred):
     return tf.math.reduce_mean(y_true - y_pred)

@@ -1,4 +1,4 @@
-\BOOKMARK [0][-]{section*.2}{Model based reinforcement learning at FERMI FEL}{}% 2
+\BOOKMARK [0][-]{section*.2}{Model based and model free reinforcement learning at FERMI FEL}{}% 2
 \BOOKMARK [1][-]{section*.1}{Abstract}{section*.2}% 1
 \BOOKMARK [1][-]{section*.3}{Introduction and Motivation}{section*.2}% 3
 \BOOKMARK [1][-]{section*.4}{The physical set-up}{section*.2}% 4
@@ -12,11 +12,13 @@
 \BOOKMARK [2][-]{section*.14}{our system: the modulator and the seed laser}{section*.9}% 12
 \BOOKMARK [1][-]{section*.15}{Proof-of-principle application of RL Agent at FERMI trajectory correction}{section*.2}% 13
 \BOOKMARK [2][-]{section*.16}{Experiment results from FERMI RL tests}{section*.15}% 14
-\BOOKMARK [1][-]{section*.17}{Discussion and outlook}{section*.2}% 15
-\BOOKMARK [1][-]{section*.18}{Conclusions}{section*.2}% 16
-\BOOKMARK [1][-]{section*.19}{A non-linear standard control problem}{section*.2}% 17
-\BOOKMARK [2][-]{section*.20}{The impact of noise}{section*.19}% 18
-\BOOKMARK [1][-]{section*.21}{NAF2 details}{section*.2}% 19
-\BOOKMARK [1][-]{section*.22}{AE training details}{section*.2}% 20
-\BOOKMARK [1][-]{section*.23}{Theoretical aspects on the AE-DYNA on FERMI FEL}{section*.2}% 21
-\BOOKMARK [1][-]{section*.32}{References}{section*.2}% 22
+\BOOKMARK [2][-]{section*.17}{MFRL tests}{section*.15}% 15
+\BOOKMARK [2][-]{section*.18}{MBRL tests}{section*.15}% 16
+\BOOKMARK [1][-]{section*.26}{Discussion and outlook}{section*.2}% 17
+\BOOKMARK [1][-]{section*.27}{Conclusions}{section*.2}% 18
+\BOOKMARK [1][-]{section*.28}{A non-linear standard control problem}{section*.2}% 19
+\BOOKMARK [2][-]{section*.29}{NAF2 details}{section*.28}% 20
+\BOOKMARK [2][-]{section*.31}{The impact of noise}{section*.28}% 21
+\BOOKMARK [1][-]{section*.33}{AE training details}{section*.2}% 22
+\BOOKMARK [1][-]{section*.34}{Theoretical aspects on the AE-DYNA on FERMI FEL}{section*.2}% 23
+\BOOKMARK [1][-]{section*.36}{References}{section*.2}% 24

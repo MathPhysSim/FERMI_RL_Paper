@@ -4,7 +4,6 @@ import pickle
 
 main_dir = 'checkpoints'
 
-
 def read_rews(rewards):
     iterations = []
     final_rews = []
@@ -18,7 +17,6 @@ def read_rews(rewards):
             sum_rews.append(np.sum(rewards[i]))
             mean_rews.append(np.mean(rewards[i]))
     return iterations, final_rews, sum_rews, mean_rews
-
 
 def plot_results(rewards_list, file_name=None):
     fig, ax = plt.subplots(1, 1)
@@ -35,7 +33,6 @@ def plot_results(rewards_list, file_name=None):
     ax.set_ylabel('cum. reward')
     ax.set_xlabel('# episode')
     plt.show()
-
 
 def plot_convergence(agent, file_name):
     losses, vs = agent.losses, agent.vs
