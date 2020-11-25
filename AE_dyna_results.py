@@ -5,18 +5,16 @@ import pickle
 import matplotlib.pyplot as plt
 import numpy as np
 
-label = ["ME-TRPO", "AE-DYNA",'simulation'][2]
+label = ["ME-TRPO", "AE-DYNA", 'Simulation'][0]
 
 if label == "ME-TRPO":
     # ME-TRPO results
     project_directory = 'Data_Experiments/2020_10_06_ME_TRPO_stable@FERMI/run2/'
-elif label=="AE-DYNA":
+elif label == "AE-DYNA":
     # AE-Dyna results
     project_directory = 'Data_Experiments/2020_11_05_AE_Dyna@FERMI/-nr_steps_25-cr_lr-n_ep_13-m_bs_100-sim_steps_3000-m_iter_35-ensnr_3-init_200/'
 else:
-    project_directory = 'Data_logging/Simulation/'+\
-                        '-nr_steps_201-n_ep_49-m_bs_100-sim_steps_20000-m_iter_10-ensnr_3-init_201'+\
-                        '/'
+    project_directory = 'Data_logging/temp/-nr_steps_25-cr_lr-n_ep_7-m_bs_100-sim_steps_2500-m_iter_30-ensnr_5-init_100/'
 
 
 def read_rewards(rewards):
@@ -45,68 +43,120 @@ def read_rewards(rewards):
     return np.array(iterations), np.array(final_rews), np.array(mean_rews), np.array(stds)
 
 
+# def plot_results(data, label='Verification', **kwargs):
+#         '''plotting'''
+#         rewards = data['rews']
+#         # iterations = []
+#         # finals = []
+#         # means = []
+#         # stds = []
+#         #
+#         # for i in range(len(rewards)):
+#         #     if (len(rewards[i]) > 1):
+#         #         finals.append(rewards[i][-1])
+#         #         means.append(np.mean(rewards[i][1:]))
+#         #         stds.append(np.std(rewards[i][1:]))
+#         #         iterations.append(len(rewards[i]))
+#         #
+#         # x = range(len(iterations))
+#         # iterations = np.array(iterations)
+#         # finals = np.array(finals)
+#         # means = np.array(means)
+#         # stds = np.array(stds)
+#
+#         iterations, finals, means, stds = read_rewards(rewards)
+#         plot_suffix = label  # , Fermi time: {env.TOTAL_COUNTER / 600:.1f} h'
+#
+#         fig, axs = plt.subplots(2, 1, sharex=True)
+#
+#         ax = axs[0]
+#         x = range(len(iterations))
+#         ax.plot(x, iterations)
+#         ax.set_ylabel('no. iterations')
+#         ax.set_title(plot_suffix)
+#         # fig.suptitle(label, fontsize=12)
+#         if 'data_number' in kwargs:
+#             ax1 = plt.twinx(ax)
+#             color = 'lime'
+#             ax1.set_ylabel('Mean reward', color=color)  # we already handled the x-label with ax1
+#             ax1.tick_params(axis='y', labelcolor=color)
+#             ax1.plot(x, kwargs.get('data_number'), color=color)
+#
+#         ax = axs[1]
+#         color = 'blue'
+#         ax.set_ylabel('Final reward', color=color)  # we already handled the x-label with ax1
+#         ax.tick_params(axis='y', labelcolor=color)
+#         ax.plot(x, finals, color=color)
+#
+#         # ax.set_title('final reward per episode (arb. units)')  # + plot_suffix)
+#         ax.set_xlabel('no. episodes')
+#
+#         ax1 = plt.twinx(ax)
+#         color = 'lime'
+#         ax1.set_ylabel('cum. reward (arb. units)', color=color)  # we already handled the x-label with ax1
+#         ax1.tick_params(axis='y', labelcolor=color)
+#         ax1.fill_between(x, means - stds, means + stds,
+#                          alpha=0.5, edgecolor=color, facecolor='#FF9848')
+#         ax1.plot(x, means, color=color)
+#         fig.align_labels()
+#         # ax.set_ylim(ax1.get_ylim())
+#         if 'save_name' in kwargs:
+#             plt.savefig(kwargs.get('save_name') + '.pdf')
+#             plt.savefig(kwargs.get('save_name') + '.png')
+#         plt.show()
+def plot_results(data, label=None, **kwargs):
+    rewards = data['rews']
+    iterations, final_rews, mean_rews, _ = read_rewards(rewards)
+    # iterations_s, final_rews_s, mean_rews_s = read_rewards(rewards_single, data_range_in=data_range_in)
 
-def plot_results(data, label='Verification', **kwargs):
-        '''plotting'''
-        rewards = data['rews']
-        # iterations = []
-        # finals = []
-        # means = []
-        # stds = []
-        #
-        # for i in range(len(rewards)):
-        #     if (len(rewards[i]) > 1):
-        #         finals.append(rewards[i][-1])
-        #         means.append(np.mean(rewards[i][1:]))
-        #         stds.append(np.std(rewards[i][1:]))
-        #         iterations.append(len(rewards[i]))
-        #
-        # x = range(len(iterations))
-        # iterations = np.array(iterations)
-        # finals = np.array(finals)
-        # means = np.array(means)
-        # stds = np.array(stds)
+    plot_suffix = ""  # f', number of iterations: {env.TOTAL_COUNTER}, Linac4 time: {env.TOTAL_COUNTER / 600:.1f} h'
+    fig, axs = plt.subplots(2, 1, sharex=True)
 
-        iterations, finals, means, stds = read_rewards(rewards)
-        plot_suffix = label  # , Fermi time: {env.TOTAL_COUNTER / 600:.1f} h'
+    ax = axs[0]
+    # ax.axvspan(0, 100, alpha=0.2, color='coral')
+    color = 'blue'
+    ax.plot(iterations, c=color)
+    # ax.plot(iterations_s, c=color, ls=':')
+    ax.set_ylabel('no. iterations', color=color)
+    ax.tick_params(axis='y', labelcolor=color)
+    ax1 = plt.twinx(ax)
+    color = 'k'
+    ax1.plot(np.cumsum(iterations), c=color)
+    # ax1.plot(np.cumsum(iterations_s), c=color, ls=':')
+    ax1.set_ylabel('no. cumulative steps', color=color)
+    ax.set_title(label)
+    # fig.suptitle(label, fontsize=12)
 
-        fig, axs = plt.subplots(2, 1, sharex=True)
+    ax = axs[1]
+    # ax.axvspan(0, 100, alpha=0.2, color='coral')
+    color = 'blue'
+    # ax.plot(starts, c=color)
+    ax.plot(mean_rews, c=color)
+    # ax.plot(mean_rews_s, c=color, ls=':')
+    ax.set_ylabel('cum. return (arb. units)', color=color)
+    # ax.axhline(-0.05, ls=':', color='r')
+    ax.tick_params(axis='y', labelcolor=color)
+    # ax.set_title('reward per episode (arb. units)')  # + plot_suffix)
+    ax.set_xlabel('no. episodes')
 
-        ax = axs[0]
-        x = range(len(iterations))
-        ax.plot(x, iterations)
-        ax.set_ylabel('no. iterations')
-        ax.set_title(plot_suffix)
-        # fig.suptitle(label, fontsize=12)
-        if 'data_number' in kwargs:
-            ax1 = plt.twinx(ax)
-            color = 'lime'
-            ax1.set_ylabel('Mean reward', color=color)  # we already handled the x-label with ax1
-            ax1.tick_params(axis='y', labelcolor=color)
-            ax1.plot(x, kwargs.get('data_number'), color=color)
+    ax1 = plt.twinx(ax)
+    color = 'lime'
+    ax1.plot(final_rews[:-1], color=color)
+    # ax1.plot(final_rews_s[:-1], color=color, ls=':')
 
-        ax = axs[1]
-        color = 'blue'
-        ax.set_ylabel('Final reward', color=color)  # we already handled the x-label with ax1
-        ax.tick_params(axis='y', labelcolor=color)
-        ax.plot(x, finals, color=color)
+    ax1.set_ylabel('final return (arb. units)', color=color)
+    ax1.axhline(-0.05, ls=':', color=color)
+    ax1.tick_params(axis='y', labelcolor=color)
 
-        # ax.set_title('final reward per episode (arb. units)')  # + plot_suffix)
-        ax.set_xlabel('no. episodes')
+    fig.align_labels()
+    fig.tight_layout()
+    # fig.suptitle('NonUniformImage class', fontsize='large')
+    if 'save_name' in kwargs:
+        save_name = kwargs.get('save_name')
+        plt.savefig(save_name + '_verification.pdf')
+        plt.savefig(save_name + '_verification.png')
+    plt.show()
 
-        ax1 = plt.twinx(ax)
-        color = 'lime'
-        ax1.set_ylabel('cum. reward (arb. units)', color=color)  # we already handled the x-label with ax1
-        ax1.tick_params(axis='y', labelcolor=color)
-        ax1.fill_between(x, means - stds, means + stds,
-                         alpha=0.5, edgecolor=color, facecolor='#FF9848')
-        ax1.plot(x, means, color=color)
-        fig.align_labels()
-        # ax.set_ylim(ax1.get_ylim())
-        if 'save_name' in kwargs:
-            plt.savefig(kwargs.get('save_name') + '.pdf')
-            plt.savefig(kwargs.get('save_name') + '.png')
-        plt.show()
 
 def plot_observables(data, label='Experiment', **kwargs):
     """plot observables during the test"""
@@ -152,10 +202,10 @@ def plot_observables(data, label='Experiment', **kwargs):
     if length_all:
         ax2 = ax.twinx()
         color = 'lime'
-        if label=='ME-TRPO':
-            ax2.set_ylabel(r'log(std($p_\pi$)) (arb. units)', color=color)   # we already handled the x-label with ax1
+        if label == 'ME-TRPO':
+            ax2.set_ylabel(r'log(std($p_\pi$)) (arb. units)', color=color)  # we already handled the x-label with ax1
         else:
-            ax2.set_ylabel(r'success (1)', color=color)   # we already handled the x-label with ax1
+            ax2.set_ylabel(r'success (1)', color=color)  # we already handled the x-label with ax1
         ax2.tick_params(axis='y', labelcolor=color)
         ax2.plot(length_all, color=color)
     fig.align_labels()
@@ -165,8 +215,9 @@ def plot_observables(data, label='Experiment', **kwargs):
         plt.savefig(kwargs.get('save_name') + '.png')
     plt.show()
 
+
 # plot verification
-if label in ["ME-TRPO", "AE-DYNA"]:
+if label in ["ME-TRPO", "AE-DYNA", "Simulation"]:
     filenames = []
     for file in os.listdir(project_directory):
         if 'final' in file:
@@ -179,8 +230,8 @@ if label in ["ME-TRPO", "AE-DYNA"]:
 
     filehandler = open(project_directory + filename, 'rb')
     object = pickle.load(filehandler)
-    save_name = 'Figures/' + label+'_verification'
-    plot_results(object,label=label, save_name=save_name)
+    save_name = 'Figures/' + label
+    plot_results(object, label=label, save_name=save_name)
 
 # plot observables
 
@@ -196,6 +247,5 @@ print(filename)
 
 filehandler = open(project_directory + filename, 'rb')
 object = pickle.load(filehandler)
-save_name = 'Figures/' + label+'_observables'
+save_name = 'Figures/' + label + '_observables'
 plot_observables(object, label=label, save_name=save_name)
-

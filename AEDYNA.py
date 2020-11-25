@@ -1,5 +1,6 @@
 import os
 import pickle
+import sys
 from datetime import datetime
 
 import gym
@@ -21,19 +22,13 @@ config = tf.ConfigProto(
 config = None
 
 ############################################################
-# Loading the environment
-############################################################
-
-real_env = env = PendulumEnv()
-
-############################################################
 # Hyperparameters
 ############################################################
 
 
 steps_per_env = 201
 init_random_steps = 201
-total_steps = 1004
+total_steps = 2009
 num_epochs = int((total_steps - init_random_steps) / steps_per_env) + 1
 
 print('Number of epochs: ', num_epochs)
@@ -53,7 +48,7 @@ else:
     from stable_baselines.common.policies import MlpPolicy
     from stable_baselines import PPO2 as Agent
 
-simulated_steps = 25000
+simulated_steps = 2500
 
 model_batch_size = 100
 num_ensemble_models = 5
@@ -62,17 +57,6 @@ early_stopping = True
 model_iter = 10
 
 # model_training_iterations = 10
-network_size = 25
-# Set the priors for the anchor method:
-#  TODO: How to set these correctly?
-init_params = dict(init_stddev_1_w=np.sqrt(1),
-                   init_stddev_1_b=np.sqrt(1),
-                   init_stddev_2_w=1 / np.sqrt(network_size))
-
-data_noise = 0.00000  # estimated noise variance
-lambda_anchor = data_noise / (np.array([init_params['init_stddev_1_w'],
-                                        init_params['init_stddev_1_b'],
-                                        init_params['init_stddev_2_w']]) ** 2)
 
 # How often to check the progress of the network training
 # e.g. lambda it, episode: (it + 1) % max(3, (ep+1)*2) == 0
@@ -83,29 +67,8 @@ lr_start = 1e-3
 lr_end = 1e-3
 lr = lambda ep: max(lr_start + ep / 30 * (lr_end - lr_start), lr_end)
 
-# Create the logging directory:
-project_directory = 'Data_logging/Simulation/'
-
-hyp_str_all = '-nr_steps_' + str(steps_per_env) + '-n_ep_' + str(num_epochs) + \
-              '-m_bs_' + str(model_batch_size) + \
-              '-sim_steps_' + str(simulated_steps) + \
-              '-m_iter_' + str(model_iter) + '-ensnr_' + str(num_ensemble_models) + '-init_' + str(
-    init_random_steps) + '/'
-project_directory = project_directory + hyp_str_all
-
-# To label the plots:
-hyp_str_all = '-nr_steps_' + str(steps_per_env) + '-n_ep_' + str(num_epochs) + \
-              '-m_bs_' + str(model_batch_size) + \
-              '-sim_steps_' + str(simulated_steps) + \
-              '-m_iter_' + str(model_iter) + \
-              '\n-ensnr_' + str(num_ensemble_models)
-
-if not os.path.isdir(project_directory):
-    os.makedirs(project_directory)
-    print("created folder : ", project_directory)
-
+# Set max episode length manually for the pendulum
 max_steps = 200
-
 
 # Class for data storage during the tests
 class TrajectoryBuffer():
@@ -170,7 +133,7 @@ class TrajectoryBuffer():
 
 class MonitoringEnv(gym.Wrapper):
     '''
-    Gym Wrapper to store information for scaling to correct scpace and for post analysis.
+    Gym Wrapper to store information for scaling to correct space and for post analysis.
     '''
 
     def __init__(self, env, **kwargs):
@@ -255,7 +218,7 @@ class MonitoringEnv(gym.Wrapper):
 
     def descale_action_env(self, act):
         scale = (self.env.action_space.high - self.env.action_space.low)
-        return (scale * act + self.env.action_space.high + self.env.action_space.low) / 2
+        return np.squeeze(scale * act + self.env.action_space.high + self.env.action_space.low) / 2
         # return act
 
     def rew_scale(self, rew):
@@ -280,11 +243,6 @@ class MonitoringEnv(gym.Wrapper):
 
     def set_directory(self, directory):
         self.directory = directory
-
-
-def make_env(**kwargs):
-    '''Create the environement'''
-    return MonitoringEnv(env=real_env, **kwargs)
 
 
 def flatten_list(tensor_list):
@@ -395,56 +353,41 @@ class NN:
         with tf.variable_scope('model_' + str(n) + '_nn'):
             self.inputs = x
             self.y_target = y
-            if True:
-                self.inputs = tf.scalar_mul(0.5, self.inputs)
-                self.layer_1_w = tf.layers.Dense(hidden_size,
-                                                 activation=tf.nn.tanh,
-                                                 kernel_initializer=tf.random_normal_initializer(mean=0.,
-                                                                                                 stddev=self.init_params.get(
-                                                                                                     'init_stddev_1_w'),
-                                                                                                 dtype=tf.float64),
-                                                 bias_initializer=tf.random_normal_initializer(mean=0.,
-                                                                                               stddev=self.init_params.get(
-                                                                                                   'init_stddev_1_b'),
-                                                                                               dtype=tf.float64))
 
-                self.layer_1 = self.layer_1_w.apply(self.inputs)
-                self.layer_1 = tf.scalar_mul(0.5, self.layer_1)
-                self.layer_2_w = tf.layers.Dense(hidden_size,
-                                                 activation=tf.nn.tanh,
-                                                 kernel_initializer=tf.random_normal_initializer(mean=0.,
-                                                                                                 stddev=self.init_params.get(
-                                                                                                     'init_stddev_1_w'),
-                                                                                                 dtype=tf.float64),
-                                                 bias_initializer=tf.random_normal_initializer(mean=0.,
-                                                                                               stddev=self.init_params.get(
-                                                                                                   'init_stddev_1_b'),
-                                                                                               dtype=tf.float64))
+            self.inputs = tf.scalar_mul(0.5, self.inputs)
+            self.layer_1_w = tf.layers.Dense(hidden_size,
+                                             activation=tf.nn.tanh,
+                                             kernel_initializer=tf.random_normal_initializer(mean=0.,
+                                                                                             stddev=self.init_params.get(
+                                                                                                 'init_stddev_1_w'),
+                                                                                             dtype=tf.float64),
+                                             bias_initializer=tf.random_normal_initializer(mean=0.,
+                                                                                           stddev=self.init_params.get(
+                                                                                               'init_stddev_1_b'),
+                                                                                           dtype=tf.float64))
 
-                self.layer_2 = self.layer_2_w.apply(self.layer_1)
-                #
-                self.output_w = tf.layers.Dense(y_dim,
-                                                activation=None,
-                                                use_bias=False,
-                                                kernel_initializer=tf.random_normal_initializer(mean=0.,
-                                                                                                stddev=self.init_params.get(
-                                                                                                    'init_stddev_2_w'),
-                                                                                                dtype=tf.float64))
-            else:
-                self.layer_1_w = tf.layers.Dense(hidden_size,
-                                                 activation=tf.nn.tanh
-                                                 )
+            self.layer_1 = self.layer_1_w.apply(self.inputs)
+            self.layer_1 = tf.scalar_mul(0.5, self.layer_1)
+            self.layer_2_w = tf.layers.Dense(hidden_size,
+                                             activation=tf.nn.tanh,
+                                             kernel_initializer=tf.random_normal_initializer(mean=0.,
+                                                                                             stddev=self.init_params.get(
+                                                                                                 'init_stddev_1_w'),
+                                                                                             dtype=tf.float64),
+                                             bias_initializer=tf.random_normal_initializer(mean=0.,
+                                                                                           stddev=self.init_params.get(
+                                                                                               'init_stddev_1_b'),
+                                                                                           dtype=tf.float64))
 
-                self.layer_1 = self.layer_1_w.apply(self.inputs)
-
-                self.layer_2_w = tf.layers.Dense(hidden_size,
-                                                 activation=tf.nn.tanh)
-
-                self.layer_2 = self.layer_2_w.apply(self.layer_1)
-
-                self.output_w = tf.layers.Dense(y_dim,
-                                                activation=None)
-                # #
+            self.layer_2 = self.layer_2_w.apply(self.layer_1)
+            #
+            self.output_w = tf.layers.Dense(y_dim,
+                                            activation=None,
+                                            use_bias=False,
+                                            kernel_initializer=tf.random_normal_initializer(mean=0.,
+                                                                                            stddev=self.init_params.get(
+                                                                                                'init_stddev_2_w'),
+                                                                                            dtype=tf.float64))
 
             self.output = self.output_w.apply(self.layer_2)
 
@@ -524,7 +467,7 @@ class NetworkEnv(gym.Wrapper):
             obs, rew = self.model_func(self.obs, [np.squeeze(action)])
         else:
             # Can be activated to randomize each step
-            current_model = np.random.randint(0, max(self.number_models, 1)) # self.current_model
+            current_model = np.random.randint(0, max(self.number_models, 1))  # self.current_model
             # current_model = self.current_model
             obs, rew = self.model_func(self.obs, [np.squeeze(action)], current_model)
         # obs, rew, _, _ = self.env.step(action)
@@ -677,8 +620,7 @@ def restore_model(old_model_variables, m_variables):
     return tf.group(*restore_m_params)
 
 
-def aedyna(env_name, cr_lr=5e-3, num_epochs=50,
-           critic_iter=10, steps_per_env=100, delta=0.05, algorithm='SAC', conj_iters=10,
+def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC',
            simulated_steps=1000, num_ensemble_models=2, model_iter=15, model_batch_size=512,
            init_random_steps=steps_per_env):
     '''
@@ -689,7 +631,7 @@ def aedyna(env_name, cr_lr=5e-3, num_epochs=50,
 
     Parameters:
     -----------
-    env_name: Name of the environment
+    real_env: Environment
     num_epochs: number of training epochs
     steps_per_env: number of steps per environment
             # NB: the total number of steps per epoch will be: steps_per_env*number_envs
@@ -700,8 +642,16 @@ def aedyna(env_name, cr_lr=5e-3, num_epochs=50,
     simulated_steps: number of simulated steps for each policy update
     model_iter: number of iterations without improvement before stopping training the model
     '''
-    model_batch_size = model_batch_size
     tf.reset_default_graph()
+
+    def make_env(**kwargs):
+        '''Create the environement'''
+        return MonitoringEnv(env=real_env, **kwargs)
+
+    try:
+        env_name = real_env.__name__
+    except:
+        env_name = 'default'
 
     # Create a few environments to collect the trajectories
     env = StructEnv(make_env())
@@ -770,9 +720,7 @@ def aedyna(env_name, cr_lr=5e-3, num_epochs=50,
     clock_time = "{}_{}_{}_{}".format(now.day, now.hour, now.minute, now.second)
     print('Time:', clock_time)
 
-    hyp_str = '-spe_' + str(steps_per_env) + '-cr_lr' + str(cr_lr) + '-crit_it_' + str(
-        critic_iter) + '-delta_' + str(delta) + '-conj_iters_' + str(conj_iters)
-
+    hyp_str = '-spe_' + str(steps_per_env)
     file_writer = tf.summary.FileWriter('log_dir/' + env_name + '/' + algorithm + '_' + clock_time + '_' + hyp_str,
                                         tf.get_default_graph())
 
@@ -1072,15 +1020,14 @@ def aedyna(env_name, cr_lr=5e-3, num_epochs=50,
                 # Sample random action during the first epoch
                 if step_count % 5 == 0:
                     env.reset()
-                act = np.random.uniform(-1, 1, size=env.action_space.shape[-1])
+                act = np.random.uniform(-1, 1, size=act_dim)
                 act = np.squeeze(act)
             else:
-                noise = 0.01 * np.random.randn(env.action_space.shape[-1])
+                noise = 0.01 * np.random.randn(act_dim)
                 act, _ = agent.predict(env.n_obs)
                 act = np.clip(np.squeeze(act) + noise, -1, 1)
             # take a step in the environment
-            obs2, rew, done, _ = env.step(np.array(act))
-
+            obs2, rew, done, _ = env.step(act)
             # add the new transition to the temporary buffer
             model_buffer.store(env.n_obs.copy(), act, rew.copy(), obs2.copy(), done)
 
@@ -1199,7 +1146,7 @@ def aedyna(env_name, cr_lr=5e-3, num_epochs=50,
                             info=label)
 
                 # save the data for plotting the progress -------------------
-                # save_data(data=data)
+                save_data(data=data)
 
                 # plotting the progress -------------------
                 # if it % 10 == 0:
@@ -1233,7 +1180,125 @@ def aedyna(env_name, cr_lr=5e-3, num_epochs=50,
 
 
 if __name__ == '__main__':
-    aedyna('', num_epochs=num_epochs,
-           steps_per_env=steps_per_env, algorithm='PPO', model_batch_size=model_batch_size,
+
+    try:
+        random_seed = int(sys.argv[2])
+    except:
+        random_seed = 25
+    try:
+        file_name = sys.argv[1] + '_' + str(random_seed)
+    except:
+        file_name = 'defaultexp_noise_' + str(random_seed) + '_'
+    # set random seed
+    tf.set_random_seed(random_seed)
+    np.random.seed(random_seed)
+
+    try:
+        root_dir = sys.argv[3]
+    except:
+        root_dir = 'Data/Simulation/'
+
+    directory = root_dir + file_name + '/'
+
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    try:
+        # clipped_double_q
+        index = int(sys.argv[4])
+        parameter_list = [
+            dict(noise=0.0, data_noise=0),
+            dict(noise=0.05, data_noise=0),
+            dict(noise=0.05, data_noise=0.05),
+
+        ]
+        parameters = parameter_list[index]
+        print('Running...', parameters)
+    except:
+        parameters = dict(noise=0.05, data_noise=0.0)
+        print('Running default...', parameters)
+
+    directory = root_dir + file_name + '/'
+
+    # Create the logging directory:
+    project_directory = file_name#'Data_logging/Simulation/'
+
+    hyp_str_all = 'nr_steps_' + str(steps_per_env) + '-n_ep_' + str(num_epochs) + \
+                  '-m_bs_' + str(model_batch_size) + \
+                  '-sim_steps_' + str(simulated_steps) + \
+                  '-m_iter_' + str(model_iter) + '-ensnr_' + str(num_ensemble_models) + '-init_' + str(
+        init_random_steps) + '/'
+    project_directory = project_directory + hyp_str_all
+
+    # To label the plots:
+    hyp_str_all = '-nr_steps_' + str(steps_per_env) + '-n_ep_' + str(num_epochs) + \
+                  '-m_bs_' + str(model_batch_size) + \
+                  '-sim_steps_' + str(simulated_steps) + \
+                  '-m_iter_' + str(model_iter) + \
+                  '\n-ensnr_' + str(num_ensemble_models)
+
+    if not os.path.isdir(project_directory):
+        os.makedirs(project_directory)
+        print("created folder : ", project_directory)
+    ############################################################
+    # Loading the environment
+    ############################################################
+    class TestWrapperEnv(gym.Wrapper):
+        """
+        Gym Wrapper to add noise and visualise.
+        """
+
+        def __init__(self, env, render=False, **kwargs):
+            """
+            :param env: open gym environment
+            :param kwargs: noise
+            :param render: flag to render
+            """
+            self.render = render
+            self.current_step = 0
+            if 'noise' in kwargs:
+                self.noise = kwargs.get('noise')
+            else:
+                self.noise = 0.0
+
+            gym.Wrapper.__init__(self, env)
+
+        def reset(self, **kwargs):
+            self.current_step = 0
+            obs = self.env.reset(**kwargs) + self.noise * np.random.randn(self.env.observation_space.shape[-1])
+            return obs
+
+        def step(self, action):
+            self.current_step +=1
+            obs, reward, done, info = self.env.step(action)
+            if self.current_step >= 200:
+                done = True
+            if self.render:
+                # Simulate and visualise the environment
+                self.env.render()
+            obs = obs + self.noise * np.random.randn(self.env.observation_space.shape[-1])
+            # reward = reward / 10
+            return obs, reward, done, info
+
+
+    real_env = TestWrapperEnv(PendulumEnv(), render=False, noise=parameters.get('noise'))
+
+    ############################################################
+    # Setting the network parameters
+    ############################################################
+
+    network_size = 25
+    # Set the priors for the anchor method:
+    init_params = dict(init_stddev_1_w=np.sqrt(1),
+                       init_stddev_1_b=np.sqrt(1),
+                       init_stddev_2_w=1 / np.sqrt(network_size)) # normalise the data
+
+    data_noise = parameters.get('data_noise')  # estimated aleatoric noise standard deviation
+    lambda_anchor = data_noise**2 / (np.array([init_params['init_stddev_1_w'],
+                                            init_params['init_stddev_1_b'],
+                                            init_params['init_stddev_2_w']]) ** 2)
+
+    aedyna(real_env=real_env, num_epochs=num_epochs,
+           steps_per_env=steps_per_env, algorithm='SAC', model_batch_size=model_batch_size,
            simulated_steps=simulated_steps,
            num_ensemble_models=num_ensemble_models, model_iter=model_iter, init_random_steps=init_random_steps)

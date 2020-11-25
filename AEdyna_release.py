@@ -1107,7 +1107,7 @@ def aedyna(env_name, cr_lr=5e-3, num_epochs=50,
         mb_lr = lr(ep)
         print('mb_lr: ', mb_lr)
         if early_stopping:
-            model_buffer.generate_random_dataset(ratio=0.1)
+            model_buffer.generate_random_dataset(ratio=0.2)
         else:
             model_buffer.generate_random_dataset()
 

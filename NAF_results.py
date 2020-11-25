@@ -1,6 +1,5 @@
 '''This script generates the plots for the NAF2 tests at FERMI FEL'''
 
-
 import os
 import pickle
 import numpy as np
@@ -9,7 +8,7 @@ import matplotlib.pyplot as plt
 
 def load_pickle_logging(file_name):
     # directory = 'checkpoints/' + file_name + '/'
-    directory =  file_name + '/'
+    directory = file_name + '/'
     files = []
     directory = directory + 'data/'
     for f in os.listdir(directory):
@@ -28,7 +27,7 @@ def load_pickle_logging(file_name):
 
 def load_pickle_final(file_name):
     # directory = 'checkpoints/' + file_name + '/'
-    directory =  file_name + '/'
+    directory = file_name + '/'
     file = 'plot_data_0.pkl'
 
     with open(directory + file, 'rb') as f:
@@ -52,7 +51,7 @@ states_s, actions_s, rewards_s, dones_s = load_pickle_logging(file_name_s)
 rewards_s = [rewards_s, rewards_s0]
 
 
-def read_rewards(rewards_in):
+def read_rewards(rewards_in, data_range_in=None):
     iterations_all = []
     final_rews_all = []
     mean_rews_all = []
@@ -62,7 +61,12 @@ def read_rewards(rewards_in):
         iterations = []
         final_rews = []
         mean_rews = []
-        for i in range(len(rewards)):
+        if data_range_in is None:
+            data_range = range(len(rewards))
+        else:
+            data_range = range(data_range_in[0], min(len(rewards), data_range_in[1]))
+        for i in data_range:
+            print(i)
             if len(rewards[i]) > 0:
                 final_rews.append(rewards[i][len(rewards[i]) - 1])
                 iterations.append(len(rewards[i]))
@@ -80,16 +84,20 @@ def read_rewards(rewards_in):
     return iterations, final_rews, mean_rews
 
 
-def plot_results(rewards, rewards_single, **kwargs):
+def plot_results(rewards, rewards_single,label=None, **kwargs):
+    if 'data_range_in' in kwargs:
+        data_range_in = kwargs.get('data_range_in')
+    else:
+        data_range_in = None
 
-    iterations, final_rews, mean_rews = read_rewards(rewards)
-    iterations_s, final_rews_s, mean_rews_s = read_rewards(rewards_single)
+    iterations, final_rews, mean_rews = read_rewards(rewards, data_range_in=data_range_in)
+    iterations_s, final_rews_s, mean_rews_s = read_rewards(rewards_single, data_range_in=data_range_in)
 
     plot_suffix = ""  # f', number of iterations: {env.TOTAL_COUNTER}, Linac4 time: {env.TOTAL_COUNTER / 600:.1f} h'
     fig, axs = plt.subplots(2, 1, sharex=True)
 
     ax = axs[0]
-    ax.axvspan(0,100, alpha=0.2, color='coral')
+    # ax.axvspan(0, 100, alpha=0.2, color='coral')
     color = 'blue'
     ax.plot(iterations, c=color)
     ax.plot(iterations_s, c=color, ls=':')
@@ -100,11 +108,11 @@ def plot_results(rewards, rewards_single, **kwargs):
     ax1.plot(np.cumsum(iterations), c=color)
     ax1.plot(np.cumsum(iterations_s), c=color, ls=':')
     ax1.set_ylabel('no. cumulative steps', color=color)
-    ax.set_title('no. iterations' + plot_suffix)
+    ax.set_title(label)
     # fig.suptitle(label, fontsize=12)
 
     ax = axs[1]
-    ax.axvspan(0, 100, alpha=0.2, color='coral')
+    # ax.axvspan(0, 100, alpha=0.2, color='coral')
     color = 'blue'
     # ax.plot(starts, c=color)
     ax.plot(mean_rews, c=color)
@@ -112,7 +120,7 @@ def plot_results(rewards, rewards_single, **kwargs):
     ax.set_ylabel('cum. return (arb. units)', color=color)
     # ax.axhline(-0.05, ls=':', color='r')
     ax.tick_params(axis='y', labelcolor=color)
-    ax.set_title('reward per episode (arb. units)')  # + plot_suffix)
+    # ax.set_title('reward per episode (arb. units)')  # + plot_suffix)
     ax.set_xlabel('no. episodes')
 
     ax1 = plt.twinx(ax)
@@ -124,7 +132,6 @@ def plot_results(rewards, rewards_single, **kwargs):
     ax1.axhline(-0.05, ls=':', color=color)
     ax1.tick_params(axis='y', labelcolor=color)
 
-
     fig.align_labels()
     fig.tight_layout()
     # fig.suptitle('NonUniformImage class', fontsize='large')
@@ -135,17 +142,13 @@ def plot_results(rewards, rewards_single, **kwargs):
     plt.show()
 
 
-
 label = 'FERMI_all_experiments_NAF'
-#
-# plot_results(rewards, rewards_s, label)
 
 
 def read_losses_v_s(losses0, v_s0, max_length):
     losses_all = []
     v_s_all = []
     for k in range(len(losses0)):
-
         losses = losses0[k]
         print(len(losses))
         v_s = v_s0[k]
@@ -199,10 +202,16 @@ def plot_convergence(losses, v_s, losses_s, v_s_s, label, **kwargs):
         plt.savefig(save_name + '_convergence' + '.png')
     plt.show()
 
-label = 'FERMI_all_experiments_NAF'
+
+label = 'FERMI_all_experiments_NAF_training'
 save_name = 'Figures/' + label
-plot_convergence(losses, v_s, losses_s, v_s_s, label=label, save_name=save_name)
+plot_results(rewards, rewards_s, 'NAF trainings', save_name=save_name, data_range_in=[0,100])
+
+label = 'FERMI_all_experiments_NAF_verification'
+save_name = 'Figures/' + label
+plot_results(rewards, rewards_s, 'NAF verifications',save_name=save_name, data_range_in=[99, 150])
+
 
 label = 'FERMI_all_experiments_NAF'
 save_name = 'Figures/' + label
-plot_results(rewards, rewards_s, save_name=save_name)
+plot_convergence(losses, v_s, losses_s, v_s_s, label='NAF trainings - metrics', save_name=save_name)

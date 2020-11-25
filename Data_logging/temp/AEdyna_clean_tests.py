@@ -24,11 +24,12 @@ from simulated_tango import SimTangoConnection
 
 # set random seed
 random_seed = 111
+tf.set_random_seed(random_seed)
 np.random.seed(random_seed)
 config = tf.ConfigProto(
     device_count={'GPU': 0}
 )
-# config = None
+config = None
 
 tango = SimTangoConnection()
 real_env = FelLocalEnv(tango=tango)
@@ -52,7 +53,7 @@ algorithm = 'SAC'
 simulated_steps = 2500
 
 model_batch_size = 100
-num_ensemble_models = 5
+num_ensemble_models = 3
 
 early_stopping = True
 model_iter = 30

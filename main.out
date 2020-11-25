@@ -1,23 +1,21 @@
 \BOOKMARK [0][-]{section*.2}{Model based and model free reinforcement learning at FERMI FEL}{}% 2
 \BOOKMARK [1][-]{section*.1}{Abstract}{section*.2}% 1
 \BOOKMARK [1][-]{section*.3}{Introduction and Motivation}{section*.2}% 3
-\BOOKMARK [1][-]{section*.4}{The physical set-up}{section*.2}% 4
-\BOOKMARK [1][-]{section*.5}{Deep Reinforcement learning}{section*.2}% 5
-\BOOKMARK [2][-]{section*.6}{Approximate dynamic programming}{section*.5}% 6
-\BOOKMARK [2][-]{section*.7}{Normalized advantage function}{section*.5}% 7
-\BOOKMARK [1][-]{section*.9}{Uncertainty aware Dyna-style reinforcement learning}{section*.2}% 8
-\BOOKMARK [2][-]{section*.11}{Critical design decisions}{section*.9}% 9
-\BOOKMARK [2][-]{section*.12}{Operational deployment}{section*.9}% 10
-\BOOKMARK [2][-]{section*.13}{short FERMI introduction}{section*.9}% 11
-\BOOKMARK [2][-]{section*.14}{our system: the modulator and the seed laser}{section*.9}% 12
-\BOOKMARK [1][-]{section*.15}{Proof-of-principle application of RL Agent at FERMI trajectory correction}{section*.2}% 13
-\BOOKMARK [2][-]{section*.16}{Experiment results from FERMI RL tests}{section*.15}% 14
-\BOOKMARK [2][-]{section*.17}{MFRL tests}{section*.15}% 15
-\BOOKMARK [2][-]{section*.18}{MBRL tests}{section*.15}% 16
-\BOOKMARK [1][-]{section*.26}{Discussion and outlook}{section*.2}% 17
-\BOOKMARK [1][-]{section*.27}{Conclusions}{section*.2}% 18
-\BOOKMARK [1][-]{section*.28}{A non-linear standard control problem}{section*.2}% 19
-\BOOKMARK [2][-]{section*.29}{NAF2 details}{section*.28}% 20
-\BOOKMARK [2][-]{section*.31}{The impact of noise}{section*.28}% 21
-\BOOKMARK [1][-]{section*.33}{Theoretical aspects on the AE-DYNA on FERMI FEL}{section*.2}% 22
-\BOOKMARK [1][-]{section*.35}{References}{section*.2}% 23
+\BOOKMARK [1][-]{section*.4}{The physical set-up of the studied problem}{section*.2}% 4
+\BOOKMARK [2][-]{section*.6}{our system: the modulator and the seed laser}{section*.4}% 5
+\BOOKMARK [1][-]{section*.7}{Deep Reinforcement learning}{section*.2}% 6
+\BOOKMARK [1][-]{section*.8}{Model free reinforcement learning - MFRL}{section*.2}% 7
+\BOOKMARK [2][-]{section*.9}{Approximate dynamic programming}{section*.8}% 8
+\BOOKMARK [2][-]{section*.10}{Normalized advantage function}{section*.8}% 9
+\BOOKMARK [1][-]{section*.11}{Uncertainty aware Dyna-style reinforcement learning}{section*.2}% 10
+\BOOKMARK [2][-]{section*.13}{Critical design decisions}{section*.11}% 11
+\BOOKMARK [2][-]{section*.14}{Experiment results from FERMI RL tests}{section*.11}% 12
+\BOOKMARK [2][-]{section*.15}{MFRL tests}{section*.11}% 13
+\BOOKMARK [2][-]{section*.16}{MBRL tests}{section*.11}% 14
+\BOOKMARK [1][-]{section*.24}{Discussion and outlook}{section*.2}% 15
+\BOOKMARK [1][-]{section*.25}{Conclusions}{section*.2}% 16
+\BOOKMARK [1][-]{section*.26}{A non-linear standard control problem}{section*.2}% 17
+\BOOKMARK [2][-]{section*.27}{NAF2 details}{section*.26}% 18
+\BOOKMARK [2][-]{section*.29}{The impact of noise}{section*.26}% 19
+\BOOKMARK [1][-]{section*.33}{Theoretical aspects on the AE-DYNA on FERMI FEL}{section*.2}% 20
+\BOOKMARK [1][-]{section*.35}{References}{section*.2}% 21
