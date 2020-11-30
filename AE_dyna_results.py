@@ -5,7 +5,7 @@ import pickle
 import matplotlib.pyplot as plt
 import numpy as np
 
-label = ["ME-TRPO", "AE-DYNA", 'Simulation'][0]
+label = ["ME-TRPO", "AE-DYNA", 'Simulation'][1]
 
 if label == "ME-TRPO":
     # ME-TRPO results
@@ -198,7 +198,7 @@ def plot_observables(data, label='Experiment', **kwargs):
     ax.set_ylabel('rewards tests (arb. units)')
     # plt.tw
     ax.grid(True)
-    ax.set_xlabel('no. iterations')
+    ax.set_xlabel('no. epochs')
     if length_all:
         ax2 = ax.twinx()
         color = 'lime'

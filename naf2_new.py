@@ -440,7 +440,7 @@ class QModel:
 class NAF(object):
     def __init__(self, env, training_info=dict(), pre_tune=None,
                  noise_info=dict(), save_frequency=500, directory=None, is_continued=False,
-                 clipped_double_q=False, q_smoothing=0.01, **nafnet_kwargs):
+                 clipped_double_q=False, q_smoothing_sigma=0.02, q_smoothing_clip=0.05, **nafnet_kwargs):
         """
         :param env: open gym environment to be solved
         :dict training_info: dictionary containing info for the training of the network
@@ -450,12 +450,15 @@ class NAF(object):
         :param directory: directory were weights are saved
         :param is_continued: continue a training, otherwise given directory deleted if existing
         :param clipped_double_q: use the clipped double q trick with switching all clipped_double_q steps
+        :param q_smoothing_clip: add small noise on actions to smooth the training
         :param q_smoothing: add small noise on actions to smooth the training
         :param nafnet_kwargs: keywords to handle the network and training
         """
 
         self.clipped_double_q = clipped_double_q
-        self.q_smoothing = q_smoothing
+        self.q_smoothing_clip = q_smoothing_clip
+        self.q_smoothing_sigma = q_smoothing_sigma
+
         self.losses2 = []
         self.vs2 = []
         self.model_switch = 1
@@ -552,12 +555,11 @@ class NAF(object):
         # Add small noise on the controller
         elif is_train:
             action = self.noise_function(np.squeeze(model.get_action([state])),self.idx_episode)
-            if self.q_smoothing is None:
+            if self.q_smoothing_clip is None:
                 return_value = np.clip(action, -1, 1)
             else:
-                sigma = 0.01
-                return_value = np.clip(action + np.clip(sigma * np.random.randn(self.action_size),
-                                                        -self.q_smoothing, self.q_smoothing), -1, 1)
+                return_value = np.clip(action + np.clip(self.sigma * np.random.randn(self.action_size),
+                                                        -self.q_smoothing_clip, self.q_smoothing_clip), -1, 1)
             return return_value
         else:
             action = model.get_action([state])

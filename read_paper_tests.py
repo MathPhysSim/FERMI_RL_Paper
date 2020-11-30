@@ -24,10 +24,11 @@ def read_experiment_observables(root_dir, key = 'tests_all'):
             if not key in ['step_counts_all']:
                 data = pd.DataFrame(pickle.load(openfile)[key]).sum()
                 # print(data)
-                data_frame = pd.DataFrame(data, columns=[root.split('_')[4]])
+                data_frame = pd.DataFrame(data, columns=[root.split('_')[1]])
                 # print(data_frame)
             else:
                 data = pickle.load(openfile)[key]
+                print(root.split('_')[1])
                 data_frame = pd.DataFrame(data, columns=[root.split('_')[4]])
 
             data_frame = data_frame.rolling(n_average).mean().shift(int(n_average / 2))
@@ -78,47 +79,52 @@ def read_experiment_final(root_dir):
     return data_all
 
 
-root_dir = 'Data_logging/Experiment_noise_pendulum/'
-
-figure_name = '../../Figures/Comparison_noise_ae_dyna.pdf'
-
-fig, axs = plt.subplots(3, 1, sharex=True)
-ax=axs[0]
-data_all_observables = read_experiment_observables(root_dir=root_dir, key='tests_all')
-data_all_observables = data_all_observables.loc[:, :60]
-sns.set_palette(sns.color_palette("bright", 3))
-sns.lineplot(ax=ax, data=data_all_observables.T, legend=False)
-# ax.set_title('Verification on real environment')
-ax.axhline(y=-200, ls=':', color = 'lime')
-ax.set_ylabel('mean cum. reward\n (arb. units.)')
-
-ax = axs[1]
-data_all_observables = read_experiment_observables(root_dir=root_dir, key='step_counts_all')
-data_all_observables = data_all_observables.loc[:, :60]
-sns.set_palette(sns.color_palette("bright", 8))
-sns.lineplot(ax=ax, data=data_all_observables.T)
-ax.set_ylabel('no. data points')
-
-ax=axs[2]
-data_all_observables = read_experiment_observables(root_dir=root_dir, key='batch_rews_all')
-data_all_observables = data_all_observables.loc[:, :60]
-sns.set_palette(sns.color_palette("bright", 8))
-sns.lineplot(ax=ax, data=data_all_observables.T, legend=False)
-ax.set_ylabel('batch reward\n (arb. units.)')
-ax.set_xlabel('no. algorithm iteration')
-# ax.set_title('Batch rewards during training')
-
-plt.tight_layout()
-
-plt.savefig(root_dir + figure_name)
-plt.show()
-
-# fig, axs = plt.subplots(1, 1)
+# root_dir = 'Data_logging/Experiment_noise_pendulum/'
 #
+# figure_name = '../../Figures/Comparison_noise_ae_dyna.pdf'
+#
+# fig, axs = plt.subplots(3, 1, sharex=True)
+# ax=axs[0]
+# data_all_observables = read_experiment_observables(root_dir=root_dir, key='tests_all')
+# data_all_observables = data_all_observables.loc[:, :60]
+# sns.set_palette(sns.color_palette("bright", 3))
+# sns.lineplot(ax=ax, data=data_all_observables.T, legend=False)
+# # ax.set_title('Verification on real environment')
+# ax.axhline(y=-200, ls=':', color = 'lime')
+# ax.set_ylabel('mean cum. reward\n (arb. units.)')
+#
+# ax = axs[1]
+# data_all_observables = read_experiment_observables(root_dir=root_dir, key='step_counts_all')
+# data_all_observables = data_all_observables.loc[:, :60]
 # sns.set_palette(sns.color_palette("bright", 8))
-# sns.lineplot(ax=axs, data=data_all.T)
-# plt.ylabel('cum. reward (arb. units.)')
-# plt.xlabel('no. algorithm iteration')
-# plt.axhline(y=-200, ls=':', color = 'lime')
-# # plt.savefig(root_dir + figure_name)
+# sns.lineplot(ax=ax, data=data_all_observables.T)
+# ax.set_ylabel('no. data points')
+#
+# ax=axs[2]
+# data_all_observables = read_experiment_observables(root_dir=root_dir, key='batch_rews_all')
+# data_all_observables = data_all_observables.loc[:, :60]
+# sns.set_palette(sns.color_palette("bright", 8))
+# sns.lineplot(ax=ax, data=data_all_observables.T, legend=False)
+# ax.set_ylabel('batch reward\n (arb. units.)')
+# ax.set_xlabel('no. epochs')
+# # ax.set_title('Batch rewards during training')
+#
+# plt.tight_layout()
+#
+# plt.savefig(root_dir + figure_name)
 # plt.show()
+
+root_dir = 'Data/Simulation/ModelSize/'
+
+figure_name = '../../Figures/Temp.pdf'
+data_all = read_experiment_observables(root_dir=root_dir)
+print(data_all)
+fig, axs = plt.subplots(1, 1)
+
+sns.set_palette(sns.color_palette("bright", 8))
+sns.lineplot(ax=axs, data=data_all.T)
+plt.ylabel('cum. reward (arb. units.)')
+plt.xlabel('no. epochs')
+plt.axhline(y=-200, ls=':', color = 'lime')
+# plt.savefig(root_dir + figure_name)
+plt.show()

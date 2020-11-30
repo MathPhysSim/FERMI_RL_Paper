@@ -8,9 +8,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-def read_experiment(root_dir):
+def read_experiment(root_dir, label = ''):
     data_all = pd.DataFrame()
-    n_average = 15
+    n_average = 25
     for root, dirs, files in os.walk(root_dir):
         for file in files:
             if file == 'plot_data_0.pkl':
@@ -19,7 +19,8 @@ def read_experiment(root_dir):
                 openfile = open(file_name, 'rb')
                 data = np.sum(pickle.load(openfile), axis=1)
                 # data_frame = pd.DataFrame(data, columns=[root.split('/')[0]])
-                data_frame = pd.DataFrame(data, columns=[root.split('_')[1]])
+                column_names = [root.split('_')[1] + label]
+                data_frame = pd.DataFrame(data, columns=column_names)
                 data_frame = data_frame.rolling(n_average).mean().shift(int(n_average / 2))
                 data_all = pd.concat([data_all, data_frame.T], sort=False)
                 openfile.close()
@@ -35,20 +36,41 @@ except:
     # double = read_experiment(root_dir=root_dir)
 
     # data_all = pd.concat([single, double], sort=False)
-    root_dir = "Experiments-150-200-50-noisy/"
+    root_dir = "Experiments-150-200-50-long/"
     data_all = read_experiment(root_dir=root_dir)
 
 
-figure_name = '../Figures/Comparison_noise.pdf'
+# root_dir = "Experiments-150-200-50-long-0.05/"
+# data_all_1 = read_experiment(root_dir=root_dir)
+root_dir = "Experiments-150-200-50-noisy/"
+data_all_2 = read_experiment(root_dir=root_dir)
+
+# data_all = data_all_1
+# data_all = pd.concat([data_all, data_all_2])
+figure_name = '../Figures/Comparison___.pdf'
 current_test_name = ''
 
-fig, axs = plt.subplots(1, 1)
+fig, axs = plt.subplots(2, 1, sharex=True)
+ax = axs[0]
 
-# data_all = data_all.loc[:, :length]
 print(data_all)
+
 sns.set_palette(sns.color_palette("bright", 8))
-sns.lineplot(ax=axs, data=data_all.T)
+sns.lineplot(ax=ax, data=data_all.T)
+ax.axhline(y=-200, ls=':', c='lime')
+plt.ylabel('cum. reward (arb. units.)')
+ax.set_ylim(-1250,-100)
+print(data_all)
+
+root_dir = "Experiments-300-20-large-smoothing/"
+data_all = read_experiment(root_dir=root_dir)
+# sns.set_palette(sns.color_palette("bright", 8))
+ax = axs[1]
+sns.lineplot(ax=ax, data=data_all.T)
+ax.axhline(y=-200, ls=':', c='lime')
+
 plt.ylabel('cum. reward (arb. units.)')
 plt.xlabel('no. episode')
-plt.savefig(root_dir + figure_name)
+ax.set_ylim(-1250,-100)
+# plt.savefig(root_dir + figure_name)
 plt.show()

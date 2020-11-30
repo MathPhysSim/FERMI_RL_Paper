@@ -28,13 +28,13 @@ config = None
 
 steps_per_env = 201
 init_random_steps = 201
-total_steps = 2009
-num_epochs = int((total_steps - init_random_steps) / steps_per_env) + 1
-
+# total_steps = 1207
+# num_epochs = int((total_steps - init_random_steps) / steps_per_env) + 1
+num_epochs = 5
 print('Number of epochs: ', num_epochs)
 
 max_training_iterations = 50
-delay_before_convergence_check = 1
+delay_before_convergence_check = 5
 
 # Select the rl-algorithm
 
@@ -51,7 +51,7 @@ else:
 simulated_steps = 2500
 
 model_batch_size = 100
-num_ensemble_models = 5
+num_ensemble_models = 3
 
 early_stopping = True
 model_iter = 10
@@ -60,7 +60,7 @@ model_iter = 10
 
 # How often to check the progress of the network training
 # e.g. lambda it, episode: (it + 1) % max(3, (ep+1)*2) == 0
-dynamic_wait_time = lambda it, ep: (it + 1) % 1 == 0  #
+dynamic_wait_time = lambda it, ep: (it + 1) % (ep+1)*2 == 0  #
 
 # Learning rate as function of ep:
 lr_start = 1e-3
@@ -175,7 +175,6 @@ class MonitoringEnv(gym.Wrapper):
             self.max_steps = env.max_steps
         except:
             self.max_steps = max_steps
-            print('Max steps set to:', self.max_steps)
         self.current_step = 0
 
     def reset(self, **kwargs):
@@ -487,7 +486,7 @@ class NetworkEnv(gym.Wrapper):
         state = np.zeros(self.env.observation_space.shape)
         maximum = 0
         if data is not None:
-            action = [data[1]]
+            # action = [data[1]]
             state = data[0]
             maximum = (data[2] - 1) / 2
         delta = 0.05
@@ -509,7 +508,8 @@ class NetworkEnv(gym.Wrapper):
                 # print(self.number_models)
                 for i1 in range(len(x)):
                     for j1 in range(len(y)):
-                        state[0] = x[i1]
+                        state[0] = np.cos(x[i1])
+                        state[1] = np.sin(x[j1])
                         state[1] = y[j1]
                         rewards[i1, j1] = (self.model_func(state, [np.squeeze(action)],
                                                            nr))[1] / num_ensemble_models
@@ -1207,9 +1207,12 @@ if __name__ == '__main__':
         # clipped_double_q
         index = int(sys.argv[4])
         parameter_list = [
-            dict(noise=0.0, data_noise=0),
-            dict(noise=0.05, data_noise=0),
-            dict(noise=0.05, data_noise=0.05),
+            dict(noise=0.0, data_noise=0, models=1),
+            dict(noise=0.0, data_noise=0, models=3),
+            dict(noise=0.0, data_noise=0, models=5),
+            dict(noise=0.0, data_noise=0, models=10),
+            # dict(noise=0.05, data_noise=0),
+            # dict(noise=0.05, data_noise=0.05),
 
         ]
         parameters = parameter_list[index]
@@ -1221,8 +1224,9 @@ if __name__ == '__main__':
     directory = root_dir + file_name + '/'
 
     # Create the logging directory:
-    project_directory = file_name#'Data_logging/Simulation/'
+    project_directory = directory#'Data_logging/Simulation/'
 
+    num_ensemble_models = parameters.get('models')
     hyp_str_all = 'nr_steps_' + str(steps_per_env) + '-n_ep_' + str(num_epochs) + \
                   '-m_bs_' + str(model_batch_size) + \
                   '-sim_steps_' + str(simulated_steps) + \

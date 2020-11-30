@@ -1,21 +1,22 @@
-\BOOKMARK [0][-]{section*.2}{Model based and model free reinforcement learning at FERMI FEL}{}% 2
+\BOOKMARK [0][-]{section*.2}{Model based and model-free reinforcement learning at FERMI FEL}{}% 2
 \BOOKMARK [1][-]{section*.1}{Abstract}{section*.2}% 1
 \BOOKMARK [1][-]{section*.3}{Introduction and Motivation}{section*.2}% 3
 \BOOKMARK [1][-]{section*.4}{The physical set-up of the studied problem}{section*.2}% 4
-\BOOKMARK [2][-]{section*.6}{our system: the modulator and the seed laser}{section*.4}% 5
+\BOOKMARK [2][-]{section*.6}{The training environment}{section*.4}% 5
 \BOOKMARK [1][-]{section*.7}{Deep Reinforcement learning}{section*.2}% 6
-\BOOKMARK [1][-]{section*.8}{Model free reinforcement learning - MFRL}{section*.2}% 7
-\BOOKMARK [2][-]{section*.9}{Approximate dynamic programming}{section*.8}% 8
-\BOOKMARK [2][-]{section*.10}{Normalized advantage function}{section*.8}% 9
-\BOOKMARK [1][-]{section*.11}{Uncertainty aware Dyna-style reinforcement learning}{section*.2}% 10
-\BOOKMARK [2][-]{section*.13}{Critical design decisions}{section*.11}% 11
-\BOOKMARK [2][-]{section*.14}{Experiment results from FERMI RL tests}{section*.11}% 12
-\BOOKMARK [2][-]{section*.15}{MFRL tests}{section*.11}% 13
-\BOOKMARK [2][-]{section*.16}{MBRL tests}{section*.11}% 14
+\BOOKMARK [2][-]{section*.8}{Model free reinforcement learning - MFRL}{section*.7}% 7
+\BOOKMARK [3][-]{section*.9}{Approximate dynamic programming}{section*.8}% 8
+\BOOKMARK [3][-]{section*.10}{Normalized advantage function}{section*.8}% 9
+\BOOKMARK [2][-]{section*.11}{Uncertainty aware DYNA-style reinforcement learning}{section*.7}% 10
+\BOOKMARK [2][-]{section*.13}{Critical design decisions}{section*.7}% 11
+\BOOKMARK [1][-]{section*.14}{Experiment results from FERMI RL tests}{section*.2}% 12
+\BOOKMARK [2][-]{section*.15}{MFRL tests}{section*.14}% 13
+\BOOKMARK [2][-]{section*.19}{MBRL tests}{section*.14}% 14
 \BOOKMARK [1][-]{section*.24}{Discussion and outlook}{section*.2}% 15
 \BOOKMARK [1][-]{section*.25}{Conclusions}{section*.2}% 16
 \BOOKMARK [1][-]{section*.26}{A non-linear standard control problem}{section*.2}% 17
 \BOOKMARK [2][-]{section*.27}{NAF2 details}{section*.26}% 18
 \BOOKMARK [2][-]{section*.29}{The impact of noise}{section*.26}% 19
-\BOOKMARK [1][-]{section*.33}{Theoretical aspects on the AE-DYNA on FERMI FEL}{section*.2}% 20
-\BOOKMARK [1][-]{section*.35}{References}{section*.2}% 21
+\BOOKMARK [2][-]{section*.32}{NAF versus AE-DYNA}{section*.26}% 20
+\BOOKMARK [1][-]{section*.34}{Still open}{section*.2}% 21
+\BOOKMARK [1][-]{section*.35}{References}{section*.2}% 22
