@@ -113,7 +113,7 @@ prstab,
 	
 	
 	
-	\title{Model based and model-free reinforcement learning at FERMI FEL}
+	\title{Online Model-Based and Model-Free Reinforcement Learning in Accelerator Operation with Applications to FERMI FEL}
 	
 	
 	
@@ -146,7 +146,7 @@ prstab,
 
 	%\tableofcontents
 	\section{Introduction and Motivation}
-	In particle accelerator operation, one main goal is to provide stable and reproducible performance. In order to achieve this, several control problems have to be considered simultaneously \cite{Kain2020}. Especially if there is no way to model the physics a priori, one might use optimisation techniques as, e.g. derivative-free optimisers (DFOs) \cite{Huang2013,Bruchon2017,Scheinker2020,Hirlaender2019,Welsch2015} or model-based optimisations as Gaussian processes \cite{Hanuka2020,Roussel2020} to restore or maintain the performance. Another promising way is to apply reinforcement learning \cite{Bruchon2020,Bruchon2019,Kain2020,Pang2020} which unveils several advantages over optimisation methods:
+	In particle accelerator operation, one main goal is to provide stable and reproducible performance. In order to achieve this, several control problems have to be considered simultaneously \cite{Kain2020}. Especially if there is no way to model the physics a priori, one might use optimisation techniques as, e.g. derivative-free optimisers (DFOs) \cite{Huang2013,Bruchon2017,Scheinker2020,Hirlaender2019,Welsch2015} or model-based optimisations as Gaussian processes \cite{Hanuka2020,Roussel2020} to restore or maintain the performance. Another promising way is to apply reinforcement learning (RL) \cite{Bruchon2020,Bruchon2019,Kain2020,Pang2020} which unveils several advantages over optimisation methods:
 	\begin{itemize}
 		\item It covers a larger class of problems, as RL optimises a sequence of decisions.
 		\item It memorises the problem and does not always begin from zero as a DFO.
@@ -224,10 +224,10 @@ prstab,
 	\begin{align}
 		\policy_\theta(\bs)=(\delta(\ba)-\arg\!\max_\ba Q_\theta(\bs,\ba)).
 	\end{align}
-	The Bellman operator $\bellman^*$ has a unique fixed point but is non-linear, due to the $\max$ - operator:
-	\begin{align}
-		\bellman^*\vec Q_\theta(\bs_t,\ba_t) := r(\bs_t,\ba_t)+\gamma\max_\ba\left( Q_\theta(\bs_{t+1},\ba) - Q_\theta(\bs_t,\ba_t)\right).
-	\end{align}
+	The Bellman operator $\bellman^*$ has a unique fixed point but is non-linear, due to the $\max$ - operator \cite{Sutton2018}:
+	\begin{multline}
+		\bellman^*\vec Q_\theta(\bs_t,\ba_t) := \\r(\bs_t,\ba_t)+\gamma\max_\ba\left( Q_\theta(\bs_{t+1},\ba) - Q_\theta(\bs_t,\ba_t)\right).
+	\end{multline}
 	The form of this equation can cause overestimation and other complications, when using a function approximator and several attempts exist to reduce the problems \cite{Hasselt2015,Mnih2013,Lillicrap2015,Gu2016,Wang2015}.
 	\subsubsection{Normalized advantage function}
 	One way to avoid the sensitivity to the mentioned complications is to take a simple analytical form with an explicitly calculable maximum of the $Q$-function.
@@ -292,7 +292,7 @@ prstab,
 	 The prior is controlled by the initialisation of the weights of the network and defines how large the variation of the approximated function is assumed. The weights of the last layer were normalised by the number of nodes in each layer. The noise level is also respected during the initialisation. For the moment, only homoscedastic errors are used.\\
 	  Several methods of network training were implemented. Early stopping was employed successfully with a waiting time of about 20 steps. Mainly due to the fact that the number of training steps is increasing with more data in close-by domains. The benefit is that the modelled uncertainty at regions where no data is available is reduced in this way, leading to better training performance. A fixed loss value threshold was tested, as also used. In the experiments, a combination of both was taken.\\
 	One of the most crucial points is how these uncertainties are taken into account by the RL algorithms. Several different approaches were tried. It is possible to take the average of the models and add Gaussian noise levelled by the standard deviation of the models. Another straight forward way is to randomly select a model to provide at each training step, which is used the original implementation of the \emph{ME-TRPO} algorithm and was used in the experiments labelled \emph{ME-TRPO}. A pessimistic setting only would select the model resulting in the lowest predicted reward. Pessimistic selection showed constant but too slow improvement for our tests.
-	\\ Good results were also obtained by following a randomly selected single model each full episode in combination with the  soft-actor-critic (\emph{SAC}), and were used in the experiments labelled \emph{AE-DYNA SAC}. The approach is similar \\
+	\\ Good results were also obtained by following a randomly selected single model each full episode in combination with the  soft-actor-critic (\emph{SAC}) \cite{fujimoto2018addressing,Hill2018}, and were used in the experiments labelled \emph{AE-DYNA SAC}. \\
 	The number of data-points taken every time the model as improved was firstly determined by the number of initial data points, collected using a random policy. The initialisation phase has to be chosen not to small to minimise the chance of getting trapped in a local minimum for too long. Afterwards, at least one full episode should be taken. We decided to use a short horizon to reduce the impact of the compound error, the accumulation error following a wrong model, as well known for DYNA-style approaches. The maximal number of steps was ten. During the data collected on the real system, the latest policy was taken with some small noise added to improve the exploration.\\
 	To decide which MFRL algorithm to use, two main algorithm classes have to be considered: the on and the off-policy algorithms. The online algorithm shows a more stable convergence in general, while off-policy algorithms have the advantage that the data buffer can be filled with real data as well. An attractive off-policy algorithm is \emph{SAC}. The \emph{SAC} not only tries to maximise $J$ \cref{eq:cumulative_reward} but also simultaneously is regularised to maximise the entropy in the action space. In this way, exploration is encouraged to avoid getting stuck in a local optimum and has a good trade-off between exploration and exploitation.\\
 	 On the other hand, the on-policy algorithm TRPO provides some theoretical improvement guarantees. As reported in \cite{Kurutach2018} using proximal policy optimization \cite{Schulman2017} as an on-line MFRL algorithm does not show the same performance, which was confirmed in our tests. In the latter case, the policy was improved over the whole training. For the \emph{SAC} the policy was reset after retraining the model, to profit from the exploration features.
@@ -361,9 +361,12 @@ prstab,
 	
 	\section{Discussion and outlook}
 	In this paper, the applicability of the method of deep reinforcement learning on the optimization of the FERMI FEL intensity was presented. Two different approaches were tested: a model free and a model based method. Both experiments yielded satisfactory results showing that this non-linear and noisy problem could be solved in a feasibly number of training steps.\\
-
+	The model-free methods were slightly better in the final performance but also more sample were taken. The model-based methods had to be stopped due to operational reasons, hence additional studies regarding a long time performance would be interesting. One big issue when applying model-based methods is the computational effort. In our tests the data acquisition time was only a fraction of the time needed to train the controller on the learned model. In case, the used methods could be parallelized to decrease the computational time.
 	\section{Conclusions}
-		 The used methods hold tremendous promise for automatizing setups common in accelerators. One purpose of this work was to provide some suggestions how to make advanced deep reinforcement learning techniques work on a real set-up by adjusting available methods.  
+ The used methods hold tremendous promise for automatizing setups common in accelerators. One purpose of this work was to provide some suggestions how to make advanced deep reinforcement learning techniques work on a real set-up by adjusting available methods.\\
+ Generally control problems in accelerators have a short horizon, which makes the usage of \emph{DYNA-style} algorithms attractive as the \emph{Me-TRPO} or our  \emph{AE-DYNA} attractive choices for highly sample efficient algorithms.\\
+ 
+ To provide the possibility for other labs to use the proposed methods the code was released in \url{https://github.com/MathPhysSim/FERMI_RL_Paper} and \cite{Hirlaender2020}.
 	\newpage
 	\appendix
 	\section{A non-linear standard control problem}
@@ -404,7 +407,7 @@ prstab,
 	\begin{figure}[!h]
 	\centering
 	\includegraphics*[width=0.5\textwidth]{Figures/Comparison_naf}
-	\caption{Cumulative reward of different \emph{NAF} implementations as discussed in the text without noise.}
+	\caption{Cumulative reward of different \emph{NAF} implementations as discussed in the text on the \emph{inverted pendulum} without noise.}
 	\label{fig:comparsion_smoothing_small}
 \end{figure}
 	\subsection{The impact of noise}
@@ -412,25 +415,34 @@ prstab,
 	\begin{figure}[!h]
 		\centering
 		\includegraphics*[width=0.5\textwidth]{Figures/Comparison_noise}
-		\caption{Cumulative reward of different NAF implementations with artificial noise as discussed in the text.}
+		\caption{Cumulative reward of different \emph{NAF} implementations on the \emph{inverted pendulum} with artificial noise as discussed in the text.}
 		\label{fig:comparsion_noise}
 	\end{figure}
-	\\Using the anchors (the noise level is homeoscetastic) and known in the dynamics model stabilizes the training of the \emph{AE-DYNA} as illustrated in \cref{fig:comparsion_noise_ae_dyna}. It the upper plot the mean cumulative reward on 10 test episodes on the real environment is shown during the training. It should indicate the result if the training is stopped at this training epoch. One cannot observe this during a real training, unless one does costly performance measurements during the training. The blue curve reaches the target much quicker exhibiting less variation. An epoch consists of 3000 iterations of the \emph{SAC}.\\
+	\\Using the anchors (the noise level is homeoscetastic) and known in the dynamics model stabilizes the training of the \emph{AE-DYNA} as illustrated in \cref{fig:comparsion_noise_ae_dyna}. It the upper plot the mean cumulative reward on 10 test episodes on the real environment is shown during the training. It should indicate the result if the training is stopped at this training epoch. One cannot observe this during a real training, unless one does costly performance measurements during the training. Respecting the aleatoric (\emph{Noise-on-aleatoric}) helps to reach the target much quicker exhibiting less variation compared to the standard use of an ensemble (\emph{Noise-on-non-aleatoric}). An epoch consists of 3000 iterations of the \emph{SAC}.\\
 	The lower plot of \cref{fig:comparsion_noise_ae_dyna} shows the batch rewards a measured during the data collection, which is observable during the training.
 	\begin{figure}[!h]
 		\centering
 		\includegraphics*[width=0.5\textwidth]{Figures/Comparison_noise_ae_dyna}
-		\caption{Cumulative reward of \emph{AE-DYNA} with artificial noise using the anchor.}
+		\caption{Cumulative reward of \emph{AE-DYNA} on the \emph{inverted pendulum} with artificial noise using the anchor.}
 		\label{fig:comparsion_noise_ae_dyna}
 	\end{figure}
+\Cref{fig:Compare_models_sizes} shows the impact of the number of models onto the performance on the \emph{inverted pendulum}. The maximum cumulative reward averaged over five different runs tested on the real environment during the training is visualized in dependence of the number of data points. A number of three models shows a good trade-off between performance and
+\begin{figure}[!h]
+	\centering
+	\includegraphics*[width=0.5\textwidth]{Figures/Compare_models_sizes}
+	\caption{Varying the number of models in the ensemble of the \emph{AE-DYNA} on the \emph{inverted pendulum}.}
+	\label{fig:Compare_models_sizes}
+\end{figure}
 \subsection{NAF versus AE-DYNA}
 	Finally, \cref{fig:comparsion_NAF_AE-DYNA} should demonstrate the sample efficiency of the \emph{AE-DYNA-SAC} and the \emph{NAF} algorithm on the noisy \emph{inverted pendulum}. \emph{AE-DYNA} converges below 2000 data points (without noise even below 800) and the \emph{NAF2} starts to perform equally 10000 data points surpassing the -200 reward threshold. One clearly sees the increased sample efficiency on this problem using the \emph{AE-DYNA} in contrast to the \emph{NAF2}.
 		\begin{figure}[!h]
 		\centering
 		\includegraphics*[width=0.5\textwidth]{Figures/Comparison_NAF_ae_dyna}
-		\caption{The comparison of the NAF2 and the \emph{AE-DYNA} on the noisy pendulum.}
+		\caption{The comparison of the NAF2 and the \emph{AE-DYNA} on the noisy \emph{inverted pendulum}.}
 		\label{fig:comparsion_NAF_AE-DYNA}
 	\end{figure}
+
+
 
 %	\section{Theoretical aspects on the \emph{AE-DYNA} on FERMI FEL}\label{appendix:Theoretical aspects on the 	AE-DYNA on FERMI FEL}
 %	In thist section we want to discuss some theoretical aspects concerning the \emph{AE-DYNA} approach. A simulation was used to obtain the presented analysis. \\
@@ -443,14 +455,15 @@ prstab,
 %	\end{figure}
 \section{Still open}
 	\begin{itemize}
+	\item mention the stable baseline.
 %	\item Noise benchmarks with pendulum - done
 %	\item AE details from papers
 %	\item Benchmark NAF2 with pendulum - done
 %	\item Compare NAF2 and AE-DYNA
 %	\item The first time model based on accelerator problem compared to a novel state of the art MFRL: NAF2
 %	\item Tailored to accelerators - short horizons are standard?
-	\item Long waiting time in MBRL	
-	\item Vary the model size
+%	\item Long waiting time in MBRL	
+%	\item Vary the model size
 %	\item Noise sensitivity as mentioned in Benchmark paper
 %	\item Improvements of the algorithms:
 %	\begin{itemize}
@@ -471,73 +484,7 @@ prstab,
 	\bibliography{tex/Bibliography}
 	
 	
-	% \bibliography{bibliography}
-	%\addcontentsline{toc}{chapter}{Bibliography}
-	%
-	%\begin{thebibliography}{9}
-	%
-	%\bibitem{lsa} D. Jacquet, R. Gorbonosov, G. Kruk, "LSA - The High Level Application Software of the LHC and its Performance during the first 3 years of Operation", ICALEPS, San Francisco, CA, USA, 6 - 11 Oct 2013, pp.thppc058.
-	%
-	%\bibitem{multiobjective-optimisation} A. Edelen, N. Neveu, M. Frey, Y. Huber, C. Mayes, and A. Adelmann, "Machine learning for orders of magnitude speedup in multiobjective optimisation of particle accelerator systems", Phys. Rev. Accel. Beams 23, 044601, 2020.
-	%
-	%\bibitem{collimator-alignment} G. Azzopardi, A. Muscat, G. Valentino, S. Redaelli, B. Salvachua, "Operational results of LHC collimator alignment using machine learning", Proc. IPAC'19, Melbourne, Australia, pp. 1208-1211, 2019.
-	%
-	%\bibitem{SPSAlignment} %InProceedings (Hirlaender2019)
-	% S. Hirlaender, M. Fraser, B. Goddard , V. Kain, J. Prieto, L. Stoel, M. Szakaly, F. Velotti, "Automatisation of the SPS ElectroStatic Septa Alignment",  
-	%in 10th Int. Partile Accelerator Conf.(IPAC'19), 2019, p. 4001-4004.
-	%
-	%\bibitem{liu} E. Shaposhnikova et al., "LHC Injectors Upgrade (LIU) Project at CERN", 7$^{th}$ International Particle Accelerator Conference, Busan, Korea, 8 - 13 May 2016, pp.MOPOY059, \url{https://doi.org/10.18429/JACoW-IPAC2016-MOPOY059}.
-	%
-	%\bibitem{awake} E. Adli, A. Ahuja, O. Apsimon, R. Apsimon, A.-M. Bachmann, D. Barrientos, F. Batsch, J. Bauche, V. B. Olsen, M. Bernardini \textit{et al.}, “Acceleration of electrons in the plasma wakefield of a proton bunch,” Nature 561, 363–367 (2018), \url{https://doi.org/10.1038/s41586-018-0485-4)}.
-	%
-	%\bibitem{scheinker} A. Scheinker \textit{et al.}, "Online multi-objective particle accelerator optimization of the AWAKE electron beam line for simultaneous emittance and orbit control", AIP Advances 10, 055320 (2020), \url{https://doi.org/10.1063/5.0003423}.
-	%
-	%\bibitem{barto-sutton} R. Sutton, A. Barto, "Introduction to Reinforcement Learning",  MIT Press, Cambridge, MA, USA, 2018.
-	%
-	%\bibitem{LQR} H. Kwakernaak, R. Sivan, "Linear Optimal Control Systems", Wiley-Interscience, 1972.
-	%
-	%\bibitem{SBP} A. Nagabandi, G. Kahn, R. S. Fearing, S. Levine, "Neural Network DYNAmics for Model-Based Deep Reinforcement Learning with Model-Free Fine-Tuning", arXiv:1708.02596, 2017. 
-	%
-	%\bibitem{DYNA} R. Sutton, "DYNA, an integrated architecture for learning, planning, and reacting", AAAI Spring Symposium, pp. 151-155, 1991, \url{https://doi.org/10.1145/122344.122377}.
-	%
-	%\bibitem{benchmarkmbrl} T. Wang et al., “Benchmarking Model-Based Reinforcement Learning”,  \url{https://arxiv.org/abs/1907.02057v1}, 2019-07-03.
-	%
-	%\bibitem{dqn} V. Mnih \textit{et al.}, "Human-level control through deep reinforcement learning", Nature 518, 529–533 (2015).
-	%
-	%\bibitem{ddpg} T. Lillicrap~\textit{et al.}, "Continuous control with deep reinforcement learning", Proc. ICLR 2016 \url{https://arxiv.org/abs/1509.02971}.
-	%
-	%\bibitem{naf} S. Gu, T. Lillicrap, I. Sutskever, S. Levine, "Continuous Deep Q-Learning with Model-based Acceleration", in Proc. 33rd International Conference on Machine Learning, New York, NY, USA, 2016.
-	%
-	%\bibitem{td3} S. Fujimoto, H. van Hoof, D. Meger, "Addressing Function Approximation Error in Actor-Critic Methods", arXiv:1802.09477, 2018.
-	%
-	%\bibitem{deeppilco} Y. Gal, R. McAllister, and C. E. Rasmussen, “Improving PILCO with Bayesian neural network dynamics models”, in Data-Efficient Machine Learning workshop, ICML, 2016, vol. 4, p. 34.
-	%
-	%\bibitem{per} T. Schaul, J. Quan, I. Antonoglou, D. Silver, "Prioritised Experience Replay", arXiv:1511.05952, 2015-11-18.
-	%
-	%\bibitem{pernafgit} S. Hirlaender, \textit{PER-NAF} available at \url{https://github.com/MathPhysSim/PER-NAF/} and
-	%\url{https://pypi.org/project/pernaf/}.
-	%\bibitem{pyjapc} "pyjapc" available at \url{https://pypi.org/project/pyjapc/}.
-	%
-	%\bibitem{openai_gym} \url{http://gym.openai.com}
-	%
-	%\bibitem{madx} MAD-X documentation and source code available at \url{https://mad.web.cern.ch/mad/}.
-	%
-	%\bibitem{linac4} G. Bellodi, "Linac4 Commissioning Status and Challenges to Nominal Operation", 61$^st$ ICFA Advanced Beam DYNAmics Workshop on High-Intensity and High-Brightness Hadron Beams, Daejeon, Korea, 17 - 22 Jun 2018, pp.MOA1PL03, \url{https://doi.org/10.18429/JACoW-HB2018-MOA1PL03}.
-	%
-	%\bibitem{auto_matching} F. Velotti, B. Goddard et al., "Automatic AWAKE electron beamline set-up using unsupervised machine learning", to be submitted to Phys. Rev. Accel. Beams.
-	%
-	%\bibitem{Kumar_1} A. Kumar, A. Gupta, S. Levine, “DisCor: Corrective Feedback in Reinforcement Learning via Distribution Correction,” arXiv:2003.07305, 2020-03-16.
-	%
-	%\bibitem{Kumar_2} A. Kumar, J. Fu, G. Tucker, S. Levine, “Stabilising Off-Policy Q-Learning via Bootstrapping Error Reduction,” arXiv:1906.00949, 2019-06-03.
-	%
-	%% NEW REFERENCES
-	%\bibitem[bruchon2020basic]{Bruchon, Niky, et al. "Basic Reinforcement Learning Techniques to Control the Intensity of a Seeded Free-Electron Laser." Electronics 9.5 (2020): 781.}
-	%% https://www.mdpi.com/2079-9292/9/5/781/htm
-	%
-	%
-	%
-	%\end{thebibliography}
-	
+
 	%%%%% CLEAR DOUBLE PAGE!
 	\newpage{\pagestyle{empty}\cleardoublepage}
 	

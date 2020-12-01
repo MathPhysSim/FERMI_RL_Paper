@@ -8,7 +8,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-def read_experiment_observables(root_dir, key = 'tests_all'):
+def read_experiment_observables(root_dir, key='tests_all'):
     data_all = pd.DataFrame()
     n_average = 5
     for root, dirs, files in os.walk(root_dir):
@@ -22,20 +22,57 @@ def read_experiment_observables(root_dir, key = 'tests_all'):
             file_name = root + os.sep + file_name
             openfile = open(file_name, 'rb')
             if not key in ['step_counts_all']:
-                data = pd.DataFrame(pickle.load(openfile)[key]).sum()
-                # print(data)
+                object = pickle.load(openfile)
+                data = pd.DataFrame(object[key]).sum()
+                # index = object['step_counts_all']
+                # data.index = index
+
                 data_frame = pd.DataFrame(data, columns=[root.split('_')[1]])
-                # print(data_frame)
+                data_frame = data_frame.rolling(n_average).mean().shift(int(n_average / 2))
             else:
                 data = pickle.load(openfile)[key]
                 print(root.split('_')[1])
-                data_frame = pd.DataFrame(data, columns=[root.split('_')[4]])
+                data_frame = pd.DataFrame(data, columns=[root.split('_')[1]])
 
-            data_frame = data_frame.rolling(n_average).mean().shift(int(n_average / 2))
             data_all = pd.concat([data_all, data_frame.T], sort=False)
             openfile.close()
 
     return data_all
+
+
+def read_experiment_observables(root_dir, key='tests_all'):
+    data_all = pd.DataFrame()
+    n_average = 3
+    for root, dirs, files in os.walk(root_dir):
+        file_names = []
+        for file in files:
+            if 'observables' in file and not 'Noise-off' in root:
+                file_names.append(file)
+        if file_names:
+            file_names.sort()
+            file_name = file_names[-1]
+            file_name = root + os.sep + file_name
+            openfile = open(file_name, 'rb')
+            if not key in ['step_counts_all']:
+
+                object = pickle.load(openfile)
+                data = pd.DataFrame(object[key][0], columns=[root.split('_')[1]])
+                index = object['step_counts_all']
+                data.index = index
+                data = data.groupby(data.index).max()
+                # print(data)
+                data = data.rolling(n_average).mean().shift(int(n_average / 2))
+            else:
+                data = pickle.load(openfile)[key]
+                print(root.split('_')[1])
+                data_frame = pd.DataFrame(data, columns=[root.split('_')[1]])
+
+            data_all = pd.concat([data_all, data], axis=1, sort=False)
+            print(data_all)
+            openfile.close()
+
+    return data_all
+
 
 def read_rewards(rewards):
     stds = []
@@ -53,6 +90,7 @@ def read_rewards(rewards):
                 mean_rews.append([])
             stds.append(np.std(rewards[i][1:]))
     return np.array(iterations), np.array(final_rews), np.array(mean_rews), np.array(stds)
+
 
 def read_experiment_final(root_dir):
     data_all = pd.DataFrame()
@@ -114,17 +152,25 @@ def read_experiment_final(root_dir):
 # plt.savefig(root_dir + figure_name)
 # plt.show()
 
-root_dir = 'Data/Simulation/ModelSize/'
+root_dir = 'Data/Simulation/ModelSizeLong/'
 
-figure_name = '../../Figures/Temp.pdf'
-data_all = read_experiment_observables(root_dir=root_dir)
+figure_name = 'Figures/Compare_models_sizes.pdf'
+data_all = read_experiment_observables(root_dir=root_dir).T
 print(data_all)
 fig, axs = plt.subplots(1, 1)
 
 sns.set_palette(sns.color_palette("bright", 8))
 sns.lineplot(ax=axs, data=data_all.T)
-plt.ylabel('cum. reward (arb. units.)')
-plt.xlabel('no. epochs')
-plt.axhline(y=-200, ls=':', color = 'lime')
-# plt.savefig(root_dir + figure_name)
+plt.ylabel('mean max cum. reward (arb. units.)')
+plt.xlabel('no. data points')
+plt.axhline(y=-200, ls=':', color='lime')
+# plt.xlim(200,1600)
+plt.savefig(figure_name)
 plt.show()
+data_all_rew = read_experiment_observables(root_dir=root_dir)
+# print(data_all_rew)
+# data_all_nr = read_experiment_observables(root_dir=root_dir, key='step_counts_all')
+# print(data_all_nr)
+
+# data_all = pd.concat([data_all_rew, data_all_nr], keys=['rew', 'nr'])
+# print(data_all.T)

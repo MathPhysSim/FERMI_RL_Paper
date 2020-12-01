@@ -1,4 +1,4 @@
-\BOOKMARK [0][-]{section*.2}{Model based and model-free reinforcement learning at FERMI FEL}{}% 2
+\BOOKMARK [0][-]{section*.2}{Online Model-Based and Model-Free Reinforcement Learning in Accelerator Operation with Applications to FERMI FEL}{}% 2
 \BOOKMARK [1][-]{section*.1}{Abstract}{section*.2}% 1
 \BOOKMARK [1][-]{section*.3}{Introduction and Motivation}{section*.2}% 3
 \BOOKMARK [1][-]{section*.4}{The physical set-up of the studied problem}{section*.2}% 4
@@ -17,6 +17,6 @@
 \BOOKMARK [1][-]{section*.26}{A non-linear standard control problem}{section*.2}% 17
 \BOOKMARK [2][-]{section*.27}{NAF2 details}{section*.26}% 18
 \BOOKMARK [2][-]{section*.29}{The impact of noise}{section*.26}% 19
-\BOOKMARK [2][-]{section*.32}{NAF versus AE-DYNA}{section*.26}% 20
-\BOOKMARK [1][-]{section*.34}{Still open}{section*.2}% 21
-\BOOKMARK [1][-]{section*.35}{References}{section*.2}% 22
+\BOOKMARK [2][-]{section*.33}{NAF versus AE-DYNA}{section*.26}% 20
+\BOOKMARK [1][-]{section*.35}{Still open}{section*.2}% 21
+\BOOKMARK [1][-]{section*.36}{References}{section*.2}% 22

@@ -30,7 +30,7 @@ steps_per_env = 201
 init_random_steps = 201
 # total_steps = 1207
 # num_epochs = int((total_steps - init_random_steps) / steps_per_env) + 1
-num_epochs = 5
+num_epochs = 10
 print('Number of epochs: ', num_epochs)
 
 max_training_iterations = 50
@@ -448,7 +448,7 @@ class NetworkEnv(gym.Wrapper):
         self.verification = False
         if 'verification' in kwargs:
             self.verification = kwargs.get('verification')
-        self.visualize()
+        # self.visualize()
 
     def reset(self, **kwargs):
         self.current_model = np.random.randint(0, max(self.number_models, 1))
@@ -1084,7 +1084,7 @@ def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC',
                 f'data points: {len(model_buffer)}, ' + \
                 f'ep: {ep}, max: {data}\n' + hyp_str_all
         # TODO: Think about visualizations:
-        sim_env.visualize(data=data, label=label)
+        # sim_env.visualize(data=data, label=label)
 
         best_sim_test = -1e16 * np.ones(num_ensemble_models)
         agent = Agent(MlpPolicy, sim_env, verbose=1)
