@@ -42,7 +42,7 @@ def read_experiment_observables(root_dir, key='tests_all'):
 
 def read_experiment_observables(root_dir, key='tests_all'):
     data_all = pd.DataFrame()
-    n_average = 3
+    n_average = 5
     for root, dirs, files in os.walk(root_dir):
         file_names = []
         for file in files:
@@ -53,7 +53,7 @@ def read_experiment_observables(root_dir, key='tests_all'):
             file_name = file_names[-1]
             file_name = root + os.sep + file_name
             openfile = open(file_name, 'rb')
-            if not key in ['step_counts_all']:
+            if not key in ['step_counts_all'] and not root.split('_')[1] == 'Five':
 
                 object = pickle.load(openfile)
                 data = pd.DataFrame(object[key][0], columns=[root.split('_')[1]])
@@ -61,14 +61,13 @@ def read_experiment_observables(root_dir, key='tests_all'):
                 data.index = index
                 data = data.groupby(data.index).max()
                 # print(data)
-                data = data.rolling(n_average).mean().shift(int(n_average / 2))
-            else:
-                data = pickle.load(openfile)[key]
-                print(root.split('_')[1])
-                data_frame = pd.DataFrame(data, columns=[root.split('_')[1]])
+            # else:
+            #     data = pickle.load(openfile)[key]
+            #     print(root.split('_')[1])
+            #     data_frame = pd.DataFrame(data, columns=[root.split('_')[1]])
 
-            data_all = pd.concat([data_all, data], axis=1, sort=False)
-            print(data_all)
+                data_all = pd.concat([data_all, data], axis=1, sort=False)
+
             openfile.close()
 
     return data_all
@@ -153,10 +152,13 @@ def read_experiment_final(root_dir):
 # plt.show()
 
 root_dir = 'Data/Simulation/ModelSizeLong/'
-
+n_average = 30
 figure_name = 'Figures/Compare_models_sizes.pdf'
-data_all = read_experiment_observables(root_dir=root_dir).T
-print(data_all)
+data_all = read_experiment_observables(root_dir=root_dir)
+data_all = data_all.reindex(np.linspace(201, 2010, num=151)).interpolate('values')
+
+data_all = data_all.rolling(n_average).mean().shift(int(n_average / 2)).T
+print(data_all.T)
 fig, axs = plt.subplots(1, 1)
 
 sns.set_palette(sns.color_palette("bright", 8))
