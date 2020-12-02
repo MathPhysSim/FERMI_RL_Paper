@@ -2,7 +2,7 @@
 
 ##These are the results of RL tests @FERMI-FEL
 The problem has four degrees of freedom in state and action space.
-A schmeatic overview:
+A schematic overview:
 ![SchemaFERMIFEL](Figures/SL_Alignment_Scheme.png)
 
 A new implementation of the NAF with doule Q learning:
