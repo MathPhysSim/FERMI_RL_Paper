@@ -7,10 +7,10 @@ Online Model-Based and Model-Free Reinforcement Learning in Accelerator Operatio
 The problem has four degrees of freedom in state and action space.
 A schematic overview:
 ![SchemaFERMIFEL](Figures/SL_Alignment_Scheme.png)
-#Experiments done on the machine
+## Experiments done on the machine:
+
 A new implementation of the NAF with doule Q learning:
 ![NAF2_training](Figures/FERMI_all_experiments_NAF_episodes.png)
-
 ![NAF2_training](Figures/FERMI_all_experiments_NAF_convergence.png)
 
 A new implementation of a AE-dyna:
@@ -28,4 +28,7 @@ The evolution as presented at GSI [Towards Artificial Intelligence in Accelerato
 
 #Experiments done on the _inverted pendulum_ openai gym environement.
 
-Cumulative reward of different _NAF_ implementations on the _inverted pendulum_ with artificial noise \\( a^2 = b^2 \\)
+Cumulative reward of different _NAF_ implementations on the _inverted pendulum_ with artificial noise.
+
+![NAF_NOISE](Figures/Comparison_noise.png)
+
