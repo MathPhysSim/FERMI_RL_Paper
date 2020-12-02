@@ -1,24 +1,31 @@
-# Online Model-Based and Model-Free Reinforcement Learning in Accelerator Operation with Applications to FERMI FEL
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
+         
+Online Model-Based and Model-Free Reinforcement Learning in Accelerator Operation with Applications to FERMI FEL
 
 ##These are the results of RL tests @FERMI-FEL
 The problem has four degrees of freedom in state and action space.
 A schematic overview:
 ![SchemaFERMIFEL](Figures/SL_Alignment_Scheme.png)
-
+#Experiments done on the machine
 A new implementation of the NAF with doule Q learning:
 ![NAF2_training](Figures/FERMI_all_experiments_NAF_episodes.png)
 
 ![NAF2_training](Figures/FERMI_all_experiments_NAF_convergence.png)
 
 A new implementation of a AE-dyna:
-![AE-DYNA](Figures/AE-DYNA_observables.png)
 
+![AE-DYNA](Figures/AE-DYNA_observables.png)
 ![AE-DYNA](Figures/AE-DYNA_verification.png)
 
 A variant of the ME-TRPO:
-![ME-TRPO](Figures/ME-TRPO_observables.png)
 
+![ME-TRPO](Figures/ME-TRPO_observables.png)
 ![ME-TRPO](Figures/ME-TRPO_verification.png)
 
 The evolution as presented at GSI [Towards Artificial Intelligence in Accelerator Operation](https://indico.gsi.de/event/11539/):
 ![ME-TRPO](Figures/Learning_evolution.png)
+
+#Experiments done on the _inverted pendulum_ openai gym environement.
+
+Cumulative reward of different _NAF_ implementations on the _inverted pendulum_ with artificial noise \\( a^2 = b^2 \\)
