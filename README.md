@@ -3,10 +3,20 @@
 ## These are the results of RL tests @FERMI-FEL
 The problem has four degrees of freedom in state and action space.
 A schematic overview:
+
 ![SchemaFERMIFEL](Figures/SL_Alignment_Scheme.png)
+
+Algorithm | Type | Noise resistive
+------------ | -------------|---------
+_NAF_ | Model-free|No
+_NAF2_ | Model-free|Yes
+_ME-TRPO_ | Model-based|No
+_AE-DYNA_ | Model-based|Yes
+
 ## Experiments done on the machine:
 
 A new implementation of the NAF with doule Q learning:
+
 ![NAF2_training](Figures/FERMI_all_experiments_NAF_episodes.png)
 
 ![NAF2_training](Figures/FERMI_all_experiments_NAF_convergence.png)
@@ -23,14 +33,15 @@ A variant of the _ME-TRPO_:
 
 ![ME-TRPO](Figures/ME-TRPO_verification.png)
 
-The evolution as presented at GSI [Towards Artificial Intelligence in Accelerator Operation](https://indico.gsi.de/event/11539/):
+## The evolution as presented at GSI [Towards Artificial Intelligence in Accelerator Operation](https://indico.gsi.de/event/11539/):
 ![ME-TRPO](Figures/Learning_evolution.png)
 
-# Experiments done on the _inverted pendulum_ openai gym environment:
+## Experiments done on the [_inverted pendulum_](https://gym.openai.com/envs/Pendulum-v0/) openai gym environment:
 
 Cumulative reward of different _NAF_ implementations on the _inverted pendulum_ with artificial noise.
 
 ![NAF_NOISE](Figures/Comparison_noise.png)
+
 Comparison of the inclusion of aleatoric noise in the AE-DYNA in the noisy _inverted pendulum_:
 
 ![AE-DYNA_NOISE](Figures/Comparison_noise_ae_dyna.png)
