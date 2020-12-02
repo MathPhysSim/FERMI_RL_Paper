@@ -17,6 +17,7 @@
 \BOOKMARK [1][-]{section*.26}{A non-linear standard control problem}{section*.2}% 17
 \BOOKMARK [2][-]{section*.27}{NAF2 details}{section*.26}% 18
 \BOOKMARK [2][-]{section*.29}{The impact of noise}{section*.26}% 19
-\BOOKMARK [2][-]{section*.33}{NAF versus AE-DYNA}{section*.26}% 20
-\BOOKMARK [1][-]{section*.35}{Still open}{section*.2}% 21
-\BOOKMARK [1][-]{section*.36}{References}{section*.2}% 22
+\BOOKMARK [3][-]{section*.31}{Regression assuming homoskedastic Gaussian noise using `Anchored ensembling'}{section*.29}% 20
+\BOOKMARK [2][-]{section*.34}{NAF versus AE-DYNA}{section*.26}% 21
+\BOOKMARK [1][-]{section*.36}{Still open}{section*.2}% 22
+\BOOKMARK [1][-]{section*.37}{References}{section*.2}% 23

@@ -9,26 +9,24 @@ import numpy as np
 import tensorflow as tf
 from inverted_pendulum import PendulumEnv
 
-# from stable_baselines.common.noise import NormalActionNoise
-
-# from naf2 import NAF
+'''This script includes the AE-DYNA algorithm. '''
 
 # set random seed
 random_seed = 111
 np.random.seed(random_seed)
-config = tf.ConfigProto(
-    device_count={'GPU': 0}
-)
-config = None
+
+# config = tf.ConfigProto(
+#     device_count={'GPU': 0}
+# )
+# config = None
 
 ############################################################
 # Hyperparameters
 ############################################################
 
 
-steps_per_env = 201
+steps_per_epoch = 201
 init_random_steps = 201
-# total_steps = 1207
 # num_epochs = int((total_steps - init_random_steps) / steps_per_env) + 1
 num_epochs = 10
 print('Number of epochs: ', num_epochs)
@@ -36,27 +34,13 @@ print('Number of epochs: ', num_epochs)
 max_training_iterations = 50
 delay_before_convergence_check = 5
 
-# Select the rl-algorithm
-
-algorithm = 'SAC'
-# algorithm = 'PPO'
-
-if algorithm == 'SAC':
-    from stable_baselines.sac.policies import MlpPolicy
-    from stable_baselines import SAC as Agent
-else:
-    from stable_baselines.common.policies import MlpPolicy
-    from stable_baselines import PPO2 as Agent
-
 simulated_steps = 2500
 
 model_batch_size = 100
 num_ensemble_models = 3
 
 early_stopping = True
-model_iter = 10
-
-# model_training_iterations = 10
+model_iter = 30
 
 # How often to check the progress of the network training
 # e.g. lambda it, episode: (it + 1) % max(3, (ep+1)*2) == 0
@@ -67,7 +51,7 @@ lr_start = 1e-3
 lr_end = 1e-3
 lr = lambda ep: max(lr_start + ep / 30 * (lr_end - lr_start), lr_end)
 
-# Set max episode length manually for the pendulum
+# Set max episode length manually here for the pendulum
 max_steps = 200
 
 # Class for data storage during the tests
@@ -622,12 +606,11 @@ def restore_model(old_model_variables, m_variables):
 
 def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC',
            simulated_steps=1000, num_ensemble_models=2, model_iter=15, model_batch_size=512,
-           init_random_steps=steps_per_env):
+           init_random_steps=steps_per_epoch):
     '''
     Anchor ensemble dyna reinforcement learning
 
     The states and actions are provided by the gym environment with the correct boxes.
-    The reward has to be between [-1,0].
 
     Parameters:
     -----------
@@ -635,13 +618,22 @@ def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC',
     num_epochs: number of training epochs
     steps_per_env: number of steps per environment
             # NB: the total number of steps per epoch will be: steps_per_env*number_envs
-    algorithm: type of algorithm. Either 'TRPO' or 'NPO'
+    algorithm: type of algorithm. Either 'PPO' or 'SAC'
     minibatch_size: Batch size used to train the critic
     mb_lr: learning rate of the environment model
     model_batch_size: batch size of the environment model
     simulated_steps: number of simulated steps for each policy update
     model_iter: number of iterations without improvement before stopping training the model
     '''
+
+    # Select the RL-algorithm
+    if algorithm == 'SAC':
+        from stable_baselines.sac.policies import MlpPolicy
+        from stable_baselines import SAC as Agent
+    else:
+        from stable_baselines.common.policies import MlpPolicy
+        from stable_baselines import PPO2 as Agent
+
     tf.reset_default_graph()
 
     def make_env(**kwargs):
@@ -715,7 +707,7 @@ def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC',
     #########################################################
     ##################### END MODEL #########################
     #########################################################
-    # Time
+    # Time stamp for logging
     now = datetime.now()
     clock_time = "{}_{}_{}_{}".format(now.day, now.hour, now.minute, now.second)
     print('Time:', clock_time)
@@ -728,11 +720,16 @@ def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC',
 
     # Tensorflow session start!!!!!!!!
     # Create a session
-    sess = tf.Session(config=config)
+    try:
+        sess = tf.Session(config=config)
+    except:
+        config = None
+        sess = tf.Session(config=config)
     # Initialize the variables
     sess.run(tf.global_variables_initializer())
 
     def model_op(o, a, md_idx):
+        """Calculate the predictions of the dynamics model"""
         mo = sess.run(nobs_pred_m[md_idx], feed_dict={obs_ph: [o], act_ph: [a]})
         return np.squeeze(mo[:, :-1]), float(np.squeeze(mo[:, -1]))
 
@@ -848,9 +845,8 @@ def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC',
         file_writer.add_summary(summary, step_count)
         file_writer.flush()
 
-    def plot_results(env_wrapper, label, **kwargs):
-        # plotting
-        print('now plotting...')
+    def plot_results(env_wrapper, label=None, **kwargs):
+        """ Plot the validation episodes"""
         rewards = env_wrapper.env.current_buffer.get_data()['rews']
 
         iterations = []
@@ -956,7 +952,7 @@ def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC',
         plt.show()
 
     def save_data(data, **kwargs):
-        '''logging function'''
+        '''logging function to save results to pickle'''
         now = datetime.now()
         clock_time = f'{now.month:0>2}_{now.day:0>2}_{now.hour:0>2}_{now.minute:0>2}_{now.second:0>2}'
         out_put_writer = open(project_directory + clock_time + '_training_observables', 'wb')
@@ -1083,7 +1079,6 @@ def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC',
         label = f'Total {total_iterations}, ' + \
                 f'data points: {len(model_buffer)}, ' + \
                 f'ep: {ep}, max: {data}\n' + hyp_str_all
-        # TODO: Think about visualizations:
         # sim_env.visualize(data=data, label=label)
 
         best_sim_test = -1e16 * np.ones(num_ensemble_models)
@@ -1100,7 +1095,6 @@ def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC',
                 label = f'Total {total_iterations}, ' + \
                         f'data points: {len(model_buffer)}, ' + \
                         f'ep: {ep}, it: {it}\n' + hyp_str_all
-                # TODO: Running the test in debugging mode
                 env_test.env.set_usage('test')
                 mn_test, mn_test_std, mn_length, mn_success = test_agent(env_test, agent.predict, num_games=5)
                 print(' Test score: ', np.round(mn_test, 2), np.round(mn_test_std, 2),
@@ -1113,7 +1107,6 @@ def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC',
                 tests_all.append(mn_test)
                 tests_std_all.append(mn_test_std)
                 length_all.append(mn_length)
-                # TODO: Running the test in debugging mode
 
                 env_test.env.set_usage('default')
 
@@ -1218,7 +1211,7 @@ if __name__ == '__main__':
         parameters = parameter_list[index]
         print('Running...', parameters)
     except:
-        parameters = dict(noise=0.05, data_noise=0.0)
+        parameters = dict(noise=0.05, data_noise=0.0, models=num_ensemble_models)
         print('Running default...', parameters)
 
     directory = root_dir + file_name + '/'
@@ -1227,7 +1220,7 @@ if __name__ == '__main__':
     project_directory = directory#'Data_logging/Simulation/'
 
     num_ensemble_models = parameters.get('models')
-    hyp_str_all = 'nr_steps_' + str(steps_per_env) + '-n_ep_' + str(num_epochs) + \
+    hyp_str_all = 'nr_steps_' + str(steps_per_epoch) + '-n_ep_' + str(num_epochs) + \
                   '-m_bs_' + str(model_batch_size) + \
                   '-sim_steps_' + str(simulated_steps) + \
                   '-m_iter_' + str(model_iter) + '-ensnr_' + str(num_ensemble_models) + '-init_' + str(
@@ -1235,7 +1228,7 @@ if __name__ == '__main__':
     project_directory = project_directory + hyp_str_all
 
     # To label the plots:
-    hyp_str_all = '-nr_steps_' + str(steps_per_env) + '-n_ep_' + str(num_epochs) + \
+    hyp_str_all = '-nr_steps_' + str(steps_per_epoch) + '-n_ep_' + str(num_epochs) + \
                   '-m_bs_' + str(model_batch_size) + \
                   '-sim_steps_' + str(simulated_steps) + \
                   '-m_iter_' + str(model_iter) + \
@@ -1244,6 +1237,7 @@ if __name__ == '__main__':
     if not os.path.isdir(project_directory):
         os.makedirs(project_directory)
         print("created folder : ", project_directory)
+
     ############################################################
     # Loading the environment
     ############################################################
@@ -1283,8 +1277,6 @@ if __name__ == '__main__':
             obs = obs + self.noise * np.random.randn(self.env.observation_space.shape[-1])
             # reward = reward / 10
             return obs, reward, done, info
-
-
     real_env = TestWrapperEnv(PendulumEnv(), render=False, noise=parameters.get('noise'))
 
     ############################################################
@@ -1297,12 +1289,12 @@ if __name__ == '__main__':
                        init_stddev_1_b=np.sqrt(1),
                        init_stddev_2_w=1 / np.sqrt(network_size)) # normalise the data
 
-    data_noise = parameters.get('data_noise')  # estimated aleatoric noise standard deviation
+    data_noise = parameters.get('data_noise')  # estimated aleatoric Gaussian noise standard deviation
     lambda_anchor = data_noise**2 / (np.array([init_params['init_stddev_1_w'],
                                             init_params['init_stddev_1_b'],
                                             init_params['init_stddev_2_w']]) ** 2)
 
     aedyna(real_env=real_env, num_epochs=num_epochs,
-           steps_per_env=steps_per_env, algorithm='SAC', model_batch_size=model_batch_size,
+           steps_per_env=steps_per_epoch, algorithm='SAC', model_batch_size=model_batch_size,
            simulated_steps=simulated_steps,
            num_ensemble_models=num_ensemble_models, model_iter=model_iter, init_random_steps=init_random_steps)
