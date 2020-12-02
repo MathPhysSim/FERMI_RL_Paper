@@ -1,4 +1,4 @@
-# FermiPaper
+# Online Model-Based and Model-Free Reinforcement Learning in Accelerator Operation with Applications to FERMI FEL
 
 ##These are the results of RL tests @FERMI-FEL
 The problem has four degrees of freedom in state and action space.
