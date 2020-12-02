@@ -480,7 +480,7 @@ We have defined a diagonal regularisation matrix, $\pmb{\Gamma}$, where the $i^{
 \Cref{fig:Compare_models_sizes} shows the impact of the number of models onto the performance on the \emph{inverted pendulum}. The maximum cumulative reward averaged over five different runs tested on the real environment during the training is visualized in dependence of the number of data points. A number of three models (label \emph{Three}) shows a good trade-off between performance and training time. A single network might not converge or too slowly (label \emph{Single}) and a model of ten shown fast and stable performance in this case (label \emph{Ten}).
 \begin{figure}[!h]
 	\centering
-	\includegraphics*[width=0.5\textwidth]{Figures/Compare_models_sizes}
+	\includegraphics*[width=0.5\textwidth]{Figures/Comparison_models_sizes}
 	\caption{Varying number of models in the ensemble of the \emph{AE-DYNA} on the \emph{inverted pendulum}.}
 	\label{fig:Compare_models_sizes}
 \end{figure}
@@ -488,7 +488,7 @@ We have defined a diagonal regularisation matrix, $\pmb{\Gamma}$, where the $i^{
 	Finally, \cref{fig:comparsion_NAF_AE-DYNA} should demonstrate the sample efficiency of the \emph{AE-DYNA-SAC} and the \emph{NAF} algorithm on the noisy \emph{inverted pendulum}. \emph{AE-DYNA} converges below 2000 data points (without noise even below 800) and the \emph{NAF2} starts to perform equally 10000 data points surpassing the -200 reward threshold. One clearly sees the increased sample efficiency on this problem using the \emph{AE-DYNA} in contrast to the \emph{NAF2}.
 		\begin{figure}[!h]
 		\centering
-		\includegraphics*[width=0.5\textwidth]{Figures/Comparison_NAF_ae_dyna}
+		\includegraphics*[width=0.5\textwidth]{Figures/Comparison_NAF_AE-DYNA}
 		\caption{The comparison of the \emph{NAF2} and the \emph{AE-DYNA} on the noisy \emph{inverted pendulum}.}
 		\label{fig:comparsion_NAF_AE-DYNA}
 	\end{figure}
