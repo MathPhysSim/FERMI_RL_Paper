@@ -1,7 +1,4 @@
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
-         
-Online Model-Based and Model-Free Reinforcement Learning in Accelerator Operation with Applications to FERMI FEL
+#Online Model-Based and Model-Free Reinforcement Learning in Accelerator Operation with Applications to FERMI FEL
 
 ##These are the results of RL tests @FERMI-FEL
 The problem has four degrees of freedom in state and action space.
@@ -26,7 +23,7 @@ A variant of the ME-TRPO:
 The evolution as presented at GSI [Towards Artificial Intelligence in Accelerator Operation](https://indico.gsi.de/event/11539/):
 ![ME-TRPO](Figures/Learning_evolution.png)
 
-#Experiments done on the _inverted pendulum_ openai gym environement.
+#Experiments done on the _inverted pendulum_ openai gym environment:
 
 Cumulative reward of different _NAF_ implementations on the _inverted pendulum_ with artificial noise.
 
