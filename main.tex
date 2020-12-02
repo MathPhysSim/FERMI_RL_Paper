@@ -434,9 +434,9 @@ On the other hand, the on-policy algorithm TRPO \cite{Schulman2015} provides som
 		\label{fig:comparsion_noise}
 	\end{figure}
 \subsubsection{Regression assuming homoskedastic Gaussian noise using `Anchored ensembling'}
-The Bayesian community and the RL community is developping
-new approaches to Bayesian inference. It is done by adding a regularisation
-term to a loss function. It returns a a point estimate of
+The Bayesian community and the RL community is spending more and more attention to
+new approaches to Bayesian inference. A regularisation
+term is added to a loss function, which returns a point estimate of
 the Bayesian posterior the maximum a posteriori (MAP) parameter estimate. 
 Injecting noise into this loss, either to targets or regularisation term, and sampling
 repeatedly (i.e. ensembling), produces a distribution of MAP solutions mimicking that of the true posterior \cite{Gu2007, Chen2011, Bardsley2012, Pearce2018}.\\
@@ -457,7 +457,7 @@ We replace $\pmb{\mu}_{prior}$ with some random variable $ {\theta}_{anc}$.
 % (\pmb{\theta} - \pmb{\theta}_{anc}) \rVert^2_2
 %\end{equation}
 ${\theta}_{anc} \sim \mathcal{N}(\pmb{\mu}_{prior},\pmb{\Sigma}_{prior} )$, to make it practical and
-assuming homoskedastic Gaussian noise of variance $\sigma^2_\epsilon$, we can give parametric form of data likelihood. We take $M$ models, where each model is indexed by$j \in \{1 ... M\}$. The MAP estimates are found by minimising ($\mathcal L_{j}$ denotes the loss of the $j^\text{th}$ model),
+assuming homoskedastic Gaussian noise of variance $\sigma^2_\epsilon$, we obtain a parametric form of the data likelihood. We take $M$ models, where each model is indexed by$j \in \{1 ... M\}$. The MAP estimates are found by minimising ($\mathcal L_{j}$ denotes the loss of the $j^\text{th}$ model),
 \begin{equation}
 	\label{eqn_anch_loss_matrix}
 	\mathcal L_{j} =  
@@ -506,7 +506,8 @@ We have defined a diagonal regularisation matrix, $\pmb{\Gamma}$, where the $i^{
 %	\end{figure}
 \section{Still open}
 	\begin{itemize}
-	\item reference clean up.
+	\item Reference clean up.
+	\item Rethink the concept of an epoch.
 	\item Conclusion and outlook\dots
 %	\item Noise benchmarks with pendulum - done
 %	\item AE details from papers
