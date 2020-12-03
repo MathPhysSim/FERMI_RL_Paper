@@ -215,7 +215,7 @@ prstab,
 	\subsubsection{Approximate dynamic programming}
 	The state value function $V^\policy(\bs)$ tells us how good a state in terms of the expected return is following a specific $\policy$:
 		\begin{align}
-		V^\policy(\bs_t) := \mathbb E_{\traj \sim p_{\policy}(\traj|\bs_t)}\left[\sum_{t=t'}^{\horizon}\discount^{(t'-t)} r(\bs_t,\ba_t)\right],
+		V^\policy(\bs_t) := \mathbb E_{\traj \sim p_{\policy}(\traj|\bs_t)}\left[\sum_{t=t'}^{\horizon}\discount^{(t'-t)} r(\bs_t,\ba_t)\right],\label{eq:state-value-function}
 	\end{align}
 	The state-action-value function $Q^\policy(\bs,\ba)$, which tells us how good an action $\ba$ in a state $\bs$ following $\policy$ is, in terms of the expected return:
 	\begin{align}
@@ -302,34 +302,60 @@ One of the most crucial points is how model uncertainties are taken into account
 The number of data-points in a batch taken every time of a new epoch has to be chosen carefully. It is influenced by the number of initial data points, collected using a random policy. The initialisation phase has to be chosen not to small to minimise the chance of getting trapped in a local minimum for too long. Afterwards, from our experience, at least one full episode should be taken. We decided to use a short horizon to diminish the impact of the compound error, the accumulation error following a wrong model, as well known for DYNA-style approaches. The maximal number of steps in our experimental runs was ten. During the data collected on the real system, the latest learned policy was taken with some small noise added to improve the exploration.\\
 To decide which MFRL algorithm to use, two main algorithm classes have to be considered: the on and the off-policy algorithms. The online algorithm shows a more stable convergence in general, while off-policy algorithms have the advantage that the data buffer can be filled with real data as well. An attractive off-policy algorithm is \emph{SAC}. The \emph{SAC} not only tries to maximise $J$ \cref{eq:cumulative_reward} but also simultaneously is regularised to maximise the entropy in the action space. In this way, exploration is encouraged to avoid getting stuck in a local optimum and has a good trade-off between exploration and exploitation.\\
 On the other hand, the on-policy algorithm TRPO \cite{Schulman2015} provides some theoretical improvement guarantees. As reported in \cite{Kurutach2018} using proximal policy optimisation \cite{Schulman2017} as an online MFRL algorithm does not show the same performance, which was confirmed in our tests. In the latter case, the policy was improved over the whole training. For the \emph{SAC} the policy was reset after retraining the model, to profit from the exploration features.
-	\section{Experimental results from FERMI RL online tests}
+
+	\subsection{Comparison of the used algorithms}
+	\Cref{tab:overview_algorithms} shows a comparison of the discussed algorithms. Details are provided in the appendix. All algorithms are suitable for many control tasks as common in accelerator operation. Their strength lies in the high sample efficiency, but they differ in representational power and noise robustness. \\
+	In \cref{sec:Experimental results from FERMI RL online tests} the \emph{NAF2},
+	\emph{ME-TRPO} and \emph{AE-DYNA} are tested and compared on the real environment.
+		\begin{table}[b]%The best place to locate the table environment is directly after its first reference in text
+	\caption{\label{tab:overview_algorithms}%
+		An overview of the algorithms discussed in this paper.
+	}
+	\begin{ruledtabular}
+		\begin{tabular}{lllll}
+			\textrm{Algorithm}&
+			\textrm{Class}&
+			\textrm{NR\footnote{Noise robustness}}&
+			\textrm{RP\footnote{Representational power}}&
+			\textrm{SE\footnote{Sample efficiency}}\\
+			\colrule
+			\emph{NAF} & model-free & low &low &high\\
+			\emph{NAF2} & model-free & high &low& high\\
+			\emph{ME-TRPO} & model-based & low& high& high\\
+			\emph{AE-DYNA} & model-based & high& high& high\\
+		\end{tabular}
+	\end{ruledtabular}
+\end{table}
+	\section{Experimental results from FERMI RL online tests}\label{sec:Experimental results from FERMI RL online tests}
 	As discussed in the previous sections, several tests were performed on the FERMI FEL.
-	The main purpose was to test the newly implemented algorithms on a real system to evaluate its operational feasibility. The \emph{NAF2} algorithm, the representative for highly sample efficient MFRL algorithms, is discussed first.
+	The main purpose was to test the newly implemented algorithms on a real system to evaluate its operational feasibility.\\ 
+	Because of the tight schedule at FERMI, only a few shifts of several hours could be reserved to carry out these experiments. Since there was a positive outcome, it is evident, that the utilised methods are at an operational level.\\
+	The \emph{NAF2} algorithm, the representative for highly sample efficient MFRL algorithms, is discussed first.
 	\subsection{MFRL tests}
 		\begin{figure}
 		\centering
 		\includegraphics*[width=0.5\textwidth]{Figures/FERMI_all_experiments_NAF_training_episodes.pdf}
-		\caption{The training of the \emph{NAF2} on the FERMI FEL.}
+		\caption{The training of the \emph{NAF2} on the FERMI FEL using a single network (dashed) and a double network (solid).}
 		\label{fig:NAF_training}
 	\end{figure}
 	
 	\begin{figure}
 		\centering
 		\includegraphics*[width=0.5\textwidth]{Figures/FERMI_all_experiments_NAF_verification_episodes.pdf}
-		\caption{The verification of the \emph{NAF2} on the FERMI FEL.}
+		\caption{The verification of the \emph{NAF2} on the FERMI FEL using a single network (dashed) and a double network (solid).}
 		\label{fig:NAF_verification}
 	\end{figure}
 	
 	\begin{figure}
 		\centering
 		\includegraphics*[width=0.5\textwidth]{Figures/FERMI_all_experiments_NAF_convergence.pdf}
-		\caption{The verification of the \emph{AE-DYNA-SAC} on the FERMI FEL.}
+		\caption{The training metrics of the \emph{AE-DYNA-SAC} on the FERMI FEL using a single network (dashed) and a double network (solid). The Bellman error (\cref{eq:minimize_bellmann_optimality}) and the state-value function (\cref{eq:state-value-function}) are shown. }
 		\label{fig:NAF_convergence}
 	\end{figure}
 	In total, four tests were carried out, two using a single network and two using the double network architecture. A motivation for the used algorithmic set-up is discussed in \cref{appendix:naf2} on a classical example from control theory. In both cases \emph{smoothing} to increase the noise robustness as discussed in \cref{appendix:naf2}) was applied.\\
 	\Cref{fig:NAF_training} displays the results, averaged over the two tests. A training of 100 episodes was accomplished. In the upper figure, the number of iterations per episode is plotted, including the cumulative number of steps. The green line in the lower plot of \cref{fig:NAF_training} indicates the 95\% intensity reward threshold, to accept an episode to be successfully finished.
 	In the verification of 50 episodes (\cref{fig:NAF_verification}) both algorithms show similar performance, while the double network needed less training steps, and reveals a more stable overall performance. \\
-	Additionally, the convergence metrics of the two algorithms is plotted in \cref{fig:NAF_convergence} against the number of training steps. The blue curves show the Bellmann error, which is comparable in both cases. The state-value function, which is a direct output of the neural net (\cref{eq:state-action-value-approxiation}), converges to a reasonable value for the double network within the shown 700 steps, whereas the single network seems to overestimate the value. In the single-network case, convergence is reached ~1400 steps.
+	Additionally, the convergence metrics of the two algorithms is plotted in \cref{fig:NAF_convergence} against the number of training steps. The blue curves show the Bellmann error \cref{eq:minimize_bellmann_optimality}, which is comparable in both cases. The state-value function $V$ (\cref{eq:state-value-function}), which is a direct output of the neural net (\cref{eq:state-action-value-approxiation}), converges to a reasonable value for the double network within the shown 700 steps, whereas the single network seems to overestimate the value. In the single-network case, convergence is reached in ~1400 steps. $V$ was averaged over 200 states.
 	\subsection{MBRL tests}
 	\begin{figure}
 		\centering
@@ -507,8 +533,8 @@ We have defined a diagonal regularisation matrix, $\pmb{\Gamma}$, where the $i^{
 \section{Still open}
 	\begin{itemize}
 	\item Reference clean up.
-	\item Rethink the concept of an epoch.
 	\item Conclusion and outlook\dots
+	\item Clean discussion of the results. What is superior and why? A table with numbers...
 %	\item Noise benchmarks with pendulum - done
 %	\item AE details from papers
 %	\item Benchmark NAF2 with pendulum - done

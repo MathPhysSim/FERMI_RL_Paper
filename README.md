@@ -6,12 +6,12 @@ A schematic overview:
 
 ![SchemaFERMIFEL](Figures/SL_Alignment_Scheme.png)
 
-Algorithm | Type | Noise resistive
------------- | -------------|---------
-_NAF_ | Model-free|No
-_NAF2_ | Model-free|Yes
-_ME-TRPO_ | Model-based|No
-_AE-DYNA_ | Model-based|Yes
+Algorithm | Type | Representational power|Noise resistive|Sample efficiency
+------------ | -------------|---------|------------|---------
+_NAF_ | Model-free|Low|No|High
+_NAF2_ | Model-free|Low|Yes|High
+_ME-TRPO_ | Model-based|High|No|High
+_AE-DYNA_ | Model-based|High|Yes|High
 
 ## Experiments done on the machine:
 

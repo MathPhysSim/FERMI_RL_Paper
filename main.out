@@ -9,15 +9,16 @@
 \BOOKMARK [3][-]{section*.10}{Normalized advantage function}{section*.8}% 9
 \BOOKMARK [2][-]{section*.11}{Uncertainty aware DYNA-style reinforcement learning}{section*.7}% 10
 \BOOKMARK [2][-]{section*.13}{Critical design decisions}{section*.7}% 11
-\BOOKMARK [1][-]{section*.14}{Experimental results from FERMI RL online tests}{section*.2}% 12
-\BOOKMARK [2][-]{section*.15}{MFRL tests}{section*.14}% 13
-\BOOKMARK [2][-]{section*.19}{MBRL tests}{section*.14}% 14
-\BOOKMARK [1][-]{section*.24}{Discussion and outlook}{section*.2}% 15
-\BOOKMARK [1][-]{section*.25}{Conclusions}{section*.2}% 16
-\BOOKMARK [1][-]{section*.26}{A non-linear standard control problem}{section*.2}% 17
-\BOOKMARK [2][-]{section*.27}{NAF2 details}{section*.26}% 18
-\BOOKMARK [2][-]{section*.29}{The impact of noise}{section*.26}% 19
-\BOOKMARK [3][-]{section*.31}{Regression assuming homoskedastic Gaussian noise using `Anchored ensembling'}{section*.29}% 20
-\BOOKMARK [2][-]{section*.34}{NAF versus AE-DYNA}{section*.26}% 21
-\BOOKMARK [1][-]{section*.36}{Still open}{section*.2}% 22
-\BOOKMARK [1][-]{section*.37}{References}{section*.2}% 23
+\BOOKMARK [2][-]{section*.14}{Comparison of the used algorithms}{section*.7}% 12
+\BOOKMARK [1][-]{section*.16}{Experimental results from FERMI RL online tests}{section*.2}% 13
+\BOOKMARK [2][-]{section*.17}{MFRL tests}{section*.16}% 14
+\BOOKMARK [2][-]{section*.21}{MBRL tests}{section*.16}% 15
+\BOOKMARK [1][-]{section*.26}{Discussion and outlook}{section*.2}% 16
+\BOOKMARK [1][-]{section*.27}{Conclusions}{section*.2}% 17
+\BOOKMARK [1][-]{section*.28}{A non-linear standard control problem}{section*.2}% 18
+\BOOKMARK [2][-]{section*.29}{NAF2 details}{section*.28}% 19
+\BOOKMARK [2][-]{section*.31}{The impact of noise}{section*.28}% 20
+\BOOKMARK [3][-]{section*.33}{Regression assuming homoskedastic Gaussian noise using `Anchored ensembling'}{section*.31}% 21
+\BOOKMARK [2][-]{section*.36}{NAF versus AE-DYNA}{section*.28}% 22
+\BOOKMARK [1][-]{section*.38}{Still open}{section*.2}% 23
+\BOOKMARK [1][-]{section*.39}{References}{section*.2}% 24
