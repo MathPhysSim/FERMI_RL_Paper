@@ -159,7 +159,7 @@ class MonitoringEnv(gym.Wrapper):
                 self.plot_results(self.current_episode)
         if self.plot_label:
             # Show the environment
-            self.env.render()
+            self.env.showing_render()
         obs = obs + self.noise * np.random.randn(self.env.observation_space.shape[-1])
         reward = reward/10
         return obs, reward, done, info

@@ -182,7 +182,7 @@ class MonitoringEnv(gym.Wrapper):
         ob = self.scale_state_env(ob)
         reward = self.scale_rew(reward)
 
-        env.render()
+        # env.render()
         # print(action, ob, reward)
         return ob, reward, done, info
 
@@ -259,7 +259,7 @@ if __name__ == '__main__':
 
     # We normalize in a MonitoringEnv state action and reward to [-1,1] for the agent and plot results
     env = MonitoringEnv(env=PendulumEnv(), plot_progress=True)
-    # env = gym.wrappers.Monitor(env, "recording2", force=True)
+    env = gym.wrappers.Monitor(env, "recording2", force=True, video_callable=lambda episode_id: episode_id%10==0)
 
     nafnet_kwargs = dict(hidden_sizes=[100, 100], activation=tf.nn.tanh
                          , kernel_initializer=tf.random_normal_initializer(0, 0.05, seed=random_seed))

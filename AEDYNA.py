@@ -1014,8 +1014,8 @@ def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC',
 
             if ep == 0:
                 # Sample random action during the first epoch
-                if step_count % 5 == 0:
-                    env.reset()
+                # if step_count % 5 == 0:
+                #     env.reset()
                 act = np.random.uniform(-1, 1, size=act_dim)
                 act = np.squeeze(act)
             else:
@@ -1252,7 +1252,7 @@ if __name__ == '__main__':
             :param kwargs: noise
             :param render: flag to render
             """
-            self.render = render
+            self.showing_render = render
             self.current_step = 0
             if 'noise' in kwargs:
                 self.noise = kwargs.get('noise')
@@ -1271,14 +1271,14 @@ if __name__ == '__main__':
             obs, reward, done, info = self.env.step(action)
             if self.current_step >= 200:
                 done = True
-            if self.render:
+            if self.showing_render:
                 # Simulate and visualise the environment
                 self.env.render()
             obs = obs + self.noise * np.random.randn(self.env.observation_space.shape[-1])
             # reward = reward / 10
             return obs, reward, done, info
-    real_env = TestWrapperEnv(PendulumEnv(), render=False, noise=parameters.get('noise'))
-
+    env = TestWrapperEnv(PendulumEnv(), render=True, noise=parameters.get('noise'))
+    real_env = gym.wrappers.Monitor(env, "recordings_new", force=True)
     ############################################################
     # Setting the network parameters
     ############################################################

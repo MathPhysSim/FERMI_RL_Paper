@@ -1,24 +1,25 @@
-\BOOKMARK [0][-]{section*.2}{Online Model-Based and Model-Free Reinforcement Learning in Accelerator Operation with Applications to FERMI FEL}{}% 2
+\BOOKMARK [0][-]{section*.2}{Online Model-Based and Model-Free Reinforcement Learning in Accelerator Operation with Application to FERMI FEL}{}% 2
 \BOOKMARK [1][-]{section*.1}{Abstract}{section*.2}% 1
 \BOOKMARK [1][-]{section*.3}{Introduction and Motivation}{section*.2}% 3
-\BOOKMARK [1][-]{section*.4}{The physical set-up of the studied problem}{section*.2}% 4
-\BOOKMARK [2][-]{section*.6}{The training environment}{section*.4}% 5
-\BOOKMARK [1][-]{section*.7}{Deep Reinforcement learning}{section*.2}% 6
-\BOOKMARK [2][-]{section*.8}{Model free reinforcement learning - MFRL}{section*.7}% 7
-\BOOKMARK [3][-]{section*.9}{Approximate dynamic programming}{section*.8}% 8
-\BOOKMARK [3][-]{section*.10}{Normalized advantage function}{section*.8}% 9
-\BOOKMARK [2][-]{section*.11}{Uncertainty aware DYNA-style reinforcement learning}{section*.7}% 10
-\BOOKMARK [2][-]{section*.13}{Critical design decisions}{section*.7}% 11
-\BOOKMARK [2][-]{section*.14}{Comparison of the used algorithms}{section*.7}% 12
-\BOOKMARK [1][-]{section*.16}{Experimental results from FERMI RL online tests}{section*.2}% 13
-\BOOKMARK [2][-]{section*.17}{MFRL tests}{section*.16}% 14
-\BOOKMARK [2][-]{section*.21}{MBRL tests}{section*.16}% 15
-\BOOKMARK [1][-]{section*.26}{Discussion and outlook}{section*.2}% 16
-\BOOKMARK [1][-]{section*.27}{Conclusions}{section*.2}% 17
-\BOOKMARK [1][-]{section*.28}{A non-linear standard control problem}{section*.2}% 18
-\BOOKMARK [2][-]{section*.29}{NAF2 details}{section*.28}% 19
-\BOOKMARK [2][-]{section*.31}{The impact of noise}{section*.28}% 20
-\BOOKMARK [3][-]{section*.33}{Regression assuming homoskedastic Gaussian noise using `Anchored ensembling'}{section*.31}% 21
-\BOOKMARK [2][-]{section*.36}{NAF versus AE-DYNA}{section*.28}% 22
-\BOOKMARK [1][-]{section*.38}{Still open}{section*.2}% 23
-\BOOKMARK [1][-]{section*.39}{References}{section*.2}% 24
+\BOOKMARK [1][-]{section*.4}{The set-up of the studied problem}{section*.2}% 4
+\BOOKMARK [2][-]{section*.5}{The physical set-up}{section*.4}% 5
+\BOOKMARK [2][-]{section*.6}{The training environment}{section*.4}% 6
+\BOOKMARK [1][-]{section*.8}{Deep Reinforcement learning}{section*.2}% 7
+\BOOKMARK [2][-]{section*.9}{Model free reinforcement learning - MFRL}{section*.8}% 8
+\BOOKMARK [3][-]{section*.10}{Approximate dynamic programming}{section*.9}% 9
+\BOOKMARK [3][-]{section*.11}{Normalized advantage function}{section*.9}% 10
+\BOOKMARK [2][-]{section*.12}{Uncertainty aware DYNA-style reinforcement learning}{section*.8}% 11
+\BOOKMARK [2][-]{section*.14}{Critical design decisions}{section*.8}% 12
+\BOOKMARK [3][-]{section*.15}{Overview of the used algorithms}{section*.14}% 13
+\BOOKMARK [1][-]{section*.17}{Experimental results from FERMI RL online tests}{section*.2}% 14
+\BOOKMARK [2][-]{section*.18}{MFRL tests}{section*.17}% 15
+\BOOKMARK [2][-]{section*.22}{MBRL tests}{section*.17}% 16
+\BOOKMARK [1][-]{section*.27}{Discussion and outlook}{section*.2}% 17
+\BOOKMARK [1][-]{section*.28}{Conclusions}{section*.2}% 18
+\BOOKMARK [1][-]{section*.29}{A non-linear standard control problem}{section*.2}% 19
+\BOOKMARK [2][-]{section*.30}{NAF2 details}{section*.29}% 20
+\BOOKMARK [2][-]{section*.32}{The impact of noise}{section*.29}% 21
+\BOOKMARK [3][-]{section*.34}{Regression assuming homoskedastic Gaussian noise using `Anchored ensembling'}{section*.32}% 22
+\BOOKMARK [2][-]{section*.37}{NAF versus AE-DYNA}{section*.29}% 23
+\BOOKMARK [1][-]{section*.39}{Still open}{section*.2}% 24
+\BOOKMARK [1][-]{section*.40}{References}{section*.2}% 25
