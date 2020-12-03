@@ -43,15 +43,15 @@ except:
 # root_dir = "Experiments-150-200-50-long-0.05/"
 # data_all_1 = read_experiment(root_dir=root_dir)
 root_dir = "Experiments-150-200-50-noisy/"
-data_all_2 = read_experiment(root_dir=root_dir)
+data_all = read_experiment(root_dir=root_dir)
 
 # data_all = data_all_1
 # data_all = pd.concat([data_all, data_all_2])
-figure_name = '../Figures/Comparison___.pdf'
+figure_name = '../Figures/Comparison_noise'
 current_test_name = ''
 
-fig, axs = plt.subplots(2, 1, sharex=True)
-ax = axs[0]
+fig, axs = plt.subplots(1, 1, sharex=True)
+ax = axs
 
 print(data_all)
 
@@ -62,15 +62,36 @@ plt.ylabel('cum. reward (arb. units.)')
 ax.set_ylim(-1250,-100)
 print(data_all)
 
-root_dir = "Experiments-300-20-large-smoothing/"
-data_all = read_experiment(root_dir=root_dir)
-# sns.set_palette(sns.color_palette("bright", 8))
-ax = axs[1]
-sns.lineplot(ax=ax, data=data_all.T)
 ax.axhline(y=-200, ls=':', c='lime')
-
+ax.legend(['Clipping','No-clipping-no-smoothing','No-clipping-smoothing'])
 plt.ylabel('cum. reward (arb. units.)')
 plt.xlabel('no. episode')
 ax.set_ylim(-1250,-100)
-# plt.savefig(root_dir + figure_name)
+plt.savefig(root_dir + figure_name+'.pdf')
+plt.savefig(root_dir + figure_name+'.png')
 plt.show()
+
+# fig, axs = plt.subplots(2, 1, sharex=True)
+# ax = axs[0]
+#
+# print(data_all)
+#
+# sns.set_palette(sns.color_palette("bright", 8))
+# sns.lineplot(ax=ax, data=data_all.T)
+# ax.axhline(y=-200, ls=':', c='lime')
+# plt.ylabel('cum. reward (arb. units.)')
+# ax.set_ylim(-1250,-100)
+# print(data_all)
+#
+# root_dir = "Experiments-300-20-large-smoothing/"
+# data_all = read_experiment(root_dir=root_dir)
+# # sns.set_palette(sns.color_palette("bright", 8))
+# ax = axs[1]
+# sns.lineplot(ax=ax, data=data_all.T)
+# ax.axhline(y=-200, ls=':', c='lime')
+#
+# plt.ylabel('cum. reward (arb. units.)')
+# plt.xlabel('no. episode')
+# ax.set_ylim(-1250,-100)
+# # plt.savefig(root_dir + figure_name)
+# plt.show()

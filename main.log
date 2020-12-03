@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  3 DEC 2020 20:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  3 DEC 2020 20:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1227,9 +1227,9 @@ exlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/202
 0/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2020/te
 xmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2020/texmf-dist/f
 onts/type1/public/cm-super/sfti0900.pfb>
-Output written on main.pdf (11 pages, 1343512 bytes).
+Output written on main.pdf (11 pages, 1341555 bytes).
 PDF statistics:
- 1100 PDF objects out of 1200 (max. 8388607)
+ 1098 PDF objects out of 1200 (max. 8388607)
  602 compressed objects within 7 object streams
  115 named destinations out of 1000 (max. 500000)
  356 words of extra memory for PDF output out of 10000 (max. 10000000)
