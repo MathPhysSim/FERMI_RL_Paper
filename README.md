@@ -16,7 +16,7 @@ _AE-DYNA_ | Model-based|High|Yes|High
 
 ## Experiments done on the machine:
 
-A new implementation of the NAF with doule Q learning:
+A new implementation of the NAF with double Q learning:
 
 ![NAF2_training](Figures/FERMI_all_experiments_NAF_episodes.png)
 
