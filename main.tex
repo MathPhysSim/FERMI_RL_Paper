@@ -122,7 +122,7 @@ prstab,
 	% \affiliation{University of Malta}
 	\affiliation{Univertsity of Salzburg, Salzburg, Austria}
 	\author{Niky Bruchon}%, Gianfranco Fenu, Felice Andrea Pellegrino, Erica Salvato}
-	\affiliation{University of Trieste, Trieste, IT}
+	\affiliation{University of Trieste, Trieste, Italy}
 	% \author{Gianluca Valentino}
 	% \affiliation{University of Malta, Msida, MT}
 	% \author{Marco Lonza, Giulio Gaio}
@@ -308,7 +308,7 @@ On the other hand, the on-policy algorithm TRPO \cite{Schulman2015} provides som
 	\Cref{tab:overview_algorithms} shows a comparison of the discussed algorithms. Details are provided in the appendix. All algorithms are suitable for many control tasks as common in accelerator operation. Their strength lies in the high sample-efficiency, but they differ in representational power and noise robustness. \\
 	In \cref{sec:Experimental results from FERMI RL online tests} the \emph{NAF2},
 	\emph{ME-TRPO} and \emph{AE-DYNA} are tested and compared on the real environment.
-		\begin{table}[b]%The best place to locate the table environment is directly after its first reference in text
+\begin{table}[b]%The best place to locate the table environment is directly after its first reference in text
 	\caption{\label{tab:overview_algorithms}%
 		An overview of the algorithms discussed in this paper.
 	}
@@ -317,7 +317,7 @@ On the other hand, the on-policy algorithm TRPO \cite{Schulman2015} provides som
 			\textrm{Algorithm}&
 			\textrm{Class}&
 			\textrm{ \begin{tabular}{@{}c@{}}Noise\\robustness\end{tabular}}&
-			\textrm{ \begin{tabular}{@{}c@{}}Representational\\power\end{tabular}}&
+			\textrm{ \begin{tabular}{@{}c@{}}Represent.\\power\end{tabular}}&
 			\textrm{ \begin{tabular}{@{}c@{}}Sample\\efficiency\end{tabular}}\\
 			\colrule
 			\emph{NAF} & model-free & low &low &high\\
@@ -327,6 +327,31 @@ On the other hand, the on-policy algorithm TRPO \cite{Schulman2015} provides som
 		\end{tabular}
 	\end{ruledtabular}
 \end{table}
+\begin{table}[b]%The best place to locate the table environment is directly after its first reference in text
+	\caption{\label{tab:overview_algorithms_results}%
+		An overview over the experimental results of the different algorithms.
+	}
+\begin{ruledtabular}
+\begin{tabular}{llrr}
+%\toprule
+&    &  mean &   std \\
+%\midrule
+ae\_dyna & cum & -1.44 &  1.10 \\
+me\_trpo & cum & -1.95 &  1.76 \\
+naf\_double & cum & -0.58 &  0.72 \\
+naf\_single & cum & -0.66 &  0.80 \\
+ae\_dyna & final &  0.04 &  0.06 \\
+me\_trpo & final &  0.01 &  0.04 \\
+naf\_double & final & -0.00 &  0.02 \\
+naf\_single & final &  0.00 &  0.02 \\
+ae\_dyna & nr &  4.28 &  1.26 \\
+me\_trpo & nr &  5.46 &  2.32 \\
+naf\_double & nr &  2.67 &  1.33 \\
+naf\_single & nr &  2.56 &  1.26 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
 	\section{Experimental results from FERMI RL online tests}\label{sec:Experimental results from FERMI RL online tests}
 	As discussed in the previous sections, several tests were performed on the FERMI FEL.
 	The main purpose was to test the newly implemented algorithms on a real system to evaluate its operational feasibility. 

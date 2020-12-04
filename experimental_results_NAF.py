@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 
 
 def load_pickle_logging(file_name):
-    # directory = 'checkpoints/' + file_name + '/'
     directory = file_name + '/'
     files = []
     directory = directory + 'data/'
@@ -26,7 +25,6 @@ def load_pickle_logging(file_name):
 
 
 def load_pickle_final(file_name):
-    # directory = 'checkpoints/' + file_name + '/'
     directory = file_name + '/'
     file = 'plot_data_0.pkl'
 
@@ -38,17 +36,27 @@ def load_pickle_final(file_name):
     return rews, inits, losses, v_s
 
 
-file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_double_q_Tango_11'
-states_0, actions_0, rewards_0, dones_0 = load_pickle_logging(file_name)
-file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_double_q_Tango_11_bis'
-states_1, actions_1, rewards_1, dones_1 = load_pickle_logging(file_name)
-rewards = [rewards_0, rewards_1]
+# file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_double_q_Tango_11'
+# states_0, actions_0, rewards_0, dones_0 = load_pickle_logging(file_name)
+# file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_double_q_Tango_11_bis'
+# states_1, actions_1, rewards_1, dones_1 = load_pickle_logging(file_name)
+# rewards = [rewards_0, rewards_1]
+#
+# file_name_s = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_single_q_Tango_11'
+# states_s0, actions_s0, rewards_s0, dones_s0 = load_pickle_logging(file_name_s)
+# file_name_s = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_single_q_Tango_11_bis'
+# states_s, actions_s, rewards_s, dones_s = load_pickle_logging(file_name_s)
+# rewards_s = [rewards_s, rewards_s0]
 
-file_name_s = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_single_q_Tango_11'
-states_s0, actions_s0, rewards_s0, dones_s0 = load_pickle_logging(file_name_s)
-file_name_s = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_single_q_Tango_11_bis'
-states_s, actions_s, rewards_s, dones_s = load_pickle_logging(file_name_s)
-rewards_s = [rewards_s, rewards_s0]
+project_directory = ''
+
+
+def save_data(data, name):
+    '''logging function to save results to pickle'''
+    clock_time = 'Paper'
+    out_put_writer = open(project_directory + name + '.pkl', 'wb')
+    pickle.dump(data, out_put_writer, -1)
+    out_put_writer.close()
 
 
 def read_rewards(rewards_in, data_range_in=None):
@@ -66,7 +74,7 @@ def read_rewards(rewards_in, data_range_in=None):
         else:
             data_range = range(data_range_in[0], min(len(rewards), data_range_in[1]))
         for i in data_range:
-            print(i)
+            # print(i)
             if len(rewards[i]) > 0:
                 final_rews.append(rewards[i][len(rewards[i]) - 1])
                 iterations.append(len(rewards[i]))
@@ -84,7 +92,7 @@ def read_rewards(rewards_in, data_range_in=None):
     return iterations, final_rews, mean_rews
 
 
-def plot_results(rewards, rewards_single,label=None, **kwargs):
+def plot_results(rewards, rewards_single, label=None, **kwargs):
     if 'data_range_in' in kwargs:
         data_range_in = kwargs.get('data_range_in')
     else:
@@ -92,7 +100,6 @@ def plot_results(rewards, rewards_single,label=None, **kwargs):
 
     iterations, final_rews, mean_rews = read_rewards(rewards, data_range_in=data_range_in)
     iterations_s, final_rews_s, mean_rews_s = read_rewards(rewards_single, data_range_in=data_range_in)
-
     plot_suffix = ""  # f', number of iterations: {env.TOTAL_COUNTER}, Linac4 time: {env.TOTAL_COUNTER / 600:.1f} h'
     fig, axs = plt.subplots(2, 1, sharex=True)
 
@@ -103,7 +110,13 @@ def plot_results(rewards, rewards_single,label=None, **kwargs):
     ax.plot(iterations_s, c=color, ls=':')
     ax.set_ylabel('no. iterations', color=color)
     ax.tick_params(axis='y', labelcolor=color)
+
     ax1 = plt.twinx(ax)
+    if 'verification' in kwargs:
+        verification = kwargs.get('verification')
+        if verification:
+            ax1.set_ylim(0, 275)
+            ax.set_ylim(1, 10)
     color = 'k'
     ax1.plot(np.cumsum(iterations), c=color)
     ax1.plot(np.cumsum(iterations_s), c=color, ls=':')
@@ -175,6 +188,12 @@ losses_s, v_s_s = read_losses_v_s([losses0, losses1], [v_s0, v_s1], 691)
 rewards_s = [rews0, rews1]
 
 
+name = 'Rewards_NAF_double'
+save_data(rewards,name=name)
+name = 'Rewards_NAF_single'
+save_data(rewards_s,name=name)
+
+
 def plot_convergence(losses, v_s, losses_s, v_s_s, label, **kwargs):
     fig, ax = plt.subplots()
     ax.set_title(label)
@@ -205,12 +224,11 @@ def plot_convergence(losses, v_s, losses_s, v_s_s, label, **kwargs):
 
 label = 'FERMI_all_experiments_NAF_training'
 save_name = 'Figures/' + label
-plot_results(rewards, rewards_s, 'NAF trainings', save_name=save_name, data_range_in=[0,100])
+plot_results(rewards, rewards_s, 'NAF trainings', save_name=save_name, data_range_in=[0, 100])
 
 label = 'FERMI_all_experiments_NAF_verification'
 save_name = 'Figures/' + label
-plot_results(rewards, rewards_s, 'NAF verifications',save_name=save_name, data_range_in=[99, 150])
-
+plot_results(rewards, rewards_s, 'NAF verifications', save_name=save_name, data_range_in=[99, 150], verification=True)
 
 label = 'FERMI_all_experiments_NAF'
 save_name = 'Figures/' + label

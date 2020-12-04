@@ -5,7 +5,7 @@ import pickle
 import matplotlib.pyplot as plt
 import numpy as np
 
-label = ["ME-TRPO", "AE-DYNA", 'Simulation'][1]
+label = ["ME-TRPO", "AE-DYNA", 'Simulation'][0]
 
 if label == "ME-TRPO":
     # ME-TRPO results
@@ -119,14 +119,16 @@ def plot_results(data, label=None, **kwargs):
     # ax.plot(iterations_s, c=color, ls=':')
     ax.set_ylabel('no. iterations', color=color)
     ax.tick_params(axis='y', labelcolor=color)
+    ax.set_ylim(1,10)
     ax1 = plt.twinx(ax)
     color = 'k'
     ax1.plot(np.cumsum(iterations), c=color)
     # ax1.plot(np.cumsum(iterations_s), c=color, ls=':')
+    # print(np.cumsum(iterations)[-1])
     ax1.set_ylabel('no. cumulative steps', color=color)
     ax.set_title(label)
     # fig.suptitle(label, fontsize=12)
-
+    ax1.set_ylim(0, 275)
     ax = axs[1]
     # ax.axvspan(0, 100, alpha=0.2, color='coral')
     color = 'blue'
@@ -215,6 +217,11 @@ def plot_observables(data, label='Experiment', **kwargs):
         plt.savefig(kwargs.get('save_name') + '.png')
     plt.show()
 
+def save_data(data, name):
+    '''logging function to save results to pickle'''
+    out_put_writer = open(name + '.pkl', 'wb')
+    pickle.dump(data, out_put_writer, -1)
+    out_put_writer.close()
 
 # plot verification
 if label in ["ME-TRPO", "AE-DYNA", "Simulation"]:
@@ -232,6 +239,11 @@ if label in ["ME-TRPO", "AE-DYNA", "Simulation"]:
     object = pickle.load(filehandler)
     save_name = 'Figures/' + label
     plot_results(object, label=label, save_name=save_name)
+
+    name = 'Rewards_'+label
+    print(name)
+    save_data(object['rews'], name=name)
+
 
 # plot observables
 

@@ -4,6 +4,13 @@ import shutil
 import matplotlib.pyplot as plt
 import gym
 
+
+'''This is a version of the NAF Article (Gu2016)
+ Gu, S.; Lillicrap, T.; Sutskever, I. & Levine, S.
+ Continuous Deep Q-Learning with Model-based Acceleration 2016
+with some modifications as explained in the paper.
+We use tensorflow 2.3'''
+
 import tensorflow as tf
 from tensorflow import keras
 # Turn off warnings form tensorflow
