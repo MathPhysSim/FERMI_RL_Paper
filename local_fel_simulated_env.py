@@ -218,7 +218,8 @@ class FelLocalEnv(gym.Env):
                 new_state = kwargs.get('set_state')
                 print('set_state')
             else:
-                new_state = self.observation_space.sample()
+                # new_state = self.observation_space.sample()
+                new_state = np.array([.1,.3,.7,.2])
 
             self.set_state(new_state)
             state = self.get_state()

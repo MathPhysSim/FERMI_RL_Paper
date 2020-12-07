@@ -430,13 +430,6 @@
   publisher = {Zenodo},
 }
 
-@Article{Kain2020,
-  author  = {Verena Kain and Simon Hirlander and Brennan Goddard and Francesco Maria Velotti and Giovanni Zevi Della Porta and Niky Bruchon and Gianluca Valentino},
-  journal = {Phys. Rev. Accel. Beams},
-  title   = {{Sample-efficient reinforcement learning for CERN accelerator control}},
-  year    = {Accepted 9th November 2020},
-}
-
 @Article{Szepesvari2010,
   author    = {Csaba Szepesv{\'{a}}ri},
   journal   = {Synthesis Lectures on Artificial Intelligence and Machine Learning},
@@ -713,7 +706,47 @@
   publisher = {Springer Science and Business Media {LLC}},
 }
 
-@Article{,
+@Book{Goodfellow2016,
+  author    = {Ian Goodfellow and Yoshua Bengio and Aaron Courville},
+  publisher = {MIT Press},
+  title     = {Deep Learning},
+  year      = {2016},
+  note      = {\url{http://www.deeplearningbook.org}},
+}
+
+@Article{Kain2020,
+  author    = {Verena Kain and Simon Hirlander and Brennan Goddard and Francesco Maria Velotti and Giovanni Zevi Della Porta and Niky Bruchon and Gianluca Valentino},
+  journal   = {Physical Review Accelerators and Beams},
+  title     = {Sample-efficient reinforcement learning for {CERN} accelerator control},
+  year      = {2020},
+  month     = {dec},
+  number    = {12},
+  volume    = {23},
+  doi       = {10.1103/physrevaccelbeams.23.124801},
+  publisher = {American Physical Society ({APS})},
+}
+
+@Article{DulacArnold2019,
+  author      = {Gabriel Dulac-Arnold and Daniel Mankowitz and Todd Hester},
+  title       = {Challenges of Real-World Reinforcement Learning},
+  abstract    = {Reinforcement learning (RL) has proven its worth in a series of artificial domains, and is beginning to show some successes in real-world scenarios. However, much of the research advances in RL are often hard to leverage in real-world systems due to a series of assumptions that are rarely satisfied in practice. We present a set of nine unique challenges that must be addressed to productionize RL to real world problems. For each of these challenges, we specify the exact meaning of the challenge, present some approaches from the literature, and specify some metrics for evaluating that challenge. An approach that addresses all nine challenges would be applicable to a large number of real world problems. We also present an example domain that has been modified to present these challenges as a testbed for practical RL research.},
+  date        = {2019-04-29},
+  eprint      = {1904.12901},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  file        = {:http\://arxiv.org/pdf/1904.12901v1:PDF},
+  keywords    = {cs.LG, cs.AI, cs.RO, stat.ML},
+}
+
+@Misc{Hirlaender2020b,
+  author    = {Simon Hirlaender and Niky Bruchon},
+  month     = nov,
+  title     = {MathPhysSim/FERMI\_RL\_Paper: Initial release},
+  year      = {2020},
+  doi       = {10.5281/zenodo.4271581},
+  publisher = {Zenodo},
+  url       = {https://doi.org/10.5281/zenodo.4271581},
+  version   = {0},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

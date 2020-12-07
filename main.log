@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  7 DEC 2020 11:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  7 DEC 2020 13:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -959,7 +959,7 @@ LaTeX Font Warning: Font shape `U/wasy/b/n' in size <8> not available
 (Font)              Font shape `U/wasy/m/n' tried instead on input line 29.
 
 ) [2]
-<Figures/MBRL_overview.pdf, id=209, 845.1575pt x 597.23125pt>
+<Figures/MBRL_overview.pdf, id=211, 845.1575pt x 597.23125pt>
 File: Figures/MBRL_overview.pdf Graphic file (type pdf)
 <use Figures/MBRL_overview.pdf>
 Package pdftex.def Info: Figures/MBRL_overview.pdf  used on input line 283.
@@ -970,7 +970,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 283--284
  []
 
 [3] [4 <./Figures/MBRL_overview.pdf>]
-<Figures/FERMI_all_experiments_NAF_training_episodes.pdf, id=289, 462.52798pt x
+<Figures/FERMI_all_experiments_NAF_training_episodes.pdf, id=291, 462.52798pt x
  346.89601pt>
 File: Figures/FERMI_all_experiments_NAF_training_episodes.pdf Graphic file (typ
 e pdf)
@@ -983,7 +983,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 340--341
  [][] 
  []
 
-<Figures/FERMI_all_experiments_NAF_verification_episodes.pdf, id=291, 462.52798
+<Figures/FERMI_all_experiments_NAF_verification_episodes.pdf, id=293, 462.52798
 pt x 346.89601pt>
 File: Figures/FERMI_all_experiments_NAF_verification_episodes.pdf Graphic file 
 (type pdf)
@@ -996,7 +996,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 347--348
  [][] 
  []
 
-<Figures/FERMI_all_experiments_NAF_convergence.pdf, id=293, 462.52798pt x 346.8
+<Figures/FERMI_all_experiments_NAF_convergence.pdf, id=295, 462.52798pt x 346.8
 9601pt>
 File: Figures/FERMI_all_experiments_NAF_convergence.pdf Graphic file (type pdf)
 
@@ -1009,7 +1009,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 354--355
  [][] 
  []
 
-<Figures/AE-DYNA_observables.pdf, id=308, 462.52798pt x 346.89601pt>
+<Figures/AE-DYNA_observables.pdf, id=310, 462.52798pt x 346.89601pt>
 File: Figures/AE-DYNA_observables.pdf Graphic file (type pdf)
 <use Figures/AE-DYNA_observables.pdf>
 Package pdftex.def Info: Figures/AE-DYNA_observables.pdf  used on input line 36
@@ -1020,7 +1020,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 365--366
  [][] 
  []
 
-<Figures/AE-DYNA_verification.pdf, id=310, 462.52798pt x 346.89601pt>
+<Figures/AE-DYNA_verification.pdf, id=312, 462.52798pt x 346.89601pt>
 File: Figures/AE-DYNA_verification.pdf Graphic file (type pdf)
 <use Figures/AE-DYNA_verification.pdf>
 Package pdftex.def Info: Figures/AE-DYNA_verification.pdf  used on input line 3
@@ -1031,7 +1031,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 372--373
  [][] 
  []
 
-<Figures/ME-TRPO_observables.pdf, id=312, 462.52798pt x 346.89601pt>
+<Figures/ME-TRPO_observables.pdf, id=314, 462.52798pt x 346.89601pt>
 File: Figures/ME-TRPO_observables.pdf Graphic file (type pdf)
 <use Figures/ME-TRPO_observables.pdf>
 Package pdftex.def Info: Figures/ME-TRPO_observables.pdf  used on input line 37
@@ -1042,7 +1042,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 378--379
  [][] 
  []
 
-<Figures/ME-TRPO_verification.pdf, id=314, 462.52798pt x 346.89601pt>
+<Figures/ME-TRPO_verification.pdf, id=316, 462.52798pt x 346.89601pt>
 File: Figures/ME-TRPO_verification.pdf Graphic file (type pdf)
 <use Figures/ME-TRPO_verification.pdf>
 Package pdftex.def Info: Figures/ME-TRPO_verification.pdf  used on input line 3
@@ -1077,7 +1077,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 424--427
  []
 
 [7 <./Figures/ME-TRPO_verification.pdf>]
-<Figures/Comparison_naf.pdf, id=664, 462.52798pt x 346.89601pt>
+<Figures/Comparison_naf.pdf, id=666, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_naf.pdf Graphic file (type pdf)
 <use Figures/Comparison_naf.pdf>
 Package pdftex.def Info: Figures/Comparison_naf.pdf  used on input line 476.
@@ -1087,7 +1087,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 476--477
  [][] 
  []
 
-<Figures/Comparison_noise.pdf, id=668, 462.52798pt x 346.89601pt>
+<Figures/Comparison_noise.pdf, id=670, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_noise.pdf Graphic file (type pdf)
 <use Figures/Comparison_noise.pdf>
 Package pdftex.def Info: Figures/Comparison_noise.pdf  used on input line 491.
@@ -1105,7 +1105,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
  on input line 502.
 
-<Figures/Comparison_noise_ae_dyna.pdf, id=731, 462.52798pt x 346.89601pt>
+<Figures/Comparison_noise_ae_dyna.pdf, id=733, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_noise_ae_dyna.pdf Graphic file (type pdf)
 <use Figures/Comparison_noise_ae_dyna.pdf>
 Package pdftex.def Info: Figures/Comparison_noise_ae_dyna.pdf  used on input li
@@ -1116,7 +1116,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 534--535
  [][] 
  []
 
-<Figures/Comparison_models_sizes.pdf, id=734, 462.52798pt x 346.89601pt>
+<Figures/Comparison_models_sizes.pdf, id=736, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_models_sizes.pdf Graphic file (type pdf)
 <use Figures/Comparison_models_sizes.pdf>
 Package pdftex.def Info: Figures/Comparison_models_sizes.pdf  used on input lin
@@ -1130,7 +1130,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 541--542
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Figures/Comparison_NAF_AE-DYNA.pdf, id=737, 462.52798pt x 346.89601pt>
+<Figures/Comparison_NAF_AE-DYNA.pdf, id=739, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_NAF_AE-DYNA.pdf Graphic file (type pdf)
 <use Figures/Comparison_NAF_AE-DYNA.pdf>
 Package pdftex.def Info: Figures/Comparison_NAF_AE-DYNA.pdf  used on input line
@@ -1150,43 +1150,48 @@ LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
  on input line 570.
 
 (./main.bbl
-Underfull \hbox (badness 1616) in paragraph at lines 184--191
+Underfull \hbox (badness 1616) in paragraph at lines 186--193
  \OT1/cmr/m/n/9 D. Gamba, S. Hirlan-der, A. Huschauer, V. Kain,
+ []
+
+
+Underfull \hbox (badness 4954) in paragraph at lines 212--218
+ []\OT1/cmr/m/n/9 R. Rous-sel, A. Hanuka, and A. Ede-len, Multi-
  []
 
 [10 <./Figures/Comparison_models_sizes.pdf> <./Figures/Comparison_NAF_AE-DYNA.p
 df>]
-Underfull \hbox (badness 4954) in paragraph at lines 210--216
- []\OT1/cmr/m/n/9 R. Rous-sel, A. Hanuka, and A. Ede-len, Multi-
- []
-
-
-Underfull \hbox (badness 1742) in paragraph at lines 398--402
+Underfull \hbox (badness 1742) in paragraph at lines 410--414
  []\OT1/cmr/m/n/9 S. Hirlaen-der, []Mathphyssim/per-naf: Ini-tial re-lease[]
  []
 
 
-Underfull \hbox (badness 2165) in paragraph at lines 421--427
+Underfull \hbox (badness 2165) in paragraph at lines 433--439
  []\OT1/cmr/m/n/9 V. Mnih, K. Kavukcuoglu, D. Sil-ver, A. Graves,
  []
 
-[11]
-Underfull \hbox (badness 2293) in paragraph at lines 714--719
+
+Underfull \hbox (badness 10000) in paragraph at lines 667--671
+ []\OT1/cmr/m/n/9 S. Hirlaen-der and N. Bru-chon, []Math-phys-
+ []
+
+
+Underfull \hbox (badness 2293) in paragraph at lines 728--733
  []\OT1/cmr/m/n/9 Y. Chen and D. S. Oliver, En-sem-ble ran-dom-ized
  []
 
-) [12] (./main.aux)
+[11]) [12] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: C4A2AB875AD638E9C66748A9FD07DB74;1918.
+(rerunfilecheck)             Checksum: 496144E13345CD3CA00037088ACA4FF8;1911.
  ) 
 Here is how much of TeX's memory you used:
- 26773 strings out of 479917
- 524054 string characters out of 5886664
- 823363 words of memory out of 5000000
- 42740 multiletter control sequences out of 15000+600000
+ 26778 strings out of 479917
+ 524165 string characters out of 5886664
+ 823399 words of memory out of 5000000
+ 42744 multiletter control sequences out of 15000+600000
  553319 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,13n,77p,1034b,999s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,13n,77p,1034b,1014s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/tex
 live/2020/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb><c:/texlive
 /2020/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb><c:/texlive/20
@@ -1215,10 +1220,10 @@ xlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/202
 st/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2020/texmf-dist/f
 onts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2020/texmf-dist/fonts/type1
 /public/cm-super/sfti0900.pfb>
-Output written on main.pdf (12 pages, 1352099 bytes).
+Output written on main.pdf (12 pages, 1352289 bytes).
 PDF statistics:
- 1125 PDF objects out of 1200 (max. 8388607)
- 627 compressed objects within 7 object streams
- 121 named destinations out of 1000 (max. 500000)
+ 1131 PDF objects out of 1200 (max. 8388607)
+ 633 compressed objects within 7 object streams
+ 122 named destinations out of 1000 (max. 500000)
  356 words of extra memory for PDF output out of 10000 (max. 10000000)
 
