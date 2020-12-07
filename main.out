@@ -11,10 +11,10 @@
 \BOOKMARK [2][-]{section*.12}{Uncertainty aware DYNA-style reinforcement learning}{section*.8}% 11
 \BOOKMARK [2][-]{section*.14}{Critical design decisions}{section*.8}% 12
 \BOOKMARK [3][-]{section*.15}{Overview of the used algorithms}{section*.14}% 13
-\BOOKMARK [1][-]{section*.18}{Experimental results from FERMI RL online tests}{section*.2}% 14
-\BOOKMARK [2][-]{section*.19}{MFRL tests}{section*.18}% 15
-\BOOKMARK [2][-]{section*.23}{MBRL tests}{section*.18}% 16
-\BOOKMARK [1][-]{section*.28}{Discussion and outlook}{section*.2}% 17
+\BOOKMARK [1][-]{section*.17}{Experimental results from FERMI RL online tests}{section*.2}% 14
+\BOOKMARK [2][-]{section*.18}{MFRL tests}{section*.17}% 15
+\BOOKMARK [2][-]{section*.22}{MBRL tests}{section*.17}% 16
+\BOOKMARK [1][-]{section*.27}{Discussion and outlook}{section*.2}% 17
 \BOOKMARK [1][-]{section*.29}{Conclusions}{section*.2}% 18
 \BOOKMARK [1][-]{section*.30}{A non-linear standard control problem}{section*.2}% 19
 \BOOKMARK [2][-]{section*.31}{NAF2 details}{section*.30}% 20

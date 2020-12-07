@@ -69,7 +69,7 @@ data_all = pd.concat([naf_single, naf_double, ae_dyna, me_trpo],
 
 idx = pd.IndexSlice
 print(data_all.loc[idx[:, 'nr'], :].T.describe().T)
-# print(data_all.T.describe().T[['mean', 'std']].apply(lambda x: np.round(x,2)).to_latex())
+print(data_all.T.describe().T[['mean', 'std']].apply(lambda x: np.round(x,2)).to_latex())
 # print(data_all.loc[idx[:, 'final'], :].mean(axis=1))
 # print(data_all)
 # plt.show()

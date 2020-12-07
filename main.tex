@@ -234,7 +234,7 @@ prstab,
 		\bellman^*\vec Q_\theta(\bs_t,\ba_t) := \\r(\bs_t,\ba_t)+\gamma\max_\ba\left( Q_\theta(\bs_{t+1},\ba) - Q_\theta(\bs_t,\ba_t)\right).
 	\end{multline}
 	The nature of this equation can cause overestimation and other complications, when using a function approximator and several attempts exist to overcome the difficulties \cite{Hasselt2015,Mnih2013,Lillicrap2015,Gu2016,Wang2015}.
-	\subsubsection{Normalized advantage function}
+	\subsubsection{Normalized advantage function}\label{ss:Normalized advantage function}
 	One way to avoid the sensitivity to the mentioned complications is to choose a simple analytical form with an explicitly calculable maximum of the $Q$-function.
 	If a specific quadratic form of the $Q$ function is assumed \cite{Gu2016}:
 	\begin{align}
@@ -320,37 +320,14 @@ On the other hand, the on-policy algorithm TRPO \cite{Schulman2015} provides som
 			\textrm{ \begin{tabular}{@{}c@{}}Represent.\\power\end{tabular}}&
 			\textrm{ \begin{tabular}{@{}c@{}}Sample\\efficiency\end{tabular}}\\
 			\colrule
-			\emph{NAF} & model-free & low &low &high\\
-			\emph{NAF2} & model-free & high &low& high\\
-			\emph{ME-TRPO} & model-based & low& high& high\\
-			\emph{AE-DYNA} & model-based & high& high& high\\
+			\emph{NAF} & MFRL & low &low &high\\
+			\emph{NAF2} &MFRL & high &low& high\\
+			\emph{ME-TRPO} & MBRL & low& high& high\\
+			\emph{AE-DYNA} & MBRL & high& high& high\\
 		\end{tabular}
 	\end{ruledtabular}
 \end{table}
-\begin{table}[b]%The best place to locate the table environment is directly after its first reference in text
-	\caption{\label{tab:overview_algorithms_results}%
-		An overview over the experimental results of the different algorithms.
-	}
-\begin{ruledtabular}
-\begin{tabular}{llrr}
-%\toprule
-&    &  mean &   std \\
-%\midrule
-ae\_dyna & cum & -1.44 &  1.10 \\
-me\_trpo & cum & -1.95 &  1.76 \\
-naf\_double & cum & -0.58 &  0.72 \\
-naf\_single & cum & -0.66 &  0.80 \\
-ae\_dyna & final &  0.04 &  0.06 \\
-me\_trpo & final &  0.01 &  0.04 \\
-naf\_double & final & -0.00 &  0.02 \\
-naf\_single & final &  0.00 &  0.02 \\
-ae\_dyna & nr &  4.28 &  1.26 \\
-me\_trpo & nr &  5.46 &  2.32 \\
-naf\_double & nr &  2.67 &  1.33 \\
-naf\_single & nr &  2.56 &  1.26 \\
-\end{tabular}
-\end{ruledtabular}
-\end{table}
+
 
 	\section{Experimental results from FERMI RL online tests}\label{sec:Experimental results from FERMI RL online tests}
 	As discussed in the previous sections, several tests were performed on the FERMI FEL.
@@ -414,8 +391,32 @@ naf\_single & nr &  2.56 &  1.26 \\
 	Secondly, the \emph{AE-DYNA SAC} was tested, which uses the \emph{SAC}- algorithm \cite{Haarnoja2018a}. In this test, the controller is reset each time, when new data for the dynamics model training is acquired. Consequently, the performance drops each time the dynamics model is retrained, as shown in \cref{fig:AE-DYNA_observables}.\\
 	In contrast to the \emph{ME-TRPO} training, the data batches consisted of 50 data-points with an initial random walk of 200 steps. The number of initial steps was chosen high enough because the convergence is slowed down strongly, so that the training becomes unfeasible on a real machine as discussed in \cref{ss:critical_design}. Each epoch consists of 2500 steps of controller training on the model. The training was stopped after the acquisition of 500 data-points. The verification was executed as in the first test. Again the success is 100\%, but the number of needed iterations per episodes is less than for the ME-TRPO. It might be a result of the higher number of data-points (50), but in general, this method exhibited better asymptotic performance than the \emph{ME-TRPO} variant.
 	\section{Discussion and outlook}
+	\begin{table}[b]%The best place to locate the table environment is directly after its first reference in text
+		\caption{\label{tab:overview_verification}%
+			An overview over the verification results of the different algorithms.
+		}
+		\begin{ruledtabular}
+			\begin{tabular}{lrrrr}
+				%\toprule
+				&  data&  nr&  cum &   final \\
+				%\midrule
+				\emph{AE-DYNA} &500 &  4.28 $\pm$  1.26 & -1.44 $\pm$  1.10 &  0.04 $\pm$  0.06\\
+				\emph{ME-TRPO} &450&  5.46 $\pm$  2.32 & -1.95 $\pm$  1.76 &  0.01 $\pm$  0.04\\
+				\emph{NAF} &1 074&  2.67 $\pm$  1.33 & -0.58 $\pm$  0.72 &0.00 $\pm$  0.02\\
+				\emph{NAF2} &824& 2.56 $\pm$  1.26 & -0.66 $\pm$  0.80 &0.00 $\pm$  0.02\\
+				%ae\_dyna & final &  0.04 &  0.06 \\
+				%me\_trpo & final &  0.01 &  0.04 \\
+				%naf\_double & final & -0.00 &  0.02 \\
+				%naf\_single & final &  0.00 &  0.02 \\
+				%ae\_dyna & nr &  4.28 &  1.26 \\
+				%me\_trpo & nr &  5.46 &  2.32 \\
+				%naf\_double & nr &  2.67 &  1.33 \\
+				%naf\_single & nr &  2.56 &  1.26 \\
+			\end{tabular}
+		\end{ruledtabular}
+	\end{table}
 	In this paper, the applicability of the method of deep reinforcement learning on the optimization of the FERMI FEL intensity was presented. Two different approaches were tested: a model free and a model based method.\\
-	 Both experiments yielded satisfactory results showing that a non-linear and noisy problem could be solved in a feasibly number of training steps. In the MFRL, 700 data-points were used and in the MBRL 450-500 data-points were used. In all experiments the 50 verification episodes were finished successfully.\\
+	 Both experiments yielded satisfactory results showing that a non-linear and noisy problem could be solved in a feasibly number of training steps. The results of the verification is summarised in \cref{tab:overview_verification}. In the MFRL, around 800-1000 and in the MBRL 450-500 data-points were used. In all experiments the 50 verification episodes were finished successfully. \emph{NAF} performs better in terms of episode length while the average reward in the \emph{DYNA}-style algorithms is higher. The experiments were done on different days, hence under slightly different conditions.\\
 	Usage of the proposed methods in an operational way is attractive and would replace the current optimization method using the destructive measurement of the screens and additionally would save valuable time.\\ 
 	The MFRL methods were slightly better in the final performance but also more samples have been collected during the training. The MBRL methods had to be stopped due to lack of available experimental time, hence additional studies regarding a long time performance would be interesting.\\ One big issue in applying MBRL methods can be the computational time to train the controller on the model. In our tests the data acquisition time was only a fraction of the time needed for the controller-training. In case, the used methods could be parallelized to decrease the computational time.
 	
@@ -443,7 +444,7 @@ Complementary, the \emph{NAF} algorithm presents a good alternative, revealing, 
 	
 	\subsection{NAF2 details}\label{appendix:naf2}
 	%We add artificial Gaussian noise $\gauss(0,0.05)$ on the state.
-	We compare the different \emph{NAF} variants: \emph{Clipping}, \emph{No-clipping-smoothing}, \emph{No-clipping-no-smoothing}, where \emph{clipping} indicates the use of the double network and in all other cases a single network is used. 
+	We compare the different \emph{NAF} variants: \emph{Clipping}, \emph{No-clipping-smoothing}, \emph{No-clipping-no-smoothing}, where \emph{clipping} indicates the use of the double network, as introduced in \cref{ss:Normalized advantage function} and in all other cases a single network is used. 
 	 The term \emph{smoothing} indicates that a small clipped noise is added on the actions to stabilize the network training as:
 	\begin{equation}
 		\ba(\bs) = \text{clip}\left(\mu_{\theta_{\text{targ}}}(\bs) + \text{clip}(\epsilon,-c,c), \ba_{Low}, \ba_{High}\right),
@@ -566,6 +567,7 @@ $\pmb{\Gamma}$ is diagonal regularisation matrix. The $i^{th}$ diagonal element 
 	\item Reference and code clean up.
 	\item Conclusion and outlook\dots
 	\item Clean discussion of the results. What is superior and why? A table with numbers \dots
+	\item Add the noise policy of NAF
 	\item Check the plots, which might be already okay!
 %	\item Noise benchmarks with pendulum - done
 %	\item AE details from papers
