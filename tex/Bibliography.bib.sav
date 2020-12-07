@@ -682,4 +682,43 @@
   url          = {http://cds.cern.ch/record/2715365},
 }
 
+@InProceedings{pmlr-v32-silver14,
+  author    = {David Silver and Guy Lever and Nicolas Heess and Thomas Degris and Daan Wierstra and Martin Riedmiller},
+  booktitle = {Proceedings of the 31st International Conference on Machine Learning},
+  title     = {{Deterministic Policy Gradient Algorithms}},
+  year      = {2014},
+  address   = {Bejing, China},
+  editor    = {Eric P. Xing and Tony Jebara},
+  month     = {22--24 Jun},
+  number    = {1},
+  pages     = {387--395},
+  publisher = {PMLR},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {32},
+  abstract  = {In this paper we consider deterministic policy gradient algorithms for reinforcement learning with continuous actions. The deterministic policy gradient has a particularly appealing form: it is the expected gradient of the action-value function. This simple form means that the deterministic policy gradient can be estimated much more efficiently than the usual stochastic policy gradient. To ensure adequate exploration, we introduce an off-policy actor-critic algorithm that learns a deterministic target policy from an exploratory behaviour policy. Deterministic policy gradient algorithms outperformed their stochastic counterparts in several benchmark problems, particularly in high-dimensional action spaces.},
+  pdf       = {http://proceedings.mlr.press/v32/silver14.pdf},
+  url       = {http://proceedings.mlr.press/v32/silver14.html},
+}
+
+@Article{Boer2005,
+  author    = {Pieter-Tjerk de Boer and Dirk P. Kroese and Shie Mannor and Reuven Y. Rubinstein},
+  journal   = {Annals of Operations Research},
+  title     = {A Tutorial on the Cross-Entropy Method},
+  year      = {2005},
+  month     = {feb},
+  number    = {1},
+  pages     = {19--67},
+  volume    = {134},
+  doi       = {10.1007/s10479-005-5724-z},
+  publisher = {Springer Science and Business Media {LLC}},
+}
+
+@Book{Goodfellow2016,
+  author    = {Ian Goodfellow and Yoshua Bengio and Aaron Courville},
+  publisher = {MIT Press},
+  title     = {Deep Learning},
+  year      = {2016},
+  note      = {\url{http://www.deeplearningbook.org}},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
