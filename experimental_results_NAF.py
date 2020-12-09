@@ -117,12 +117,31 @@ def plot_results(rewards, rewards_single, label=None, **kwargs):
         if verification:
             ax1.set_ylim(0, 275)
             ax.set_ylim(1, 10)
-    color = 'k'
+    color = 'lime'
     ax1.plot(np.cumsum(iterations), c=color)
     ax1.plot(np.cumsum(iterations_s), c=color, ls=':')
     ax1.set_ylabel('no. cumulative steps', color=color)
+    ax1.tick_params(axis='y', labelcolor=color)
     ax.set_title(label)
     # fig.suptitle(label, fontsize=12)
+    import matplotlib.lines as mlines
+
+    single_line = mlines.Line2D([], [], color='k', ls=':', label='single network')
+    double_line = mlines.Line2D([], [], color='k', ls='-', label='double network')
+    plt.legend(handles=[single_line,double_line])
+
+    # import pandas as pd
+    # df = pd.DataFrame([iterations[:10], iterations[-10:]], index=['initial','final']).T
+    # df_d =df.describe().T[['mean']]
+    # df = pd.DataFrame([iterations_s[:10], iterations_s[-10:]], index=['initial','final']).T
+    # df_s = df.describe().T[['mean']]
+    # df = pd.concat([df_s,df_d], axis=1)
+    # df.columns =['single network', 'double network']
+    # pd.plotting.table(ax, np.round(df, 2), loc='center right', colWidths=[0.15, 0.15],
+    #                 colLabels=[single_line,double_line], label='av')
+    # New subplot
+    # plt.legend(['double network', 'single network'])
+
 
     ax = axs[1]
     # ax.axvspan(0, 100, alpha=0.2, color='coral')
@@ -152,6 +171,7 @@ def plot_results(rewards, rewards_single, label=None, **kwargs):
         save_name = kwargs.get('save_name')
         plt.savefig(save_name + '_episodes.pdf')
         plt.savefig(save_name + '_episodes.png')
+        plt.savefig(save_name + '_episodes.pgf')
     plt.show()
 
 
@@ -170,29 +190,6 @@ def read_losses_v_s(losses0, v_s0, max_length):
     losses = np.mean(losses_all, axis=0)
     v_s = np.mean(v_s_all, axis=0)
     return losses, v_s
-
-
-file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_double_q_Tango_11'
-rews0, inits0, losses0, v_s0 = load_pickle_final(file_name)
-file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_double_q_Tango_11_bis'
-rews1, inits1, losses1, v_s1 = load_pickle_final(file_name)
-losses, v_s = read_losses_v_s([losses0, losses1], [v_s0, v_s1], 691)
-rewards = [rews0, rews1]
-
-file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_single_q_Tango_11'
-rews0, inits0, losses0, v_s0 = load_pickle_final(file_name)
-file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_single_q_Tango_11_bis'
-rews1, inits1, losses1, v_s1 = load_pickle_final(file_name)
-losses_s, v_s_s = read_losses_v_s([losses0, losses1], [v_s0, v_s1], 691)
-
-rewards_s = [rews0, rews1]
-
-
-name = 'Rewards_NAF_double'
-save_data(rewards,name=name)
-name = 'Rewards_NAF_single'
-save_data(rewards_s,name=name)
-
 
 def plot_convergence(losses, v_s, losses_s, v_s_s, label, **kwargs):
     fig, ax = plt.subplots()
@@ -221,15 +218,50 @@ def plot_convergence(losses, v_s, losses_s, v_s_s, label, **kwargs):
         plt.savefig(save_name + '_convergence' + '.png')
     plt.show()
 
+file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_double_q_Tango_11'
+rews0, inits0, losses0, v_s0 = load_pickle_final(file_name)
+file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_double_q_Tango_11_bis'
+rews1, inits1, losses1, v_s1 = load_pickle_final(file_name)
+losses, v_s = read_losses_v_s([losses0, losses1], [v_s0, v_s1], 691)
+rewards = [rews0, rews1]
 
-label = 'FERMI_all_experiments_NAF_training'
-save_name = 'Figures/' + label
-plot_results(rewards, rewards_s, 'NAF trainings', save_name=save_name, data_range_in=[0, 100])
+file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_single_q_Tango_11'
+rews0, inits0, losses0, v_s0 = load_pickle_final(file_name)
+file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_single_q_Tango_11_bis'
+rews1, inits1, losses1, v_s1 = load_pickle_final(file_name)
+losses_s, v_s_s = read_losses_v_s([losses0, losses1], [v_s0, v_s1], 691)
 
-label = 'FERMI_all_experiments_NAF_verification'
-save_name = 'Figures/' + label
-plot_results(rewards, rewards_s, 'NAF verifications', save_name=save_name, data_range_in=[99, 150], verification=True)
+rewards_s = [rews0, rews1]
 
-label = 'FERMI_all_experiments_NAF'
-save_name = 'Figures/' + label
-plot_convergence(losses, v_s, losses_s, v_s_s, label='NAF trainings - metrics', save_name=save_name)
+# name = 'Rewards_NAF_double'
+# save_data(rewards, name=name)
+# name = 'Rewards_NAF_single'
+# save_data(rewards_s, name=name)
+
+
+# label = 'FERMI_all_experiments_NAF_training'
+# save_name = 'Figures/' + label
+# plot_results(rewards, rewards_s, 'NAF trainings', save_name=save_name, data_range_in=[0, 100])
+#
+# label = 'FERMI_all_experiments_NAF_verification'
+# save_name = 'Figures/' + label
+# plot_results(rewards, rewards_s, 'NAF verifications', save_name=save_name, data_range_in=[99, 150], verification=True)
+
+# label = 'FERMI_all_experiments_NAF'
+# save_name = 'Figures/' + label
+# plot_convergence(losses, v_s, losses_s, v_s_s, label='NAF trainings - metrics', save_name=save_name)
+
+
+
+
+file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_double_q_Tango_11'
+states_0, actions_0, rewards_0, dones_0 = load_pickle_logging(file_name)
+file_name = 'Data_Experiments/2020_07_20_NAF@FERMI/FEL_training_100_double_q_Tango_11_bis'
+states_1, actions_1, rewards_1, dones_1 = load_pickle_logging(file_name)
+rewards = [rewards_0, rewards_1]
+
+import pandas as pd
+data = (pd.concat([pd.DataFrame(actions_1[i][1:]) for i in range(len(actions_1))], axis=1, keys=range(len(actions_1))))
+print(data)
+data.plot()
+plt.show()

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  7 DEC 2020 13:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  9 DEC 2020 14:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -834,10 +834,10 @@ File: tikzlibrarypositioning.code.tex 2020/10/01 v3.1.6a (3.1.6a)
 
 (./tex/defs.tex)
 Class revtex4-2 Info: Unrecognized array package. Please update this document c
-lass! (Proceeding with fingers crossed.) on input line 110.
-Class revtex4-2 Info: cite was not loaded (OK!) on input line 110.
-Class revtex4-2 Info: mcite was not loaded (OK!) on input line 110.
-Class revtex4-2 Info: multicol was not loaded (OK!) on input line 110.
+lass! (Proceeding with fingers crossed.) on input line 111.
+Class revtex4-2 Info: cite was not loaded (OK!) on input line 111.
+Class revtex4-2 Info: mcite was not loaded (OK!) on input line 111.
+Class revtex4-2 Info: multicol was not loaded (OK!) on input line 111.
 
 
 LaTeX Warning: Unused global option(s):
@@ -846,22 +846,22 @@ LaTeX Warning: Unused global option(s):
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
  (c:/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count334
@@ -887,7 +887,7 @@ e
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 110.
+Package hyperref Info: Link coloring OFF on input line 111.
 
 (c:/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -900,9 +900,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count340
 )
-LaTeX Info: Redefining \ref on input line 110.
-LaTeX Info: Redefining \pageref on input line 110.
-LaTeX Info: Redefining \nameref on input line 110.
+LaTeX Info: Redefining \ref on input line 111.
+LaTeX Info: Redefining \pageref on input line 111.
+LaTeX Info: Redefining \nameref on input line 111.
 
 (./main.out) (./main.out)
 \@outlinefile=\write5
@@ -916,41 +916,41 @@ File: siunitx-abbreviations.cfg 2017/11/26 v2.7k siunitx: Abbreviated units
 glish.dict
 Dictionary: translator-basic-dictionary, Language: English 
 )
-Class revtex4-2 Info: Taking \maketitle back from hyperref on input line 110.
+Class revtex4-2 Info: Taking \maketitle back from hyperref on input line 111.
 \openout3 = `mainNotes.bib'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 110
+LaTeX Font Info:    Trying to load font information for U+msa on input line 111
 .
  (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 110
+LaTeX Font Info:    Trying to load font information for U+msb on input line 111
 .
 
 (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for U+wasy on input line 11
-0.
+1.
 
 (c:/texlive/2020/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
 
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <7> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 110.
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 111.
 
 
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <5> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 110.
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 111.
 
 
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <9> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 139.
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 140.
 
 
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <6> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 139.
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 140.
 
 [1{c:/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 (./Figures/SL_Alignment_Scheme.tex
@@ -959,97 +959,53 @@ LaTeX Font Warning: Font shape `U/wasy/b/n' in size <8> not available
 (Font)              Font shape `U/wasy/m/n' tried instead on input line 29.
 
 ) [2]
-<Figures/MBRL_overview.pdf, id=211, 845.1575pt x 597.23125pt>
+<Figures/MBRL_overview.pdf, id=215, 845.1575pt x 597.23125pt>
 File: Figures/MBRL_overview.pdf Graphic file (type pdf)
 <use Figures/MBRL_overview.pdf>
-Package pdftex.def Info: Figures/MBRL_overview.pdf  used on input line 283.
+Package pdftex.def Info: Figures/MBRL_overview.pdf  used on input line 288.
 (pdftex.def)             Requested size: 255.0pt x 180.1914pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 283--284
+Overfull \hbox (9.0pt too wide) in paragraph at lines 288--289
  [][] 
  []
 
 [3] [4 <./Figures/MBRL_overview.pdf>]
-<Figures/FERMI_all_experiments_NAF_training_episodes.pdf, id=291, 462.52798pt x
+<Figures/FERMI_all_experiments_NAF_training_episodes.pdf, id=299, 462.52798pt x
  346.89601pt>
 File: Figures/FERMI_all_experiments_NAF_training_episodes.pdf Graphic file (typ
 e pdf)
 <use Figures/FERMI_all_experiments_NAF_training_episodes.pdf>
 Package pdftex.def Info: Figures/FERMI_all_experiments_NAF_training_episodes.pd
-f  used on input line 340.
+f  used on input line 346.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 340--341
+Overfull \hbox (9.0pt too wide) in paragraph at lines 346--347
  [][] 
  []
 
-<Figures/FERMI_all_experiments_NAF_verification_episodes.pdf, id=293, 462.52798
+<Figures/FERMI_all_experiments_NAF_verification_episodes.pdf, id=301, 462.52798
 pt x 346.89601pt>
 File: Figures/FERMI_all_experiments_NAF_verification_episodes.pdf Graphic file 
 (type pdf)
 <use Figures/FERMI_all_experiments_NAF_verification_episodes.pdf>
 Package pdftex.def Info: Figures/FERMI_all_experiments_NAF_verification_episode
-s.pdf  used on input line 347.
+s.pdf  used on input line 353.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 347--348
+Overfull \hbox (9.0pt too wide) in paragraph at lines 353--354
  [][] 
  []
 
-<Figures/FERMI_all_experiments_NAF_convergence.pdf, id=295, 462.52798pt x 346.8
+<Figures/FERMI_all_experiments_NAF_convergence.pdf, id=303, 462.52798pt x 346.8
 9601pt>
 File: Figures/FERMI_all_experiments_NAF_convergence.pdf Graphic file (type pdf)
 
 <use Figures/FERMI_all_experiments_NAF_convergence.pdf>
 Package pdftex.def Info: Figures/FERMI_all_experiments_NAF_convergence.pdf  use
-d on input line 354.
+d on input line 360.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 354--355
- [][] 
- []
-
-<Figures/AE-DYNA_observables.pdf, id=310, 462.52798pt x 346.89601pt>
-File: Figures/AE-DYNA_observables.pdf Graphic file (type pdf)
-<use Figures/AE-DYNA_observables.pdf>
-Package pdftex.def Info: Figures/AE-DYNA_observables.pdf  used on input line 36
-5.
-(pdftex.def)             Requested size: 255.0pt x 191.25389pt.
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 365--366
- [][] 
- []
-
-<Figures/AE-DYNA_verification.pdf, id=312, 462.52798pt x 346.89601pt>
-File: Figures/AE-DYNA_verification.pdf Graphic file (type pdf)
-<use Figures/AE-DYNA_verification.pdf>
-Package pdftex.def Info: Figures/AE-DYNA_verification.pdf  used on input line 3
-72.
-(pdftex.def)             Requested size: 255.0pt x 191.25389pt.
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 372--373
- [][] 
- []
-
-<Figures/ME-TRPO_observables.pdf, id=314, 462.52798pt x 346.89601pt>
-File: Figures/ME-TRPO_observables.pdf Graphic file (type pdf)
-<use Figures/ME-TRPO_observables.pdf>
-Package pdftex.def Info: Figures/ME-TRPO_observables.pdf  used on input line 37
-8.
-(pdftex.def)             Requested size: 255.0pt x 191.25389pt.
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 378--379
- [][] 
- []
-
-<Figures/ME-TRPO_verification.pdf, id=316, 462.52798pt x 346.89601pt>
-File: Figures/ME-TRPO_verification.pdf Graphic file (type pdf)
-<use Figures/ME-TRPO_verification.pdf>
-Package pdftex.def Info: Figures/ME-TRPO_verification.pdf  used on input line 3
-84.
-(pdftex.def)             Requested size: 255.0pt x 191.25389pt.
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 384--385
+Overfull \hbox (9.0pt too wide) in paragraph at lines 360--361
  [][] 
  []
 
@@ -1057,141 +1013,176 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 384--385
 _all_experiments_NAF_verification_episodes.pdf>]
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 393.
+ on input line 368.
+
+<Figures/AE-DYNA_observables.pdf, id=415, 462.52798pt x 346.89601pt>
+File: Figures/AE-DYNA_observables.pdf Graphic file (type pdf)
+<use Figures/AE-DYNA_observables.pdf>
+Package pdftex.def Info: Figures/AE-DYNA_observables.pdf  used on input line 37
+1.
+(pdftex.def)             Requested size: 255.0pt x 191.25389pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 371--372
+ [][] 
+ []
+
+<Figures/AE-DYNA_verification.pdf, id=417, 462.52798pt x 346.89601pt>
+File: Figures/AE-DYNA_verification.pdf Graphic file (type pdf)
+<use Figures/AE-DYNA_verification.pdf>
+Package pdftex.def Info: Figures/AE-DYNA_verification.pdf  used on input line 3
+78.
+(pdftex.def)             Requested size: 255.0pt x 191.25389pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 378--379
+ [][] 
+ []
+
+<Figures/ME-TRPO_observables.pdf, id=419, 462.52798pt x 346.89601pt>
+File: Figures/ME-TRPO_observables.pdf Graphic file (type pdf)
+<use Figures/ME-TRPO_observables.pdf>
+Package pdftex.def Info: Figures/ME-TRPO_observables.pdf  used on input line 38
+4.
+(pdftex.def)             Requested size: 255.0pt x 191.25389pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 384--385
+ [][] 
+ []
+
+<Figures/ME-TRPO_verification.pdf, id=421, 462.52798pt x 346.89601pt>
+File: Figures/ME-TRPO_verification.pdf Graphic file (type pdf)
+<use Figures/ME-TRPO_verification.pdf>
+Package pdftex.def Info: Figures/ME-TRPO_verification.pdf  used on input line 3
+90.
+(pdftex.def)             Requested size: 255.0pt x 191.25389pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 390--391
+ [][] 
+ []
 
 [6 <./Figures/FERMI_all_experiments_NAF_convergence.pdf> <./Figures/AE-DYNA_obs
-ervables.pdf> <./Figures/AE-DYNA_verification.pdf> <./Figures/ME-TRPO_observabl
-es.pdf>]
+ervables.pdf> <./Figures/AE-DYNA_verification.pdf>]
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 393.
+ on input line 399.
 
 
-Underfull \hbox (badness 1406) in paragraph at lines 424--427
+Underfull \hbox (badness 1406) in paragraph at lines 430--433
 []\OT1/cmr/m/n/10 The pre-sented meth-ods hold tremen-dous promise
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 424--427
+Underfull \hbox (badness 10000) in paragraph at lines 430--433
 
  []
 
-[7 <./Figures/ME-TRPO_verification.pdf>]
-<Figures/Comparison_naf.pdf, id=666, 462.52798pt x 346.89601pt>
+[7 <./Figures/ME-TRPO_observables.pdf> <./Figures/ME-TRPO_verification.pdf>]
+<Figures/Comparison_naf.pdf, id=679, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_naf.pdf Graphic file (type pdf)
 <use Figures/Comparison_naf.pdf>
-Package pdftex.def Info: Figures/Comparison_naf.pdf  used on input line 476.
+Package pdftex.def Info: Figures/Comparison_naf.pdf  used on input line 482.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 476--477
+Overfull \hbox (9.0pt too wide) in paragraph at lines 482--483
  [][] 
  []
 
-<Figures/Comparison_noise.pdf, id=670, 462.52798pt x 346.89601pt>
+[8]
+<Figures/Comparison_noise.pdf, id=696, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_noise.pdf Graphic file (type pdf)
 <use Figures/Comparison_noise.pdf>
-Package pdftex.def Info: Figures/Comparison_noise.pdf  used on input line 491.
+Package pdftex.def Info: Figures/Comparison_noise.pdf  used on input line 497.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 491--492
+Overfull \hbox (9.0pt too wide) in paragraph at lines 497--498
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8 <./Figures/Comparison_naf.pdf>]
-
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 502.
-
-<Figures/Comparison_noise_ae_dyna.pdf, id=733, 462.52798pt x 346.89601pt>
+<Figures/Comparison_noise_ae_dyna.pdf, id=705, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_noise_ae_dyna.pdf Graphic file (type pdf)
 <use Figures/Comparison_noise_ae_dyna.pdf>
 Package pdftex.def Info: Figures/Comparison_noise_ae_dyna.pdf  used on input li
-ne 534.
+ne 540.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 534--535
+Overfull \hbox (9.0pt too wide) in paragraph at lines 540--541
  [][] 
  []
 
-<Figures/Comparison_models_sizes.pdf, id=736, 462.52798pt x 346.89601pt>
+<Figures/Comparison_models_sizes.pdf, id=708, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_models_sizes.pdf Graphic file (type pdf)
 <use Figures/Comparison_models_sizes.pdf>
 Package pdftex.def Info: Figures/Comparison_models_sizes.pdf  used on input lin
-e 541.
+e 547.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 541--542
+Overfull \hbox (9.0pt too wide) in paragraph at lines 547--548
  [][] 
  []
 
+[9 <./Figures/Comparison_naf.pdf> <./Figures/Comparison_noise.pdf>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Figures/Comparison_NAF_AE-DYNA.pdf, id=739, 462.52798pt x 346.89601pt>
+<Figures/Comparison_NAF_AE-DYNA.pdf, id=807, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_NAF_AE-DYNA.pdf Graphic file (type pdf)
 <use Figures/Comparison_NAF_AE-DYNA.pdf>
 Package pdftex.def Info: Figures/Comparison_NAF_AE-DYNA.pdf  used on input line
- 549.
+ 555.
 (pdftex.def)             Requested size: 255.0pt x 191.25389pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 549--550
+Overfull \hbox (9.0pt too wide) in paragraph at lines 555--556
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[9 <./Figures/Comparison_noise.pdf> <./Figures/Comparison_noise_ae_dyna.pdf>]
-
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 570.
-
-(./main.bbl
-Underfull \hbox (badness 1616) in paragraph at lines 186--193
+(./main.bbl [10 <./Figures/Comparison_noise_ae_dyna.pdf> <./Figures/Comparison_
+models_sizes.pdf> <./Figures/Comparison_NAF_AE-DYNA.pdf>]
+Underfull \hbox (badness 1616) in paragraph at lines 204--211
  \OT1/cmr/m/n/9 D. Gamba, S. Hirlan-der, A. Huschauer, V. Kain,
  []
 
 
-Underfull \hbox (badness 4954) in paragraph at lines 212--218
+Underfull \hbox (badness 4954) in paragraph at lines 230--236
  []\OT1/cmr/m/n/9 R. Rous-sel, A. Hanuka, and A. Ede-len, Multi-
  []
 
-[10 <./Figures/Comparison_models_sizes.pdf> <./Figures/Comparison_NAF_AE-DYNA.p
-df>]
-Underfull \hbox (badness 1742) in paragraph at lines 410--414
+
+Underfull \hbox (badness 1742) in paragraph at lines 428--432
  []\OT1/cmr/m/n/9 S. Hirlaen-der, []Mathphyssim/per-naf: Ini-tial re-lease[]
  []
 
 
-Underfull \hbox (badness 2165) in paragraph at lines 433--439
+Underfull \hbox (badness 2165) in paragraph at lines 451--457
  []\OT1/cmr/m/n/9 V. Mnih, K. Kavukcuoglu, D. Sil-ver, A. Graves,
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 667--671
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 690--694
  []\OT1/cmr/m/n/9 S. Hirlaen-der and N. Bru-chon, []Math-phys-
  []
 
 
-Underfull \hbox (badness 2293) in paragraph at lines 728--733
+Underfull \hbox (badness 2293) in paragraph at lines 751--756
  []\OT1/cmr/m/n/9 Y. Chen and D. S. Oliver, En-sem-ble ran-dom-ized
  []
 
-[11]) [12] (./main.aux)
+) [12] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 496144E13345CD3CA00037088ACA4FF8;1911.
+(rerunfilecheck)             Checksum: E68EFCC4CC2DCE95DBA89A51B9A8F39C;1992.
  ) 
 Here is how much of TeX's memory you used:
- 26778 strings out of 479917
- 524165 string characters out of 5886664
- 823399 words of memory out of 5000000
- 42744 multiletter control sequences out of 15000+600000
+ 26788 strings out of 479917
+ 524416 string characters out of 5886664
+ 821012 words of memory out of 5000000
+ 42751 multiletter control sequences out of 15000+600000
  553319 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,13n,77p,1034b,1014s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,13n,77p,1034b,976s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/tex
 live/2020/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb><c:/texlive
 /2020/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb><c:/texlive/20
@@ -1220,10 +1211,10 @@ xlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/202
 st/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2020/texmf-dist/f
 onts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2020/texmf-dist/fonts/type1
 /public/cm-super/sfti0900.pfb>
-Output written on main.pdf (12 pages, 1352289 bytes).
+Output written on main.pdf (12 pages, 1355721 bytes).
 PDF statistics:
- 1131 PDF objects out of 1200 (max. 8388607)
- 633 compressed objects within 7 object streams
- 122 named destinations out of 1000 (max. 500000)
- 356 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1149 PDF objects out of 1200 (max. 8388607)
+ 646 compressed objects within 7 object streams
+ 125 named destinations out of 1000 (max. 500000)
+ 364 words of extra memory for PDF output out of 10000 (max. 10000000)
 
