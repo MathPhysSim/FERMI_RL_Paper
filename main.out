@@ -14,13 +14,14 @@
 \BOOKMARK [3][-]{section*.16}{Overview of the used algorithms}{section*.15}% 14
 \BOOKMARK [1][-]{section*.18}{Experimental results from FERMI RL online tests}{section*.2}% 15
 \BOOKMARK [2][-]{section*.19}{MFRL tests}{section*.18}% 16
-\BOOKMARK [2][-]{section*.23}{MBRL tests}{section*.18}% 17
-\BOOKMARK [1][-]{section*.28}{Discussion and outlook}{section*.2}% 18
-\BOOKMARK [1][-]{section*.30}{Conclusions}{section*.2}% 19
-\BOOKMARK [1][-]{section*.31}{A non-linear standard control problem}{section*.2}% 20
-\BOOKMARK [2][-]{section*.32}{NAF2 details}{section*.31}% 21
-\BOOKMARK [2][-]{section*.34}{The impact of noise}{section*.31}% 22
-\BOOKMARK [3][-]{section*.36}{Regression assuming homoskedastic Gaussian noise using `Anchored ensembling'}{section*.34}% 23
-\BOOKMARK [2][-]{section*.39}{NAF versus AE-DYNA}{section*.31}% 24
-\BOOKMARK [1][-]{section*.41}{Still open}{section*.2}% 25
-\BOOKMARK [1][-]{section*.42}{References}{section*.2}% 26
+\BOOKMARK [2][-]{section*.25}{MBRL tests}{section*.18}% 17
+\BOOKMARK [1][-]{section*.30}{Discussion and outlook}{section*.2}% 18
+\BOOKMARK [1][-]{section*.32}{Conclusions}{section*.2}% 19
+\BOOKMARK [1][-]{section*.33}{Acknowledgements}{section*.2}% 20
+\BOOKMARK [1][-]{section*.34}{A non-linear standard control problem}{section*.2}% 21
+\BOOKMARK [2][-]{section*.35}{NAF2 details}{section*.34}% 22
+\BOOKMARK [2][-]{section*.37}{The impact of noise}{section*.34}% 23
+\BOOKMARK [3][-]{section*.39}{Regression assuming homoskedastic Gaussian noise using `Anchored ensembling'}{section*.37}% 24
+\BOOKMARK [2][-]{section*.42}{NAF versus AE-DYNA}{section*.34}% 25
+\BOOKMARK [1][-]{section*.44}{Still open}{section*.2}% 26
+\BOOKMARK [1][-]{section*.45}{References}{section*.2}% 27

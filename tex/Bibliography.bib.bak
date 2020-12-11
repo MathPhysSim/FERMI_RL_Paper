@@ -526,18 +526,6 @@
   keywords    = {cs.AI, cs.LG, physics.acc-ph},
 }
 
-@Article{Scheinker2020,
-  author      = {Alexander Scheinker and Simon Hirlaender and Francesco Maria Velotti and Spencer Gessner and Giovanni Zevi Della Port and Verena Kain and Rebecca Ramjiawan},
-  title       = {Online Multi-Objective Particle Accelerator Optimization of the AWAKE Electron Beam Line for Simultaneous Emittance and Orbit Control},
-  abstract    = {Multi-objective optimization is important for particle accelerators where various competing objectives must be satisfied routinely such as, for example, transverse emittance vs bunch length. We develop and demonstrate an online multi-time scale multi-objective optimization algorithm that performs real time feedback on particle accelerators. We demonstrate the ability to simultaneously minimize the emittance and maintain a reference trajectory of a beam in the electron beamline in CERN's Advanced Proton Driven Plasma Wakefield Acceleration Experiment (AWAKE).},
-  date        = {2020-03-24},
-  eprint      = {2003.11155},
-  eprintclass = {physics.acc-ph},
-  eprinttype  = {arXiv},
-  file        = {:http\://arxiv.org/pdf/2003.11155v1:PDF},
-  keywords    = {physics.acc-ph, math.DS, math.OC},
-}
-
 @Article{Hirlaender2019,
   author    = {Hirlaender, Simon and Fraser, Matthew and Goddard, Brennan and Kain, Verena and Prieto, Javier and Stoel, Linda and Szakaly, Marcel and Velotti, Francesco},
   journal   = {Proceedings of the 10th Int. Particle Accelerator Conf.},
@@ -746,7 +734,31 @@
   doi       = {10.5281/zenodo.4271581},
   publisher = {Zenodo},
   url       = {https://doi.org/10.5281/zenodo.4271581},
-  version   = {0},
+}
+
+@Article{Scheinker2020,
+  author    = {Alexander Scheinker and Simon Hirlaender and Francesco Maria Velotti and Spencer Gessner and Giovanni Zevi Della Porta and Verena Kain and Brennan Goddard and Rebecca Ramjiawan},
+  journal   = {{AIP} Advances},
+  title     = {Online multi-objective particle accelerator optimization of the {AWAKE} electron beam line for simultaneous emittance and orbit control},
+  year      = {2020},
+  month     = {may},
+  number    = {5},
+  pages     = {055320},
+  volume    = {10},
+  doi       = {10.1063/5.0003423},
+  publisher = {{AIP} Publishing},
+}
+
+@Article{Scheinker2018,
+  author    = {Alexander Scheinker and Auralee Edelen and Dorian Bohler and Claudio Emma and Alberto Lutman},
+  journal   = {Physical Review Letters},
+  title     = {Demonstration of Model-Independent Control of the Longitudinal Phase Space of Electron Beams in the Linac-Coherent Light Source with Femtosecond Resolution},
+  year      = {2018},
+  month     = {jul},
+  number    = {4},
+  volume    = {121},
+  doi       = {10.1103/physrevlett.121.044801},
+  publisher = {American Physical Society ({APS})},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

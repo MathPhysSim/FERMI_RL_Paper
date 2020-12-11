@@ -4,6 +4,7 @@ import os
 import pickle
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 label = ["ME-TRPO", "AE-DYNA", 'Simulation'][0]
 
@@ -27,14 +28,16 @@ def read_rewards(rewards):
     final_rews = []
     mean_rews = []
     for i in range(len(rewards)):
-        if len(rewards[i]) > 0:
-            final_rews.append(rewards[i][len(rewards[i]) - 1])
-            iterations.append(len(rewards[i]))
+        current_rewards = rewards[i][1:]
+        if len(current_rewards) > 0:
+            # print(current_rewards)
+            final_rews.append(rewards[i][-1])
+            iterations.append(len(current_rewards))
             try:
-                mean_rews.append(np.sum(rewards[i][1:]))
+                mean_rews.append(np.sum(current_rewards))
             except:
                 mean_rews.append([])
-            stds.append(np.std(rewards[i][1:]))
+            stds.append(np.std(current_rewards))
 
     # iterations = np.mean(np.array(iterations_all), axis=0)
     # final_rews = np.mean(np.array(final_rews_all), axis=0)
@@ -159,6 +162,111 @@ def plot_results(data, label=None, **kwargs):
         plt.savefig(save_name + '_verification.png')
     plt.show()
 
+def plot_results_verification(data_array, label=None, **kwargs):
+    if 'data_range_in' in kwargs:
+        data_range_in = kwargs.get('data_range_in')
+    else:
+        data_range_in = None
+
+    rewards = data_array[0]['rews']
+    iterations, final_rews, mean_rews, _ = read_rewards(rewards)
+
+    rewards = data_array[1]['rews']
+    iterations_s, final_rews_s, mean_rews_s, iter_all_s = read_rewards(rewards)
+    plot_suffix = ""  # f', number of iterations: {env.TOTAL_COUNTER}, Linac4 time: {env.TOTAL_COUNTER / 600:.1f} h'
+    fig, axs = plt.subplots(1, 1, sharex=True)
+    fig.set_size_inches(fig.get_size_inches()[0],fig.get_size_inches()[1]*0.6)
+    ax = axs
+    # ax.axvspan(0, 100, alpha=0.2, color='coral')
+    color = 'blue'
+    x = np.arange(0, len(iterations))
+    ax.plot(iterations, c=color)
+    # ax.fill_between(x, iterations[0] - iterations[1], iterations[0] + iterations[1], color=color, alpha=0.1)
+    # color = 'orange'
+    x = np.arange(0, len(iterations_s))
+    ax.plot(iterations_s, c=color, ls=':')
+    # ax.fill_between(x, iterations_s[0] - iterations_s[1], iterations_s[0] + iterations_s[1], color=color, alpha=0.1)
+
+    ax.set_ylabel('no. iterations', color=color)
+    ax.tick_params(axis='y', labelcolor=color)
+    ax.set_ylim(0, 10)
+    ax1 = plt.twinx(ax)
+    if 'verification' in kwargs:
+        verification = kwargs.get('verification')
+        if verification:
+            ax1.set_ylim(0, 275)
+            ax.set_ylim(0, 10)
+    color = 'lime'
+    iterations_mean = np.cumsum(iterations)
+    ax1.plot(iterations_mean, c=color)
+    x = np.arange(0, len(iterations_mean))
+    # ax1.fill_between(x, iterations_mean-iterations_std, iterations_mean
+    #                  + iterations_std, color=color, alpha=0.1)
+
+    iterations_mean = np.cumsum(iterations_s)
+    ax1.plot(iterations_mean, c=color, ls=':')
+    x = np.arange(0, len(iterations_mean))
+    # ax1.fill_between(x, iterations_mean-iterations_std, iterations_mean
+    #                  + iterations_std, color=color, alpha=0.1)
+
+    ax1.set_ylabel('no. cumulative steps', color=color)
+    ax1.tick_params(axis='y', labelcolor=color)
+    ax.set_title(label)
+    ax.set_xlabel('no. episodes')
+    # fig.suptitle(label, fontsize=12)
+    import matplotlib.lines as mlines
+
+    single_line = mlines.Line2D([], [], color='k', ls=':', label='AE-DYNA')
+    double_line = mlines.Line2D([], [], color='k', ls='-', label='ME-TRPO')
+    plt.legend(handles=[single_line, double_line])
+
+    # import pandas as pd
+    # df = pd.DataFrame([iterations[:10], iterations[-10:]], index=['initial','final']).T
+    # df_d =df.describe().T[['mean']]
+    # df = pd.DataFrame([iterations_s[:10], iterations_s[-10:]], index=['initial','final']).T
+    # df_s = df.describe().T[['mean']]
+    # df = pd.concat([df_s,df_d], axis=1)
+    # df.columns =['single network', 'double network']
+    # pd.plotting.table(ax, np.round(df, 2), loc='center right', colWidths=[0.15, 0.15],
+    #                 colLabels=[single_line,double_line], label='av')
+    # New subplot
+    # plt.legend(['double network', 'single network'])
+
+    # ax = axs[1]
+    # # ax.axvspan(0, 100, alpha=0.2, color='coral')
+    # color = 'blue'
+    # # ax.plot(starts, c=color)
+    # ax.plot(mean_rews[0], c=color)
+    # x = np.arange(0, len(mean_rews[0]))
+    # ax.fill_between(x, mean_rews[0] - mean_rews[1], mean_rews[0] + mean_rews[1], color=color, alpha=0.1)
+    # color = 'orange'
+    # ax.plot(mean_rews_s[0], c=color, ls=':')
+    # x = np.arange(0, len(mean_rews_s[0]))
+    # ax.fill_between(x, mean_rews_s[0] - mean_rews_s[1], mean_rews_s[0] + mean_rews_s[1], color=color, alpha=0.1)
+    # ax.set_ylabel('cum. return (arb. units)', color=color)
+    # # ax.axhline(-0.05, ls=':', color='r')
+    # ax.tick_params(axis='y', labelcolor=color)
+    # # ax.set_title('reward per episode (arb. units)')  # + plot_suffix)
+    # ax.set_xlabel('no. episodes')
+    #
+    # ax1 = plt.twinx(ax)
+    # color = 'lime'
+    # ax1.plot(final_rews[0][:-1], color=color)
+    # ax1.plot(final_rews_s[0][:-1], color=color, ls=':')
+    #
+    # ax1.set_ylabel('final return (arb. units)', color=color)
+    # ax1.axhline(-0.05, ls=':', color=color)
+    # ax1.tick_params(axis='y', labelcolor=color)
+
+    fig.align_labels()
+    fig.tight_layout()
+    # fig.suptitle('NonUniformImage class', fontsize='large')
+    if 'save_name' in kwargs:
+        save_name = kwargs.get('save_name')
+        plt.savefig(save_name + '_episodes.pdf')
+        plt.savefig(save_name + '_episodes.png')
+        plt.savefig(save_name + '_episodes.pgf')
+    plt.show()
 
 def plot_observables(data, label='Experiment', **kwargs):
     """plot observables during the test"""
@@ -224,7 +332,14 @@ def save_data(data, name):
     out_put_writer.close()
 
 # plot verification
-if label in ["ME-TRPO", "AE-DYNA", "Simulation"]:
+data_array=[]
+for label in ["ME-TRPO", "AE-DYNA"]:
+    if label == "ME-TRPO":
+        # ME-TRPO results
+        project_directory = 'Data_Experiments/2020_10_06_ME_TRPO_stable@FERMI/run2/'
+    elif label == "AE-DYNA":
+        # AE-Dyna results
+        project_directory = 'Data_Experiments/2020_11_05_AE_Dyna@FERMI/-nr_steps_25-cr_lr-n_ep_13-m_bs_100-sim_steps_3000-m_iter_35-ensnr_3-init_200/'
     filenames = []
     for file in os.listdir(project_directory):
         if 'final' in file:
@@ -237,14 +352,22 @@ if label in ["ME-TRPO", "AE-DYNA", "Simulation"]:
 
     filehandler = open(project_directory + filename, 'rb')
     object = pickle.load(filehandler)
+
+    if label == "ME-TRPO":
+        object_me = object.copy()
+    else:
+        object_ae = object.copy()
+    data_array.append(object)
     save_name = 'Figures/' + label
-    plot_results(object, label=label, save_name=save_name)
 
     name = 'Rewards_'+label
     print(name)
-    save_data(object['rews'], name=name)
+    data_out = object['rews']
 
+    save_data(data_out, name=name)
 
+save_name = 'Figures/Verification_DYNA_all'
+plot_results_verification(data_array, label='DYNA-verification', save_name=save_name)
 # plot observables
 
 filenames = []
@@ -257,7 +380,100 @@ filenames.sort()
 filename = filenames[-1]
 print(filename)
 
-filehandler = open(project_directory + filename, 'rb')
-object = pickle.load(filehandler)
+# filehandler = open(project_directory + filename, 'rb')
+# object = pickle.load(filehandler)
 save_name = 'Figures/' + label + '_observables'
-plot_observables(object, label=label, save_name=save_name)
+# plot_observables(object, label=label, save_name=save_name)
+
+
+
+object = object_me
+states_1 = object['obss']
+print('object', object['obss'])
+dones_1 = object['dones']
+rewards_1 = object['rews']
+actions_1 = object['acts']
+selected_item = np.argmax([len(states_1[i]) for i
+                           in range( len(states_1))])
+
+# for max_lengths in range(len(states_1)):
+data_s = pd.DataFrame(states_1[selected_item])
+data_s.columns = ['tt1 tilt', 'tt1 incline', 'tt2 tilt', 'tt2 incline']
+data_r = pd.DataFrame(rewards_1[selected_item])
+data_r = data_r + 1
+max = data_r[1:][dones_1[selected_item][1:]].values
+
+font = {'family': 'serif',
+        'color': 'darkslategray',
+        'weight': 'normal',
+        'size': 12,
+        }
+import matplotlib.gridspec as gspec
+
+figure_name = 'Worst_episode_MBRL'
+fig, (ax_1, ax_2) = plt.subplots(2)
+
+ax = ax_1
+ax1 = ax.twinx()
+ax1.set_title(r'Worst verification episode ME-TRPO', fontdict=font, zorder=10)
+color = 'lime'
+
+ax1.axhline(y=0.95, c=color, ls='--')
+ax1.plot(data_r.index.values, data_r.values, c=color, drawstyle="steps-post")
+
+ax1.set_ylabel('FEL intensity (% of max)', color=color)
+ax1.tick_params(axis='y', labelcolor=color)
+
+ax.plot(data_r.index.values, data_s, ls=':', drawstyle="steps-post")
+
+ax.set_xlabel('no. step')
+ax.set_ylabel('norm. state (arb. units)')
+ax.legend(labels=data_s.columns, bbox_to_anchor=(0., 1.22, 1., .102), loc='lower left',
+          ncol=2, mode="expand", borderaxespad=0.)
+ax.set_ylim(0, 1)
+
+object = object_ae
+states_1 = object['obss']
+print('object', object['obss'])
+dones_1 = object['dones']
+rewards_1 = object['rews']
+actions_1 = object['acts']
+# shift = 52
+selected_item = np.argmax([len(states_1[i]) for i
+                           in range( len(states_1))])
+# print(selected_item)
+# selected_item = 4
+# for max_lengths in range(len(states_1)):
+data_s = pd.DataFrame(states_1[selected_item])
+data_a = pd.DataFrame(actions_1[selected_item][1:], columns=['1','2','3','4'])
+data_s.columns = data_a.columns
+data_correct = pd.concat([pd.DataFrame(data_s.iloc[0,:]).T, data_a], ignore_index=True)
+print(data_s.head())
+print(data_correct.cumsum().head())
+# print(data_a.iloc[:,:])
+data_s.columns = ['tt1 tilt', 'tt1 incline', 'tt2 tilt', 'tt2 incline']
+data_r = pd.DataFrame(rewards_1[selected_item])
+data_r = data_r + 1
+max = data_r[1:][dones_1[selected_item][1:]].values
+# data = pd.concat([data_s, data_r], axis=1)
+
+ax_0 = ax_2
+# ax_0.text(0, 1.02, r'Worst training episode among the last ten.', fontdict=font)
+ax_0.set_title(r'Worst verification episode AE-DYNA', fontdict=font)
+ax_0.plot(data_s.index.values, data_s.values, ls=':', drawstyle="steps-post")
+# plt.legend(loc='upper right')
+ax_0.set_xlabel('no. step')
+ax_0.set_ylabel('norm. state (arb. units)')
+ax_0.set_ylim(0, 1)
+color = 'lime'
+ax_1 = ax_0.twinx()
+ax_1.axhline(y=0.95, c=color, ls='--')
+ax_1.set_ylabel('FEL intensity (% of max)', color=color)
+ax_1.tick_params(axis='y', labelcolor=color)
+ax_1.plot(data_r.index.values, data_r.values, c=color, drawstyle="steps-post")
+
+# plt.title(f'len: {len(states_1[selected_item][1:])} nr: {selected_item}')
+plt.tight_layout(h_pad=0.2)
+fig.align_labels()
+plt.savefig('Figures/' + figure_name + '.pdf')
+plt.show()

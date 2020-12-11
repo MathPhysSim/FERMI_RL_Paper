@@ -175,7 +175,8 @@ prstab,
 	\section{The set-up of the studied problem}
 	\subsection{The physical set-up}
 	In a seeded free-electron laser one of the most critical parameters is the temporal and transverse overlap of the electron and laser beam in the magnetic section called modulator undulator.\\
-	At FERMI several beam-based feedback systems are deployed to control the beams trajectories shot to shot with the main purpose of guaranteeing a steady intensity of the light radiation. Nevertheless, in the last years, various approaches have been studied to investigate their applicability in tuning operations. \\
+%	At FERMI several beam-based feedback systems are deployed to control the beams trajectories shot to shot with the main purpose of guaranteeing a steady intensity of the light radiation. 
+In the last years, various approaches have been studied to investigate their applicability in tuning operations. \\
 	A free-electron laser is a fourth-generation light source where the lasing medium consists of a very-high-speed electron moving freely through a magnetic structure. By using an external seeding source, the FERMI FEL has several advantages relative to standard FEL approaches in terms of increased stability in pulse and photon energy, reduced size, improved longitudinal coherence, more control on the pulse structure, and improved temporal synchronization with external timing systems.\\
 The external optical laser signal interacts with the relativistic electron beam in the undulator, introducing an energy modulation that aids in the FEL process. The modulation in energy is converted into a charge modulation in the dispersive section, and finally, the density modulated beams radiation is amplified in the section of the radiator.\\
 	 The importance of ensuring the best possible overlap between the seed laser and the electron beam in the modulator is therefore evident.\\
@@ -192,12 +193,12 @@ The external optical laser signal interacts with the relativistic electron beam 
 	A schematic overview of the set-up is provided in \cref{fig:schematic_FEL}.
 	Two mirrors, TT1 and TT2, are used to control the trajectory of the laser by tilting and inclining, which gives a total of four degrees of freedom (DOF). In turn, the laser overlaps with the electron beam between the two screens, CCD1 and CCD2. Lastly, the monitor measures the intensity, $I_0$.\\
 	The final problem faced consists of optimising the seed laser trajectory to match the electron beam and consequently increase the intensity of the FEL radiation.
-	The RL algorithm accesses the problem via an \emph{openai gym} environment \cite{Brockman2016}, which interfaces the RL algorithm with the hardware control system.\\
+	The RL algorithm accesses the problem via an \emph{openai gym} environment \cite{Brockman2016}, which interfaces the RL algorithm with the control system.\\
 	The state $\bs$ is a four dimensional vector holding the current voltage values applied to the piezo motors, where each component lies within the normalized interval [-1, 1]. Two values correspond to the two DOF of each mirror. The action $\ba$ is four dimensional, namely a delta step on the voltages at time-step $t$ $\bs_t$:
 	\begin{align}
 		\bs_{t+1} = \bs_t+\ba_t.
 	\end{align} 
-	The training is done in episodes with a uniformly\footnote{in the normalized state-space} randomized initial state and a specific maximal length of taken steps afterwards - the horizon. For reason discussed later, the horizon varies in the applications between either 10 or 50 steps. An early termination happens if a specific threshold is obtained, which lies in all cases at 95\% of the maximal achievable intensity of the system \tocheck{discussion with Niky}.\\
+	The training is done in episodes with a uniformly\footnote{in the normalized state-space} randomized initial state and a specific maximal length of taken steps afterwards - the horizon. For reason discussed later, the horizon varies in the applications between either 10 or 50 steps. An early termination happens if a specific threshold is obtained, which lies in all cases at 95\% of the maximal achievable intensity of the system \tocheck{discussion with Niky}. In our experiments the maximal intensity was provided by a manual optimization done of an expert. \\
 	 During the training phase exploration and the training of the function approximator takes place.
 	After a defined number of training episodes, a verification of 50 episodes is performed. In the second phase, the RL only applies the learned policy.
 	
@@ -341,13 +342,24 @@ On the other hand, the on-policy algorithm TRPO \cite{Schulman2015} provides som
 	Because of the tight schedule at FERMI, only a few shifts of several hours could be reserved to carry out these experiments. Since there was a positive outcome, it is evident, that the utilised methods are at an operational level.\\
 	The \emph{NAF2} algorithm, the representative for highly sample efficient MFRL algorithms, is discussed first.
 	\subsection{MFRL tests}
-		\begin{figure}
+	\begin{figure}
 		\centering
 		\includegraphics*[width=0.5\textwidth]{Figures/FERMI_all_experiments_NAF_training_episodes.pdf}
 		\caption{The training of the \emph{NAF2} on the FERMI FEL using a single network (dashed) and a double network (solid).}
 		\label{fig:NAF_training}
 	\end{figure}
-	
+	\begin{figure}
+		\centering
+		\includegraphics*[width=0.5\textwidth]{Figures/Evolution_double.pdf}
+		\caption{The training of the \emph{NAF2} on the FERMI FEL using a single network (dashed) and a double network (solid).}
+		\label{fig:NAF_evolution_double}
+	\end{figure}
+	\begin{figure}
+	\centering
+	\includegraphics*[width=0.5\textwidth]{Figures/Evolution_single.pdf}
+	\caption{The training of the \emph{NAF2} on the FERMI FEL using a single network (dashed) and a double network (solid).}
+	\label{fig:NAF_evolution_single}
+\end{figure}
 	\begin{figure}
 		\centering
 		\includegraphics*[width=0.5\textwidth]{Figures/FERMI_all_experiments_NAF_verification_episodes.pdf}
@@ -375,22 +387,31 @@ On the other hand, the on-policy algorithm TRPO \cite{Schulman2015} provides som
 	
 	\begin{figure}
 		\centering
-		\includegraphics*[width=0.5\textwidth]{Figures/AE-DYNA_verification.pdf}
-		\caption{The verification of the \emph{AE-DYNA-SAC} on the FERMI FEL.}
+		\includegraphics*[width=0.5\textwidth]{Figures/Verification_DYNA_all_episodes.pdf}
+		\caption{The verification of the \emph{ME-TRPO} and the \emph{AE-DYNA-SAC} on the FERMI FEL.}
 		\label{fig:AE-DYNA_verification}
 	\end{figure}
+
+
 	\begin{figure}
 		\centering
 		\includegraphics*[width=0.5\textwidth]{Figures/ME-TRPO_observables.pdf}
 		\caption{The training of the ME-TRPO on the FERMI FEL.}
 		\label{fig:ME-TRPO_observables}
 	\end{figure}
+
 	\begin{figure}
-		\centering
-		\includegraphics*[width=0.5\textwidth]{Figures/ME-TRPO_verification.pdf}
-		\caption{The verification of the ME-TRPO on the FERMI FEL.}
-		\label{fig:ME-TRPO_verification}
+	\centering
+	\includegraphics*[width=0.5\textwidth]{Figures/Worst_episode_MBRL.pdf}
+	\caption{The verification of the \emph{ME-TRPO} and the \emph{AE-DYNA-SAC} on the FERMI FEL.}
+	\label{fig:Worst_episode_MBRL}
 	\end{figure}
+%	\begin{figure}
+%		\centering
+%		\includegraphics*[width=0.5\textwidth]{Figures/ME-TRPO_verification.pdf}
+%		\caption{The verification of the ME-TRPO on the FERMI FEL.}
+%		\label{fig:ME-TRPO_verification}
+%	\end{figure}
 	The second test campaign was employing the \emph{AE-DYNA} algorithm, as a representative for pure MBRL algorithms. Two variants were implemented: the \emph{ME-TRPO} variant and the \emph{AE-DYNA-SAC} variant. The algorithmic design details are discussed in \cref{ss:critical_design}. 
 	\\ The first uses the trust region policy optimisation -\emph{TRPO}- \cite{Schulman2015} to train the controller. The TRPO monotonically converges to better policy, and this property is exploited in training. The convergence property can be seen in \cref{fig:ME-TRPO_observables}. In the upper figure, the total reward per batch and the number of data-points are shown as used to train the dynamics model against the number of epochs. In the lower plot, the average cumulative reward as achieved by the TRPO on the individual models in the ensemble on ten episodes as in dependence of the epochs is drawn. During an epoch the \emph{TRPO} is trained for 10000 steps on the synthetic data. The shaded area shows the corresponding standard deviation to indicate the uncertainty of the dynamics model. As a measure of convergence of the TRPO, the logarithm of the standard deviation of $p_\traj$ is visualised. The training was stopped after 450 steps collecting 25 steps each dynamics training.
 	\\ As shown in \cref{fig:ME-TRPO_verification}, all of the 50 verification episodes were successfully finished after a few steps. To verify the impact of the ensemble technique, a test with a single network using the same hyper-parameters has been applied, where no convergence within 500 data-points has been observed. \\
@@ -406,10 +427,10 @@ On the other hand, the on-policy algorithm TRPO \cite{Schulman2015} provides som
 				%\toprule
 				&  data&  nr&  cum &   final \\
 				%\midrule
-				\emph{AE-DYNA} &500 &  4.28 $\pm$  1.26 & -1.44 $\pm$  1.10 &  0.04 $\pm$  0.06\\
-				\emph{ME-TRPO} &450&  5.46 $\pm$  2.32 & -1.95 $\pm$  1.76 &  0.01 $\pm$  0.04\\
-				\emph{NAF} &1 074&  2.67 $\pm$  1.33 & -0.58 $\pm$  0.72 &0.00 $\pm$  0.02\\
-				\emph{NAF2} &824& 2.56 $\pm$  1.26 & -0.66 $\pm$  0.80 &0.00 $\pm$  0.02\\
+				\emph{AE-DYNA} &500 &  3.28 $\pm$  1.26 & -1.44 $\pm$  1.10 &  0.04 $\pm$  0.06\\
+				\emph{ME-TRPO} &450&  4.46 $\pm$  2.32 & -1.95 $\pm$  1.76 &  0.01 $\pm$  0.04\\
+				\emph{NAF} &1 074&  2.56 $\pm$  1.96 & -0.66 $\pm$  1.22 &0.00 $\pm$  0.02\\
+				\emph{NAF2} &824& 2.64 $\pm$  1.65 & -0.57 $\pm$  0.92 &0.00 $\pm$  0.03\\
 				%ae\_dyna & final &  0.04 &  0.06 \\
 				%me\_trpo & final &  0.01 &  0.04 \\
 				%naf\_double & final & -0.00 &  0.02 \\
@@ -432,6 +453,9 @@ Regularly, control problems in accelerators have short horizons, which makes \em
 Complementary, the \emph{NAF} algorithm presents a good alternative, revealing, as a model-free method, good asymptotic performance. As numerous cases in accelerator control can be treated with the assumption of the quadratic dependence of the actions of the state-action value function, there is a broad spectrum of potential applications.\\
  
  To provide the possibility for other laboratories to use the stated methods, the code was released in \url{https://github.com/MathPhysSim/FERMI_RL_Paper} and \cite{Hirlaender2020b}.
+ 
+ \section{Acknowledgements}
+ Giulio Gaio
  \vfill
  \newpage
  \vfill

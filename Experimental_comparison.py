@@ -19,10 +19,12 @@ def read_rewards(rewards_in, data_range_in=None):
             data_range = range(data_range_in[0], min(len(rewards), data_range_in[1]))
         for i in data_range:
             if len(rewards[i]) > 0:
-                final_rews.append(rewards[i][len(rewards[i]) - 1])
-                iterations.append(len(rewards[i]))
+                current_rewards = (pd.DataFrame(rewards[i]).dropna().values).flatten()
+                print(current_rewards)
+                final_rews.append(current_rewards[-1])
+                iterations.append(len(current_rewards))
                 try:
-                    mean_rews.append(np.sum(rewards[i][1:]))
+                    mean_rews.append(np.sum(current_rewards))
                 except:
                     mean_rews.append([])
         iterations_all.append(iterations)
@@ -40,13 +42,15 @@ name = 'Rewards_NAF_double.pkl'
 filehandler = open(project_directory + name, 'rb')
 object = pickle.load(filehandler)
 
-naf_double = read_rewards(object, data_range_in=[99, 149]).mean(level=0)
+# naf_double = read_rewards(object, data_range_in=[99, 149]).mean(level=0)
+naf_double = read_rewards(object).mean(level=0)
 
 name = 'Rewards_NAF_single.pkl'
 
 filehandler = open(project_directory + name, 'rb')
 object = pickle.load(filehandler)
-naf_single = read_rewards(object, data_range_in=[99, 149]).mean(level=0)
+# naf_single = read_rewards(object, data_range_in=[99, 149]).mean(level=0)
+naf_single = read_rewards(object).mean(level=0)
 
 name = 'Rewards_AE-DYNA.pkl'
 
@@ -59,10 +63,10 @@ filehandler = open(project_directory + name, 'rb')
 object = pickle.load(filehandler)
 me_trpo = read_rewards([object]).mean(level=0)
 
-# print(naf_double)
-# print(naf_single)
-# print(ae_dyna)
-# print(me_trpo)
+print(naf_double)
+print(naf_single)
+print(ae_dyna)
+print(me_trpo)
 
 data_all = pd.concat([naf_single, naf_double, ae_dyna, me_trpo],
                      keys=['naf_single', 'naf_double', 'ae_dyna', 'me_trpo'])
