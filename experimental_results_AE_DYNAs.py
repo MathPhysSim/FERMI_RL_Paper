@@ -424,13 +424,15 @@ ax1.plot(data_r.index.values, data_r.values, c=color, drawstyle="steps-post")
 ax1.set_ylabel('FEL intensity (% of max)', color=color)
 ax1.tick_params(axis='y', labelcolor=color)
 
-ax.plot(data_r.index.values, data_s, ls=':', drawstyle="steps-post")
+ax.plot(data_r.index.values, data_s, drawstyle="steps-post")
 
 ax.set_xlabel('no. step')
 ax.set_ylabel('norm. state (arb. units)')
 ax.legend(labels=data_s.columns, bbox_to_anchor=(0., 1.22, 1., .102), loc='lower left',
           ncol=2, mode="expand", borderaxespad=0.)
 ax.set_ylim(0, 1)
+ax.set_zorder(ax1.get_zorder()+1)
+ax.patch.set_visible(False)
 
 object = object_ae
 states_1 = object['obss']
@@ -448,9 +450,7 @@ data_s = pd.DataFrame(states_1[selected_item])
 data_a = pd.DataFrame(actions_1[selected_item][1:], columns=['1','2','3','4'])
 data_s.columns = data_a.columns
 data_correct = pd.concat([pd.DataFrame(data_s.iloc[0,:]).T, data_a], ignore_index=True)
-print(data_s.head())
-print(data_correct.cumsum().head())
-# print(data_a.iloc[:,:])
+
 data_s.columns = ['tt1 tilt', 'tt1 incline', 'tt2 tilt', 'tt2 incline']
 data_r = pd.DataFrame(rewards_1[selected_item])
 data_r = data_r + 1
@@ -460,7 +460,7 @@ max = data_r[1:][dones_1[selected_item][1:]].values
 ax_0 = ax_2
 # ax_0.text(0, 1.02, r'Worst training episode among the last ten.', fontdict=font)
 ax_0.set_title(r'Worst verification episode AE-DYNA', fontdict=font)
-ax_0.plot(data_s.index.values, data_s.values, ls=':', drawstyle="steps-post")
+ax_0.plot(data_s.index.values, data_s.values, drawstyle="steps-post")
 # plt.legend(loc='upper right')
 ax_0.set_xlabel('no. step')
 ax_0.set_ylabel('norm. state (arb. units)')
@@ -472,6 +472,8 @@ ax_1.set_ylabel('FEL intensity (% of max)', color=color)
 ax_1.tick_params(axis='y', labelcolor=color)
 ax_1.plot(data_r.index.values, data_r.values, c=color, drawstyle="steps-post")
 
+ax_0.set_zorder(ax_1.get_zorder()+1)
+ax_0.patch.set_visible(False)
 # plt.title(f'len: {len(states_1[selected_item][1:])} nr: {selected_item}')
 plt.tight_layout(h_pad=0.2)
 fig.align_labels()

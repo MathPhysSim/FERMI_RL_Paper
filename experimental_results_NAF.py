@@ -452,7 +452,7 @@ fig, (ax_1, ax_2) = plt.subplots(2)
 
 ax = ax_1
 ax1 = ax.twinx()
-ax1.set_title(r'Worst training episode among the first ten.', fontdict=font, zorder=10)
+ax1.set_title(r'Worst training episode among the first ten.', fontdict=font, zorder=0)
 color = 'lime'
 
 ax1.axhline(y=0.95, c=color, ls='--')
@@ -461,7 +461,7 @@ ax1.plot(data_r.index.values, data_r.values, c=color, drawstyle="steps-post")
 ax1.set_ylabel('FEL intensity (% of max)', color=color)
 ax1.tick_params(axis='y', labelcolor=color)
 
-ax.plot(data_r.index.values, data_s, ls=':', drawstyle="steps-post")
+ax.plot(data_r.index.values, data_s, drawstyle="steps-post")
 
 ax.set_xlabel('no. step')
 ax.set_ylabel('norm. state (arb. units)')
@@ -469,18 +469,23 @@ ax.legend(labels=data_s.columns, bbox_to_anchor=(0., 1.22, 1., .102), loc='lower
           ncol=2, mode="expand", borderaxespad=0.)
 ax.set_ylim(0, 1)
 
-shift = 2
+ax.set_zorder(ax1.get_zorder()+1)
+ax.patch.set_visible(False)
+shift = 10
 selected_item = np.argmax([len(states_1[i]) for i
                            in range(len(states_1) - shift, len(states_1))]) + len(states_1) - shift
 print('selected_item', selected_item)
 # selected_item = 55
 # for max_lengths in range(len(states_1)):
 data_s = pd.DataFrame(states_1[selected_item])
+print('data_s', data_s)
+data_s = data_s.drop_duplicates()
+print('data_s', data_s)
+
 data_a = pd.DataFrame(actions_1[selected_item][1:], columns=['1','2','3','4'])
-data_s.columns = data_a.columns
-data_correct = pd.concat([pd.DataFrame(data_s.iloc[0,:]).T, data_a], ignore_index=True)
-print(data_s.head())
-print(data_correct.cumsum().head())
+# data_s.columns = data_a.columns
+# data_correct = pd.concat([pd.DataFrame(data_s.iloc[0,:]).T, data_a], ignore_index=True)
+
 # print(data_a.iloc[:,:])
 data_s.columns = ['tt1 tilt', 'tt1 incline', 'tt2 tilt', 'tt2 incline']
 data_r = pd.DataFrame(rewards_1[selected_item])
@@ -491,7 +496,7 @@ max = data_r[1:][dones_1[selected_item][1:]].values
 ax_0 = ax_2
 # ax_0.text(0, 1.02, r'Worst training episode among the last ten.', fontdict=font)
 ax_0.set_title(r'Worst training episode among the last ten.', fontdict=font)
-ax_0.plot(data_s.index.values, data_s.values, ls=':', drawstyle="steps-post")
+ax_0.plot(np.arange(1,len(data_s.values)+1), data_s.values, drawstyle="steps-post")
 # plt.legend(loc='upper right')
 ax_0.set_xlabel('no. step')
 ax_0.set_ylabel('norm. state (arb. units)')
@@ -502,6 +507,9 @@ ax_1.axhline(y=0.95, c=color, ls='--')
 ax_1.set_ylabel('FEL intensity (% of max)', color=color)
 ax_1.tick_params(axis='y', labelcolor=color)
 ax_1.plot(data_r.index.values, data_r.values, c=color, drawstyle="steps-post")
+
+ax_0.set_zorder(ax_1.get_zorder()+1)
+ax_0.patch.set_visible(False)
 
 # plt.title(f'len: {len(states_1[selected_item][1:])} nr: {selected_item}')
 plt.tight_layout(h_pad=0.2)
