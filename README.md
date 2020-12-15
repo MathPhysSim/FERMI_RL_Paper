@@ -1,4 +1,5 @@
-# Online Model-Based and Model-Free Reinforcement Learning in Accelerator Operation with Applications to FERMI FEL
+# Uncertainty Aware Model-Based Reinforcement Learning in Accelerator Operation with Application to FERMI FEL
+
 Contact: simon.hirlaender(at)sbg.ac.at
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4271581.svg)](https://doi.org/10.5281/zenodo.4271581)
