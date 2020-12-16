@@ -22,15 +22,6 @@
   primaryclass  = {cs.AI},
 }
 
-@InProceedings{Gal2016,
-  author    = {Gal, Yarin and McAllister, Rowan and Rasmussen, Carl Edward},
-  booktitle = {Data-Efficient Machine Learning workshop, ICML},
-  title     = {{Improving PILCO with Bayesian neural network dynamics models}},
-  year      = {2016},
-  pages     = {34},
-  volume    = {4},
-}
-
 @SuppBook{Haarnoja2018,
   abstract    = {Model-free deep reinforcement learning (RL) algorithms have been demonstrated on a range of challenging decision making and control tasks. However, these methods typically suffer from two major challenges: very high sample complexity and brittle convergence properties, which necessitate meticulous hyperparameter tuning. Both of these challenges severely limit the applicability of such methods to complex, real-world domains. In this paper, we propose soft actor-critic, an off-policy actor-critic deep RL algorithm based on the maximum entropy reinforcement learning framework. In this framework, the actor aims to maximize expected reward while also maximizing entropy. That is, to succeed at the task while acting as randomly as possible. Prior deep RL methods based on this framework have been formulated as Q-learning methods. By combining off-policy updates with a stable stochastic actor-critic formulation, our method achieves state-of-the-art performance on a range of continuous control benchmark tasks, outperforming prior on-policy and off-policy methods. Furthermore, we demonstrate that, in contrast to other off-policy algorithms, our approach is very stable, achieving very similar performance across different random seeds.},
   author      = {Tuomas Haarnoja and Aurick Zhou and Pieter Abbeel and Sergey Levine},
@@ -142,7 +133,7 @@
 
 @Article{Kurutach2018,
   author      = {Thanard Kurutach and Ignasi Clavera and Yan Duan and Aviv Tamar and Pieter Abbeel},
-  title       = {Model-Ensemble Trust-Region Policy Optimization},
+  title       = {{Model-Ensemble Trust-Region Policy Optimization}},
   abstract    = {Model-free reinforcement learning (RL) methods are succeeding in a growing number of tasks, aided by recent advances in deep learning. However, they tend to suffer from high sample complexity, which hinders their use in real-world domains. Alternatively, model-based reinforcement learning promises to reduce sample complexity, but tends to require careful tuning and to date have succeeded mainly in restrictive domains where simple models are sufficient for learning. In this paper, we analyze the behavior of vanilla model-based reinforcement learning methods when deep neural networks are used to learn both the model and the policy, and show that the learned policy tends to exploit regions where insufficient data is available for the model to be learned, causing instability in training. To overcome this issue, we propose to use an ensemble of models to maintain the model uncertainty and regularize the learning process. We further show that the use of likelihood ratio derivatives yields much more stable learning than backpropagation through time. Altogether, our approach Model-Ensemble Trust-Region Policy Optimization (ME-TRPO) significantly reduces the sample complexity compared to model-free deep RL methods on challenging continuous control benchmark tasks.},
   date        = {2018-02-28},
   eprint      = {1802.10592},
@@ -221,19 +212,6 @@
   keywords    = {stat.ML, cs.AI, cs.LG},
 }
 
-@Article{Pearce2018b,
-  author       = {Tim Pearce and Felix Leibfried and Alexandra Brintrup and Mohamed Zaki and Andy Neely},
-  title        = {Uncertainty in Neural Networks: Approximately Bayesian Ensembling},
-  abstract     = {Understanding the uncertainty of a neural network's (NN) predictions is essential for many purposes. The Bayesian framework provides a principled approach to this, however applying it to NNs is challenging due to large numbers of parameters and data. Ensembling NNs provides an easily implementable, scalable method for uncertainty quantification, however, it has been criticised for not being Bayesian. This work proposes one modification to the usual process that we argue does result in approximate Bayesian inference; regularising parameters about values drawn from a distribution which can be set equal to the prior. A theoretical analysis of the procedure in a simplified setting suggests the recovered posterior is centred correctly but tends to have an underestimated marginal variance, and overestimated correlation. However, two conditions can lead to exact recovery. We argue that these conditions are partially present in NNs. Empirical evaluations demonstrate it has an advantage over standard ensembling, and is competitive with variational methods.},
-  date         = {2018-10-12},
-  eprint       = {1810.05546},
-  eprintclass  = {stat.ML},
-  eprinttype   = {arXiv},
-  file         = {:http\://arxiv.org/pdf/1810.05546v5:PDF},
-  journaltitle = {The 23rd International Conference on Artificial Intelligence and Statistics, AISTATS 2020},
-  keywords     = {stat.ML, cs.LG},
-}
-
 @InProceedings{Furutaa,
   author    = {K. Furuta and M. Yamakita and S. Kobayashi},
   booktitle = {Proceedings {IECON} {\textquotesingle}91: 1991 International Conference on Industrial Electronics, Control and Instrumentation},
@@ -245,11 +223,11 @@
 @InProceedings{Silver2014,
   author    = {Silver, David and Lever, Guy and Heess, Nicolas and Degris, Thomas and Wierstra, Daan and Riedmiller, Martin},
   booktitle = {Proceedings of the 31st International Conference on International Conference on Machine Learning - Volume 32},
-  title     = {Deterministic Policy Gradient Algorithms},
+  title     = {{Deterministic Policy Gradient Algorithms}},
   year      = {2014},
   pages     = {I–387–I–395},
   publisher = {JMLR.org},
-  series    = {ICML'14},
+  series    = {ICML14},
   abstract  = {In this paper we consider deterministic policy gradient algorithms for reinforcement learning with continuous actions. The deterministic policy gradient has a particularly appealing form: it is the expected gradient of the action-value function. This simple form means that the deterministic policy gradient can be estimated much more efficiently than the usual stochastic policy gradient. To ensure adequate exploration, we introduce an off-policy actor-critic algorithm that learns a deterministic target policy from an exploratory behaviour policy. We demonstrate that deterministic policy gradient algorithms can significantly outperform their stochastic counterparts in high-dimensional action spaces.},
   location  = {Beijing, China},
   numpages  = {9},
@@ -399,7 +377,7 @@
 
 @Article{Gu2016,
   author      = {Shixiang Gu and Timothy Lillicrap and Ilya Sutskever and Sergey Levine},
-  title       = {Continuous Deep Q-Learning with Model-based Acceleration},
+  title       = {{Continuous Deep Q-Learning with Model-based Acceleration}},
   abstract    = {Model-free reinforcement learning has been successfully applied to a range of challenging problems, and has recently been extended to handle large neural network policies and value functions. However, the sample complexity of model-free algorithms, particularly when using high-dimensional function approximators, tends to limit their applicability to physical systems. In this paper, we explore algorithms and representations to reduce the sample complexity of deep reinforcement learning for continuous control tasks. We propose two complementary techniques for improving the efficiency of such algorithms. First, we derive a continuous variant of the Q-learning algorithm, which we call normalized adantage functions (NAF), as an alternative to the more commonly used policy gradient and actor-critic methods. NAF representation allows us to apply Q-learning with experience replay to continuous tasks, and substantially improves performance on a set of simulated robotic control tasks. To further improve the efficiency of our approach, we explore the use of learned models for accelerating model-free reinforcement learning. We show that iteratively refitted local linear models are especially effective for this, and demonstrate substantially faster learning on domains where such models are applicable.},
   date        = {2016-03-02},
   eprint      = {1603.00748},
@@ -559,13 +537,6 @@
   doi     = {10.1109/TPAMI.2013.218},
 }
 
-@InProceedings{gal2016improving,
-  author    = {Gal, Yarin and McAllister, Rowan and Rasmussen, Carl Edward},
-  booktitle = {Data-Efficient Machine Learning workshop, International Conference on Machine Learning},
-  title     = {Improving {PILCO} with {B}ayesian neural network dynamics models},
-  year      = {2016},
-}
-
 @Article{Chua2018,
   author      = {Kurtland Chua and Roberto Calandra and Rowan McAllister and Sergey Levine},
   title       = {Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models},
@@ -663,24 +634,6 @@
   url          = {http://cds.cern.ch/record/2715365},
 }
 
-@InProceedings{pmlr-v32-silver14,
-  author    = {David Silver and Guy Lever and Nicolas Heess and Thomas Degris and Daan Wierstra and Martin Riedmiller},
-  booktitle = {Proceedings of the 31st International Conference on Machine Learning},
-  title     = {{Deterministic Policy Gradient Algorithms}},
-  year      = {2014},
-  address   = {Bejing, China},
-  editor    = {Eric P. Xing and Tony Jebara},
-  month     = {22--24 Jun},
-  number    = {1},
-  pages     = {387--395},
-  publisher = {PMLR},
-  series    = {Proceedings of Machine Learning Research},
-  volume    = {32},
-  abstract  = {In this paper we consider deterministic policy gradient algorithms for reinforcement learning with continuous actions. The deterministic policy gradient has a particularly appealing form: it is the expected gradient of the action-value function. This simple form means that the deterministic policy gradient can be estimated much more efficiently than the usual stochastic policy gradient. To ensure adequate exploration, we introduce an off-policy actor-critic algorithm that learns a deterministic target policy from an exploratory behaviour policy. Deterministic policy gradient algorithms outperformed their stochastic counterparts in several benchmark problems, particularly in high-dimensional action spaces.},
-  pdf       = {http://proceedings.mlr.press/v32/silver14.pdf},
-  url       = {http://proceedings.mlr.press/v32/silver14.html},
-}
-
 @Article{Boer2005,
   author    = {Pieter-Tjerk de Boer and Dirk P. Kroese and Shie Mannor and Reuven Y. Rubinstein},
   journal   = {Annals of Operations Research},
@@ -771,6 +724,83 @@
   volume    = {22},
   doi       = {10.1103/physrevaccelbeams.22.082802},
   publisher = {American Physical Society ({APS})},
+}
+
+@Article{Heess2017,
+  author      = {Nicolas Heess and Dhruva TB and Srinivasan Sriram and Jay Lemmon and Josh Merel and Greg Wayne and Yuval Tassa and Tom Erez and Ziyu Wang and S. M. Ali Eslami and Martin Riedmiller and David Silver},
+  title       = {Emergence of Locomotion Behaviours in Rich Environments},
+  abstract    = {The reinforcement learning paradigm allows, in principle, for complex behaviours to be learned directly from simple reward signals. In practice, however, it is common to carefully hand-design the reward function to encourage a particular solution, or to derive it from demonstration data. In this paper explore how a rich environment can help to promote the learning of complex behavior. Specifically, we train agents in diverse environmental contexts, and find that this encourages the emergence of robust behaviours that perform well across a suite of tasks. We demonstrate this principle for locomotion -- behaviours that are known for their sensitivity to the choice of reward. We train several simulated bodies on a diverse set of challenging terrains and obstacles, using a simple reward function based on forward progress. Using a novel scalable variant of policy gradient reinforcement learning, our agents learn to run, jump, crouch and turn as required by the environment without explicit reward-based guidance. A visual depiction of highlights of the learned behavior can be viewed following https://youtu.be/hx_bgoTF7bs .},
+  date        = {2017-07-07},
+  eprint      = {1707.02286},
+  eprintclass = {cs.AI},
+  eprinttype  = {arXiv},
+  file        = {:http\://arxiv.org/pdf/1707.02286v2:PDF},
+  keywords    = {cs.AI},
+}
+
+@Article{OpenAI2018,
+  author      = {OpenAI and Marcin Andrychowicz and Bowen Baker and Maciek Chociej and Rafal Jozefowicz and Bob McGrew and Jakub Pachocki and Arthur Petron and Matthias Plappert and Glenn Powell and Alex Ray and Jonas Schneider and Szymon Sidor and Josh Tobin and Peter Welinder and Lilian Weng and Wojciech Zaremba},
+  title       = {Learning Dexterous In-Hand Manipulation},
+  abstract    = {We use reinforcement learning (RL) to learn dexterous in-hand manipulation policies which can perform vision-based object reorientation on a physical Shadow Dexterous Hand. The training is performed in a simulated environment in which we randomize many of the physical properties of the system like friction coefficients and an object's appearance. Our policies transfer to the physical robot despite being trained entirely in simulation. Our method does not rely on any human demonstrations, but many behaviors found in human manipulation emerge naturally, including finger gaiting, multi-finger coordination, and the controlled use of gravity. Our results were obtained using the same distributed RL system that was used to train OpenAI Five. We also include a video of our results: https://youtu.be/jwSbzNHGflM},
+  date        = {2018-08-01},
+  eprint      = {1808.00177},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  file        = {:http\://arxiv.org/pdf/1808.00177v5:PDF},
+  keywords    = {cs.LG, cs.AI, cs.RO, stat.ML},
+}
+
+@InProceedings{Gal2016,
+  author    = {Gal, Yarin and McAllister, Rowan and Rasmussen, Carl Edward},
+  booktitle = {Data-Efficient Machine Learning workshop, International Conference on Machine Learning},
+  title     = {{Improving PILCO with Bayesian neural network dynamics models}},
+  year      = {2016},
+  pages     = {34},
+  volume    = {4},
+}
+
+@InProceedings{Deisenroth2011,
+  author    = {Deisenroth, Marc Peter and Rasmussen, Carl Edward},
+  booktitle = {Proceedings of the 28th International Conference on International Conference on Machine Learning},
+  title     = {PILCO: A Model-Based and Data-Efficient Approach to Policy Search},
+  year      = {2011},
+  address   = {Madison, WI, USA},
+  pages     = {465–472},
+  publisher = {Omnipress},
+  series    = {ICML'11},
+  abstract  = {In this paper, we introduce PILCO, a practical, data-efficient model-based policy search method. PILCO reduces model bias, one of the key problems of model-based reinforcement learning, in a principled way. By learning a probabilistic dynamics model and explicitly incorporating model uncertainty into long-term planning, PILCO can cope with very little data and facilitates learning from scratch in only a few trials. Policy evaluation is performed in closed form using state-of-the-art approximate inference. Furthermore, policy gradients are computed analytically for policy improvement. We report unprecedented learning efficiency on challenging and high-dimensional control tasks.},
+  isbn      = {9781450306195},
+  location  = {Bellevue, Washington, USA},
+  numpages  = {8},
+}
+@InProceedings{kidambi2020morel,
+author = {Kidambi, Rahul and Rajeswaran, Aravind and Netrapalli, Praneeth and Joachims, Thorsten},
+title = {MOReL : Model-Based Offline Reinforcement Learning},
+organization = {ACM},
+booktitle = {NeurIPS 2020},
+year = {2020},
+month = {May},
+abstract = {In offline reinforcement learning (RL), the goal is to learn a highly rewarding policy based solely on a dataset of historical interactions with the environment. The ability to train RL policies offline can greatly expand the applicability of RL, its data efficiency, and its experimental velocity. Prior work in offline RL has been confined almost exclusively to model-free RL approaches. In this work, we present MOReL, an algorithmic framework for model-based offline RL. This framework consists of two steps: (a) learning a pessimistic MDP (P-MDP) using the offline dataset; and (b) learning a near-optimal policy in this P-MDP. The learned P-MDP has the property that for any policy, the performance in the real environment is approximately lower-bounded by the performance in the P-MDP. This enables it to serve as a good surrogate for purposes of policy evaluation and learning, and overcome common pitfalls of model-based RL like model exploitation. Theoretically, we show that MOReL is minimax optimal (up to log factors) for offline RL. Through experiments, we show that MOReL matches or exceeds state-of-the-art results in widely studied offline RL benchmarks. Moreover, the modular design of MOReL enables future advances in its components (e.g. generative modeling, uncertainty estimation, planning etc.) to directly translate into advances for offline RL.},
+url = {https://www.microsoft.com/en-us/research/publication/morel-model-based-offline-reinforcement-learning/},
+}
+@Book{Sutton2018,
+  author    = {Richard Sutton and Andrew Barto},
+  publisher = {MIT Press Ltd},
+  title     = {{Reinforcement Learning}},
+  year      = {2018},
+  isbn      = {0262039249},
+  date      = {2018-11-13},
+  ean       = {9780262039246},
+  pagetotal = {552},
+  url       = {https://www.ebook.de/de/product/32966850/richard_s_university_of_alberta_sutton_andrew_g_co_director_autonomous_learning_laboratory_barto_reinforcement_learning.html},
+}
+
+@Book{Goodfellow2016,
+  author    = {Ian Goodfellow and Yoshua Bengio and Aaron Courville},
+  publisher = {MIT Press},
+  title     = {Deep Learning},
+  year      = {2016},
+  note      = {\url{http://www.deeplearningbook.org}},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

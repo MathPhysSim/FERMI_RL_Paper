@@ -23,14 +23,14 @@
 \citation{Sutton2018,DulacArnold2019}
 \newlabel{FirstPage}{{}{1}{}{section*.1}{}}
 \newlabel{FirstPage@cref}{{}{[1][1][]1}}
-\@writefile{toc}{\contentsline {title}{Uncertainty Aware Model-Based Reinforcement Learning in Accelerator Operation with Application to FERMI FEL}{1}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {title}{Model-Based and Model-Free Deep Reinforcement Learning in Accelerator Operation with Application to FERMI FEL}{1}{section*.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {abstract}{Abstract}{1}{section*.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction and Motivation}{1}{section*.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}An Overview of the Main Results}{1}{section*.4}\protected@file@percent }
 \citation{Brockman2016}
 \citation{Note1}
-\citation{Sutton2018,Williams1992,Baxter2011,pmlr-v28-levine13,Schulman2015,Schulman2017}
-\citation{Szepesvari2010,Lillicrap2015,pmlr-v32-silver14}
+\citation{Heess2017,Schulman2017,Silver2014,Lillicrap2015,OpenAI2018}
+\citation{Deisenroth2011}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A schematic view on the set-up of the FERMI FEL.\relax }}{2}{figure.caption.8}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:schematic_FEL}{{1}{2}{A schematic view on the set-up of the FERMI FEL.\relax }{figure.caption.8}{}}
@@ -39,106 +39,122 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}The physical set-up}{2}{section*.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {B}The training environment}{2}{section*.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {III}Deep Reinforcement learning}{2}{section*.9}\protected@file@percent }
-\newlabel{eq:cumulative_reward}{{2}{2}{}{equation.3.2}{}}
-\newlabel{eq:cumulative_reward@cref}{{[equation][2][]2}{[1][2][]2}}
+\citation{Sutton2018,Williams1992,Baxter2011,pmlr-v28-levine13,Schulman2015,Schulman2017}
+\citation{Szepesvari2010,Lillicrap2015,Silver2014}
 \citation{Sutton2018,Levine2020}
+\citation{Gu2016}
 \citation{Kain2020,Hirlaender2020a}
+\citation{Note2}
 \citation{Sutton2018}
 \citation{Hasselt2015,Mnih2013,Lillicrap2015,Gu2016,Wang2015}
 \citation{Gu2016}
 \citation{Gu2016}
 \citation{NIPS2010_091d584f,Hasselt2015,fujimoto2018addressing}
+\citation{Lillicrap2015,Gu2016,Silver2014}
+\citation{fujimoto2018addressing}
 \citation{Gu2016}
 \citation{Hirlaender2020a}
+\citation{Gu2016}
+\newlabel{eq:cumulative_reward}{{2}{3}{}{equation.3.2}{}}
+\newlabel{eq:cumulative_reward@cref}{{[equation][2][]2}{[1][3][]3}}
+\newlabel{eq:trajectory_distribution}{{3}{3}{}{equation.3.3}{}}
+\newlabel{eq:trajectory_distribution@cref}{{[equation][3][]3}{[1][3][]3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Model free reinforcement learning}{3}{section*.10}\protected@file@percent }
+\newlabel{s:Model free reinforcement learning}{{III\,A}{3}{}{section*.10}{}}
+\newlabel{s:Model free reinforcement learning@cref}{{[subsection][1][3]III\,A}{[1][3][]3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1}Approximate dynamic programming}{3}{section*.11}\protected@file@percent }
+\newlabel{eq:state-value-function}{{4}{3}{}{equation.3.4}{}}
+\newlabel{eq:state-value-function@cref}{{[equation][4][]4}{[1][3][]3}}
+\newlabel{eq:minimize_bellmann_optimality}{{6}{3}{}{equation.3.6}{}}
+\newlabel{eq:minimize_bellmann_optimality@cref}{{[equation][6][]6}{[1][3][]3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2}Design decisions for MFRL}{3}{section*.12}\protected@file@percent }
+\newlabel{ss:Normalized advantage function}{{III\,A\,2}{3}{}{section*.12}{}}
+\newlabel{ss:Normalized advantage function@cref}{{[subsubsection][2][3,1]III\,A\,2}{[1][3][]3}}
+\newlabel{eq:state-action-value-approxiation}{{9}{3}{}{equation.3.9}{}}
+\newlabel{eq:state-action-value-approxiation@cref}{{[equation][9][]9}{[1][3][]3}}
 \citation{Wang2019}
 \citation{Gal2016,6654139}
 \citation{Chua2018,Wang2019a}
 \citation{Boer2005}
-\citation{Note2}
+\citation{Note3}
 \citation{Sutton1991}
 \citation{Pearce2018}
+\citation{Kurutach2018}
 \citation{Wang2019}
 \citation{Chua2018,Janner2019,Wang2019a}
 \citation{Kurutach2018}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Model free reinforcement learning - MFRL}{3}{section*.10}\protected@file@percent }
-\newlabel{s:Model free reinforcement learning}{{III\,A}{3}{}{section*.10}{}}
-\newlabel{s:Model free reinforcement learning@cref}{{[subsection][1][3]III\,A}{[1][3][]3}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {1}Approximate dynamic programming}{3}{section*.11}\protected@file@percent }
-\newlabel{eq:state-value-function}{{3}{3}{}{equation.3.3}{}}
-\newlabel{eq:state-value-function@cref}{{[equation][3][]3}{[1][3][]3}}
-\newlabel{eq:minimize_bellmann_optimality}{{5}{3}{}{equation.3.5}{}}
-\newlabel{eq:minimize_bellmann_optimality@cref}{{[equation][5][]5}{[1][3][]3}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2}Normalized advantage function}{3}{section*.12}\protected@file@percent }
-\newlabel{ss:Normalized advantage function}{{III\,A\,2}{3}{}{section*.12}{}}
-\newlabel{ss:Normalized advantage function@cref}{{[subsubsection][2][3,1]III\,A\,2}{[1][3][]3}}
-\newlabel{eq:state-action-value-approxiation}{{8}{3}{}{equation.3.8}{}}
-\newlabel{eq:state-action-value-approxiation@cref}{{[equation][8][]8}{[1][3][]3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Uncertainty aware DYNA-style reinforcement learning}{3}{section*.13}\protected@file@percent }
-\newlabel{ss:Uncertainty aware DYNA-style reinforcement learning}{{III\,B}{3}{}{section*.13}{}}
-\newlabel{ss:Uncertainty aware DYNA-style reinforcement learning@cref}{{[subsection][2][3]III\,B}{[1][3][]3}}
-\newlabel{eq:dynamics_model}{{10}{3}{}{equation.3.10}{}}
-\newlabel{eq:dynamics_model@cref}{{[equation][10][]10}{[1][3][]3}}
 \citation{Goodfellow2016}
-\citation{Kurutach2018}
-\citation{fujimoto2018addressing,Hill2018}
-\citation{Janner2019}
-\citation{Haarnoja2018a}
-\citation{Schulman2015}
-\citation{Kurutach2018}
-\citation{Schulman2017}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Uncertainty aware DYNA-style reinforcement learning}{4}{section*.13}\protected@file@percent }
+\newlabel{ss:Uncertainty aware DYNA-style reinforcement learning}{{III\,B}{4}{}{section*.13}{}}
+\newlabel{ss:Uncertainty aware DYNA-style reinforcement learning@cref}{{[subsection][2][3]III\,B}{[1][4][]4}}
+\newlabel{eq:dynamics_model}{{11}{4}{}{equation.3.11}{}}
+\newlabel{eq:dynamics_model@cref}{{[equation][11][]11}{[1][4][]4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces A schematic overview of the \emph  {AE-DYNA} approach used in this paper.\relax }}{4}{figure.caption.14}\protected@file@percent }
 \newlabel{fig:MBRL_overview}{{2}{4}{A schematic overview of the \emph {AE-DYNA} approach used in this paper.\relax }{figure.caption.14}{}}
-\newlabel{fig:MBRL_overview@cref}{{[figure][2][]2}{[1][3][]4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}Critical design decisions}{4}{section*.15}\protected@file@percent }
+\newlabel{fig:MBRL_overview@cref}{{[figure][2][]2}{[1][4][]4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Critical design decisions in MBRL}{4}{section*.15}\protected@file@percent }
 \newlabel{ss:critical_design}{{III\,C}{4}{}{section*.15}{}}
 \newlabel{ss:critical_design@cref}{{[subsection][3][3]III\,C}{[1][4][]4}}
-\citation{Note3}
-\citation{Note4}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {1}Overview of the used algorithms}{5}{section*.16}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Experimental results from FERMI RL online tests}{5}{section*.18}\protected@file@percent }
-\newlabel{sec:Experimental results from FERMI RL online tests}{{IV}{5}{}{section*.18}{}}
-\newlabel{sec:Experimental results from FERMI RL online tests@cref}{{[section][4][]IV}{[1][5][]5}}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Overview of the algorithms. \relax }}{5}{table.caption.17}\protected@file@percent }
-\newlabel{tab:overview_algorithms}{{I}{5}{Overview of the algorithms. \relax }{table.caption.17}{}}
-\newlabel{tab:overview_algorithms@cref}{{[table][1][]I}{[1][5][]5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The training of the \emph  {NAF2} on the FERMI FEL using a single network (dashed) and a double network (solid).\relax }}{5}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:NAF_training}{{3}{5}{The training of the \emph {NAF2} on the FERMI FEL using a single network (dashed) and a double network (solid).\relax }{figure.caption.20}{}}
-\newlabel{fig:NAF_training@cref}{{[figure][3][]3}{[1][5][]5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The training of the \emph  {NAF2} on the FERMI FEL using a double network.\relax }}{5}{figure.caption.21}\protected@file@percent }
-\newlabel{fig:NAF_evolution_double}{{4}{5}{The training of the \emph {NAF2} on the FERMI FEL using a double network.\relax }{figure.caption.21}{}}
-\newlabel{fig:NAF_evolution_double@cref}{{[figure][4][]4}{[1][5][]5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}MFRL tests}{5}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1}The uncertainty aware dynamics model}{4}{section*.16}\protected@file@percent }
+\newlabel{ss:The uncertainty aware dynamics model}{{III\,C\,1}{4}{}{section*.16}{}}
+\newlabel{ss:The uncertainty aware dynamics model@cref}{{[subsubsection][1][3,3]III\,C\,1}{[1][4][]4}}
+\citation{Sutton2018}
 \citation{Schulman2015}
+\citation{Kurutach2018}
+\citation{Kurutach2018}
+\citation{Schulman2017}
+\citation{fujimoto2018addressing,Hill2018}
 \citation{Haarnoja2018a}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The training of the \emph  {NAF2} on the FERMI FEL using a single network.\relax }}{6}{figure.caption.22}\protected@file@percent }
-\newlabel{fig:NAF_evolution_single}{{5}{6}{The training of the \emph {NAF2} on the FERMI FEL using a single network.\relax }{figure.caption.22}{}}
+\citation{Kurutach2018}
+\citation{kidambi2020morel}
+\citation{Janner2019}
+\citation{Note4}
+\citation{Note5}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2}The controller algorithm}{5}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3}Handling of the uncertainty}{5}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4}The data acquisition}{5}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Experimental results from FERMI RL online tests}{5}{section*.20}\protected@file@percent }
+\newlabel{sec:Experimental results from FERMI RL online tests}{{IV}{5}{}{section*.20}{}}
+\newlabel{sec:Experimental results from FERMI RL online tests@cref}{{[section][4][]IV}{[1][5][]5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The training of the \emph  {NAF2} on the FERMI FEL using a single network (dashed) and a double network (solid).\relax }}{6}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:NAF_training}{{3}{6}{The training of the \emph {NAF2} on the FERMI FEL using a single network (dashed) and a double network (solid).\relax }{figure.caption.23}{}}
+\newlabel{fig:NAF_training@cref}{{[figure][3][]3}{[1][5][]6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The training of the \emph  {NAF2} on the FERMI FEL using a double network.\relax }}{6}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:NAF_evolution_double}{{4}{6}{The training of the \emph {NAF2} on the FERMI FEL using a double network.\relax }{figure.caption.24}{}}
+\newlabel{fig:NAF_evolution_double@cref}{{[figure][4][]4}{[1][5][]6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The training of the \emph  {NAF2} on the FERMI FEL using a single network.\relax }}{6}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:NAF_evolution_single}{{5}{6}{The training of the \emph {NAF2} on the FERMI FEL using a single network.\relax }{figure.caption.25}{}}
 \newlabel{fig:NAF_evolution_single@cref}{{[figure][5][]5}{[1][5][]6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The verification of the \emph  {NAF2} on the FERMI FEL using a single network (dashed) and a double network (solid).\relax }}{6}{figure.caption.23}\protected@file@percent }
-\newlabel{fig:NAF_verification}{{6}{6}{The verification of the \emph {NAF2} on the FERMI FEL using a single network (dashed) and a double network (solid).\relax }{figure.caption.23}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Overview of the algorithms. \relax }}{6}{table.caption.21}\protected@file@percent }
+\newlabel{tab:overview_algorithms}{{I}{6}{Overview of the algorithms. \relax }{table.caption.21}{}}
+\newlabel{tab:overview_algorithms@cref}{{[table][1][]I}{[1][5][]6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The verification of the \emph  {NAF2} on the FERMI FEL using a single network (dashed) and a double network (solid).\relax }}{6}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:NAF_verification}{{6}{6}{The verification of the \emph {NAF2} on the FERMI FEL using a single network (dashed) and a double network (solid).\relax }{figure.caption.26}{}}
 \newlabel{fig:NAF_verification@cref}{{[figure][6][]6}{[1][5][]6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The training metrics of the \emph  {AE-DYNA-SAC} on the FERMI FEL using a single network (dashed) and a double network (solid). The Bellman error (\cref  {eq:minimize_bellmann_optimality}) and the state-value function (\cref  {eq:state-value-function}) are shown. \relax }}{6}{figure.caption.24}\protected@file@percent }
-\newlabel{fig:NAF_convergence}{{7}{6}{The training metrics of the \emph {AE-DYNA-SAC} on the FERMI FEL using a single network (dashed) and a double network (solid). The Bellman error (\cref {eq:minimize_bellmann_optimality}) and the state-value function (\cref {eq:state-value-function}) are shown. \relax }{figure.caption.24}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}MFRL tests}{6}{section*.22}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The training metrics of the \emph  {AE-DYNA-SAC} on the FERMI FEL using a single network (dashed) and a double network (solid). The Bellman error (\cref  {eq:minimize_bellmann_optimality}) and the state-value function (\cref  {eq:state-value-function}) are shown. \relax }}{6}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:NAF_convergence}{{7}{6}{The training metrics of the \emph {AE-DYNA-SAC} on the FERMI FEL using a single network (dashed) and a double network (solid). The Bellman error (\cref {eq:minimize_bellmann_optimality}) and the state-value function (\cref {eq:state-value-function}) are shown. \relax }{figure.caption.27}{}}
 \newlabel{fig:NAF_convergence@cref}{{[figure][7][]7}{[1][5][]6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The training of the \emph  {AE-DYNA-SAC} on the FERMI FEL.\relax }}{6}{figure.caption.26}\protected@file@percent }
-\newlabel{fig:AE-DYNA_observables}{{8}{6}{The training of the \emph {AE-DYNA-SAC} on the FERMI FEL.\relax }{figure.caption.26}{}}
-\newlabel{fig:AE-DYNA_observables@cref}{{[figure][8][]8}{[1][6][]6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}MBRL tests}{6}{section*.25}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The verification of the \emph  {ME-TRPO} and the \emph  {AE-DYNA-SAC} on the FERMI FEL.\relax }}{6}{figure.caption.27}\protected@file@percent }
-\newlabel{fig:AE-DYNA_verification}{{9}{6}{The verification of the \emph {ME-TRPO} and the \emph {AE-DYNA-SAC} on the FERMI FEL.\relax }{figure.caption.27}{}}
-\newlabel{fig:AE-DYNA_verification@cref}{{[figure][9][]9}{[1][6][]6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces The training of the ME-TRPO on the FERMI FEL.\relax }}{7}{figure.caption.28}\protected@file@percent }
-\newlabel{fig:ME-TRPO_observables}{{10}{7}{The training of the ME-TRPO on the FERMI FEL.\relax }{figure.caption.28}{}}
-\newlabel{fig:ME-TRPO_observables@cref}{{[figure][10][]10}{[1][6][]7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces The verification of the \emph  {ME-TRPO} and the \emph  {AE-DYNA-SAC} on the FERMI FEL.\relax }}{7}{figure.caption.29}\protected@file@percent }
-\newlabel{fig:Worst_episode_MBRL}{{11}{7}{The verification of the \emph {ME-TRPO} and the \emph {AE-DYNA-SAC} on the FERMI FEL.\relax }{figure.caption.29}{}}
-\newlabel{fig:Worst_episode_MBRL@cref}{{[figure][11][]11}{[1][6][]7}}
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces An overview over the verification results of the different algorithms. \relax }}{7}{table.caption.31}\protected@file@percent }
-\newlabel{tab:overview_verification}{{II}{7}{An overview over the verification results of the different algorithms. \relax }{table.caption.31}{}}
-\newlabel{tab:overview_verification@cref}{{[table][2][]II}{[1][7][]7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The training of the \emph  {AE-DYNA-SAC} on the FERMI FEL.\relax }}{7}{figure.caption.29}\protected@file@percent }
+\newlabel{fig:AE-DYNA_observables}{{8}{7}{The training of the \emph {AE-DYNA-SAC} on the FERMI FEL.\relax }{figure.caption.29}{}}
+\newlabel{fig:AE-DYNA_observables@cref}{{[figure][8][]8}{[1][7][]7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The verification of the \emph  {ME-TRPO} and the \emph  {AE-DYNA-SAC} on the FERMI FEL.\relax }}{7}{figure.caption.30}\protected@file@percent }
+\newlabel{fig:AE-DYNA_verification}{{9}{7}{The verification of the \emph {ME-TRPO} and the \emph {AE-DYNA-SAC} on the FERMI FEL.\relax }{figure.caption.30}{}}
+\newlabel{fig:AE-DYNA_verification@cref}{{[figure][9][]9}{[1][7][]7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}MBRL tests}{7}{section*.28}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces The training of the ME-TRPO on the FERMI FEL.\relax }}{7}{figure.caption.31}\protected@file@percent }
+\newlabel{fig:ME-TRPO_observables}{{10}{7}{The training of the ME-TRPO on the FERMI FEL.\relax }{figure.caption.31}{}}
+\newlabel{fig:ME-TRPO_observables@cref}{{[figure][10][]10}{[1][7][]7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces The verification of the \emph  {ME-TRPO} and the \emph  {AE-DYNA-SAC} on the FERMI FEL.\relax }}{7}{figure.caption.32}\protected@file@percent }
+\newlabel{fig:Worst_episode_MBRL}{{11}{7}{The verification of the \emph {ME-TRPO} and the \emph {AE-DYNA-SAC} on the FERMI FEL.\relax }{figure.caption.32}{}}
+\newlabel{fig:Worst_episode_MBRL@cref}{{[figure][11][]11}{[1][7][]7}}
 \citation{Hirlaender2020b}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Discussion and outlook}{8}{section*.30}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusions}{8}{section*.32}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Acknowledgements}{8}{section*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {V}Discussion and outlook}{8}{section*.33}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces An overview over the verification results of the different algorithms. \relax }}{8}{table.caption.34}\protected@file@percent }
+\newlabel{tab:overview_verification}{{II}{8}{An overview over the verification results of the different algorithms. \relax }{table.caption.34}{}}
+\newlabel{tab:overview_verification@cref}{{[table][2][]II}{[1][8][]8}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusions}{8}{section*.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Acknowledgements}{8}{section*.36}\protected@file@percent }
 \citation{Furutaa}
 \citation{fujimoto2018addressing}
 \citation{Silver2014}
@@ -148,32 +164,37 @@
 \citation{Gu2007,Chen2011,Bardsley2012,Pearce2018}
 \citation{Pearce2018}
 \@writefile{toc}{\appendix }
-\@writefile{toc}{\contentsline {section}{\numberline {A}A non-linear standard control problem}{9}{section*.34}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1}NAF2 details}{9}{section*.35}\protected@file@percent }
-\newlabel{appendix:naf2}{{A\,1}{9}{}{section*.35}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}A non-linear standard control problem}{9}{section*.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1}NAF2 details}{9}{section*.38}\protected@file@percent }
+\newlabel{appendix:naf2}{{A\,1}{9}{}{section*.38}{}}
 \newlabel{appendix:naf2@cref}{{[subappendix][1][2147483647,1]A\,1}{[1][9][]9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Cumulative reward of different \emph  {NAF} implementations as discussed in the text on the \emph  {inverted pendulum} without noise.\relax }}{9}{figure.caption.36}\protected@file@percent }
-\newlabel{fig:comparsion_smoothing_small}{{12}{9}{Cumulative reward of different \emph {NAF} implementations as discussed in the text on the \emph {inverted pendulum} without noise.\relax }{figure.caption.36}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Cumulative reward of different \emph  {NAF} implementations as discussed in the text on the \emph  {inverted pendulum} without noise.\relax }}{9}{figure.caption.39}\protected@file@percent }
+\newlabel{fig:comparsion_smoothing_small}{{12}{9}{Cumulative reward of different \emph {NAF} implementations as discussed in the text on the \emph {inverted pendulum} without noise.\relax }{figure.caption.39}{}}
 \newlabel{fig:comparsion_smoothing_small@cref}{{[figure][12][2147483647]12}{[1][9][]9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2}The impact of noise}{9}{section*.37}\protected@file@percent }
-\newlabel{appendix:The impact of noise}{{A\,2}{9}{}{section*.37}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2}The impact of noise}{9}{section*.40}\protected@file@percent }
+\newlabel{appendix:The impact of noise}{{A\,2}{9}{}{section*.40}{}}
 \newlabel{appendix:The impact of noise@cref}{{[subappendix][2][2147483647,1]A\,2}{[1][9][]9}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {a}Regression assuming homoskedastic Gaussian noise using `Anchored ensembling'}{9}{section*.39}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Cumulative reward of different \emph  {NAF} implementations on the \emph  {inverted pendulum} with artificial noise as discussed in the text.\relax }}{10}{figure.caption.38}\protected@file@percent }
-\newlabel{fig:comparsion_noise}{{13}{10}{Cumulative reward of different \emph {NAF} implementations on the \emph {inverted pendulum} with artificial noise as discussed in the text.\relax }{figure.caption.38}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Cumulative reward of different \emph  {NAF} implementations on the \emph  {inverted pendulum} with artificial noise as discussed in the text.\relax }}{10}{figure.caption.41}\protected@file@percent }
+\newlabel{fig:comparsion_noise}{{13}{10}{Cumulative reward of different \emph {NAF} implementations on the \emph {inverted pendulum} with artificial noise as discussed in the text.\relax }{figure.caption.41}{}}
 \newlabel{fig:comparsion_noise@cref}{{[figure][13][2147483647]13}{[1][9][]10}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {a}Regression assuming homoskedastic Gaussian noise using `Anchored ensembling'}{10}{section*.42}\protected@file@percent }
 \newlabel{eq_MAP_loglike_anc}{{A4}{10}{}{equation.A.4}{}}
 \newlabel{eq_MAP_loglike_anc@cref}{{[equation][4][2147483647,1]A4}{[1][10][]10}}
 \newlabel{eqn_anch_loss_matrix}{{A5}{10}{}{equation.A.5}{}}
 \newlabel{eqn_anch_loss_matrix@cref}{{[equation][5][2147483647,1]A5}{[1][10][]10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Cumulative reward of \emph  {AE-DYNA-SAC} on the \emph  {inverted pendulum} with artificial noise using the anchor.\relax }}{10}{figure.caption.43}\protected@file@percent }
+\newlabel{fig:comparsion_noise_ae_dyna}{{14}{10}{Cumulative reward of \emph {AE-DYNA-SAC} on the \emph {inverted pendulum} with artificial noise using the anchor.\relax }{figure.caption.43}{}}
+\newlabel{fig:comparsion_noise_ae_dyna@cref}{{[figure][14][2147483647]14}{[1][10][]10}}
 \newlabel{eqn_anch_loss_init}{{A6}{10}{}{equation.A.6}{}}
 \newlabel{eqn_anch_loss_init@cref}{{[equation][6][2147483647,1]A6}{[1][10][]10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Cumulative reward of \emph  {AE-DYNA-SAC} on the \emph  {inverted pendulum} with artificial noise using the anchor.\relax }}{10}{figure.caption.40}\protected@file@percent }
-\newlabel{fig:comparsion_noise_ae_dyna}{{14}{10}{Cumulative reward of \emph {AE-DYNA-SAC} on the \emph {inverted pendulum} with artificial noise using the anchor.\relax }{figure.caption.40}{}}
-\newlabel{fig:comparsion_noise_ae_dyna@cref}{{[figure][14][2147483647]14}{[1][10][]10}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3}NAF versus AE-DYNA}{10}{section*.42}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {B}Still open}{10}{section*.44}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3}NAF versus AE-DYNA}{10}{section*.45}\protected@file@percent }
 \bibdata{mainNotes,tex/Bibliography}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Varying number of models in the ensemble of the \emph  {AE-DYNA-SAC} on the \emph  {inverted pendulum}.\relax }}{11}{figure.caption.44}\protected@file@percent }
+\newlabel{fig:Compare_models_sizes}{{15}{11}{Varying number of models in the ensemble of the \emph {AE-DYNA-SAC} on the \emph {inverted pendulum}.\relax }{figure.caption.44}{}}
+\newlabel{fig:Compare_models_sizes@cref}{{[figure][15][2147483647]15}{[1][10][]11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces The comparison of the \emph  {NAF2} and the \emph  {AE-DYNA-SAC} on the noisy \emph  {inverted pendulum}.\relax }}{11}{figure.caption.46}\protected@file@percent }
+\newlabel{fig:comparsion_NAF_AE-DYNA}{{16}{11}{The comparison of the \emph {NAF2} and the \emph {AE-DYNA-SAC} on the noisy \emph {inverted pendulum}.\relax }{figure.caption.46}{}}
+\newlabel{fig:comparsion_NAF_AE-DYNA@cref}{{[figure][16][2147483647]16}{[1][10][]11}}
 \bibcite{Kain2020}{{1}{2020}{{Kain\ \emph  {et~al.}}}{{Kain, Hirlander, Goddard, Velotti, Porta, Bruchon,\ and\ Valentino}}}
 \bibcite{Scheinker2018}{{2}{2018}{{Scheinker\ \emph  {et~al.}}}{{Scheinker, Edelen, Bohler, Emma,\ and\ Lutman}}}
 \bibcite{Huang2013}{{3}{2013}{{Huang\ \emph  {et~al.}}}{{Huang, Corbett, Safranek,\ and\ Wu}}}
@@ -185,59 +206,58 @@
 \bibcite{Hanuka2020}{{9}{}{{Hanuka\ \emph  {et~al.}}}{{Hanuka, Huang, Shtalenkova, Kennedy, Edelen, Lalchand, Ratner,\ and\ Duris}}}
 \bibcite{Roussel2020}{{10}{}{{Roussel\ \emph  {et~al.}}}{{Roussel, Hanuka,\ and\ Edelen}}}
 \bibcite{Bruchon2020}{{11}{2020}{{Bruchon\ \emph  {et~al.}}}{{Bruchon, Fenu, Gaio, Lonza, O'Shea, Pellegrino,\ and\ Salvato}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Varying number of models in the ensemble of the \emph  {AE-DYNA-SAC} on the \emph  {inverted pendulum}.\relax }}{11}{figure.caption.41}\protected@file@percent }
-\newlabel{fig:Compare_models_sizes}{{15}{11}{Varying number of models in the ensemble of the \emph {AE-DYNA-SAC} on the \emph {inverted pendulum}.\relax }{figure.caption.41}{}}
-\newlabel{fig:Compare_models_sizes@cref}{{[figure][15][2147483647]15}{[1][10][]11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces The comparison of the \emph  {NAF2} and the \emph  {AE-DYNA-SAC} on the noisy \emph  {inverted pendulum}.\relax }}{11}{figure.caption.43}\protected@file@percent }
-\newlabel{fig:comparsion_NAF_AE-DYNA}{{16}{11}{The comparison of the \emph {NAF2} and the \emph {AE-DYNA-SAC} on the noisy \emph {inverted pendulum}.\relax }{figure.caption.43}{}}
-\newlabel{fig:comparsion_NAF_AE-DYNA@cref}{{[figure][16][2147483647]16}{[1][10][]11}}
-\@writefile{toc}{\contentsline {section}{\numberline {}References}{11}{section*.45}\protected@file@percent }
 \bibcite{Bruchon2019}{{12}{2019}{{Bruchon\ \emph  {et~al.}}}{{Bruchon, Fenu, Gaio, Lonza, Pellegrino,\ and\ Salvato}}}
 \bibcite{Pang2020}{{13}{}{{Pang\ \emph  {et~al.}}}{{Pang, Thulasidasan,\ and\ Rybarcyk}}}
 \bibcite{Sutton2018}{{14}{2018}{{Sutton\ and\ Barto}}{{}}}
 \bibcite{DulacArnold2019}{{15}{}{{Dulac-Arnold\ \emph  {et~al.}}}{{Dulac-Arnold, Mankowitz,\ and\ Hester}}}
 \bibcite{Brockman2016}{{16}{}{{Brockman\ \emph  {et~al.}}}{{Brockman, Cheung, Pettersson, Schneider, Schulman, Tang,\ and\ Zaremba}}}
 \bibcite{Note1}{{17}{}{{Note1}}{{}}}
-\bibcite{Williams1992}{{18}{1992}{{Williams}}{{}}}
-\bibcite{Baxter2011}{{19}{}{{Baxter\ and\ Bartlett}}{{}}}
-\bibcite{pmlr-v28-levine13}{{20}{2013}{{Levine\ and\ Koltun}}{{}}}
-\bibcite{Schulman2015}{{21}{}{{Schulman\ \emph  {et~al.}}}{{Schulman, Levine, Moritz, Jordan,\ and\ Abbeel}}}
-\bibcite{Schulman2017}{{22}{2017}{{Schulman\ \emph  {et~al.}}}{{Schulman, Wolski, Dhariwal, Radford,\ and\ Klimov}}}
-\bibcite{Szepesvari2010}{{23}{2010}{{Szepesv{\'{a}}ri}}{{}}}
-\bibcite{Lillicrap2015}{{24}{}{{Lillicrap\ \emph  {et~al.}}}{{Lillicrap, Hunt, Pritzel, Heess, Erez, Tassa, Silver,\ and\ Wierstra}}}
-\bibcite{pmlr-v32-silver14}{{25}{2014{}}{{Silver\ \emph  {et~al.}}}{{Silver, Lever, Heess, Degris, Wierstra,\ and\ Riedmiller}}}
-\bibcite{Levine2020}{{26}{}{{Levine\ \emph  {et~al.}}}{{Levine, Kumar, Tucker,\ and\ Fu}}}
-\bibcite{Hirlaender2020a}{{27}{2020}{{Hirlaender}}{{}}}
-\bibcite{Hasselt2015}{{28}{}{{van Hasselt\ \emph  {et~al.}}}{{van Hasselt, Guez,\ and\ Silver}}}
-\bibcite{Mnih2013}{{29}{}{{Mnih\ \emph  {et~al.}}}{{Mnih, Kavukcuoglu, Silver, Graves, Antonoglou, Wierstra,\ and\ Riedmiller}}}
+\bibcite{Heess2017}{{18}{}{{Heess\ \emph  {et~al.}}}{{Heess, TB, Sriram, Lemmon, Merel, Wayne, Tassa, Erez, Wang, Eslami, Riedmiller,\ and\ Silver}}}
+\bibcite{Schulman2017}{{19}{2017}{{Schulman\ \emph  {et~al.}}}{{Schulman, Wolski, Dhariwal, Radford,\ and\ Klimov}}}
+\bibcite{Silver2014}{{20}{2014}{{Silver\ \emph  {et~al.}}}{{Silver, Lever, Heess, Degris, Wierstra,\ and\ Riedmiller}}}
+\bibcite{Lillicrap2015}{{21}{}{{Lillicrap\ \emph  {et~al.}}}{{Lillicrap, Hunt, Pritzel, Heess, Erez, Tassa, Silver,\ and\ Wierstra}}}
+\bibcite{OpenAI2018}{{22}{}{{OpenAI\ \emph  {et~al.}}}{{OpenAI, Andrychowicz, Baker, Chociej, Jozefowicz, McGrew, Pachocki, Petron, Plappert, Powell, Ray, Schneider, Sidor, Tobin, Welinder, Weng,\ and\ Zaremba}}}
+\bibcite{Deisenroth2011}{{23}{2011}{{Deisenroth\ and\ Rasmussen}}{{}}}
+\bibcite{Williams1992}{{24}{1992}{{Williams}}{{}}}
+\bibcite{Baxter2011}{{25}{}{{Baxter\ and\ Bartlett}}{{}}}
+\bibcite{pmlr-v28-levine13}{{26}{2013}{{Levine\ and\ Koltun}}{{}}}
+\bibcite{Schulman2015}{{27}{}{{Schulman\ \emph  {et~al.}}}{{Schulman, Levine, Moritz, Jordan,\ and\ Abbeel}}}
+\bibcite{Szepesvari2010}{{28}{2010}{{Szepesv{\'{a}}ri}}{{}}}
+\bibcite{Levine2020}{{29}{}{{Levine\ \emph  {et~al.}}}{{Levine, Kumar, Tucker,\ and\ Fu}}}
 \bibcite{Gu2016}{{30}{}{{Gu\ \emph  {et~al.}}}{{Gu, Lillicrap, Sutskever,\ and\ Levine}}}
-\bibcite{Wang2015}{{31}{}{{Wang\ \emph  {et~al.}}}{{Wang, Schaul, Hessel, van Hasselt, Lanctot,\ and\ de~Freitas}}}
-\bibcite{NIPS2010_091d584f}{{32}{2010}{{Hasselt}}{{}}}
-\bibcite{fujimoto2018addressing}{{33}{2018}{{Fujimoto\ \emph  {et~al.}}}{{Fujimoto, van Hoof,\ and\ Meger}}}
-\bibcite{Wang2019}{{34}{}{{Wang\ \emph  {et~al.}}}{{Wang, Bao, Clavera, Hoang, Wen, Langlois, Zhang, Zhang, Abbeel,\ and\ Ba}}}
-\bibcite{Gal2016}{{35}{2016}{{Gal\ \emph  {et~al.}}}{{Gal, McAllister,\ and\ Rasmussen}}}
-\bibcite{6654139}{{36}{2015}{{{Deisenroth}\ \emph  {et~al.}}}{{{Deisenroth}, {Fox},\ and\ {Rasmussen}}}}
-\bibcite{Chua2018}{{37}{}{{Chua\ \emph  {et~al.}}}{{Chua, Calandra, McAllister,\ and\ Levine}}}
-\bibcite{Wang2019a}{{38}{}{{Wang\ and\ Ba}}{{}}}
-\bibcite{Boer2005}{{39}{2005}{{de~Boer\ \emph  {et~al.}}}{{de~Boer, Kroese, Mannor,\ and\ Rubinstein}}}
-\bibcite{Note2}{{40}{}{{Note2}}{{}}}
-\bibcite{Sutton1991}{{41}{1991}{{Sutton}}{{}}}
-\bibcite{Pearce2018}{{42}{}{{Pearce\ \emph  {et~al.}}}{{Pearce, Leibfried, Brintrup, Zaki,\ and\ Neely}}}
-\bibcite{Janner2019}{{43}{}{{Janner\ \emph  {et~al.}}}{{Janner, Fu, Zhang,\ and\ Levine}}}
-\bibcite{Kurutach2018}{{44}{}{{Kurutach\ \emph  {et~al.}}}{{Kurutach, Clavera, Duan, Tamar,\ and\ Abbeel}}}
-\bibcite{Goodfellow2016}{{45}{2016}{{Goodfellow\ \emph  {et~al.}}}{{Goodfellow, Bengio,\ and\ Courville}}}
-\bibcite{Hill2018}{{46}{2018}{{Hill\ \emph  {et~al.}}}{{Hill, Raffin, Ernestus, Gleave, Kanervisto, Traore, Dhariwal, Hesse, Klimov, Nichol, Plappert, Radford, Schulman, Sidor,\ and\ Wu}}}
-\bibcite{Haarnoja2018a}{{47}{}{{Haarnoja\ \emph  {et~al.}}}{{Haarnoja, Zhou, Hartikainen, Tucker, Ha, Tan, Kumar, Zhu, Gupta, Abbeel,\ and\ Levine}}}
-\bibcite{Note3}{{48}{}{{Note3}}{{}}}
-\bibcite{Hirlaender2020b}{{49}{2020}{{Hirlaender\ and\ Bruchon}}{{}}}
-\bibcite{Furutaa}{{50}{}{{Furuta\ \emph  {et~al.}}}{{Furuta, Yamakita,\ and\ Kobayashi}}}
-\bibcite{Silver2014}{{51}{2014{}}{{Silver\ \emph  {et~al.}}}{{Silver, Lever, Heess, Degris, Wierstra,\ and\ Riedmiller}}}
-\bibcite{BarthMaron2018}{{52}{}{{Barth-Maron\ \emph  {et~al.}}}{{Barth-Maron, Hoffman, Budden, Dabney, Horgan, TB, Muldal, Heess,\ and\ Lillicrap}}}
-\bibcite{Gu2007}{{53}{2007}{{Gu\ and\ Oliver}}{{}}}
-\bibcite{Chen2011}{{54}{2011}{{Chen\ and\ Oliver}}{{}}}
-\bibcite{Bardsley2012}{{55}{2012}{{Bardsley}}{{}}}
-\newlabel{LastBibItem}{{55}{13}{}{section*.45}{}}
-\newlabel{LastBibItem@cref}{{[appendix][2][2147483647]B}{[1][13][]13}}
+\bibcite{Hirlaender2020a}{{31}{2020}{{Hirlaender}}{{}}}
+\bibcite{Note2}{{32}{}{{Note2}}{{}}}
+\bibcite{Hasselt2015}{{33}{}{{van Hasselt\ \emph  {et~al.}}}{{van Hasselt, Guez,\ and\ Silver}}}
+\@writefile{toc}{\contentsline {section}{\numberline {}References}{12}{section*.47}\protected@file@percent }
+\bibcite{Mnih2013}{{34}{}{{Mnih\ \emph  {et~al.}}}{{Mnih, Kavukcuoglu, Silver, Graves, Antonoglou, Wierstra,\ and\ Riedmiller}}}
+\bibcite{Wang2015}{{35}{}{{Wang\ \emph  {et~al.}}}{{Wang, Schaul, Hessel, van Hasselt, Lanctot,\ and\ de~Freitas}}}
+\bibcite{NIPS2010_091d584f}{{36}{2010}{{Hasselt}}{{}}}
+\bibcite{fujimoto2018addressing}{{37}{2018}{{Fujimoto\ \emph  {et~al.}}}{{Fujimoto, van Hoof,\ and\ Meger}}}
+\bibcite{Wang2019}{{38}{}{{Wang\ \emph  {et~al.}}}{{Wang, Bao, Clavera, Hoang, Wen, Langlois, Zhang, Zhang, Abbeel,\ and\ Ba}}}
+\bibcite{Gal2016}{{39}{2016}{{Gal\ \emph  {et~al.}}}{{Gal, McAllister,\ and\ Rasmussen}}}
+\bibcite{6654139}{{40}{2015}{{{Deisenroth}\ \emph  {et~al.}}}{{{Deisenroth}, {Fox},\ and\ {Rasmussen}}}}
+\bibcite{Chua2018}{{41}{}{{Chua\ \emph  {et~al.}}}{{Chua, Calandra, McAllister,\ and\ Levine}}}
+\bibcite{Wang2019a}{{42}{}{{Wang\ and\ Ba}}{{}}}
+\bibcite{Boer2005}{{43}{2005}{{de~Boer\ \emph  {et~al.}}}{{de~Boer, Kroese, Mannor,\ and\ Rubinstein}}}
+\bibcite{Note3}{{44}{}{{Note3}}{{}}}
+\bibcite{Sutton1991}{{45}{1991}{{Sutton}}{{}}}
+\bibcite{Pearce2018}{{46}{}{{Pearce\ \emph  {et~al.}}}{{Pearce, Leibfried, Brintrup, Zaki,\ and\ Neely}}}
+\bibcite{Kurutach2018}{{47}{}{{Kurutach\ \emph  {et~al.}}}{{Kurutach, Clavera, Duan, Tamar,\ and\ Abbeel}}}
+\bibcite{Janner2019}{{48}{}{{Janner\ \emph  {et~al.}}}{{Janner, Fu, Zhang,\ and\ Levine}}}
+\bibcite{Goodfellow2016}{{49}{2016}{{Goodfellow\ \emph  {et~al.}}}{{Goodfellow, Bengio,\ and\ Courville}}}
+\bibcite{Hill2018}{{50}{2018}{{Hill\ \emph  {et~al.}}}{{Hill, Raffin, Ernestus, Gleave, Kanervisto, Traore, Dhariwal, Hesse, Klimov, Nichol, Plappert, Radford, Schulman, Sidor,\ and\ Wu}}}
+\bibcite{Haarnoja2018a}{{51}{}{{Haarnoja\ \emph  {et~al.}}}{{Haarnoja, Zhou, Hartikainen, Tucker, Ha, Tan, Kumar, Zhu, Gupta, Abbeel,\ and\ Levine}}}
+\bibcite{kidambi2020morel}{{52}{2020}{{Kidambi\ \emph  {et~al.}}}{{Kidambi, Rajeswaran, Netrapalli,\ and\ Joachims}}}
+\bibcite{Note4}{{53}{}{{Note4}}{{}}}
+\bibcite{Note5}{{54}{}{{Note5}}{{}}}
+\bibcite{Hirlaender2020b}{{55}{2020}{{Hirlaender\ and\ Bruchon}}{{}}}
+\bibcite{Furutaa}{{56}{}{{Furuta\ \emph  {et~al.}}}{{Furuta, Yamakita,\ and\ Kobayashi}}}
+\bibcite{BarthMaron2018}{{57}{}{{Barth-Maron\ \emph  {et~al.}}}{{Barth-Maron, Hoffman, Budden, Dabney, Horgan, TB, Muldal, Heess,\ and\ Lillicrap}}}
+\bibcite{Gu2007}{{58}{2007}{{Gu\ and\ Oliver}}{{}}}
+\bibcite{Chen2011}{{59}{2011}{{Chen\ and\ Oliver}}{{}}}
+\bibcite{Bardsley2012}{{60}{2012}{{Bardsley}}{{}}}
+\newlabel{LastBibItem}{{60}{13}{}{section*.47}{}}
+\newlabel{LastBibItem@cref}{{[subappendix][3][2147483647,1]A\,3}{[1][13][]13}}
 \bibstyle{apsrev4-2}
 \citation{REVTEX42Control}
 \citation{apsrev42Control}
