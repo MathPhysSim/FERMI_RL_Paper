@@ -6,6 +6,9 @@ Please cite as:
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4271581.svg)](https://doi.org/10.5281/zenodo.4271581)
 
+## The included scripts:
+1. To run the NAF2 as used in the paper on the pendulum run: run_naf2.py
+
 ## These are the results of RL tests @FERMI-FEL
 The problem has four degrees of freedom in state and action space.
 A schematic overview:
