@@ -9,7 +9,8 @@ import numpy as np
 import tensorflow as tf
 from inverted_pendulum import PendulumEnv
 
-'''This script includes the AE-DYNA algorithm. '''
+'''This script includes the AE-DYNA algorithm. It runs on tensorflow 1.15 since it needs also the stable base lines.
+https://github.com/hill-a/stable-baselines '''
 
 # set random seed
 random_seed = 111

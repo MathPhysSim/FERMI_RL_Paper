@@ -1,17 +1,19 @@
+'''This script includes the AE-DYNA algorithm running on a dummy simulation for the FERMI FEL. It runs on tensorflow 1.15 since it needs also the stable base lines.
+https://github.com/hill-a/stable-baselines '''
+
 import os
 import pickle
 from datetime import datetime
-import itertools as it
+
 import gym
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-# from stable_baselines.common.noise import NormalActionNoise
-
 import tensorflow as tf
 
 from local_fel_simulated_env import FelLocalEnv
 from simulated_tango import SimTangoConnection
+
+# from stable_baselines.common.noise import NormalActionNoise
 
 # from naf2 import NAF
 

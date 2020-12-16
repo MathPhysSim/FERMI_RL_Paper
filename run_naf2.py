@@ -1,3 +1,6 @@
+"""Script to run the NAF2 agent on the inverted pendulum.
+Includes also a visualisation of the environment and a video."""
+
 import os
 import pickle
 import random
@@ -10,7 +13,7 @@ import tensorflow as tf
 
 from inverted_pendulum import PendulumEnv
 
-from naf2 import NAF
+from naf2_new import NAF
 
 # set random seed
 random_seed = 111
