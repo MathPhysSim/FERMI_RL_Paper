@@ -8,6 +8,9 @@ Please cite as:
 
 ## The included scripts:
 1. To run the NAF2 as used in the paper on the pendulum run: run_naf2.py
+2. To run the AE-DYNA as used in the paper on the pendulum run: AEDYNA.py
+
+The rest should be straight forward, otherwise contact me.
 
 ## These are the results of RL tests @FERMI-FEL
 The problem has four degrees of freedom in state and action space.

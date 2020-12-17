@@ -262,6 +262,7 @@ if __name__ == '__main__':
 
     # We normalize in a MonitoringEnv state action and reward to [-1,1] for the agent and plot results
     env = MonitoringEnv(env=PendulumEnv(), plot_progress=True)
+    # If you want a video:
     env = gym.wrappers.Monitor(env, "recording2", force=True, video_callable=lambda episode_id: episode_id%10==0)
 
     nafnet_kwargs = dict(hidden_sizes=[100, 100], activation=tf.nn.tanh
