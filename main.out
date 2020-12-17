@@ -1,29 +1,29 @@
-\BOOKMARK [0][-]{section*.2}{Model-free and Bayesian Neural Network Model-based Deep Reinforcement Learning for Particle Accelerator Control Demonstrated on the FERMI FEL}{}% 2
+\BOOKMARK [0][-]{section*.2}{Model-free and Bayesian Ensembling Model-based Deep Reinforcement Learning for Particle Accelerator Control Demonstrated on the FERMI FEL}{}% 2
 \BOOKMARK [1][-]{section*.1}{Abstract}{section*.2}% 1
 \BOOKMARK [1][-]{section*.3}{Introduction and Motivation}{section*.2}% 3
-\BOOKMARK [2][-]{section*.4}{An Overview of the Main Results}{section*.3}% 4
-\BOOKMARK [1][-]{section*.5}{The set-up of the studied problem}{section*.2}% 5
-\BOOKMARK [2][-]{section*.6}{The physical set-up}{section*.5}% 6
-\BOOKMARK [2][-]{section*.7}{The training environment}{section*.5}% 7
-\BOOKMARK [1][-]{section*.9}{Deep Reinforcement learning}{section*.2}% 8
-\BOOKMARK [2][-]{section*.10}{Model free reinforcement learning}{section*.9}% 9
-\BOOKMARK [3][-]{section*.11}{Approximate dynamic programming}{section*.10}% 10
-\BOOKMARK [3][-]{section*.12}{Design decisions for MFRL}{section*.10}% 11
-\BOOKMARK [2][-]{section*.13}{Uncertainty aware DYNA-style reinforcement learning}{section*.9}% 12
-\BOOKMARK [2][-]{section*.15}{Critical design decisions in MBRL}{section*.9}% 13
-\BOOKMARK [3][-]{section*.16}{The uncertainty aware dynamics model}{section*.15}% 14
-\BOOKMARK [3][-]{section*.17}{The controller algorithm}{section*.15}% 15
-\BOOKMARK [3][-]{section*.18}{Handling of the uncertainty}{section*.15}% 16
-\BOOKMARK [3][-]{section*.19}{The data acquisition}{section*.15}% 17
-\BOOKMARK [1][-]{section*.20}{Experimental results from FERMI RL online tests}{section*.2}% 18
-\BOOKMARK [2][-]{section*.22}{MFRL tests}{section*.20}% 19
-\BOOKMARK [2][-]{section*.28}{MBRL tests}{section*.20}% 20
-\BOOKMARK [1][-]{section*.33}{Discussion and outlook}{section*.2}% 21
-\BOOKMARK [1][-]{section*.35}{Conclusions}{section*.2}% 22
-\BOOKMARK [1][-]{section*.36}{Acknowledgements}{section*.2}% 23
-\BOOKMARK [1][-]{section*.37}{A non-linear standard control problem}{section*.2}% 24
-\BOOKMARK [2][-]{section*.38}{NAF2 details}{section*.37}% 25
-\BOOKMARK [2][-]{section*.40}{The impact of noise}{section*.37}% 26
-\BOOKMARK [3][-]{section*.42}{Regression assuming homoskedastic Gaussian noise using `Anchored ensembling'}{section*.40}% 27
-\BOOKMARK [2][-]{section*.45}{NAF versus AE-DYNA}{section*.37}% 28
-\BOOKMARK [1][-]{section*.47}{References}{section*.2}% 29
+\BOOKMARK [2][-]{section*.5}{An Overview of the Main Results}{section*.3}% 4
+\BOOKMARK [1][-]{section*.6}{The set-up of the studied problem}{section*.2}% 5
+\BOOKMARK [2][-]{section*.7}{The Physical Set-up}{section*.6}% 6
+\BOOKMARK [2][-]{section*.8}{The Training Environment}{section*.6}% 7
+\BOOKMARK [1][-]{section*.10}{Deep Reinforcement learning}{section*.2}% 8
+\BOOKMARK [2][-]{section*.11}{Model-free Reinforcement Learning}{section*.10}% 9
+\BOOKMARK [3][-]{section*.12}{Approximate dynamic programming}{section*.11}% 10
+\BOOKMARK [3][-]{section*.13}{Design decisions for MFRL}{section*.11}% 11
+\BOOKMARK [2][-]{section*.14}{Uncertainty Aware DYNA-style Reinforcement Learning}{section*.10}% 12
+\BOOKMARK [2][-]{section*.16}{Critical Design Decisions in MBRL}{section*.10}% 13
+\BOOKMARK [3][-]{section*.17}{The uncertainty aware dynamics model}{section*.16}% 14
+\BOOKMARK [3][-]{section*.18}{The controller algorithm}{section*.16}% 15
+\BOOKMARK [3][-]{section*.19}{Handling of the uncertainty}{section*.16}% 16
+\BOOKMARK [3][-]{section*.20}{The data acquisition}{section*.16}% 17
+\BOOKMARK [1][-]{section*.21}{Experimental results from FERMI RL online tests}{section*.2}% 18
+\BOOKMARK [2][-]{section*.23}{MFRL Tests}{section*.21}% 19
+\BOOKMARK [2][-]{section*.29}{MBRL Tests}{section*.21}% 20
+\BOOKMARK [1][-]{section*.34}{Discussion and outlook}{section*.2}% 21
+\BOOKMARK [1][-]{section*.36}{Conclusions}{section*.2}% 22
+\BOOKMARK [1][-]{section*.37}{Acknowledgements}{section*.2}% 23
+\BOOKMARK [1][-]{section*.38}{A Non-linear Standard Control Problem}{section*.2}% 24
+\BOOKMARK [2][-]{section*.39}{NAF2 Details}{section*.38}% 25
+\BOOKMARK [2][-]{section*.41}{The Impact of Noise}{section*.38}% 26
+\BOOKMARK [3][-]{section*.43}{Regression assuming homoskedastic Gaussian noise using `anchored ensembling'}{section*.41}% 27
+\BOOKMARK [2][-]{section*.46}{NAF versus AE-DYNA}{section*.38}% 28
+\BOOKMARK [1][-]{section*.48}{References}{section*.2}% 29
