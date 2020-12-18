@@ -5,7 +5,7 @@ Contact: simon.hirlaender(at)sbg.ac.at
 Pre-print
 [https://arxiv.org/abs/2012.09737](https://arxiv.org/abs/2012.09737)
 
-Please cite as:
+Please cite code as:
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4271581.svg)](https://doi.org/10.5281/zenodo.4271581)
 
