@@ -30,7 +30,7 @@ _AE-DYNA_ | Model-based|High|Yes|High
 
 ## Experiments done on the machine:
 
-A new implementation of the NAF with double Q learning:
+A new implementation of the NAF with double Q learning (single network dashed, double network solid):
 
 ![NAF2_training](Figures/FERMI_all_experiments_NAF_episodes.png)
 
