@@ -7,7 +7,7 @@ Pre-print
 
 Please cite code as:
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4271581.svg)](https://doi.org/10.5281/zenodo.4271581)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4348989.svg)](https://doi.org/10.5281/zenodo.4348989)
 
 ## The included scripts:
 1. To run the NAF2 as used in the paper on the pendulum run: run_naf2.py
