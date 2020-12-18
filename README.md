@@ -1,6 +1,9 @@
-# Model-Based and Model-Free Deep Reinforcement Learning in Accelerator Operation with Application to FERMI FEL
+# Model-free and Bayesian Ensembling Model-based Deep Reinforcement Learning for Particle Accelerator Control Demonstrated on the FERMI FEL
 
 Contact: simon.hirlaender(at)sbg.ac.at
+
+Pre-print
+[https://arxiv.org/abs/2012.09737](https://arxiv.org/abs/2012.09737)
 
 Please cite as:
 
