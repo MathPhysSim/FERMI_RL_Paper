@@ -185,8 +185,8 @@ class QModel:
             h = self.fc(h, hidden_dim, kernel_initializer=self.kernel_initializer)
 
         # Output - state-value function, where the reward is assumed to be negative
-        V = tf.scalar_mul(-1, self.fc(h, 1, activation=tf.nn.leaky_relu,
-                                      kernel_initializer=self.kernel_initializer, name='V'))
+        V = -self.fc(h, 1, activation=tf.nn.leaky_relu,
+                                      kernel_initializer=self.kernel_initializer, name='V')
         # Output - for the matrix L
         l = self.fc(h, (self.act_dim * (self.act_dim + 1) / 2),
                     kernel_initializer=self.kernel_initializer, name='l')
