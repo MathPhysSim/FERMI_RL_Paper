@@ -87,7 +87,7 @@ class NormalizeEnv(gym.Wrapper):
 
         self.obs_dim = self.env.observation_space.shape
         self.obs_high = self.env.observation_space.high
-        self.obs_low = self.env.observation_space.high
+        self.obs_low = self.env.observation_space.low
         self.act_dim = self.env.action_space.shape
         self.act_high = self.env.action_space.high
         self.act_low = self.env.action_space.low
