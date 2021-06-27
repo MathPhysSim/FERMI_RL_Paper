@@ -261,14 +261,15 @@ if __name__ == '__main__':
     is_continued = False  # False if is_train else True
 
     # We normalize in a MonitoringEnv state action and reward to [-1,1] for the agent and plot results
-    env = MonitoringEnv(env=PendulumEnv(), plot_progress=True)
+    env = MonitoringEnv(env=PendulumEnv(), plot_progress=False)
     # If you want a video:
     env = gym.wrappers.Monitor(env, "recording2", force=True, video_callable=lambda episode_id: episode_id%10==0)
 
     nafnet_kwargs = dict(hidden_sizes=[100, 100], activation=tf.nn.tanh
                          , kernel_initializer=tf.random_normal_initializer(0, 0.05, seed=random_seed))
 
-    noise_info = dict(noise_function=lambda nr: max(0., (1 - (nr / 50))))
+    action_size = env.action_space.shape[-1]
+    noise_info = dict(noise_function=lambda action, nr: action + np.random.randn(action_size) * 1 / (nr + 1))
 
     # the target network is updated at the end of each episode
     # the number of episodes is executed each step in the environment

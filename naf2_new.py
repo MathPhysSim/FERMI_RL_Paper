@@ -4,7 +4,6 @@ import shutil
 import matplotlib.pyplot as plt
 import gym
 
-
 '''This is a version of the NAF Article (Gu2016)
  Gu, S.; Lillicrap, T.; Sutskever, I. & Levine, S.
  Continuous Deep Q-Learning with Model-based Acceleration 2016
@@ -13,12 +12,14 @@ We use tensorflow 2.3'''
 
 import tensorflow as tf
 from tensorflow import keras
+
 # Turn off warnings form tensorflow
 tf.get_logger().setLevel('ERROR')
 
 tf.keras.backend.set_floatx('float64')
 import numpy as np
 from tqdm import tqdm
+
 
 class ReplayBuffer:
     """
@@ -72,6 +73,7 @@ class ReplayBuffer:
         for i in range(len(obs1s)):
             self.store(obs1s[i], acts[i], rews[i], obs2s[i], dones[i])
         # print(self.size)
+
 
 def basic_loss_function(y_true, y_pred):
     return tf.math.reduce_mean(y_true - y_pred)
@@ -186,7 +188,7 @@ class QModel:
 
         # Output - state-value function, where the reward is assumed to be negative
         V = -self.fc(h, 1, activation=tf.nn.leaky_relu,
-                                      kernel_initializer=self.kernel_initializer, name='V')
+                     kernel_initializer=self.kernel_initializer, name='V')
         # Output - for the matrix L
         l = self.fc(h, (self.act_dim * (self.act_dim + 1) / 2),
                     kernel_initializer=self.kernel_initializer, name='l')
@@ -296,12 +298,23 @@ class QModel:
             # y_target = tf.add(tf.multiply(tf.math.scalar_mul(self.discount, q_2),
             #                               tf.add(tf.constant(1, dtype=tf.float64),
             #                                      tf.math.scalar_mul(-1, batch['done']))), batch['rews'])
-
+            # if self.q_smoothing_clip is None:
+            #     return_value = np.clip(action, -1, 1)
+            # else:
+            #     return_value = np.clip(action + np.clip(self.q_smoothing_sigma * np.random.randn(self.action_size),
+            #                                             -self.q_smoothing_clip, self.q_smoothing_clip), -1, 1)
+            acts = batch['acts']
+            print(type(acts))
+            sigma = 0.02
+            clip = 0.05
+            noise = tf.clip_by_value(tf.random.normal(shape=tf.shape(acts),stddev=sigma, dtype=tf.float64), -clip, clip)
+            acts = tf.add(tf.clip_by_value(acts, -1, 1), noise)
             with tf.GradientTape() as tape:
                 # Run the forward pass of the layer.
                 # The operations that the layer applies
                 # to its inputs are going to be recorded
                 # on the GradientTape.
+
                 y_pred = self([batch['obs1'], batch['acts']], training=True)
                 # Compute the loss value for this minibatch.
                 loss = self.compiled_loss(y_target, y_pred)
@@ -561,12 +574,18 @@ class NAF(object):
 
         # Add small noise on the controller
         elif is_train:
-            action = self.noise_function(np.squeeze(model.get_action([state])),self.idx_episode)
-            if self.q_smoothing_clip is None:
-                return_value = np.clip(action, -1, 1)
-            else:
-                return_value = np.clip(action + np.clip(self.sigma * np.random.randn(self.action_size),
-                                                        -self.q_smoothing_clip, self.q_smoothing_clip), -1, 1)
+            # action = self.noise_function(np.squeeze(model.get_action([state])),self.idx_episode)
+            # if self.q_smoothing_clip is None:
+            #     return_value = np.clip(action, -1, 1)
+            # else:
+            #     return_value = np.clip(action + np.clip(self.q_smoothing_sigma * np.random.randn(self.action_size),
+            #                                             -self.q_smoothing_clip, self.q_smoothing_clip), -1, 1)
+            action = self.noise_function(np.squeeze(model.get_action([state])), self.idx_episode)
+            # if self.q_smoothing_clip is None:
+            return_value = np.clip(action, -1, 1)
+            # else:
+            #     return_value = np.clip(action + np.clip(self.q_smoothing_sigma * np.random.randn(self.action_size),
+            #                                             -self.q_smoothing_clip, self.q_smoothing_clip), -1, 1)
             return return_value
         else:
             action = model.get_action([state])
