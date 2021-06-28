@@ -10,10 +10,11 @@ Please cite code as:
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4348989.svg)](https://doi.org/10.5281/zenodo.4348989)
 
 ## The included scripts:
-1. To run the NAF2 as used in the paper on the pendulum run: run_naf2.py
-2. To run the AE-DYNA as used in the paper on the pendulum run: AEDYNA.py
+1. To run the NAF2 as used in the paper on the pendulum run: _run_naf2.py_
+2. To run the AE-DYNA as used in the paper on the pendulum run: _AEDYNA.py_
+3. To run the AE-DYNA with tensorflow 2 on the pendulum run: _AE_Dyna_Tensorflow_2.py_
 
-The rest should be straight forward, otherwise contact me.
+The rest should be straight forward, otherwise contact us.
 
 ## These are the results of RL tests @FERMI-FEL
 The problem has four degrees of freedom in state and action space.
