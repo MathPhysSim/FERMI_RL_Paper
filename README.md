@@ -79,6 +79,6 @@ Finally, there is an update of the AE-dyna to use tensorflow 2. Run the script _
 It is based on tensor_layers [tensorlayer](https://github.com/tensorlayer/tensorlayer/tree/reinforcement-learning/), which has to be installed.
 The script _AE_Dyna_Tensorflow_2.py_ runs on the inverted pendulum and produces results like shown in the figure below.
 
-![image](https://user-images.githubusercontent.com/22523245/121345395-164c3c80-c925-11eb-97d3-b97c92aad4e9.png)
 
+![img.png](Figures/Final_Observables.png)
 If you have questions do not hesitate to contact us.

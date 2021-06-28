@@ -566,7 +566,9 @@ def plot_observables(data, label, length_all, **kwargs):
     ax2.plot(length_all, color=color)
 
     fig.align_labels()
+    fig.tight_layout()
     plt.show()
+    return fig
 
 def plot_results(env_wrapper, label=None, **kwargs):
     """ Plot the validation episodes"""

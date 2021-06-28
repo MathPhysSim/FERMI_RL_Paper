@@ -376,7 +376,7 @@ def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC', simulate
 
                 # plotting the progress -------------------
                 # if it % 10 == 0:
-                plot_observables(data=data, label=label, length_all=length_all)
+                fig = plot_observables(data=data, label=label, length_all=length_all)
 
                 # stop training if the policy hasn't improved
                 if (np.sum(best_sim_test >= sim_rewards) >= int(num_ensemble_models * 0.7)):
@@ -386,6 +386,8 @@ def aedyna(real_env, num_epochs=50, steps_per_env=100, algorithm='SAC', simulate
                 else:
                     best_sim_test = sim_rewards
 
+    # Store the observables at the end
+    fig.savefig('Final_Observables.png')
     # Final verification:
     env_test.env.set_usage('final')
     mn_test, mn_test_std, mn_length, _ = test_agent(env_test, agent.policy_net.get_action, num_games=50)
@@ -412,7 +414,7 @@ if __name__ == '__main__':
     ############################################################
     # Steps in real environment each epoch for the model training
     steps_per_epoch = 200
-    total_steps = 1500
+    total_steps = 1400
     # Initial steps in real environment at the beginning for the model training
     init_random_steps = 200
     num_epochs = int((total_steps - init_random_steps) / steps_per_epoch) + 1
