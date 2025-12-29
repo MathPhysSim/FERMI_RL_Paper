@@ -1,85 +1,107 @@
 # Model-free and Bayesian Ensembling Model-based Deep Reinforcement Learning for Particle Accelerator Control Demonstrated on the FERMI FEL
 
-Contact: simon.hirlaender(at)sbg.ac.at
+**Pre-print:** [arXiv:2012.09737](https://arxiv.org/abs/2012.09737)
 
-Pre-print
-[https://arxiv.org/abs/2012.09737](https://arxiv.org/abs/2012.09737)
+**Contact:** simon.hirlaender(at)sbg.ac.at
 
-Please cite code as:
-
+**Cite as:**
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4348989.svg)](https://doi.org/10.5281/zenodo.4348989)
 
-## The included scripts:
-1. To run the NAF2 as used in the paper on the pendulum run: _run_naf2.py_
-2. To run the AE-DYNA as used in the paper on the pendulum run: _AEDYNA.py_
-3. To run the AE-DYNA with tensorflow 2 on the pendulum run: _AE_Dyna_Tensorflow_2.py_
+---
 
-The rest should be straight forward, otherwise contact us.
+## Abstract
 
-## These are the results of RL tests @FERMI-FEL
-The problem has four degrees of freedom in state and action space.
-A schematic overview:
+Reinforcement learning holds tremendous promise in accelerator controls. The primary goal of this paper is to show how this approach can be utilised on an operational level on accelerator physics problems. Despite the success of model-free reinforcement learning in several domains, sample-efficiency still is a bottle-neck, which might be encompassed by model-based methods.
+We compare well-suited purely model-based to model-free reinforcement learning applied to the intensity optimisation on the FERMI FEL system. We find that the model-based approach demonstrates higher representational power and sample-efficiency, while the asymptotic performance of the model-free method is slightly superior. The model-based algorithm is implemented in a DYNA-style using an uncertainty aware model, and the model-free algorithm is based on tailored deep Q-learning. In both cases, the algorithms were implemented in a way, which presents increased noise robustness as omnipresent in accelerator control problems.
+
+## Schematic Overview
 
 ![SchemaFERMIFEL](Figures/SL_Alignment_Scheme.png)
 
-Algorithm | Type | Representational power|Noise resistive|Sample efficiency
+## Algorithms & Code
+
+This repository contains implementations of both Model-Free and Model-Based RL algorithms applied to the FERMI FEL control problem and simulated environments (Inverted Pendulum).
+
+| Algorithm | Type | Representational power| Noise resistive| Sample efficiency
 ------------ | -------------|---------|------------|---------
-_NAF_ | Model-free|Low|No|High
-_NAF2_ | Model-free|Low|Yes|High
-_ME-TRPO_ | Model-based|High|No|High
-_AE-DYNA_ | Model-based|High|Yes|High
+_NAF_ | Model-free| Low| No| High
+_NAF2_ | Model-free| Low| Yes| High
+_ME-TRPO_ | Model-based| High| No| High
+_AE-DYNA_ | Model-based| High| Yes| High |
 
-## Experiments done on the machine:
+### Scripts
 
-A new implementation of the NAF with double Q learning (single network dashed, double network solid):
+> [!IMPORTANT]
+> The repository contains scripts using different TensorFlow versions. Please check the requirements below.
+
+1. **`run_naf2.py`** (TensorFlow 2.x): Runs the Normalized Advantage Function (NAF2) with double Q-learning on the inverted pendulum environment.
+2. **`AE_Dyna_Tensorflow_2.py`** (TensorFlow 2.x): Runs the Uncertainty Aware DYNA-style RL (AE-DYNA) on the inverted pendulum environment using TensorFlow 2.
+3. **`AEDYNA.py`** (TensorFlow 1.15 - **Legacy**): The original implementation of AE-DYNA used in the paper. Requires stable-baselines (v2) and TensorFlow 1.x.
+
+## Installation
+
+### Prerequisites (TensorFlow 2.x Scripts)
+
+To run `run_naf2.py` and `AE_Dyna_Tensorflow_2.py`, you need a Python 3 environment with the dependencies listed in `requirements.txt`.
+
+```bash
+# Creative a virtual environment (optional but recommended)
+conda create -n fermi_rl python=3.8
+conda activate fermi_rl
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### Legacy Setup (`AEDYNA.py`)
+
+To run the legacy script `AEDYNA.py`, you must use an environment compatible with TensorFlow 1.15 and `stable-baselines` (v2). This is separate from the main TF2 environment.
+
+## Usage
+
+To run the NAF2 agent on the pendulum:
+
+```bash
+python run_naf2.py
+```
+
+To run the AE-DYNA agent (TF2) on the pendulum:
+
+```bash
+python AE_Dyna_Tensorflow_2.py
+```
+
+## Results
+
+### FERMI FEL Optimisation
+
+Comparing NAF2 (Model-Free) and AE-DYNA (Model-Based) performance.
+
+#### Experimental Results at FERMI FEL
 
 ![NAF2_training](Figures/FERMI_all_experiments_NAF_episodes.png)
+![NAF2_convergence](Figures/FERMI_all_experiments_NAF_convergence.png)
 
-![NAF2_training](Figures/FERMI_all_experiments_NAF_convergence.png)
-
-A new implementation of a _AE-DYNA_:
+#### AE-DYNA Training
 
 ![AE-DYNA](Figures/AE-DYNA_observables.png)
+![AE-DYNA_verification](Figures/AE-DYNA_verification.png)
 
-![AE-DYNA](Figures/AE-DYNA_verification.png)
+### Inverted Pendulum Benchmarks
 
-A variant of the _ME-TRPO_:
+**Noise Robustness:**
+![Comparison_noise](Figures/Comparison_noise.png)
 
-![ME-TRPO](Figures/ME-TRPO_observables.png)
+**Sample Efficiency (NAF vs AE-DYNA):**
+![Comparison_NAF_AE-DYNA](Figures/Comparison_NAF_AE-DYNA.png)
 
-![ME-TRPO](Figures/ME-TRPO_verification.png)
+### Learning Evolution
 
-## The evolution as presented at GSI [Towards Artificial Intelligence in Accelerator Operation](https://indico.gsi.de/event/11539/):
-![ME-TRPO](Figures/Learning_evolution.png)
+The evolution as presented at GSI [Towards Artificial Intelligence in Accelerator Operation](https://indico.gsi.de/event/11539/):
+![Learning_evolution](Figures/Learning_evolution.png)
 
-## Experiments done on the [_inverted pendulum_](https://gym.openai.com/envs/Pendulum-v0/) openai gym environment:
+### TensorFlow 2 Implementation
 
-Cumulative reward of different _NAF_ implementations on the _inverted pendulum_ with artificial noise.
+The repository includes an updated implementation of AE-DYNA using TensorFlow 2 (`AE_Dyna_Tensorflow_2.py`), based on `tensorlayer`.
 
-![NAF_NOISE](Figures/Comparison_noise.png)
-
-Comparison of the inclusion of aleatoric noise in the AE-DYNA in the noisy _inverted pendulum_:
-
-![AE-DYNA_NOISE](Figures/Comparison_noise_ae_dyna.png)
-
-Comparison of the inclusion of aleatoric noise in the AE-DYNA in the noisy _inverted pendulum_:
-
-![AE-DYNA_NOISE](Figures/Comparison_models_sizes.png)
-
-Sample efficiency of _NAF_ and _AE-DYNA_:
-
-![AE-DYNA](Figures/Comparison_NAF_AE-DYNA.png)
-
-Free run on the _inverted pendulum_:
-
-![AE-DYNA](Figures/AE-DYNA_free_run_pendulum.png)
-
-
-# Update of AE-Dyna-(SAC) to Tensorflow 2
-Finally, there is an update of the AE-dyna to use tensorflow 2. Run the script _AE_Dyna_Tensorflow_2.py_.
-It is based on tensor_layers [tensorlayer](https://github.com/tensorlayer/tensorlayer/tree/reinforcement-learning/), which has to be installed.
-The script _AE_Dyna_Tensorflow_2.py_ runs on the inverted pendulum and produces results like shown in the figure below.
-
-
-![img.png](Figures/Final_Observables.png)
-If you have questions do not hesitate to contact us.
+![Final Observables](Figures/Final_Observables.png)

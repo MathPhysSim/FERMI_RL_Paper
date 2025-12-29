@@ -1,0 +1,5 @@
+tensorflow>=2.3
+gym
+numpy
+matplotlib
+tqdm
