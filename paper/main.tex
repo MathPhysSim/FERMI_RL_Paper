@@ -528,7 +528,7 @@ prstab,
 	\end{figure}
 	\subsubsection{Regression assuming homoskedastic Gaussian noise using `anchored ensembling'}
 	The Bayesian and RL communities are paying increasing attention to new approaches for Bayesian inference. In the `anchored ensembling' technique, a regularization term is added to the loss function, which yields a point estimate of the Bayesian posterior, specifically the maximum a posteriori (MAP) parameter estimate. 
-	By employing an ensemble of networks and introducing noise to the regularization term's targets, a distribution of MAP solutions \cite{Gu2007, Chen2011, Bardsley2012, Pearce2018} is obtained, which mimics the true posterior.\\
+	By employing an ensemble of networks and introducing noise to the regularization term's targets, a distribution of MAP solutions \cite{Gu2007, Chen2011, Bardsley2012, Pearce2018} is obtained, which mimics the true posterior. This approach addresses a key criticism of standard deep ensembles: that randomly initialized networks merely find diverse local optima rather than sampling from the true posterior distribution. The regularization term anchoring the weights to a prior draw provides the theoretical linkage to Bayesian inference that standard ensembles lack.\\
 	Consider an artificial neural net containing parameters, ${\theta}$, making predictions for the dynamics and the reward \cref{eq:dynamics_model}, $\hat{f}_\theta$ ($f$ denotes the true unknown function), with $N$ data-points. If the prior is given by $P(\theta) = \mathcal{N}(\pmb{\mu}_{prior}, \pmb{\Sigma}_{prior})$, maximising the following returns MAP parameter estimates (details see \cite{Pearce2018}):
 	\begin{equation}
 		\label{eq_MAP_loglike_anc}

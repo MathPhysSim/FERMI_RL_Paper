@@ -11,23 +11,23 @@
 
 ## Abstract
 
-Reinforcement learning holds tremendous promise in accelerator controls. The primary goal of this paper is to show how this approach can be utilised on an operational level on accelerator physics problems. Despite the success of model-free reinforcement learning in several domains, sample-efficiency still is a bottle-neck, which might be encompassed by model-based methods.
-We compare well-suited purely model-based to model-free reinforcement learning applied to the intensity optimisation on the FERMI FEL system. We find that the model-based approach demonstrates higher representational power and sample-efficiency, while the asymptotic performance of the model-free method is slightly superior. The model-based algorithm is implemented in a DYNA-style using an uncertainty aware model, and the model-free algorithm is based on tailored deep Q-learning. In both cases, the algorithms were implemented in a way, which presents increased noise robustness as omnipresent in accelerator control problems.
+Reinforcement learning holds significant potential in accelerator controls. The primary goal of this paper is to demonstrate the operational application of this approach to accelerator physics problems. Despite the success of model-free reinforcement learning in several domains, sample efficiency remains a limiting factor, a challenge that model-based methods may mitigate.
+We compare well-suited purely model-based to model-free reinforcement learning applied to the intensity optimisation on the FERMI FEL system. We find that the model-based approach demonstrates higher representational power and sample-efficiency, while the asymptotic performance of the model-free method is slightly superior. The model-based algorithm is implemented in a DYNA-style using an uncertainty aware model, and the model-free algorithm is based on tailored deep Q-learning. In both cases, the algorithms were implemented in a manner that presents increased noise robustness as prevalent in accelerator control problems.
 
 ## Schematic Overview
 
-![SchemaFERMIFEL](Figures/SL_Alignment_Scheme.png)
+![SchemaFERMIFEL](paper/Figures/SL_Alignment_Scheme.png)
 
 ## Algorithms & Code
 
 This repository contains implementations of both Model-Free and Model-Based RL algorithms applied to the FERMI FEL control problem and simulated environments (Inverted Pendulum).
 
-| Algorithm | Type | Representational power| Noise resistive| Sample efficiency
------------- | -------------|---------|------------|---------
-_NAF_ | Model-free| Low| No| High
-_NAF2_ | Model-free| Low| Yes| High
-_ME-TRPO_ | Model-based| High| No| High
-_AE-DYNA_ | Model-based| High| Yes| High |
+| Algorithm   | Type        | Representational power | Noise resistive | Sample efficiency |
+| ----------- | ----------- | ---------------------- | --------------- | ----------------- |
+| _NAF_       | Model-free  | Low                    | No              | High              |
+| _NAF2_      | Model-free  | Low                    | Yes             | High              |
+| _ME-TRPO_   | Model-based | High                   | No              | High              |
+| _AE-DYNA_   | Model-based | High                   | Yes             | High              |
 
 ### Scripts
 
@@ -101,21 +101,21 @@ Comparing NAF2 (Model-Free) and AE-DYNA (Model-Based) performance.
 
 #### AE-DYNA Training
 
-![AE-DYNA](Figures/AE-DYNA_observables.png)
-![AE-DYNA_verification](Figures/AE-DYNA_verification.png)
+![AE-DYNA](paper/Figures/AE-DYNA_observables.png)
+![AE-DYNA_verification](paper/Figures/Verification_DYNA_all_episodes.png)
 
 ### Inverted Pendulum Benchmarks
 
 **Noise Robustness:**
-![Comparison_noise](Figures/Comparison_noise.png)
+![Comparison_noise](paper/Figures/Comparison_noise.png)
 
 **Sample Efficiency (NAF vs AE-DYNA):**
-![Comparison_NAF_AE-DYNA](Figures/Comparison_NAF_AE-DYNA.png)
+![Comparison_NAF_AE-DYNA](paper/Figures/Comparison_NAF_AE-DYNA.png)
 
 ### Learning Evolution
 
 The evolution as presented at GSI [Towards Artificial Intelligence in Accelerator Operation](https://indico.gsi.de/event/11539/):
-![Learning_evolution](Figures/Learning_evolution.png)
+![Learning_evolution](paper/Figures/Learning_evolution.png)
 
 ### TensorFlow 2 Implementation
 
@@ -124,4 +124,4 @@ The repository includes an updated implementation of AE-DYNA using TensorFlow 2 
 1. To run the updated AE-DYNA with TensorFlow 2: `src/AE_Dyna_Tensorflow_2.py`
 2. Legacy AE-DYNA (TF 1.15): `src/AEDYNA.py` (requires separate environment)
 
-![Final Observables](Figures/Final_Observables.png)
+![Final Observables](paper/Figures/Final_Observables.png)
