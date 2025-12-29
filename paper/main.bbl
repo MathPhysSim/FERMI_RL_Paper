@@ -1,0 +1,860 @@
+%apsrev4-2.bst 2019-01-14 (MD) hand-edited version of apsrev4-1.bst
+%Control: key (0)
+%Control: author (8) initials jnrlst
+%Control: editor formatted (1) identically to author
+%Control: production of article title (0) allowed
+%Control: page (0) single
+%Control: year (1) truncated
+%Control: production of eprint (0) enabled
+\begin{thebibliography}{57}%
+\makeatletter
+\providecommand \@ifxundefined [1]{%
+ \@ifx{#1\undefined}
+}%
+\providecommand \@ifnum [1]{%
+ \ifnum #1\expandafter \@firstoftwo
+ \else \expandafter \@secondoftwo
+ \fi
+}%
+\providecommand \@ifx [1]{%
+ \ifx #1\expandafter \@firstoftwo
+ \else \expandafter \@secondoftwo
+ \fi
+}%
+\providecommand \natexlab [1]{#1}%
+\providecommand \enquote  [1]{``#1''}%
+\providecommand \bibnamefont  [1]{#1}%
+\providecommand \bibfnamefont [1]{#1}%
+\providecommand \citenamefont [1]{#1}%
+\providecommand \href@noop [0]{\@secondoftwo}%
+\providecommand \href [0]{\begingroup \@sanitize@url \@href}%
+\providecommand \@href[1]{\@@startlink{#1}\@@href}%
+\providecommand \@@href[1]{\endgroup#1\@@endlink}%
+\providecommand \@sanitize@url [0]{\catcode `\\12\catcode `\$12\catcode
+  `\&12\catcode `\#12\catcode `\^12\catcode `\_12\catcode `\%12\relax}%
+\providecommand \@@startlink[1]{}%
+\providecommand \@@endlink[0]{}%
+\providecommand \url  [0]{\begingroup\@sanitize@url \@url }%
+\providecommand \@url [1]{\endgroup\@href {#1}{\urlprefix }}%
+\providecommand \urlprefix  [0]{URL }%
+\providecommand \Eprint [0]{\href }%
+\providecommand \doibase [0]{https://doi.org/}%
+\providecommand \selectlanguage [0]{\@gobble}%
+\providecommand \bibinfo  [0]{\@secondoftwo}%
+\providecommand \bibfield  [0]{\@secondoftwo}%
+\providecommand \translation [1]{[#1]}%
+\providecommand \BibitemOpen [0]{}%
+\providecommand \bibitemStop [0]{}%
+\providecommand \bibitemNoStop [0]{.\EOS\space}%
+\providecommand \EOS [0]{\spacefactor3000\relax}%
+\providecommand \BibitemShut  [1]{\csname bibitem#1\endcsname}%
+\let\auto@bib@innerbib\@empty
+%</preamble>
+\bibitem [{\citenamefont {Kain}\ \emph {et~al.}(2020)\citenamefont {Kain},
+  \citenamefont {Hirlander}, \citenamefont {Goddard}, \citenamefont {Velotti},
+  \citenamefont {Porta}, \citenamefont {Bruchon},\ and\ \citenamefont
+  {Valentino}}]{Kain2020}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {V.}~\bibnamefont
+  {Kain}}, \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Hirlander}},
+  \bibinfo {author} {\bibfnamefont {B.}~\bibnamefont {Goddard}}, \bibinfo
+  {author} {\bibfnamefont {F.~M.}\ \bibnamefont {Velotti}}, \bibinfo {author}
+  {\bibfnamefont {G.~Z.~D.}\ \bibnamefont {Porta}}, \bibinfo {author}
+  {\bibfnamefont {N.}~\bibnamefont {Bruchon}},\ and\ \bibinfo {author}
+  {\bibfnamefont {G.}~\bibnamefont {Valentino}},\ }\bibfield  {title} {\bibinfo
+  {title} {Sample-efficient reinforcement learning for {CERN} accelerator
+  control},\ }\bibfield  {journal} {\bibinfo  {journal} {Physical Review
+  Accelerators and Beams}\ }\textbf {\bibinfo {volume} {23}},\ \href
+  {https://doi.org/10.1103/physrevaccelbeams.23.124801}
+  {10.1103/physrevaccelbeams.23.124801} (\bibinfo {year} {2020})\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Scheinker}\ \emph {et~al.}(2018)\citenamefont
+  {Scheinker}, \citenamefont {Edelen}, \citenamefont {Bohler}, \citenamefont
+  {Emma},\ and\ \citenamefont {Lutman}}]{Scheinker2018}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
+  {Scheinker}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Edelen}},
+  \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Bohler}}, \bibinfo
+  {author} {\bibfnamefont {C.}~\bibnamefont {Emma}},\ and\ \bibinfo {author}
+  {\bibfnamefont {A.}~\bibnamefont {Lutman}},\ }\bibfield  {title} {\bibinfo
+  {title} {Demonstration of model-independent control of the longitudinal phase
+  space of electron beams in the linac-coherent light source with femtosecond
+  resolution},\ }\bibfield  {journal} {\bibinfo  {journal} {Physical Review
+  Letters}\ }\textbf {\bibinfo {volume} {121}},\ \href
+  {https://doi.org/10.1103/physrevlett.121.044801}
+  {10.1103/physrevlett.121.044801} (\bibinfo {year} {2018})\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Huang}\ \emph {et~al.}(2013)\citenamefont {Huang},
+  \citenamefont {Corbett}, \citenamefont {Safranek},\ and\ \citenamefont
+  {Wu}}]{Huang2013}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {X.}~\bibnamefont
+  {Huang}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Corbett}},
+  \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Safranek}},\ and\
+  \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Wu}},\ }\bibfield
+  {title} {\bibinfo {title} {An algorithm for online optimization of
+  accelerators},\ }\href {https://doi.org/10.1016/j.nima.2013.05.046}
+  {\bibfield  {journal} {\bibinfo  {journal} {Nuclear Instruments and Methods
+  in Physics Research Section A: Accelerators, Spectrometers, Detectors and
+  Associated Equipment}\ }\textbf {\bibinfo {volume} {726}},\ \bibinfo {pages}
+  {77} (\bibinfo {year} {2013})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Bruchon}\ \emph {et~al.}(2017)\citenamefont
+  {Bruchon}, \citenamefont {Fenu}, \citenamefont {Gaio}, \citenamefont {Lonza},
+  \citenamefont {Pellegrino},\ and\ \citenamefont {Saule}}]{Bruchon2017}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {N.}~\bibnamefont
+  {Bruchon}}, \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Fenu}},
+  \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Gaio}}, \bibinfo {author}
+  {\bibfnamefont {M.}~\bibnamefont {Lonza}}, \bibinfo {author} {\bibfnamefont
+  {F.~A.}\ \bibnamefont {Pellegrino}},\ and\ \bibinfo {author} {\bibfnamefont
+  {L.}~\bibnamefont {Saule}},\ }\bibfield  {title} {\bibinfo {title}
+  {Free-electron laser spectrum evaluation and automatic optimization},\ }\href
+  {https://doi.org/10.1016/j.nima.2017.07.048} {\bibfield  {journal} {\bibinfo
+  {journal} {Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment}\ }\textbf
+  {\bibinfo {volume} {871}},\ \bibinfo {pages} {20} (\bibinfo {year}
+  {2017})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Scheinker}\ \emph {et~al.}(2020)\citenamefont
+  {Scheinker}, \citenamefont {Hirlaender}, \citenamefont {Velotti},
+  \citenamefont {Gessner}, \citenamefont {Porta}, \citenamefont {Kain},
+  \citenamefont {Goddard},\ and\ \citenamefont {Ramjiawan}}]{Scheinker2020}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
+  {Scheinker}}, \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Hirlaender}}, \bibinfo {author} {\bibfnamefont {F.~M.}\ \bibnamefont
+  {Velotti}}, \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Gessner}},
+  \bibinfo {author} {\bibfnamefont {G.~Z.~D.}\ \bibnamefont {Porta}}, \bibinfo
+  {author} {\bibfnamefont {V.}~\bibnamefont {Kain}}, \bibinfo {author}
+  {\bibfnamefont {B.}~\bibnamefont {Goddard}},\ and\ \bibinfo {author}
+  {\bibfnamefont {R.}~\bibnamefont {Ramjiawan}},\ }\bibfield  {title} {\bibinfo
+  {title} {Online multi-objective particle accelerator optimization of the
+  {AWAKE} electron beam line for simultaneous emittance and orbit control},\
+  }\href {https://doi.org/10.1063/5.0003423} {\bibfield  {journal} {\bibinfo
+  {journal} {{AIP} Advances}\ }\textbf {\bibinfo {volume} {10}},\ \bibinfo
+  {pages} {055320} (\bibinfo {year} {2020})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Hirlaender}\ \emph {et~al.}(2019)\citenamefont
+  {Hirlaender}, \citenamefont {Fraser}, \citenamefont {Goddard}, \citenamefont
+  {Kain}, \citenamefont {Prieto}, \citenamefont {Stoel}, \citenamefont
+  {Szakaly},\ and\ \citenamefont {Velotti}}]{Hirlaender2019}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Hirlaender}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Fraser}},
+  \bibinfo {author} {\bibfnamefont {B.}~\bibnamefont {Goddard}}, \bibinfo
+  {author} {\bibfnamefont {V.}~\bibnamefont {Kain}}, \bibinfo {author}
+  {\bibfnamefont {J.}~\bibnamefont {Prieto}}, \bibinfo {author} {\bibfnamefont
+  {L.}~\bibnamefont {Stoel}}, \bibinfo {author} {\bibfnamefont
+  {M.}~\bibnamefont {Szakaly}},\ and\ \bibinfo {author} {\bibfnamefont
+  {F.}~\bibnamefont {Velotti}},\ }\bibfield  {title} {\bibinfo {title}
+  {{Automatisation of the SPS ElectroStatic septa alignment}},\ }\href@noop {}
+  {\bibfield  {journal} {\bibinfo  {journal} {Proceedings of the 10th Int.
+  Particle Accelerator Conf.}\ }\textbf {\bibinfo {volume} {IPAC2019}},\
+  \bibinfo {pages} {Australia} (\bibinfo {year} {2019})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Welsch}(2015)}]{Welsch2015}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {C.}~\bibnamefont
+  {Welsch}},\ }\bibfield  {title} {\bibinfo {title} {Numerical optimization of
+  accelerators within opac},\ }\href@noop {} {\bibfield  {journal} {\bibinfo
+  {journal} {Proceedings of the 6th Int. Particle Accelerator Conf.}\ }\textbf
+  {\bibinfo {volume} {IPAC2015}},\ \bibinfo {pages} {USA} (\bibinfo {year}
+  {2015})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Albright}\ \emph {et~al.}(2019)\citenamefont
+  {Albright}, \citenamefont {Alemany~Fernandez}, \citenamefont {Angoletta},
+  \citenamefont {Bartosik}, \citenamefont {Beaumont}, \citenamefont {Bellodi},
+  \citenamefont {Biancacci}, \citenamefont {Bozzolan}, \citenamefont {Buzio},
+  \citenamefont {Di~Lorenzo}, \citenamefont {Frassier}, \citenamefont {Gamba},
+  \citenamefont {Hirlander}, \citenamefont {Huschauer}, \citenamefont {Kain},
+  \citenamefont {Kotzian}, \citenamefont {Kuchler}, \citenamefont {Latina},
+  \citenamefont {Levens}, \citenamefont {Mahner}, \citenamefont {Manosperti},
+  \citenamefont {Marqversen}, \citenamefont {Moreno~Garcia}, \citenamefont
+  {Nicosia}, \citenamefont {O'Neil}, \citenamefont {Ozturk}, \citenamefont
+  {Saa~Hernandez}, \citenamefont {Scrivens}, \citenamefont {Jensen},
+  \citenamefont {Tranquille}, \citenamefont {Wetton},\ and\ \citenamefont
+  {Zampetakis}}]{Albright2019}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Albright}}, \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
+  {Alemany~Fernandez}}, \bibinfo {author} {\bibfnamefont {M.~E.}\ \bibnamefont
+  {Angoletta}}, \bibinfo {author} {\bibfnamefont {H.}~\bibnamefont {Bartosik}},
+  \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Beaumont}}, \bibinfo
+  {author} {\bibfnamefont {G.}~\bibnamefont {Bellodi}}, \bibinfo {author}
+  {\bibfnamefont {N.}~\bibnamefont {Biancacci}}, \bibinfo {author}
+  {\bibfnamefont {M.}~\bibnamefont {Bozzolan}}, \bibinfo {author}
+  {\bibfnamefont {M.}~\bibnamefont {Buzio}}, \bibinfo {author} {\bibfnamefont
+  {F.}~\bibnamefont {Di~Lorenzo}}, \bibinfo {author} {\bibfnamefont
+  {A.}~\bibnamefont {Frassier}}, \bibinfo {author} {\bibfnamefont
+  {D.}~\bibnamefont {Gamba}}, \bibinfo {author} {\bibfnamefont
+  {S.}~\bibnamefont {Hirlander}}, \bibinfo {author} {\bibfnamefont
+  {A.}~\bibnamefont {Huschauer}}, \bibinfo {author} {\bibfnamefont
+  {V.}~\bibnamefont {Kain}}, \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
+  {Kotzian}}, \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Kuchler}},
+  \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Latina}}, \bibinfo
+  {author} {\bibfnamefont {T.}~\bibnamefont {Levens}}, \bibinfo {author}
+  {\bibfnamefont {E.}~\bibnamefont {Mahner}}, \bibinfo {author} {\bibfnamefont
+  {E.}~\bibnamefont {Manosperti}}, \bibinfo {author} {\bibfnamefont
+  {O.}~\bibnamefont {Marqversen}}, \bibinfo {author} {\bibfnamefont
+  {D.}~\bibnamefont {Moreno~Garcia}}, \bibinfo {author} {\bibfnamefont
+  {D.}~\bibnamefont {Nicosia}}, \bibinfo {author} {\bibfnamefont
+  {M.}~\bibnamefont {O'Neil}}, \bibinfo {author} {\bibfnamefont
+  {E.}~\bibnamefont {Ozturk}}, \bibinfo {author} {\bibfnamefont
+  {A.}~\bibnamefont {Saa~Hernandez}}, \bibinfo {author} {\bibfnamefont
+  {R.}~\bibnamefont {Scrivens}}, \bibinfo {author} {\bibfnamefont
+  {S.}~\bibnamefont {Jensen}}, \bibinfo {author} {\bibfnamefont {G.~A.}\
+  \bibnamefont {Tranquille}}, \bibinfo {author} {\bibfnamefont
+  {C.}~\bibnamefont {Wetton}},\ and\ \bibinfo {author} {\bibfnamefont
+  {M.}~\bibnamefont {Zampetakis}},\ }\bibfield  {title} {\bibinfo {title}
+  {{Review of LEIR operation in 2018}},\ }\href
+  {http://cds.cern.ch/record/2715365} {\bibfield  {journal} {\bibinfo
+  {journal} {{}}\ } (\bibinfo {year} {2019})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Hanuka}\ \emph {et~al.}(2020)\citenamefont {Hanuka},
+  \citenamefont {Huang}, \citenamefont {Shtalenkova}, \citenamefont {Kennedy},
+  \citenamefont {Edelen}, \citenamefont {Lalchand}, \citenamefont {Ratner},\
+  and\ \citenamefont {Duris}}]{Hanuka2020}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
+  {Hanuka}}, \bibinfo {author} {\bibfnamefont {X.}~\bibnamefont {Huang}},
+  \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Shtalenkova}}, \bibinfo
+  {author} {\bibfnamefont {D.}~\bibnamefont {Kennedy}}, \bibinfo {author}
+  {\bibfnamefont {A.}~\bibnamefont {Edelen}}, \bibinfo {author} {\bibfnamefont
+  {V.~R.}\ \bibnamefont {Lalchand}}, \bibinfo {author} {\bibfnamefont
+  {D.}~\bibnamefont {Ratner}},\ and\ \bibinfo {author} {\bibfnamefont
+  {J.}~\bibnamefont {Duris}},\ }\bibfield  {title} {\bibinfo {title}
+  {Physics-informed gaussian process for online optimization of particle
+  accelerators},\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal}
+  {{}}\ } (\bibinfo {year} {2020})},\ \Eprint
+  {https://arxiv.org/abs/2009.03566} {2009.03566} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Roussel}\ \emph {et~al.}(2020)\citenamefont
+  {Roussel}, \citenamefont {Hanuka},\ and\ \citenamefont
+  {Edelen}}]{Roussel2020}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
+  {Roussel}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Hanuka}},\
+  and\ \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Edelen}},\
+  }\bibfield  {title} {\bibinfo {title} {Multi-objective bayesian optimization
+  for accelerator tuning},\ }\href@noop {} {\bibfield  {journal} {\bibinfo
+  {journal} {{}}\ } (\bibinfo {year} {2020})},\ \Eprint
+  {https://arxiv.org/abs/2010.09824} {2010.09824} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Bruchon}\ \emph {et~al.}(2020)\citenamefont
+  {Bruchon}, \citenamefont {Fenu}, \citenamefont {Gaio}, \citenamefont {Lonza},
+  \citenamefont {O'Shea}, \citenamefont {Pellegrino},\ and\ \citenamefont
+  {Salvato}}]{Bruchon2020}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {N.}~\bibnamefont
+  {Bruchon}}, \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Fenu}},
+  \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Gaio}}, \bibinfo {author}
+  {\bibfnamefont {M.}~\bibnamefont {Lonza}}, \bibinfo {author} {\bibfnamefont
+  {F.~H.}\ \bibnamefont {O'Shea}}, \bibinfo {author} {\bibfnamefont {F.~A.}\
+  \bibnamefont {Pellegrino}},\ and\ \bibinfo {author} {\bibfnamefont
+  {E.}~\bibnamefont {Salvato}},\ }\bibfield  {title} {\bibinfo {title} {Basic
+  reinforcement learning techniques to control the intensity of a seeded
+  free-electron laser},\ }\href {https://doi.org/10.3390/electronics9050781}
+  {\bibfield  {journal} {\bibinfo  {journal} {Electronics}\ }\textbf {\bibinfo
+  {volume} {9}},\ \bibinfo {pages} {781} (\bibinfo {year} {2020})}\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Bruchon}\ \emph {et~al.}(2019)\citenamefont
+  {Bruchon}, \citenamefont {Fenu}, \citenamefont {Gaio}, \citenamefont {Lonza},
+  \citenamefont {Pellegrino},\ and\ \citenamefont {Salvato}}]{Bruchon2019}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {N.}~\bibnamefont
+  {Bruchon}}, \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Fenu}},
+  \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Gaio}}, \bibinfo {author}
+  {\bibfnamefont {M.}~\bibnamefont {Lonza}}, \bibinfo {author} {\bibfnamefont
+  {F.~A.}\ \bibnamefont {Pellegrino}},\ and\ \bibinfo {author} {\bibfnamefont
+  {E.}~\bibnamefont {Salvato}},\ }\bibfield  {title} {\bibinfo {title} {Toward
+  the application of reinforcement learning to the intensity control of a
+  seeded free-electron laser},\ }in\ \href
+  {https://doi.org/10.1109/icmect.2019.8932150} {\emph {\bibinfo {booktitle}
+  {2019 23rd International Conference on Mechatronics Technology ({ICMT})}}}\
+  (\bibinfo  {publisher} {{IEEE}},\ \bibinfo {year} {2019})\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Pang}\ \emph {et~al.}(2020)\citenamefont {Pang},
+  \citenamefont {Thulasidasan},\ and\ \citenamefont {Rybarcyk}}]{Pang2020}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {X.}~\bibnamefont
+  {Pang}}, \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Thulasidasan}},\
+  and\ \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont {Rybarcyk}},\
+  }\bibfield  {title} {\bibinfo {title} {Autonomous control of a particle
+  accelerator using deep reinforcement learning},\ }\href@noop {} {\bibfield
+  {journal} {\bibinfo  {journal} {{}}\ } (\bibinfo {year} {2020})},\ \Eprint
+  {https://arxiv.org/abs/2010.08141} {2010.08141} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {John}\ \emph {et~al.}(2020)\citenamefont {John},
+  \citenamefont {Herwig}, \citenamefont {Kafkes}, \citenamefont {Pellico},
+  \citenamefont {Perdue}, \citenamefont {Quintero-Parra}, \citenamefont
+  {Schupbach}, \citenamefont {Seiya}, \citenamefont {Tran}, \citenamefont
+  {Duarte}, \citenamefont {Huang}, \citenamefont {Schram},\ and\ \citenamefont
+  {Keller}}]{John2020}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.~S.}\ \bibnamefont
+  {John}}, \bibinfo {author} {\bibfnamefont {C.}~\bibnamefont {Herwig}},
+  \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Kafkes}}, \bibinfo
+  {author} {\bibfnamefont {W.~A.}\ \bibnamefont {Pellico}}, \bibinfo {author}
+  {\bibfnamefont {G.~N.}\ \bibnamefont {Perdue}}, \bibinfo {author}
+  {\bibfnamefont {A.}~\bibnamefont {Quintero-Parra}}, \bibinfo {author}
+  {\bibfnamefont {B.~A.}\ \bibnamefont {Schupbach}}, \bibinfo {author}
+  {\bibfnamefont {K.}~\bibnamefont {Seiya}}, \bibinfo {author} {\bibfnamefont
+  {N.}~\bibnamefont {Tran}}, \bibinfo {author} {\bibfnamefont {J.~M.}\
+  \bibnamefont {Duarte}}, \bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
+  {Huang}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Schram}},\ and\
+  \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Keller}},\ }\bibfield
+  {title} {\bibinfo {title} {Real-time artificial intelligence for accelerator
+  control: a study at the fermilab booster},\ }\href@noop {} {\bibfield
+  {journal} {\bibinfo  {journal} {{}}\ } (\bibinfo {year} {2020})},\ \Eprint
+  {https://arxiv.org/abs/2011.07371} {2011.07371} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Sutton}\ and\ \citenamefont
+  {Barto}(2018)}]{Sutton2018}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
+  {Sutton}}\ and\ \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Barto}},\
+  }\href
+  {https://www.ebook.de/de/product/32966850/richard_s_university_of_alberta_sutton_andrew_g_co_director_autonomous_learning_laboratory_barto_reinforcement_learning.html}
+  {\emph {\bibinfo {title} {{Reinforcement Learning}}}}\ (\bibinfo  {publisher}
+  {MIT Press Ltd},\ \bibinfo {year} {2018})\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Dulac-Arnold}\ \emph {et~al.}(2019)\citenamefont
+  {Dulac-Arnold}, \citenamefont {Mankowitz},\ and\ \citenamefont
+  {Hester}}]{DulacArnold2019}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
+  {Dulac-Arnold}}, \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
+  {Mankowitz}},\ and\ \bibinfo {author} {\bibfnamefont {T.}~\bibnamefont
+  {Hester}},\ }\bibfield  {title} {\bibinfo {title} {Challenges of real-world
+  reinforcement learning},\ }\href@noop {} {\bibfield  {journal} {\bibinfo
+  {journal} {{}}\ } (\bibinfo {year} {2019})},\ \Eprint
+  {https://arxiv.org/abs/1904.12901} {1904.12901} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Bruchon}(2020)}]{Brochon2020}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {N.}~\bibnamefont
+  {Bruchon}},\ }\emph {\bibinfo {title} {Feasibility Investigation on Several
+  Reinforcement Learning Techniques to Improve the Performance of the FERMI
+  Free-Electron Laser}},\ \href@noop {} {\bibinfo {type} {{PhD thesis}}},\
+  \bibinfo  {school} {{Universit\`a degli Studi di Trieste}} (\bibinfo {year}
+  {2020}),\ \bibinfo {note} {(unpublished)}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Brockman}\ \emph {et~al.}(2016)\citenamefont
+  {Brockman}, \citenamefont {Cheung}, \citenamefont {Pettersson}, \citenamefont
+  {Schneider}, \citenamefont {Schulman}, \citenamefont {Tang},\ and\
+  \citenamefont {Zaremba}}]{Brockman2016}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
+  {Brockman}}, \bibinfo {author} {\bibfnamefont {V.}~\bibnamefont {Cheung}},
+  \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont {Pettersson}}, \bibinfo
+  {author} {\bibfnamefont {J.}~\bibnamefont {Schneider}}, \bibinfo {author}
+  {\bibfnamefont {J.}~\bibnamefont {Schulman}}, \bibinfo {author}
+  {\bibfnamefont {J.}~\bibnamefont {Tang}},\ and\ \bibinfo {author}
+  {\bibfnamefont {W.}~\bibnamefont {Zaremba}},\ }\bibfield  {title} {\bibinfo
+  {title} {Openai gym},\ }\href
+  {https://github.com/openai/gym/wiki/Leaderboard#pendulum-v0} {\bibfield
+  {journal} {\bibinfo  {journal} {{}}\ } (\bibinfo {year} {2016})},\ \Eprint
+  {https://arxiv.org/abs/1606.01540} {1606.01540} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Heess}\ \emph {et~al.}(2017)\citenamefont {Heess},
+  \citenamefont {TB}, \citenamefont {Sriram}, \citenamefont {Lemmon},
+  \citenamefont {Merel}, \citenamefont {Wayne}, \citenamefont {Tassa},
+  \citenamefont {Erez}, \citenamefont {Wang}, \citenamefont {Eslami},
+  \citenamefont {Riedmiller},\ and\ \citenamefont {Silver}}]{Heess2017}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {N.}~\bibnamefont
+  {Heess}}, \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {TB}}, \bibinfo
+  {author} {\bibfnamefont {S.}~\bibnamefont {Sriram}}, \bibinfo {author}
+  {\bibfnamefont {J.}~\bibnamefont {Lemmon}}, \bibinfo {author} {\bibfnamefont
+  {J.}~\bibnamefont {Merel}}, \bibinfo {author} {\bibfnamefont
+  {G.}~\bibnamefont {Wayne}}, \bibinfo {author} {\bibfnamefont
+  {Y.}~\bibnamefont {Tassa}}, \bibinfo {author} {\bibfnamefont
+  {T.}~\bibnamefont {Erez}}, \bibinfo {author} {\bibfnamefont {Z.}~\bibnamefont
+  {Wang}}, \bibinfo {author} {\bibfnamefont {S.~M.~A.}\ \bibnamefont {Eslami}},
+  \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Riedmiller}},\ and\
+  \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Silver}},\ }\bibfield
+  {title} {\bibinfo {title} {Emergence of locomotion behaviours in rich
+  environments},\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal}
+  {{}}\ } (\bibinfo {year} {2017})},\ \Eprint
+  {https://arxiv.org/abs/1707.02286} {1707.02286} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Schulman}\ \emph {et~al.}(2017)\citenamefont
+  {Schulman}, \citenamefont {Wolski}, \citenamefont {Dhariwal}, \citenamefont
+  {Radford},\ and\ \citenamefont {Klimov}}]{Schulman2017}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
+  {Schulman}}, \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont {Wolski}},
+  \bibinfo {author} {\bibfnamefont {P.}~\bibnamefont {Dhariwal}}, \bibinfo
+  {author} {\bibfnamefont {A.}~\bibnamefont {Radford}},\ and\ \bibinfo {author}
+  {\bibfnamefont {O.}~\bibnamefont {Klimov}},\ }\bibfield  {title} {\bibinfo
+  {title} {Proximal policy optimization algorithms},\ }\href
+  {http://arxiv.org/abs/1707.06347} {\bibfield  {journal} {\bibinfo  {journal}
+  {CoRR}\ }\textbf {\bibinfo {volume} {abs/1707.06347}} (\bibinfo {year}
+  {2017})},\ \Eprint {https://arxiv.org/abs/1707.06347} {arXiv:1707.06347}
+  \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Silver}\ \emph {et~al.}(2014)\citenamefont {Silver},
+  \citenamefont {Lever}, \citenamefont {Heess}, \citenamefont {Degris},
+  \citenamefont {Wierstra},\ and\ \citenamefont {Riedmiller}}]{Silver2014}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
+  {Silver}}, \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Lever}},
+  \bibinfo {author} {\bibfnamefont {N.}~\bibnamefont {Heess}}, \bibinfo
+  {author} {\bibfnamefont {T.}~\bibnamefont {Degris}}, \bibinfo {author}
+  {\bibfnamefont {D.}~\bibnamefont {Wierstra}},\ and\ \bibinfo {author}
+  {\bibfnamefont {M.}~\bibnamefont {Riedmiller}},\ }\bibfield  {title}
+  {\bibinfo {title} {{Deterministic policy gradient algorithms}},\ }in\
+  \href@noop {} {\emph {\bibinfo {booktitle} {Proceedings of the 31st
+  International Conference on International Conference on Machine Learning -
+  Volume 32}}},\ \bibinfo {series and number} {ICML14}\ (\bibinfo  {publisher}
+  {JMLR.org},\ \bibinfo {year} {2014})\ p.\ \bibinfo {pages}
+  {I–387–I–395}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Lillicrap}\ \emph {et~al.}(2015)\citenamefont
+  {Lillicrap}, \citenamefont {Hunt}, \citenamefont {Pritzel}, \citenamefont
+  {Heess}, \citenamefont {Erez}, \citenamefont {Tassa}, \citenamefont
+  {Silver},\ and\ \citenamefont {Wierstra}}]{Lillicrap2015}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {T.~P.}\ \bibnamefont
+  {Lillicrap}}, \bibinfo {author} {\bibfnamefont {J.~J.}\ \bibnamefont {Hunt}},
+  \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Pritzel}}, \bibinfo
+  {author} {\bibfnamefont {N.}~\bibnamefont {Heess}}, \bibinfo {author}
+  {\bibfnamefont {T.}~\bibnamefont {Erez}}, \bibinfo {author} {\bibfnamefont
+  {Y.}~\bibnamefont {Tassa}}, \bibinfo {author} {\bibfnamefont
+  {D.}~\bibnamefont {Silver}},\ and\ \bibinfo {author} {\bibfnamefont
+  {D.}~\bibnamefont {Wierstra}},\ }\bibfield  {title} {\bibinfo {title}
+  {Continuous control with deep reinforcement learning},\ }\href@noop {}
+  {\bibfield  {journal} {\bibinfo  {journal} {{}}\ } (\bibinfo {year}
+  {2015})},\ \Eprint {https://arxiv.org/abs/1509.02971} {1509.02971}
+  \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {OpenAI}\ \emph {et~al.}(2018)\citenamefont {OpenAI},
+  \citenamefont {Andrychowicz}, \citenamefont {Baker}, \citenamefont {Chociej},
+  \citenamefont {Jozefowicz}, \citenamefont {McGrew}, \citenamefont {Pachocki},
+  \citenamefont {Petron}, \citenamefont {Plappert}, \citenamefont {Powell},
+  \citenamefont {Ray}, \citenamefont {Schneider}, \citenamefont {Sidor},
+  \citenamefont {Tobin}, \citenamefont {Welinder}, \citenamefont {Weng},\ and\
+  \citenamefont {Zaremba}}]{OpenAI2018}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibnamefont {OpenAI}}, \bibinfo
+  {author} {\bibfnamefont {M.}~\bibnamefont {Andrychowicz}}, \bibinfo {author}
+  {\bibfnamefont {B.}~\bibnamefont {Baker}}, \bibinfo {author} {\bibfnamefont
+  {M.}~\bibnamefont {Chociej}}, \bibinfo {author} {\bibfnamefont
+  {R.}~\bibnamefont {Jozefowicz}}, \bibinfo {author} {\bibfnamefont
+  {B.}~\bibnamefont {McGrew}}, \bibinfo {author} {\bibfnamefont
+  {J.}~\bibnamefont {Pachocki}}, \bibinfo {author} {\bibfnamefont
+  {A.}~\bibnamefont {Petron}}, \bibinfo {author} {\bibfnamefont
+  {M.}~\bibnamefont {Plappert}}, \bibinfo {author} {\bibfnamefont
+  {G.}~\bibnamefont {Powell}}, \bibinfo {author} {\bibfnamefont
+  {A.}~\bibnamefont {Ray}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
+  {Schneider}}, \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Sidor}},
+  \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Tobin}}, \bibinfo
+  {author} {\bibfnamefont {P.}~\bibnamefont {Welinder}}, \bibinfo {author}
+  {\bibfnamefont {L.}~\bibnamefont {Weng}},\ and\ \bibinfo {author}
+  {\bibfnamefont {W.}~\bibnamefont {Zaremba}},\ }\bibfield  {title} {\bibinfo
+  {title} {Learning dexterous in-hand manipulation},\ }\href@noop {} {\bibfield
+   {journal} {\bibinfo  {journal} {{}}\ } (\bibinfo {year} {2018})},\ \Eprint
+  {https://arxiv.org/abs/1808.00177} {1808.00177} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Deisenroth}\ and\ \citenamefont
+  {Rasmussen}(2011)}]{Deisenroth2011}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.~P.}\ \bibnamefont
+  {Deisenroth}}\ and\ \bibinfo {author} {\bibfnamefont {C.~E.}\ \bibnamefont
+  {Rasmussen}},\ }\bibfield  {title} {\bibinfo {title} {Pilco: A model-based
+  and data-efficient approach to policy search},\ }in\ \href@noop {} {\emph
+  {\bibinfo {booktitle} {Proceedings of the 28th International Conference on
+  International Conference on Machine Learning}}},\ \bibinfo {series and
+  number} {ICML'11}\ (\bibinfo  {publisher} {Omnipress},\ \bibinfo {address}
+  {Madison, WI, USA},\ \bibinfo {year} {2011})\ p.\ \bibinfo {pages}
+  {465–472}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Williams}(1992)}]{Williams1992}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.~J.}\ \bibnamefont
+  {Williams}},\ }\bibfield  {title} {\bibinfo {title} {Simple statistical
+  gradient-following algorithms for connectionist reinforcement learning},\
+  }\href {https://doi.org/10.1007/bf00992696} {\bibfield  {journal} {\bibinfo
+  {journal} {Machine Learning}\ }\textbf {\bibinfo {volume} {8}},\ \bibinfo
+  {pages} {229} (\bibinfo {year} {1992})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Baxter}\ and\ \citenamefont
+  {Bartlett}(2011)}]{Baxter2011}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
+  {Baxter}}\ and\ \bibinfo {author} {\bibfnamefont {P.~L.}\ \bibnamefont
+  {Bartlett}},\ }\bibfield  {title} {\bibinfo {title} {Infinite-horizon
+  policy-gradient estimation},\ }\bibfield  {journal} {\bibinfo  {journal}
+  {{}}\ }\href {https://doi.org/10.1613/jair.806} {10.1613/jair.806} (\bibinfo
+  {year} {2011}),\ \Eprint {https://arxiv.org/abs/1106.0665} {1106.0665}
+  \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Levine}\ and\ \citenamefont
+  {Koltun}(2013)}]{pmlr-v28-levine13}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Levine}}\ and\ \bibinfo {author} {\bibfnamefont {V.}~\bibnamefont
+  {Koltun}},\ }\bibfield  {title} {\bibinfo {title} {{Guided policy search}},\
+  }in\ \href {http://proceedings.mlr.press/v28/levine13.html} {\emph {\bibinfo
+  {booktitle} {Proceedings of the 30th International Conference on Machine
+  Learning}}},\ \bibinfo {series} {Proceedings of Machine Learning Research},
+  Vol.~\bibinfo {volume} {28},\ \bibinfo {editor} {edited by\ \bibinfo {editor}
+  {\bibfnamefont {S.}~\bibnamefont {Dasgupta}}\ and\ \bibinfo {editor}
+  {\bibfnamefont {D.}~\bibnamefont {McAllester}}}\ (\bibinfo  {publisher}
+  {PMLR},\ \bibinfo {address} {Atlanta, Georgia, USA},\ \bibinfo {year}
+  {2013})\ pp.\ \bibinfo {pages} {1--9}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Schulman}\ \emph {et~al.}(2015)\citenamefont
+  {Schulman}, \citenamefont {Levine}, \citenamefont {Moritz}, \citenamefont
+  {Jordan},\ and\ \citenamefont {Abbeel}}]{Schulman2015}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
+  {Schulman}}, \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Levine}},
+  \bibinfo {author} {\bibfnamefont {P.}~\bibnamefont {Moritz}}, \bibinfo
+  {author} {\bibfnamefont {M.~I.}\ \bibnamefont {Jordan}},\ and\ \bibinfo
+  {author} {\bibfnamefont {P.}~\bibnamefont {Abbeel}},\ }\bibfield  {title}
+  {\bibinfo {title} {Trust region policy optimization},\ }\href@noop {}
+  {\bibfield  {journal} {\bibinfo  {journal} {{}}\ } (\bibinfo {year}
+  {2015})},\ \Eprint {https://arxiv.org/abs/1502.05477} {1502.05477}
+  \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Szepesv{\'{a}}ri}(2010)}]{Szepesvari2010}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {C.}~\bibnamefont
+  {Szepesv{\'{a}}ri}},\ }\bibfield  {title} {\bibinfo {title} {Algorithms for
+  reinforcement learning},\ }\href
+  {https://doi.org/10.2200/s00268ed1v01y201005aim009} {\bibfield  {journal}
+  {\bibinfo  {journal} {Synthesis Lectures on Artificial Intelligence and
+  Machine Learning}\ }\textbf {\bibinfo {volume} {4}},\ \bibinfo {pages} {1}
+  (\bibinfo {year} {2010})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Levine}\ \emph {et~al.}(2020)\citenamefont {Levine},
+  \citenamefont {Kumar}, \citenamefont {Tucker},\ and\ \citenamefont
+  {Fu}}]{Levine2020}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Levine}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Kumar}},
+  \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Tucker}},\ and\ \bibinfo
+  {author} {\bibfnamefont {J.}~\bibnamefont {Fu}},\ }\bibfield  {title}
+  {\bibinfo {title} {{Offline reinforcement learning: tutorial, review, and
+  perspectives on open problems}},\ }\href@noop {} {\bibfield  {journal}
+  {\bibinfo  {journal} {{}}\ } (\bibinfo {year} {2020})},\ \Eprint
+  {https://arxiv.org/abs/2005.01643} {2005.01643} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Gu}\ \emph {et~al.}(2016)\citenamefont {Gu},
+  \citenamefont {Lillicrap}, \citenamefont {Sutskever},\ and\ \citenamefont
+  {Levine}}]{Gu2016}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Gu}}, \bibinfo {author} {\bibfnamefont {T.}~\bibnamefont {Lillicrap}},
+  \bibinfo {author} {\bibfnamefont {I.}~\bibnamefont {Sutskever}},\ and\
+  \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Levine}},\ }\bibfield
+  {title} {\bibinfo {title} {{Continuous deep q-learning with model-based
+  acceleration}},\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal}
+  {{}}\ } (\bibinfo {year} {2016})},\ \Eprint
+  {https://arxiv.org/abs/1603.00748} {1603.00748} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Hirlaender}(2020)}]{Hirlaender2020a}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Hirlaender}},\ }\bibfield  {title} {\bibinfo {title} {Mathphyssim/per-naf:
+  Initial release},\ }\bibfield  {journal} {\bibinfo  {journal} {{}}\ }\href
+  {https://doi.org/10.5281/zenodo.4271647} {10.5281/zenodo.4271647} (\bibinfo
+  {year} {2020})\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {van Hasselt}\ \emph {et~al.}(2015)\citenamefont {van
+  Hasselt}, \citenamefont {Guez},\ and\ \citenamefont {Silver}}]{Hasselt2015}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {H.}~\bibnamefont {van
+  Hasselt}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Guez}},\ and\
+  \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Silver}},\ }\bibfield
+  {title} {\bibinfo {title} {Deep reinforcement learning with double
+  q-learning},\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {{}}\
+  } (\bibinfo {year} {2015})},\ \Eprint {https://arxiv.org/abs/1509.06461}
+  {1509.06461} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Mnih}\ \emph {et~al.}(2013)\citenamefont {Mnih},
+  \citenamefont {Kavukcuoglu}, \citenamefont {Silver}, \citenamefont {Graves},
+  \citenamefont {Antonoglou}, \citenamefont {Wierstra},\ and\ \citenamefont
+  {Riedmiller}}]{Mnih2013}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {V.}~\bibnamefont
+  {Mnih}}, \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont {Kavukcuoglu}},
+  \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Silver}}, \bibinfo
+  {author} {\bibfnamefont {A.}~\bibnamefont {Graves}}, \bibinfo {author}
+  {\bibfnamefont {I.}~\bibnamefont {Antonoglou}}, \bibinfo {author}
+  {\bibfnamefont {D.}~\bibnamefont {Wierstra}},\ and\ \bibinfo {author}
+  {\bibfnamefont {M.}~\bibnamefont {Riedmiller}},\ }\bibfield  {title}
+  {\bibinfo {title} {Playing atari with deep reinforcement learning},\
+  }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {{}}\ } (\bibinfo
+  {year} {2013})},\ \Eprint {https://arxiv.org/abs/1312.5602} {1312.5602}
+  \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Wang}\ \emph {et~al.}(2015)\citenamefont {Wang},
+  \citenamefont {Schaul}, \citenamefont {Hessel}, \citenamefont {van Hasselt},
+  \citenamefont {Lanctot},\ and\ \citenamefont {de~Freitas}}]{Wang2015}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Z.}~\bibnamefont
+  {Wang}}, \bibinfo {author} {\bibfnamefont {T.}~\bibnamefont {Schaul}},
+  \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Hessel}}, \bibinfo
+  {author} {\bibfnamefont {H.}~\bibnamefont {van Hasselt}}, \bibinfo {author}
+  {\bibfnamefont {M.}~\bibnamefont {Lanctot}},\ and\ \bibinfo {author}
+  {\bibfnamefont {N.}~\bibnamefont {de~Freitas}},\ }\bibfield  {title}
+  {\bibinfo {title} {Dueling network architectures for deep reinforcement
+  learning},\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {{}}\ }
+  (\bibinfo {year} {2015})},\ \Eprint {https://arxiv.org/abs/1511.06581}
+  {1511.06581} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Hasselt}(2010)}]{NIPS2010_091d584f}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {H.}~\bibnamefont
+  {Hasselt}},\ }\bibfield  {title} {\bibinfo {title} {Double q-learning},\ }in\
+  \href
+  {https://proceedings.neurips.cc/paper/2010/file/091d584fced301b442654dd8c23b3fc9-Paper.pdf}
+  {\emph {\bibinfo {booktitle} {Advances in Neural Information Processing
+  Systems}}},\ Vol.~\bibinfo {volume} {23},\ \bibinfo {editor} {edited by\
+  \bibinfo {editor} {\bibfnamefont {J.}~\bibnamefont {Lafferty}}, \bibinfo
+  {editor} {\bibfnamefont {C.}~\bibnamefont {Williams}}, \bibinfo {editor}
+  {\bibfnamefont {J.}~\bibnamefont {Shawe-Taylor}}, \bibinfo {editor}
+  {\bibfnamefont {R.}~\bibnamefont {Zemel}},\ and\ \bibinfo {editor}
+  {\bibfnamefont {A.}~\bibnamefont {Culotta}}}\ (\bibinfo  {publisher} {Curran
+  Associates, Inc.},\ \bibinfo {year} {2010})\ pp.\ \bibinfo {pages}
+  {2613--2621}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Fujimoto}\ \emph {et~al.}(2018)\citenamefont
+  {Fujimoto}, \citenamefont {van Hoof},\ and\ \citenamefont
+  {Meger}}]{fujimoto2018addressing}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Fujimoto}}, \bibinfo {author} {\bibfnamefont {H.}~\bibnamefont {van Hoof}},\
+  and\ \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Meger}},\
+  }\href@noop {} {\bibinfo {title} {{Addressing function approximation error in
+  actor-critic methods}}} (\bibinfo {year} {2018}),\ \Eprint
+  {https://arxiv.org/abs/1802.09477} {arXiv:1802.09477 [cs.AI]} \BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Wang}\ \emph {et~al.}(2019)\citenamefont {Wang},
+  \citenamefont {Bao}, \citenamefont {Clavera}, \citenamefont {Hoang},
+  \citenamefont {Wen}, \citenamefont {Langlois}, \citenamefont {Zhang},
+  \citenamefont {Zhang}, \citenamefont {Abbeel},\ and\ \citenamefont
+  {Ba}}]{Wang2019}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {T.}~\bibnamefont
+  {Wang}}, \bibinfo {author} {\bibfnamefont {X.}~\bibnamefont {Bao}}, \bibinfo
+  {author} {\bibfnamefont {I.}~\bibnamefont {Clavera}}, \bibinfo {author}
+  {\bibfnamefont {J.}~\bibnamefont {Hoang}}, \bibinfo {author} {\bibfnamefont
+  {Y.}~\bibnamefont {Wen}}, \bibinfo {author} {\bibfnamefont {E.}~\bibnamefont
+  {Langlois}}, \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Zhang}},
+  \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Zhang}}, \bibinfo
+  {author} {\bibfnamefont {P.}~\bibnamefont {Abbeel}},\ and\ \bibinfo {author}
+  {\bibfnamefont {J.}~\bibnamefont {Ba}},\ }\bibfield  {title} {\bibinfo
+  {title} {Benchmarking model-based reinforcement learning},\ }\href@noop {}
+  {\bibfield  {journal} {\bibinfo  {journal} {{}}\ } (\bibinfo {year}
+  {2019})},\ \Eprint {https://arxiv.org/abs/1907.02057v1} {1907.02057v1}
+  \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Gal}\ \emph {et~al.}(2016)\citenamefont {Gal},
+  \citenamefont {McAllister},\ and\ \citenamefont {Rasmussen}}]{Gal2016}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
+  {Gal}}, \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {McAllister}},\
+  and\ \bibinfo {author} {\bibfnamefont {C.~E.}\ \bibnamefont {Rasmussen}},\
+  }\bibfield  {title} {\bibinfo {title} {{Improving PILCO with Bayesian neural
+  network dynamics models}},\ }in\ \href@noop {} {\emph {\bibinfo {booktitle}
+  {Data-Efficient Machine Learning workshop, International Conference on
+  Machine Learning}}},\ Vol.~\bibinfo {volume} {4}\ (\bibinfo {year} {2016})\
+  p.~\bibinfo {pages} {34}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {{Deisenroth}}\ \emph {et~al.}(2015)\citenamefont
+  {{Deisenroth}}, \citenamefont {{Fox}},\ and\ \citenamefont
+  {{Rasmussen}}}]{6654139}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.~P.}\ \bibnamefont
+  {{Deisenroth}}}, \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
+  {{Fox}}},\ and\ \bibinfo {author} {\bibfnamefont {C.~E.}\ \bibnamefont
+  {{Rasmussen}}},\ }\bibfield  {title} {\bibinfo {title} {Gaussian processes
+  for data-efficient learning in robotics and control},\ }\href
+  {https://doi.org/10.1109/TPAMI.2013.218} {\bibfield  {journal} {\bibinfo
+  {journal} {IEEE Transactions on Pattern Analysis and Machine Intelligence}\
+  }\textbf {\bibinfo {volume} {37}},\ \bibinfo {pages} {408} (\bibinfo {year}
+  {2015})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Chua}\ \emph {et~al.}(2018)\citenamefont {Chua},
+  \citenamefont {Calandra}, \citenamefont {McAllister},\ and\ \citenamefont
+  {Levine}}]{Chua2018}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
+  {Chua}}, \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Calandra}},
+  \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {McAllister}},\ and\
+  \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Levine}},\ }\bibfield
+  {title} {\bibinfo {title} {Deep reinforcement learning in a handful of trials
+  using probabilistic dynamics models},\ }\href@noop {} {\bibfield  {journal}
+  {\bibinfo  {journal} {{}}\ } (\bibinfo {year} {2018})},\ \Eprint
+  {https://arxiv.org/abs/1805.12114} {1805.12114} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Wang}\ and\ \citenamefont {Ba}(2019)}]{Wang2019a}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {T.}~\bibnamefont
+  {Wang}}\ and\ \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Ba}},\
+  }\bibfield  {title} {\bibinfo {title} {Exploring model-based planning with
+  policy networks},\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal}
+  {{}}\ } (\bibinfo {year} {2019})},\ \Eprint
+  {https://arxiv.org/abs/1906.08649} {1906.08649} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {de~Boer}\ \emph {et~al.}(2005)\citenamefont
+  {de~Boer}, \citenamefont {Kroese}, \citenamefont {Mannor},\ and\
+  \citenamefont {Rubinstein}}]{Boer2005}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {P.-T.}\ \bibnamefont
+  {de~Boer}}, \bibinfo {author} {\bibfnamefont {D.~P.}\ \bibnamefont {Kroese}},
+  \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Mannor}},\ and\ \bibinfo
+  {author} {\bibfnamefont {R.~Y.}\ \bibnamefont {Rubinstein}},\ }\bibfield
+  {title} {\bibinfo {title} {A tutorial on the cross-entropy method},\ }\href
+  {https://doi.org/10.1007/s10479-005-5724-z} {\bibfield  {journal} {\bibinfo
+  {journal} {Annals of Operations Research}\ }\textbf {\bibinfo {volume}
+  {134}},\ \bibinfo {pages} {19} (\bibinfo {year} {2005})}\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Sutton}(1991)}]{Sutton1991}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.~S.}\ \bibnamefont
+  {Sutton}},\ }\bibfield  {title} {\bibinfo {title} {Dyna, an integrated
+  architecture for learning, planning, and reacting},\ }\href
+  {https://doi.org/10.1145/122344.122377} {\bibfield  {journal} {\bibinfo
+  {journal} {{ACM} {SIGART} Bulletin}\ }\textbf {\bibinfo {volume} {2}},\
+  \bibinfo {pages} {160} (\bibinfo {year} {1991})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Pearce}\ \emph {et~al.}(2018)\citenamefont {Pearce},
+  \citenamefont {Leibfried}, \citenamefont {Brintrup}, \citenamefont {Zaki},\
+  and\ \citenamefont {Neely}}]{Pearce2018}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {T.}~\bibnamefont
+  {Pearce}}, \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont {Leibfried}},
+  \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Brintrup}}, \bibinfo
+  {author} {\bibfnamefont {M.}~\bibnamefont {Zaki}},\ and\ \bibinfo {author}
+  {\bibfnamefont {A.}~\bibnamefont {Neely}},\ }\bibfield  {title} {\bibinfo
+  {title} {Uncertainty in neural networks: approximately bayesian ensembling},\
+  }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {{}}\ } (\bibinfo
+  {year} {2018})},\ \Eprint {https://arxiv.org/abs/1810.05546} {1810.05546}
+  \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Kurutach}\ \emph {et~al.}(2018)\citenamefont
+  {Kurutach}, \citenamefont {Clavera}, \citenamefont {Duan}, \citenamefont
+  {Tamar},\ and\ \citenamefont {Abbeel}}]{Kurutach2018}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {T.}~\bibnamefont
+  {Kurutach}}, \bibinfo {author} {\bibfnamefont {I.}~\bibnamefont {Clavera}},
+  \bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont {Duan}}, \bibinfo {author}
+  {\bibfnamefont {A.}~\bibnamefont {Tamar}},\ and\ \bibinfo {author}
+  {\bibfnamefont {P.}~\bibnamefont {Abbeel}},\ }\bibfield  {title} {\bibinfo
+  {title} {{Model-ensemble trust-region policy optimization}},\ }\href@noop {}
+  {\bibfield  {journal} {\bibinfo  {journal} {{}}\ } (\bibinfo {year}
+  {2018})},\ \Eprint {https://arxiv.org/abs/1802.10592} {1802.10592}
+  \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Janner}\ \emph {et~al.}(2019)\citenamefont {Janner},
+  \citenamefont {Fu}, \citenamefont {Zhang},\ and\ \citenamefont
+  {Levine}}]{Janner2019}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
+  {Janner}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Fu}}, \bibinfo
+  {author} {\bibfnamefont {M.}~\bibnamefont {Zhang}},\ and\ \bibinfo {author}
+  {\bibfnamefont {S.}~\bibnamefont {Levine}},\ }\bibfield  {title} {\bibinfo
+  {title} {When to trust your model: Model-based policy optimization},\
+  }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {{}}\ } (\bibinfo
+  {year} {2019})},\ \Eprint {https://arxiv.org/abs/1906.08253} {1906.08253}
+  \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Goodfellow}\ \emph {et~al.}(2016)\citenamefont
+  {Goodfellow}, \citenamefont {Bengio},\ and\ \citenamefont
+  {Courville}}]{Goodfellow2016}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {I.}~\bibnamefont
+  {Goodfellow}}, \bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont {Bengio}},\
+  and\ \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Courville}},\
+  }\href@noop {} {\emph {\bibinfo {title} {Deep Learning}}}\ (\bibinfo
+  {publisher} {MIT Press},\ \bibinfo {year} {2016})\ \bibinfo {note}
+  {\url{http://www.deeplearningbook.org}}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Hill}\ \emph {et~al.}(2018)\citenamefont {Hill},
+  \citenamefont {Raffin}, \citenamefont {Ernestus}, \citenamefont {Gleave},
+  \citenamefont {Kanervisto}, \citenamefont {Traore}, \citenamefont {Dhariwal},
+  \citenamefont {Hesse}, \citenamefont {Klimov}, \citenamefont {Nichol},
+  \citenamefont {Plappert}, \citenamefont {Radford}, \citenamefont {Schulman},
+  \citenamefont {Sidor},\ and\ \citenamefont {Wu}}]{Hill2018}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
+  {Hill}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Raffin}},
+  \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Ernestus}}, \bibinfo
+  {author} {\bibfnamefont {A.}~\bibnamefont {Gleave}}, \bibinfo {author}
+  {\bibfnamefont {A.}~\bibnamefont {Kanervisto}}, \bibinfo {author}
+  {\bibfnamefont {R.}~\bibnamefont {Traore}}, \bibinfo {author} {\bibfnamefont
+  {P.}~\bibnamefont {Dhariwal}}, \bibinfo {author} {\bibfnamefont
+  {C.}~\bibnamefont {Hesse}}, \bibinfo {author} {\bibfnamefont
+  {O.}~\bibnamefont {Klimov}}, \bibinfo {author} {\bibfnamefont
+  {A.}~\bibnamefont {Nichol}}, \bibinfo {author} {\bibfnamefont
+  {M.}~\bibnamefont {Plappert}}, \bibinfo {author} {\bibfnamefont
+  {A.}~\bibnamefont {Radford}}, \bibinfo {author} {\bibfnamefont
+  {J.}~\bibnamefont {Schulman}}, \bibinfo {author} {\bibfnamefont
+  {S.}~\bibnamefont {Sidor}},\ and\ \bibinfo {author} {\bibfnamefont
+  {Y.}~\bibnamefont {Wu}},\ }\href@noop {} {\bibinfo {title} {Stable
+  baselines}},\ \bibinfo {howpublished}
+  {\url{https://github.com/hill-a/stable-baselines}} (\bibinfo {year}
+  {2018})\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Haarnoja}\ \emph {et~al.}(2018)\citenamefont
+  {Haarnoja}, \citenamefont {Zhou}, \citenamefont {Hartikainen}, \citenamefont
+  {Tucker}, \citenamefont {Ha}, \citenamefont {Tan}, \citenamefont {Kumar},
+  \citenamefont {Zhu}, \citenamefont {Gupta}, \citenamefont {Abbeel},\ and\
+  \citenamefont {Levine}}]{Haarnoja2018a}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {T.}~\bibnamefont
+  {Haarnoja}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Zhou}},
+  \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont {Hartikainen}}, \bibinfo
+  {author} {\bibfnamefont {G.}~\bibnamefont {Tucker}}, \bibinfo {author}
+  {\bibfnamefont {S.}~\bibnamefont {Ha}}, \bibinfo {author} {\bibfnamefont
+  {J.}~\bibnamefont {Tan}}, \bibinfo {author} {\bibfnamefont {V.}~\bibnamefont
+  {Kumar}}, \bibinfo {author} {\bibfnamefont {H.}~\bibnamefont {Zhu}}, \bibinfo
+  {author} {\bibfnamefont {A.}~\bibnamefont {Gupta}}, \bibinfo {author}
+  {\bibfnamefont {P.}~\bibnamefont {Abbeel}},\ and\ \bibinfo {author}
+  {\bibfnamefont {S.}~\bibnamefont {Levine}},\ }\bibfield  {title} {\bibinfo
+  {title} {Soft actor-critic algorithms and applications},\ }\href@noop {}
+  {\bibfield  {journal} {\bibinfo  {journal} {{}}\ } (\bibinfo {year}
+  {2018})},\ \Eprint {https://arxiv.org/abs/1812.05905} {1812.05905}
+  \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Kidambi}\ \emph {et~al.}(2020)\citenamefont
+  {Kidambi}, \citenamefont {Rajeswaran}, \citenamefont {Netrapalli},\ and\
+  \citenamefont {Joachims}}]{kidambi2020morel}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
+  {Kidambi}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Rajeswaran}},
+  \bibinfo {author} {\bibfnamefont {P.}~\bibnamefont {Netrapalli}},\ and\
+  \bibinfo {author} {\bibfnamefont {T.}~\bibnamefont {Joachims}},\ }\bibfield
+  {title} {\bibinfo {title} {Morel : model-based offline reinforcement
+  learning},\ }in\ \href
+  {https://www.microsoft.com/en-us/research/publication/morel-model-based-offline-reinforcement-learning/}
+  {\emph {\bibinfo {booktitle} {NeurIPS 2020}}}\ (\bibinfo {organization}
+  {ACM},\ \bibinfo {year} {2020})\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Hirlaender}\ and\ \citenamefont
+  {Bruchon}(2020)}]{Hirlaender2020b}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Hirlaender}}\ and\ \bibinfo {author} {\bibfnamefont {N.}~\bibnamefont
+  {Bruchon}},\ }\bibfield  {title} {\bibinfo {title}
+  {{MathPhysSim/FERMI\_RL\_Paper: Initial release}},\ }\bibfield  {journal}
+  {\bibinfo  {journal} {{}}\ }\href {https://doi.org/10.5281/ZENODO.4271580}
+  {10.5281/ZENODO.4271580} (\bibinfo {year} {2020})\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Furuta}\ \emph {et~al.}(1991)\citenamefont {Furuta},
+  \citenamefont {Yamakita},\ and\ \citenamefont {Kobayashi}}]{Furutaa}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
+  {Furuta}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Yamakita}},\
+  and\ \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Kobayashi}},\
+  }\bibfield  {title} {\bibinfo {title} {Swing up control of inverted
+  pendulum},\ }in\ \href {https://doi.org/10.1109/iecon.1991.239008} {\emph
+  {\bibinfo {booktitle} {Proceedings {IECON} {\textquotesingle}91: 1991
+  International Conference on Industrial Electronics, Control and
+  Instrumentation}}}\ (\bibinfo  {publisher} {{IEEE}},\ \bibinfo {year}
+  {1991})\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Barth-Maron}\ \emph {et~al.}(2018)\citenamefont
+  {Barth-Maron}, \citenamefont {Hoffman}, \citenamefont {Budden}, \citenamefont
+  {Dabney}, \citenamefont {Horgan}, \citenamefont {TB}, \citenamefont {Muldal},
+  \citenamefont {Heess},\ and\ \citenamefont {Lillicrap}}]{BarthMaron2018}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
+  {Barth-Maron}}, \bibinfo {author} {\bibfnamefont {M.~W.}\ \bibnamefont
+  {Hoffman}}, \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Budden}},
+  \bibinfo {author} {\bibfnamefont {W.}~\bibnamefont {Dabney}}, \bibinfo
+  {author} {\bibfnamefont {D.}~\bibnamefont {Horgan}}, \bibinfo {author}
+  {\bibfnamefont {D.}~\bibnamefont {TB}}, \bibinfo {author} {\bibfnamefont
+  {A.}~\bibnamefont {Muldal}}, \bibinfo {author} {\bibfnamefont
+  {N.}~\bibnamefont {Heess}},\ and\ \bibinfo {author} {\bibfnamefont
+  {T.}~\bibnamefont {Lillicrap}},\ }\bibfield  {title} {\bibinfo {title}
+  {Distributed distributional deterministic policy gradients},\ }\href@noop {}
+  {\bibfield  {journal} {\bibinfo  {journal} {{}}\ } (\bibinfo {year}
+  {2018})},\ \Eprint {https://arxiv.org/abs/1804.08617} {1804.08617}
+  \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Gu}\ and\ \citenamefont {Oliver}(2007)}]{Gu2007}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
+  {Gu}}\ and\ \bibinfo {author} {\bibfnamefont {D.~S.}\ \bibnamefont
+  {Oliver}},\ }\bibfield  {title} {\bibinfo {title} {An iterative ensemble
+  kalman filter for multiphase fluid flow data assimilation},\ }\href
+  {https://doi.org/10.2118/108438-pa} {\bibfield  {journal} {\bibinfo
+  {journal} {{SPE} Journal}\ }\textbf {\bibinfo {volume} {12}},\ \bibinfo
+  {pages} {438} (\bibinfo {year} {2007})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Chen}\ and\ \citenamefont {Oliver}(2011)}]{Chen2011}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
+  {Chen}}\ and\ \bibinfo {author} {\bibfnamefont {D.~S.}\ \bibnamefont
+  {Oliver}},\ }\bibfield  {title} {\bibinfo {title} {Ensemble randomized
+  maximum likelihood method as an iterative ensemble smoother},\ }\href
+  {https://doi.org/10.1007/s11004-011-9376-z} {\bibfield  {journal} {\bibinfo
+  {journal} {Mathematical Geosciences}\ }\textbf {\bibinfo {volume} {44}},\
+  \bibinfo {pages} {1} (\bibinfo {year} {2011})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Bardsley}(2012)}]{Bardsley2012}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.~M.}\ \bibnamefont
+  {Bardsley}},\ }\bibfield  {title} {\bibinfo {title} {{MCMC}-based image
+  reconstruction with uncertainty quantification},\ }\href
+  {https://doi.org/10.1137/11085760x} {\bibfield  {journal} {\bibinfo
+  {journal} {{SIAM} Journal on Scientific Computing}\ }\textbf {\bibinfo
+  {volume} {34}},\ \bibinfo {pages} {A1316} (\bibinfo {year}
+  {2012})}\BibitemShut {NoStop}%
+\end{thebibliography}%

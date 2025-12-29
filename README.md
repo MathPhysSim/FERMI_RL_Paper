@@ -36,13 +36,19 @@ _AE-DYNA_ | Model-based| High| Yes| High |
 
 1. **`run_naf2.py`** (TensorFlow 2.x): Runs the Normalized Advantage Function (NAF2) with double Q-learning on the inverted pendulum environment.
 2. **`AE_Dyna_Tensorflow_2.py`** (TensorFlow 2.x): Runs the Uncertainty Aware DYNA-style RL (AE-DYNA) on the inverted pendulum environment using TensorFlow 2.
-3. **`AEDYNA.py`** (TensorFlow 1.15 - **Legacy**): The original implementation of AE-DYNA used in the paper. Requires stable-baselines (v2) and TensorFlow 1.x.
+3. **`AEDYNA.py`**
+
+### TensorFlow 1.15 (Legacy)
+
+Required **only** for `src/AEDYNA.py` (original paper implementation). Requires stable-baselines (v2) and TensorFlow 1.x.
 
 ## Installation
 
-### Prerequisites (TensorFlow 2.x Scripts)
+### Prerequisites
 
-To run `run_naf2.py` and `AE_Dyna_Tensorflow_2.py`, you need a Python 3 environment with the dependencies listed in `requirements.txt`.
+### TensorFlow 2 (Recommended)
+
+This environment supports `run_naf2.py` and `AE_Dyna_Tensorflow_2.py`.
 
 ```bash
 # Creative a virtual environment (optional but recommended)
@@ -59,17 +65,28 @@ To run the legacy script `AEDYNA.py`, you must use an environment compatible wit
 
 ## Usage
 
-To run the NAF2 agent on the pendulum:
+### Running the Experiments
 
-```bash
-python run_naf2.py
-```
+Run scripts from the `src/` directory or adjust paths accordingly.
 
-To run the AE-DYNA agent (TF2) on the pendulum:
+1. **NAF2 (TensorFlow 2)**:
 
-```bash
-python AE_Dyna_Tensorflow_2.py
-```
+    ```bash
+    python src/run_naf2.py
+    ```
+
+2. **AE-DYNA (TensorFlow 2)**:
+
+    ```bash
+    python src/AE_Dyna_Tensorflow_2.py
+    ```
+
+3. **AE-DYNA (Legacy TF 1.15)**:
+
+    ```bash
+    # Activate 'fermi_legacy' environment first
+    python src/AEDYNA.py
+    ```
 
 ## Results
 
@@ -79,8 +96,8 @@ Comparing NAF2 (Model-Free) and AE-DYNA (Model-Based) performance.
 
 #### Experimental Results at FERMI FEL
 
-![NAF2_training](Figures/FERMI_all_experiments_NAF_episodes.png)
-![NAF2_convergence](Figures/FERMI_all_experiments_NAF_convergence.png)
+![NAF2_training](paper/Figures/FERMI_all_experiments_NAF_episodes.png)
+![NAF2_convergence](paper/Figures/FERMI_all_experiments_NAF_convergence.png)
 
 #### AE-DYNA Training
 
@@ -103,5 +120,8 @@ The evolution as presented at GSI [Towards Artificial Intelligence in Accelerato
 ### TensorFlow 2 Implementation
 
 The repository includes an updated implementation of AE-DYNA using TensorFlow 2 (`AE_Dyna_Tensorflow_2.py`), based on `tensorlayer`.
+
+1. To run the updated AE-DYNA with TensorFlow 2: `src/AE_Dyna_Tensorflow_2.py`
+2. Legacy AE-DYNA (TF 1.15): `src/AEDYNA.py` (requires separate environment)
 
 ![Final Observables](Figures/Final_Observables.png)

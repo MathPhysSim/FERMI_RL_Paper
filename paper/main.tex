@@ -130,7 +130,7 @@ prstab,
 	
 	\begin{abstract}
 		Reinforcement learning holds significant potential in accelerator controls. The primary goal of this paper is to demonstrate the operational application of this approach to accelerator physics problems. Despite the success of model-free reinforcement learning in several domains, sample efficiency remains a limiting factor, a challenge that model-based methods may mitigate.
-		We compare well-suited purely model-based to model-free reinforcement learning applied to the intensity optimisation on the FERMI FEL system. We find that the model-based approach demonstrates higher representational power and sample-efficiency, while the asymptotic performance of the model-free method is slightly superior. The model-based algorithm is implemented in a DYNA-style using an uncertainty aware model, and the model-free algorithm is based on tailored deep Q-learning. In both cases, the algorithms were implemented in a way, which presents increased noise robustness as prevalent in accelerator control problems. Code is released in \url{https://github.com/MathPhysSim/FERMI_RL_Paper}.
+		We compare well-suited purely model-based to model-free reinforcement learning applied to the intensity optimisation on the FERMI FEL system. We find that the model-based approach demonstrates higher representational power and sample-efficiency, while the asymptotic performance of the model-free method is slightly superior. The model-based algorithm is implemented in a DYNA-style using an uncertainty aware model, and the model-free algorithm is based on tailored deep Q-learning. In both cases, the algorithms were implemented in a manner that presents increased noise robustness as prevalent in accelerator control problems. Code is released in \url{https://github.com/MathPhysSim/FERMI_RL_Paper}.
 		
 	\end{abstract}
 	%\keywords{Suggested keywords}%Use showkeys class option if keyword
@@ -210,7 +210,7 @@ prstab,
 	%\NB{Niky}
 	
 	\section{Deep Reinforcement learning}
-	Most commonly, two main categories of deep RL algorithms are distinguished: model-free RL (MFRL) and model-based RL (MBRL). MFRL algorithms learn directly from the interaction with a system, while MBRL algorithms learn a dynamics model from these interactions first. Despite the success of MFRL in several domains as robotics and video games \cite{Heess2017, Schulman2017,Silver2014,Lillicrap2015,OpenAI2018}, their applications is mainly restricted to simulated environments due to their low sample-efficiency. However, putting constraints on the algorithms, as discussed in \cref{s:Model-free reinforcement learning}, partly cures the sample inefficiency, turning them into practical tools for real-world problems.\\
+	Most commonly, two main categories of deep RL algorithms are distinguished: model-free RL (MFRL) and model-based RL (MBRL). MFRL algorithms learn directly from the interaction with a system, while MBRL algorithms learn a dynamics model from these interactions first. Despite the success of MFRL in several domains as robotics and video games \cite{Heess2017, Schulman2017,Silver2014,Lillicrap2015,OpenAI2018}, their application is mainly restricted to simulated environments due to their low sample-efficiency. However, putting constraints on the algorithms, as discussed in \cref{s:Model-free reinforcement learning}, partly cures the sample inefficiency, turning them into practical tools for real-world problems.\\
 	On the other hand, MBRL shows much better sample efficiency. The challenge for these methods is to learn an accurate model, which turns out to be rather hard and leads to the so-called model-bias problem \cite{Deisenroth2011}. In \cref{ss:Uncertainty aware DYNA-style reinforcement learning} we discuss attempts to capture the model uncertainty to alleviate this obstacle by making use of model ensembles and Bayesian neural networks resulting in algorithms, exhibiting a high sample efficiency and a low model-bias.\\
 	In what follows, we denote the set of all states $\bs$ by $\states$ and the set of all actions $\ba$ by $\actions$. Relative to state and action vectors, $(\bs,\ba)$, we define a reward function $\reward : \states \times \actions \rightarrow \real$, a scalar $\discount \in (0,1]$ called discount factor and an initial state distribution $\initstate$. $\transitions(\bs_{t+1}|\bs_t,\ba_t)$ characterises the probability to end in a state $\bs_{t+1}$ if an action $\ba_t$ is taken at state $\bs_t$. The tuple \mbox{$\mdp = (\states,\actions,\transitions,\initstate,\reward,\discount)$} defines a Markov decision process.\\
 	The goal of reinforcement learning is to find a $\policy^*: \bs\mapsto \ba$, which is the solution of:
@@ -325,7 +325,7 @@ prstab,
 	An attractive \emph{off-policy} algorithm is the soft-actor-critic (\emph{SAC}) \cite{fujimoto2018addressing,Hill2018}. \emph{SAC} not only tries to maximise \cref{eq:cumulative_reward} but also simultaneously is regularised to maximise the entropy in the action space \cite{Haarnoja2018a}. In this way, exploration is encouraged to avoid getting stuck in a local optimum, and a good trade-off between exploration and exploitation is achieved. We refer to experiments using the \emph{SAC} as \emph{AE-DYNA-SAC}. 
 	For \emph{AE-DYNA-SAC} the controller was reset after each re-training of the dynamics model, to profit from its exploration features, while for \emph{ME-TRPO} the policy was improved continuously to exploit its monotony.
 	\subsubsection{Handling of the uncertainty}
-	One of the most crucial points is how model uncertainties are taken into account by the MFRL controller. Several different approaches were tried. One way is to take the mean of the models $\mu_m$ and the standard deviation $\sigma_m$ and sample from $\gauss(\mu_m,\sigma_m)$. Another strategy is to randomly select a model to provide at each training step, which demonstrated the best performance the original implementation of the model ensemble \emph{TRPO} (\emph{ME-TRPO}) algorithm and was used in the experiments labelled \emph{ME-TRPO} \cite{Kurutach2018}. A pessimistic selection would only select the model resulting in the lowest predicted reward (as used, e.g. in \cite{kidambi2020morel}) and showed constant but too slow improvement for our online-training.
+	One of the most crucial points is how model uncertainties are taken into account by the MFRL controller. Several different approaches were tried. One way is to take the mean of the models $\mu_m$ and the standard deviation $\sigma_m$ and sample from $\gauss(\mu_m,\sigma_m)$. Another strategy is to randomly select a model to provide at each training step, which demonstrated the best performance in the original implementation of the model ensemble \emph{TRPO} (\emph{ME-TRPO}) algorithm and was used in the experiments labelled \emph{ME-TRPO} \cite{Kurutach2018}. A pessimistic selection would only select the model resulting in the lowest predicted reward (as used, e.g. in \cite{kidambi2020morel}) and showed constant but too slow improvement for our online-training.
 	Good results were also obtained by following a randomly selected single model each full episode in combination, which was used in the \emph{AE-DYNA-SAC}. 
 	\subsubsection{The data acquisition}
 	The number of data-points in a new batch to improve the model has to be chosen carefully. It is influenced by the number of randomly collected initial data-points (and then by the used policy $\policy$). The initialisation phase has to be selected not to small to minimise risks getting trapped in a local minimum for too long. Afterwards, from our experience, at least one full episode per epoch should be taken. We decided to use a short horizon to diminish the impact of the compound error \cite{Janner2019}, the accumulation error following a wrong model, as well known in \emph{DYNA}-style approaches. The maximal number of steps in our experimental runs per episode was ten. During the data acquisition on the real system, the latest learned policy $\policy$ was taken with some small additional Gaussian noise to improve exploration.
@@ -337,25 +337,25 @@ prstab,
 	%	Since there was a positive outcome, we deduce that the utilised methods are at an operational level.\\
 	\Cref{tab:overview_algorithms} shows a comparison of the discussed algorithms. Details are provided in the appendix. All algorithms are suitable for control tasks as common in accelerator operation. Their strength lies in the high sample efficiency, but they differ in representational power and noise robustness. In \cref{sec:Experimental results from FERMI RL online tests}, the \emph{NAF2},
 	\emph{ME-TRPO} and \emph{AE-DYNA} are tested and compared on the real environment. The \emph{NAF2} algorithm, the representative for highly sample efficient MFRL algorithms, is discussed first.
-	\begin{table}[h!]%The best place to locate the table environment is directly after its first reference in text
+	\begin{table*}[t]%The best place to locate the table environment is directly after its first reference in text
 		\caption{\label{tab:overview_algorithms}%
 			Overview of the algorithms.
 		}
-		\begin{ruledtabular}
-			\begin{tabular}{l p{1.5cm}p{1.5cm}p{1.5cm}p{1.5cm}}
+			\begin{tabular}{lcccc}
+				\hline\hline
 				\textrm{Algorithm}&
 				\textrm{Class}&
-				\textrm{Noise \newline robustness}&
+				\textrm{Noise robustness}&
 				\textrm{Represent. power}&
-				\textrm{Sample \newline efficiency}\\
-				\colrule
+				\textrm{Sample efficiency}\\
+				\hline
 				\emph{NAF} & MFRL & low &low &high\\
 				\emph{NAF2} &MFRL & high &low& high\\
 				\emph{ME-TRPO} & MBRL & low& high& high\\
 				\emph{AE-DYNA} & MBRL & high& high& high\\
+				\hline\hline
 			\end{tabular}
-		\end{ruledtabular}
-	\end{table}
+	\end{table*}
 
 	\subsection{MFRL Tests}
 	\begin{figure}
@@ -437,14 +437,13 @@ prstab,
 	Both experiments yielded satisfactory results, demonstrating that a non-linear, noisy problem can be solved within a feasible number of training steps. The results of the verification are summarised in \cref{tab:overview_verification}. In the model-free case, around 800-1000 and in the model-based 450-500 data-points were used. In all experiments, all verification episodes were finished successfully. \emph{NAF2} performs better in terms of episode length while the average reward in the \emph{DYNA}-style algorithms is higher. The experiments were done on different days, hence under slightly different conditions.\\
 	Usage of the proposed methods in an operational way is attractive and could replace in the future the current optimisation method, which needs the destructive screen measurement. Hence an online retraining could be done and valuable time could be saved.\\ 
 	The MFRL methods were slightly better in the final performance, but also more samples have been collected during the training. The MBRL methods had to be stopped due to lack of available experimental time. Hence additional studies regarding a long time performance would be interesting.\\ A significant challenge in applying MBRL methods is the computational time to train the controller on the model. In our tests, the data acquisition time was only a fraction of the time needed for the controller-training. In case, the used methods could be parallelised to reduce the computational time.
-	\begin{table}[!h]%The best place to locate the table environment is directly after its first reference in text
+	\begin{table*}[t]%The best place to locate the table environment is directly after its first reference in text
 		\caption{\label{tab:overview_verification}%
 			An overview over the verification performance of the different trained algorithms on the FERMI FEL including their standard deviation.
 		}
-		\begin{ruledtabular}
-			\begin{tabular}{l>{\raggedleft} p{1cm}>{\raggedleft}p{1.8cm}>{\raggedleft} p{1.8cm} >{\raggedleft\arraybackslash} p{1.8cm}}
-				%\toprule
-				&  \centering Data points (counts)&   \centering Episode length (counts)&   \centering Cumulative reward\newline (arb. units)&   \centering Final\\reward \newline (arb. units)\tabularnewline
+			\begin{tabular}{lrrrr}
+				\hline\hline
+				&  \centering Data points (counts)&   \centering Episode length (counts)&   \centering Cumulative reward (arb. units)&   \centering Final reward (arb. units)\tabularnewline
 				\hline
 				\emph{AE-DYNA} &500 &  3.28 $\pm$  1.26 & -1.44 $\pm$  1.10 &  0.04 $\pm$  0.06\\
 				\emph{ME-TRPO} &450&  4.46 $\pm$  2.32 & -1.95 $\pm$  1.76 &  0.01 $\pm$  0.04\\
@@ -458,9 +457,9 @@ prstab,
 				%me\_trpo & nr &  5.46 &  2.32 \\
 				%naf\_double & nr &  2.67 &  1.33 \\
 				%naf\_single & nr &  2.56 &  1.26 \\
+				\hline\hline
 			\end{tabular}
-		\end{ruledtabular}
-	\end{table}
+	\end{table*}
 	\section{Conclusions}
 	The presented reinforcement learning methods hold tremendous promise for automating setups typical in accelerators. One objective of this work was to provide some suggestions on how to make advanced deep reinforcement learning techniques work on a real setup by adapting available methods. This was demonstrated on the FERMI FEL intensity optimisation problem.\\
 	Regularly, control problems in accelerators have short horizons, which makes \emph{DYNA}-style algorithms as the \emph{ME-TRPO} or our \emph{AE-DYNA} with their high representational power and excellent sample efficiency appealing choices.\\
@@ -528,11 +527,8 @@ prstab,
 		\label{fig:comparsion_noise}
 	\end{figure}
 	\subsubsection{Regression assuming homoskedastic Gaussian noise using `anchored ensembling'}
-	The Bayesian community and the RL community is spending more and more attention to
-	new approaches to Bayesian inference. In the `anchored ensembling' technique a regularisation
-	term is added to the loss function, which returns a point estimate of
-	the Bayesian posterior the maximum a posteriori (MAP) parameter estimate. 
-	Using an ensemble of networks and adding noise on either the targets of the regularisation term a distribution of MAP solutions  \cite{Gu2007, Chen2011, Bardsley2012, Pearce2018} is obtained, which mimics true posterior.\\
+	The Bayesian and RL communities are paying increasing attention to new approaches for Bayesian inference. In the `anchored ensembling' technique, a regularization term is added to the loss function, which yields a point estimate of the Bayesian posterior, specifically the maximum a posteriori (MAP) parameter estimate. 
+	By employing an ensemble of networks and introducing noise to the regularization term's targets, a distribution of MAP solutions \cite{Gu2007, Chen2011, Bardsley2012, Pearce2018} is obtained, which mimics the true posterior.\\
 	Consider an artificial neural net containing parameters, ${\theta}$, making predictions for the dynamics and the reward \cref{eq:dynamics_model}, $\hat{f}_\theta$ ($f$ denotes the true unknown function), with $N$ data-points. If the prior is given by $P(\theta) = \mathcal{N}(\pmb{\mu}_{prior}, \pmb{\Sigma}_{prior})$, maximising the following returns MAP parameter estimates (details see \cite{Pearce2018}):
 	\begin{equation}
 		\label{eq_MAP_loglike_anc}
@@ -570,7 +566,7 @@ prstab,
 		\caption{Cumulative reward of \emph{AE-DYNA-SAC} on the \emph{inverted pendulum} with artificial noise using the `anchor ensembling'.}
 		\label{fig:comparsion_noise_ae_dyna}
 	\end{figure}
-	\Cref{fig:Compare_models_sizes} shows the impact of the number of models onto the performance on the \emph{inverted pendulum}. The maximum cumulative reward averaged over five different runs tested on the real environment during the training is visualized in dependence of the number of data-points. A number of three models (label \emph{Three}) shows a good trade-off between performance and training time. A single network might not converge or too slowly (label \emph{Single}) and a model of ten shown fast and stable performance in this case (label \emph{Ten}).
+	\Cref{fig:Compare_models_sizes} shows the impact of the number of models onto the performance on the \emph{inverted pendulum}. The maximum cumulative reward averaged over five different runs tested on the real environment during the training is visualized in dependence of the number of data-points. A number of three models (label \emph{Three}) shows a good trade-off between performance and training time. A single network might not converge or too slowly (label \emph{Single}) and a model of ten showed fast and stable performance in this case (label \emph{Ten}).
 	\begin{figure}[h]
 		\centering
 		\includegraphics*[width=0.5\textwidth]{Figures/Comparison_models_sizes}
@@ -585,7 +581,7 @@ prstab,
 		\label{fig:comparsion_NAF_AE-DYNA}
 	\end{figure}
 	
-	Finally, \cref{fig:comparsion_NAF_AE-DYNA} demonstrates the sample-efficiency of the \emph{AE-DYNA-SAC} and the \emph{NAF} algorithm on the noisy \emph{inverted pendulum}. \emph{AE-DYNA-SAC} converges below 2000 data-points (without noise even below 800) and the \emph{NAF2} starts to perform equally 10000 data-points surpassing the -200 reward threshold. One clearly sees the increased sample-efficiency on this problem using the \emph{AE-DYNA} in contrast to the \emph{NAF2}.
+	Finally, \cref{fig:comparsion_NAF_AE-DYNA} demonstrates the sample-efficiency of the \emph{AE-DYNA-SAC} and the \emph{NAF} algorithm on the noisy \emph{inverted pendulum}. \emph{AE-DYNA-SAC} converges below 2000 data-points (without noise even below 800) and the \emph{NAF2} starts to perform equally after 10000 data-points surpassing the -200 reward threshold. One clearly sees the increased sample-efficiency on this problem using the \emph{AE-DYNA} in contrast to the \emph{NAF2}.
 
 	
 	
