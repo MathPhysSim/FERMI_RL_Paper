@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.7.18)  29 DEC 2025 23:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.7.18)  29 DEC 2025 23:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -6,36 +6,33 @@ entering extended mode
 (./main.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
-(/usr/local/texlive/2025/texmf-dist/tex/latex/revtex/revtex4-2.cls
-Document Class: revtex4-2 2022/06/05 4.2f (https://journals.aps.org/revtex/ for
- documentation)
+(./revtex4-2.cls
+Document Class: revtex4-2 2018/12/26/16:06:17 4.2b (https://journals.aps.org/re
+vtex/ for documentation)
  Copyright (c) 2019 American Physical Society.
  mailto:revtex@aps.org
  Licensed under the LPPL:
 http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt
  Arthur Ogawa <arthur_ogawa at sbcglobal dot net>
- Based on work by David Carlisle <david at dcarlisle.demon.co.uk>
- Version (4.2d--4.2f): Modified by Mark Doyle and Phelype Oleinik
+ Based on work by David Carlisle <david at dcarlisle.demon.co.uk>Version (4.2b)
+: Modified by Mark Doyle
  .
-ltxutil[2022/06/05 4.2f utilities package (portions licensed from W. E. Baxter 
-web at superscript.com)]
-LaTeX Info: Redefining \@centercr on input line 356.
-Class revtex4-2 Info: Repairing broken LaTeX eqnarray on input line 417.
-\eqncolsep=\skip49
+ltxutil[2018/12/26/16:53:27 4.2a utilities package (portions licensed from W. E
+. Baxter web at superscript.com)]
+LaTeX Info: Redefining \@centercr on input line 315.
 Class revtex4-2 Info: Repairing hyperref-unfriendly LaTeX definition of \mpfoot
-note on input line 492.
-Class revtex4-2 Info: Repairing broken LateX \@sect on input line 814.
+note on input line 440.
+Class revtex4-2 Info: Repairing broken LateX \@sect on input line 762.
 \intertabularlinepenalty=\count196
 \@tbpen=\count197
 \@arstrutbox@hline=\box52
-Class revtex4-2 Info: Repairing broken LaTeX \@xbitor on input line 1845.
-Class revtex4-2 Info: Making \typeout \long on input line 2110.
-ltxfront[2022/06/05 4.2f frontmatter package (AO,DPC,MD)]
+Class revtex4-2 Info: Repairing broken LaTeX \@xbitor on input line 1793.
+ltxfront[2018/12/26/17:08:09 4.2a frontmatter package (AO,DPC,MD)]
 \c@affil=\count198
 \c@collab=\count199
 \absbox=\box53
-ltxgrid[2022/06/05 4.2f page grid package (portions licensed from W. E. Baxter 
-web at superscript.com)]
+ltxgrid[2018/12/26/17:28:09 4.2a page grid package (portions licensed from W. E
+. Baxter web at superscript.com)]
 \c@linecount=\count266
 \output@latex=\toks17
 \box@size@1=\box54
@@ -48,16 +45,18 @@ web at superscript.com)]
 \pagesofar=\box60
 \footsofar=\box61
 \pagegrid@col=\count267
-Class revtex4-2 Info: Overriding \@vspace, \@vspacer, \@no@pgbk, \@newline, and
- \\  on input line 5676.
+
+Class revtex4-2 Warning: Failed to recognize \@vspace, \@vspacer, \@no@pgbk, \@
+newline, and \\; no patches applied. Please get a more up-to-date class, .
+
 \c@part=\count268
 \c@section=\count269
 \c@subsection=\count270
 \c@subsubsection=\count271
 \c@paragraph=\count272
 \c@subparagraph=\count273
-\abovecaptionskip=\skip50
-\belowcaptionskip=\skip51
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
 \c@figure=\count274
 \fbox@1=\box62
 \c@table=\count275
@@ -67,20 +66,20 @@ Class revtex4-2 Info: Overriding \@vspace, \@vspacer, \@no@pgbk, \@newline, and
 \@bibdataout=\write3
 \widetext@top=\box65
 \widetext@bot=\box66
-Class revtex4-2 Info: Selecting society aps on input line 7669.
-(/usr/local/texlive/2025/texmf-dist/tex/latex/revtex/aps4-2.rtx
-File: aps4-2 2022/06/05 4.2f (https://journals.aps.org/revtex/ for documentatio
-n)
-Class revtex4-2 Info: RevTeX society APS selected on input line 40.
+Class revtex4-2 Info: Selecting society aps on input line 7581.
+(./aps4-2.rtx
+File: aps4-2 2018/12/26/16:06:17 4.2b (https://journals.aps.org/revtex/ for doc
+umentation)
+Class revtex4-2 Info: RevTeX society APS selected on input line 37.
 )
 
 Class revtex4-2 Warning: No journal specified, using default pra.
 
-Class revtex4-2 Info: APS journal PRA selected on input line 7672.
-(/usr/local/texlive/2025/texmf-dist/tex/latex/revtex/aps10pt4-2.rtx
-File: aps10pt4-2 2022/06/05 4.2f (https://journals.aps.org/revtex/ for document
-ation)
-Class revtex4-2 Info: RevTeX pointsize 10pt selected on input line 39.
+Class revtex4-2 Info: APS journal PRA selected on input line 7584.
+(./aps10pt4-2.rtx
+File: aps10pt4-2 2018/12/26/16:06:17 4.2b (https://journals.aps.org/revtex/ for
+ documentation)
+Class revtex4-2 Info: RevTeX pointsize 10pt selected on input line 36.
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/textcase/textcase.sty
 Package: textcase 2025/02/16 v1.05 Text only upper/lower case changing (DPC)
@@ -100,7 +99,7 @@ Package: amssymb 2013/01/14 v3.01 AMS font symbols
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2024/11/05 v2.17t AMS math features
-\@mathmargin=\skip52
+\@mathmargin=\skip51
 
 For additional information on amsmath, use the `?' option.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -162,8 +161,8 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \totwidth@=\dimen148
 \lineht@=\dimen149
 \@envbody=\toks23
-\multlinegap=\skip53
-\multlinetaggap=\skip54
+\multlinegap=\skip52
+\multlinetaggap=\skip53
 \mathdisplay@stack=\toks24
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
@@ -174,19 +173,19 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip55
-\bibsep=\skip56
+\bibhang=\skip54
+\bibsep=\skip55
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count289
 )
-Class revtex4-2 Info: Repairing natbib's \BibitemShut on input line 7676.
+Class revtex4-2 Info: Repairing natbib's \BibitemShut on input line 7588.
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/revtex/revsymb4-2.sty
-Package: revsymb4-2 2022/06/05 4.2f (https://journals.aps.org/revtex/ for docum
-entation)
-LaTeX Info: Redefining \frak on input line 104.
-LaTeX Info: Redefining \Bbb on input line 120.
-LaTeX Info: Redefining \REV@mathfrak on input line 128.
+(./revsymb4-2.sty
+Package: revsymb4-2 2018/12/26/16:06:17 4.2b (https://journals.aps.org/revtex/ 
+for documentation)
+LaTeX Info: Redefining \frak on input line 101.
+LaTeX Info: Redefining \Bbb on input line 117.
+LaTeX Info: Redefining \REV@mathfrak on input line 125.
 ))
 (/usr/local/texlive/2025/texmf-dist/tex/latex/wasysym/wasysym.sty
 Package: wasysym 2020/01/19 v2.4 Wasy-2 symbol support package
@@ -264,8 +263,8 @@ Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
 \ar@mcellbox=\box69
 \extrarowheight=\dimen161
 \NC@list=\toks26
-\extratabsurround=\skip57
-\backup@length=\skip58
+\extratabsurround=\skip56
+\backup@length=\skip57
 \ar@cellbox=\box70
 ))
 (/usr/local/texlive/2025/texmf-dist/tex/latex/tools/bm.sty
@@ -418,7 +417,7 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 85.
 )
-\Hy@SectionHShift=\skip59
+\Hy@SectionHShift=\skip58
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
 Package: algpseudocode 
@@ -433,19 +432,19 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \c@ALG@line=\count306
 \c@ALG@rem=\count307
 \c@ALG@nested=\count308
-\ALG@tlm=\skip60
-\ALG@thistlm=\skip61
+\ALG@tlm=\skip59
+\ALG@thistlm=\skip60
 \c@ALG@Lnr=\count309
 \c@ALG@blocknr=\count310
 \c@ALG@storecount=\count311
 \c@ALG@tmpcounter=\count312
-\ALG@tmplength=\skip62
+\ALG@tmplength=\skip61
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
 \c@AlgoLine=\count313
-\algocf@hangindent=\skip63
+\algocf@hangindent=\skip62
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
@@ -457,36 +456,36 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 (/usr/local/texlive/2025/texmf-dist/tex/latex/relsize/relsize.sty
 Package: relsize 2013/03/29 ver 4.1
 )
-\skiptotal=\skip64
-\skiplinenumber=\skip65
-\skiprule=\skip66
-\skiphlne=\skip67
-\skiptext=\skip68
-\skiplength=\skip69
-\algomargin=\skip70
-\skipalgocfslide=\skip71
+\skiptotal=\skip63
+\skiplinenumber=\skip64
+\skiprule=\skip65
+\skiphlne=\skip66
+\skiptext=\skip67
+\skiplength=\skip68
+\algomargin=\skip69
+\skipalgocfslide=\skip70
 \algowidth=\dimen166
 \inoutsize=\dimen167
 \inoutindent=\dimen168
 \interspacetitleruled=\dimen169
 \interspacealgoruled=\dimen170
 \interspacetitleboxruled=\dimen171
-\algocf@ruledwidth=\skip72
+\algocf@ruledwidth=\skip71
 \algocf@inoutbox=\box71
 \algocf@inputbox=\box72
-\AlCapSkip=\skip73
-\AlCapHSkip=\skip74
-\algoskipindent=\skip75
+\AlCapSkip=\skip72
+\AlCapHSkip=\skip73
+\algoskipindent=\skip74
 \algocf@nlbox=\box73
 \algocf@hangingbox=\box74
 \algocf@untilbox=\box75
-\algocf@skipuntil=\skip76
+\algocf@skipuntil=\skip75
 \algocf@capbox=\box76
-\algocf@lcaptionbox=\skip77
-\algoheightruledefault=\skip78
-\algoheightrule=\skip79
-\algotitleheightruledefault=\skip80
-\algotitleheightrule=\skip81
+\algocf@lcaptionbox=\skip76
+\algoheightruledefault=\skip77
+\algoheightrule=\skip78
+\algotitleheightruledefault=\skip79
+\algotitleheightrule=\skip80
 \c@algocfline=\count315
 \c@algocfproc=\count316
 \c@algocf=\count317
@@ -862,13 +861,29 @@ LaTeX Warning: \include should only be used after \begin{document} on input lin
 e 109.
 
 (./tex/defs.tex)
+! Extra \endgroup.
+\document ->\endgroup 
+                      \document@inithook \true@sw {}\UseOneTimeHook {begindo...
+l.111 \begin{document}
+                      
+Things are pretty mixed up, but I think the worst is over.
+
 Class revtex4-2 Info: Unrecognized array package. Please update this document c
 lass! (Proceeding with fingers crossed.) on input line 111.
 Class revtex4-2 Info: cite was not loaded (OK!) on input line 111.
 Class revtex4-2 Info: mcite was not loaded (OK!) on input line 111.
 Class revtex4-2 Info: multicol was not loaded (OK!) on input line 111.
-Package translations Info: No language package found. I am going to use `englis
-h' as default language. on input line 111.
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.111 \begin{document}
+                      
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
@@ -902,6 +917,13 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 111.
 LaTeX Font Info:    ... okay on input line 111.
 
 (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+Overfull \hbox (149.19258pt too wide) in paragraph at lines 111--13
+[]\OT1/cmr/m/n/10 begindocument/before                                         
+                                                                               
+                                                                               
+                                                  
+ []
+
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count354
 \scratchdimen=\dimen284
@@ -933,19 +955,22 @@ Package hyperref Info: Link coloring OFF on input line 111.
 \openout5 = `main.out'.
 
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/translations/translations-basic-d
-ictionary-english.trsl
-File: translations-basic-dictionary-english.trsl (english translation file `tra
-nslations-basic-dictionary')
-)
-Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 111.
+! Undefined control sequence.
+<argument> \@trnslt@loaded@languages 
+                                     
+l.111 \begin{document}
+                      
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 Class revtex4-2 Info: Taking \maketitle back from hyperref on input line 111.
 \openout3 = `mainNotes.bib'.
 
 LaTeX Font Info:    Trying to load font information for U+msa on input line 133
 .
-
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -1005,7 +1030,7 @@ Underfull \hbox (badness 1005) in paragraph at lines 230--234
  []
 
 [3]
-<Figures/MBRL_overview.pdf, id=311, 845.1575pt x 597.23125pt>
+<Figures/MBRL_overview.pdf, id=312, 845.1575pt x 597.23125pt>
 File: Figures/MBRL_overview.pdf Graphic file (type pdf)
 <use Figures/MBRL_overview.pdf>
 Package pdftex.def Info: Figures/MBRL_overview.pdf  used on input line 302.
@@ -1029,7 +1054,7 @@ LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
  on input line 317.
 
 [5 <./Figures/MBRL_overview.pdf>]
-<Figures/FERMI_all_experiments_NAF_training_episodes.pdf, id=389, 462.52798pt x
+<Figures/FERMI_all_experiments_NAF_training_episodes.pdf, id=390, 462.52798pt x
  208.1376pt>
 File: Figures/FERMI_all_experiments_NAF_training_episodes.pdf Graphic file (typ
 e pdf)
@@ -1042,7 +1067,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 363--364
  [][] 
  []
 
-<Figures/Evolution_double.pdf, id=391, 462.52798pt x 346.89601pt>
+<Figures/Evolution_double.pdf, id=392, 462.52798pt x 346.89601pt>
 File: Figures/Evolution_double.pdf Graphic file (type pdf)
 <use Figures/Evolution_double.pdf>
 Package pdftex.def Info: Figures/Evolution_double.pdf  used on input line 369.
@@ -1052,7 +1077,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 369--370
  [][] 
  []
 
-<Figures/Evolution_single.pdf, id=393, 462.52798pt x 346.89601pt>
+<Figures/Evolution_single.pdf, id=394, 462.52798pt x 346.89601pt>
 File: Figures/Evolution_single.pdf Graphic file (type pdf)
 <use Figures/Evolution_single.pdf>
 Package pdftex.def Info: Figures/Evolution_single.pdf  used on input line 375.
@@ -1062,7 +1087,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 375--376
  [][] 
  []
 
-<Figures/FERMI_all_experiments_NAF_verification_episodes.pdf, id=395, 462.52798
+<Figures/FERMI_all_experiments_NAF_verification_episodes.pdf, id=396, 462.52798
 pt x 208.1376pt>
 File: Figures/FERMI_all_experiments_NAF_verification_episodes.pdf Graphic file 
 (type pdf)
@@ -1075,7 +1100,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 381--382
  [][] 
  []
 
-<Figures/FERMI_all_experiments_NAF_convergence.pdf, id=397, 462.52798pt x 208.1
+<Figures/FERMI_all_experiments_NAF_convergence.pdf, id=398, 462.52798pt x 208.1
 376pt>
 File: Figures/FERMI_all_experiments_NAF_convergence.pdf Graphic file (type pdf)
 
@@ -1090,7 +1115,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 387--388
 
 [6 <./Figures/FERMI_all_experiments_NAF_training_episodes.pdf> <./Figures/Evolu
 tion_double.pdf>]
-<Figures/AE-DYNA_observables.pdf, id=528, 462.52798pt x 346.89601pt>
+<Figures/AE-DYNA_observables.pdf, id=529, 462.52798pt x 346.89601pt>
 File: Figures/AE-DYNA_observables.pdf Graphic file (type pdf)
 <use Figures/AE-DYNA_observables.pdf>
 Package pdftex.def Info: Figures/AE-DYNA_observables.pdf  used on input line 39
@@ -1101,7 +1126,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 397--398
  [][] 
  []
 
-<Figures/Verification_DYNA_all_episodes.pdf, id=530, 462.52798pt x 208.1376pt>
+<Figures/Verification_DYNA_all_episodes.pdf, id=531, 462.52798pt x 208.1376pt>
 File: Figures/Verification_DYNA_all_episodes.pdf Graphic file (type pdf)
 <use Figures/Verification_DYNA_all_episodes.pdf>
 Package pdftex.def Info: Figures/Verification_DYNA_all_episodes.pdf  used on in
@@ -1112,7 +1137,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 404--405
  [][] 
  []
 
-<Figures/ME-TRPO_observables.pdf, id=532, 462.52798pt x 346.89601pt>
+<Figures/ME-TRPO_observables.pdf, id=533, 462.52798pt x 346.89601pt>
 File: Figures/ME-TRPO_observables.pdf Graphic file (type pdf)
 <use Figures/ME-TRPO_observables.pdf>
 Package pdftex.def Info: Figures/ME-TRPO_observables.pdf  used on input line 41
@@ -1123,7 +1148,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 412--413
  [][] 
  []
 
-<Figures/Worst_episode_MBRL.pdf, id=534, 462.52798pt x 346.89601pt>
+<Figures/Worst_episode_MBRL.pdf, id=535, 462.52798pt x 346.89601pt>
 File: Figures/Worst_episode_MBRL.pdf Graphic file (type pdf)
 <use Figures/Worst_episode_MBRL.pdf>
 Package pdftex.def Info: Figures/Worst_episode_MBRL.pdf  used on input line 419
@@ -1143,7 +1168,7 @@ LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
 
 [8 <./Figures/Verification_DYNA_all_episodes.pdf> <./Figures/ME-TRPO_observable
 s.pdf> <./Figures/Worst_episode_MBRL.pdf>] [9]
-<Figures/Comparison_naf.pdf, id=932, 462.52798pt x 346.89601pt>
+<Figures/Comparison_naf.pdf, id=933, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_naf.pdf Graphic file (type pdf)
 <use Figures/Comparison_naf.pdf>
 Package pdftex.def Info: Figures/Comparison_naf.pdf  used on input line 510.
@@ -1153,7 +1178,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 510--511
  [][] 
  []
 
-<Figures/Comparison_noise.pdf, id=936, 462.52798pt x 346.89601pt>
+<Figures/Comparison_noise.pdf, id=937, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_noise.pdf Graphic file (type pdf)
 <use Figures/Comparison_noise.pdf>
 Package pdftex.def Info: Figures/Comparison_noise.pdf  used on input line 525.
@@ -1164,7 +1189,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 525--526
  []
 
 [10 <./Figures/Comparison_naf.pdf> <./Figures/Comparison_noise.pdf>]
-<Figures/Comparison_noise_ae_dyna.pdf, id=1041, 462.52798pt x 346.89601pt>
+<Figures/Comparison_noise_ae_dyna.pdf, id=1042, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_noise_ae_dyna.pdf Graphic file (type pdf)
 <use Figures/Comparison_noise_ae_dyna.pdf>
 Package pdftex.def Info: Figures/Comparison_noise_ae_dyna.pdf  used on input li
@@ -1175,7 +1200,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 565--566
  [][] 
  []
 
-<Figures/Comparison_models_sizes.pdf, id=1044, 462.52798pt x 346.89601pt>
+<Figures/Comparison_models_sizes.pdf, id=1045, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_models_sizes.pdf Graphic file (type pdf)
 <use Figures/Comparison_models_sizes.pdf>
 Package pdftex.def Info: Figures/Comparison_models_sizes.pdf  used on input lin
@@ -1192,7 +1217,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Figures/Comparison_NAF_AE-DYNA.pdf, id=1046, 462.52798pt x 346.89601pt>
+<Figures/Comparison_NAF_AE-DYNA.pdf, id=1047, 462.52798pt x 346.89601pt>
 File: Figures/Comparison_NAF_AE-DYNA.pdf Graphic file (type pdf)
 <use Figures/Comparison_NAF_AE-DYNA.pdf>
 Package pdftex.def Info: Figures/Comparison_NAF_AE-DYNA.pdf  used on input line
@@ -1247,59 +1272,224 @@ Underfull \hbox (badness 2293) in paragraph at lines 846--851
  []\OT1/cmr/m/n/9 Y. Chen and D. S. Oliver, En-sem-ble ran-dom-ized
  []
 
-) [14] (./main.aux)
- ***********
-LaTeX2e <2024-11-01> patch level 2
-L3 programming layer <2025-01-18>
- ***********
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 5FD921C8C435B0A6103B919C71924840;6234.
- ) 
+) [14] (./main.aux
+
+Package natbib Warning: Citation `Kain2020' multiply defined.
+
+
+Package natbib Warning: Citation `Scheinker2018' multiply defined.
+
+
+Package natbib Warning: Citation `Huang2013' multiply defined.
+
+
+Package natbib Warning: Citation `Bruchon2017' multiply defined.
+
+
+Package natbib Warning: Citation `Scheinker2020' multiply defined.
+
+
+Package natbib Warning: Citation `Hirlaender2019' multiply defined.
+
+
+Package natbib Warning: Citation `Welsch2015' multiply defined.
+
+
+Package natbib Warning: Citation `Albright2019' multiply defined.
+
+
+Package natbib Warning: Citation `Hanuka2020' multiply defined.
+
+
+Package natbib Warning: Citation `Roussel2020' multiply defined.
+
+
+Package natbib Warning: Citation `Bruchon2020' multiply defined.
+
+
+Package natbib Warning: Citation `Bruchon2019' multiply defined.
+
+
+Package natbib Warning: Citation `Pang2020' multiply defined.
+
+
+Package natbib Warning: Citation `John2020' multiply defined.
+
+
+Package natbib Warning: Citation `Sutton2018' multiply defined.
+
+
+Package natbib Warning: Citation `DulacArnold2019' multiply defined.
+
+
+Package natbib Warning: Citation `Brochon2020' multiply defined.
+
+
+Package natbib Warning: Citation `Brockman2016' multiply defined.
+
+
+Package natbib Warning: Citation `Heess2017' multiply defined.
+
+
+Package natbib Warning: Citation `Schulman2017' multiply defined.
+
+
+Package natbib Warning: Citation `Silver2014' multiply defined.
+
+
+Package natbib Warning: Citation `Lillicrap2015' multiply defined.
+
+
+Package natbib Warning: Citation `OpenAI2018' multiply defined.
+
+
+Package natbib Warning: Citation `Deisenroth2011' multiply defined.
+
+
+Package natbib Warning: Citation `Williams1992' multiply defined.
+
+
+Package natbib Warning: Citation `Baxter2011' multiply defined.
+
+
+Package natbib Warning: Citation `pmlr-v28-levine13' multiply defined.
+
+
+Package natbib Warning: Citation `Schulman2015' multiply defined.
+
+
+Package natbib Warning: Citation `Szepesvari2010' multiply defined.
+
+
+Package natbib Warning: Citation `Levine2020' multiply defined.
+
+
+Package natbib Warning: Citation `Gu2016' multiply defined.
+
+
+Package natbib Warning: Citation `Hirlaender2020a' multiply defined.
+
+
+Package natbib Warning: Citation `Hasselt2015' multiply defined.
+
+
+Package natbib Warning: Citation `Mnih2013' multiply defined.
+
+
+Package natbib Warning: Citation `Wang2015' multiply defined.
+
+
+Package natbib Warning: Citation `NIPS2010_091d584f' multiply defined.
+
+
+Package natbib Warning: Citation `fujimoto2018addressing' multiply defined.
+
+
+Package natbib Warning: Citation `Wang2019' multiply defined.
+
+
+Package natbib Warning: Citation `Gal2016' multiply defined.
+
+
+Package natbib Warning: Citation `6654139' multiply defined.
+
+
+Package natbib Warning: Citation `Chua2018' multiply defined.
+
+
+Package natbib Warning: Citation `Wang2019a' multiply defined.
+
+
+Package natbib Warning: Citation `Boer2005' multiply defined.
+
+
+Package natbib Warning: Citation `Sutton1991' multiply defined.
+
+
+Package natbib Warning: Citation `Pearce2018' multiply defined.
+
+
+Package natbib Warning: Citation `Kurutach2018' multiply defined.
+
+
+Package natbib Warning: Citation `Janner2019' multiply defined.
+
+
+Package natbib Warning: Citation `Goodfellow2016' multiply defined.
+
+
+Package natbib Warning: Citation `Hill2018' multiply defined.
+
+
+Package natbib Warning: Citation `Haarnoja2018a' multiply defined.
+
+
+Package natbib Warning: Citation `kidambi2020morel' multiply defined.
+
+
+Package natbib Warning: Citation `Hirlaender2020b' multiply defined.
+
+
+Package natbib Warning: Citation `Furutaa' multiply defined.
+
+
+Package natbib Warning: Citation `BarthMaron2018' multiply defined.
+
+
+Package natbib Warning: Citation `Gu2007' multiply defined.
+
+
+Package natbib Warning: Citation `Chen2011' multiply defined.
+
+
+Package natbib Warning: Citation `Bardsley2012' multiply defined.
+
+) ) 
 Here is how much of TeX's memory you used:
- 32269 strings out of 473190
- 648125 string characters out of 5715800
- 999302 words of memory out of 5000000
- 54924 multiletter control sequences out of 15000+600000
+ 32027 strings out of 473190
+ 635507 string characters out of 5715800
+ 995227 words of memory out of 5000000
+ 54686 multiletter control sequences out of 15000+600000
  574585 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,1097b,1279s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Itali
-c.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-R
-egular.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-bx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmb
-x7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9
-.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10
-.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.
-pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.p
-fb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
-></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><
-/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></u
-sr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
-/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/l
-ocal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
-al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/
-texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/tex
-live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texliv
-e/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
-025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2025/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2025/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2025/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2025/texmf-dist/fonts
-/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/f
-onts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2025/texmf-dist/fon
-ts/type1/public/cm-super/sfti0900.pfb>
-Output written on main.pdf (14 pages, 2103676 bytes).
+ 75i,12n,79p,1097b,1278s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Ital
+ic.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-
+Regular.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+bx7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx
+9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc1
+0.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10
+.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.
+pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pf
+b></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb>
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></
+usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
+r/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/
+local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
+cal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local
+/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/te
+xlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texli
+ve/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
+2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/202
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2025/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2025/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2025/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2025/texmf-dist/font
+s/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/
+fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2025/texmf-dist/fo
+nts/type1/public/cm-super/sfti0900.pfb>
+Output written on main.pdf (14 pages, 2103705 bytes).
 PDF statistics:
- 1437 PDF objects out of 1440 (max. 8388607)
+ 1440 PDF objects out of 1440 (max. 8388607)
  769 compressed objects within 8 object streams
- 144 named destinations out of 1000 (max. 500000)
- 421 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 145 named destinations out of 1000 (max. 500000)
+ 409 words of extra memory for PDF output out of 10000 (max. 10000000)
 

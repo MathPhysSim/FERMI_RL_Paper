@@ -5,7 +5,7 @@
 
 **Contact:** simon.hirlaender(at)sbg.ac.at
 
-This repository accompanies the paper demonstrating deep reinforcement learning for the intensity optimisation of the **FERMI Free-Electron Laser (FEL)**. We compare model-free (NAF2) and model-based (AE-DYNA) approaches, finding that model-based methods offer superior sample efficiency and representational power, while model-free methods achieve slightly better asymptotic performance.
+Official repository for the **FERMI Free-Electron Laser (FEL)** paper, utilizing model-based and model-free reinforcement learning methods to solve complex particle accelerator operation problems. This work demonstrates the practical application of deep RL for intensity optimization, comparing the sample-efficient **AE-DYNA** (model-based) with the high-performing **NAF2** (model-free) algorithms.
 
 ![Schematic Overview](paper/Figures/SL_Alignment_Scheme.png)
 
@@ -13,11 +13,11 @@ This repository accompanies the paper demonstrating deep reinforcement learning 
 
 ## Algorithms
 
-| Algorithm | Type        | Noise Robust | Sample Efficient |
-| --------- | ----------- | :----------: | :--------------: |
-| NAF       | Model-free  |      ✗       |        ✓         |
-| **NAF2**  | Model-free  |      ✓       |        ✓         |
-| ME-TRPO   | Model-based |      ✗       |        ✓         |
+| Algorithm   | Type        | Noise Robust | Sample Efficient |
+| ----------- | ----------- | :----------: | :--------------: |
+| NAF         | Model-free  |      ✗       |        ✓         |
+| **NAF2**    | Model-free  |      ✓       |        ✓         |
+| ME-TRPO     | Model-based |      ✗       |        ✓         |
 | **AE-DYNA** | Model-based |      ✓       |        ✓         |
 
 ---
@@ -51,25 +51,25 @@ python src/AE_Dyna_Tensorflow_2.py
 
 ### FERMI FEL Performance
 
-| | NAF2 Training | NAF2 Convergence |
-|---|---|---|
-| ![](paper/Figures/FERMI_all_experiments_NAF_episodes.png) | ![](paper/Figures/FERMI_all_experiments_NAF_convergence.png) |
+| NAF2 Training | NAF2 Convergence |
+| :---: | :---: |
+| ![NAF2 Training](paper/Figures/FERMI_all_experiments_NAF_episodes.png) | ![NAF2 Convergence](paper/Figures/FERMI_all_experiments_NAF_convergence.png) |
 
-| | AE-DYNA Training | AE-DYNA Verification |
-|---|---|---|
-| ![](paper/Figures/AE-DYNA_observables.png) | ![](paper/Figures/Verification_DYNA_all_episodes.png) |
+| AE-DYNA Training | AE-DYNA Verification |
+| :---: | :---: |
+| ![AE-DYNA Training](paper/Figures/AE-DYNA_observables.png) | ![AE-DYNA Verification](paper/Figures/Verification_DYNA_all_episodes.png) |
 
 ### Inverted Pendulum Benchmarks
 
 | Noise Robustness | Sample Efficiency (NAF vs AE-DYNA) |
-|---|---|
-| ![](paper/Figures/Comparison_noise.png) | ![](paper/Figures/Comparison_NAF_AE-DYNA.png) |
+| :---: | :---: |
+| ![Noise Robustness](paper/Figures/Comparison_noise.png) | ![Sample Efficiency](paper/Figures/Comparison_NAF_AE-DYNA.png) |
 
 ---
 
 ## Project Structure
 
-```
+```text
 .
 ├── src/                  # Python source code
 │   ├── run_naf2.py       # NAF2 agent (TF2)
